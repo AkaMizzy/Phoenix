@@ -1,0 +1,170 @@
+mixin NewsCardBody(cardItem) 
+  h4.mb-2.line-clamp-1=cardItem.title
+  p.fs-9.text-body-secondary.line-clamp-2=cardItem.desc 
+  .d-flex.flex-wrap.align-items-center.gap-2.mb-3.text-body-quaternary 
+    .d-flex.align-items-center 
+      span.uil.uil-calendar-alt.fs-10
+      p.mb-0.fs-10.ms-1= cardItem.time
+    ul.fs-10.ps-3.mb-0
+      li=cardItem.type
+  .d-flex.align-items.gap-2 
+    each tag in cardItem.tags 
+      a(href='#!').fs-10.fw-bold.px-2.py-1.bg-primary-subtle.rounded.text-body-highlight.mb-0.text-uppercase.lh-sm=tag
+
+mixin NewsTabContent 
+  -
+    var cardItems = [
+      {
+        image: 'stock/news/10.png',
+        title: `Apple (AAPL) Requires a 'Glowtime' Event to Ignite a Company-Wide Catalyst`,
+        desc: `The headline "Apple (AAPL) Needs 'Glowtime' Event to Spark Company Catalyst" suggests that Apple Inc. (stock ticker AAPL) requires a significant and impactful....`,
+        time: '2 hours ago',
+        type: 'The Business Standard',
+        tags: ['orcl', 'AAPL']
+      },
+      {
+        image: 'stock/news/1.png',
+        title: `Here's How Investing $100 a Month Plus Your Tax refers`,
+        desc: `Here's How Investing $100 a Month Plus Your Tax refers to a financial strategy that involves regularly investing $100 per month along with any tax refunds or deductions to maximize long-term growth through compound interest and market returns.`,
+        time: '2 hours ago',
+        type: 'The Economic Time',
+        tags: ['orcl']
+      },
+      {
+        image: 'stock/news/2.png',
+        title: `According to FT, Arm's semiconductor technology refers`,
+        desc: `According to FT, Arm's Semiconductor Technology refers to a report or analysis by the Financial Times (FT) regarding Arm's advancements, market impact, and strategic developments in the semiconductor industry.`,
+        time: '3 hours ago',
+        type: 'The Business Standard',
+        tags: [`arm's`]
+      },
+      {
+        image: 'stock/news/3.png',
+        title: `Apple: Buy, Sell, or Hold?`,
+        desc: `Investors are prompted to assess whether they should buy more shares of Apple (indicating confidence in future growth) or hold their current positions based on market trends, financial performance, and long-term potential.`,
+        time: '8 hours ago',
+        type: 'Mint',
+        tags: ['AAPL', 'buy', 'sell']
+      },
+      {
+        image: 'stock/news/4.png',
+        title: `Guru Fundamental Report for AAPL`,
+        desc: `This type of report typically evaluates key financial metrics such as earnings, revenue growth, profit margins, and market trends to provide insights into a company's overall performance and future outlook.`,
+        time: '9 hours ago',
+        type: 'The Financial Express',
+        tags: ['orcl']
+      },
+      {
+        image: 'stock/news/5.png',
+        title: `Berkshire Hathaway Holds Bank of America, American Express`,
+        desc: `Berkshire Hathaway, the multinational conglomerate led by Warren Buffett, continues to maintain significant investments in various industries, demonstrating a long-term value-driven approach to wealth accumulation.`,
+        time: '11 hours ago',
+        type: 'Business Line',
+        tags: []
+      },
+      {
+        image: 'stock/news/6.png',
+        title: `Is Apple Stock a Buy Now?`,
+        desc: `It suggests an analysis of Apple's recent performance, market conditions, and potential future growth to determine whether investing in the company remains a profitable opportunity for investors.`,
+        time: '14 hours ago',
+        type: 'The Business Standard',
+        tags: []
+      },
+      {
+        image: 'stock/news/7.png',
+        title: `40.5% of Warren Buffett's $312 Billion Berkshire Hathaway`,
+        desc: `The headline "This percentage represents a substantial fraction of Berkshire Hathaway's overall worth, which is reported to be influenced by its key investments and long-term financial strategies.`,
+        time: '18 hours ago',
+        type: `Investor's Business Daily`,
+        tags: ['orcl']
+      },
+      {
+        image: 'stock/news/8.png',
+        title: `This AI Stock Is Set to Surpass Nvidia by the End of the Year`,
+        desc: `This AI Stock Will Outperform Nvidia by Year-End" suggests that a specific company within the artificial intelligence sector is expected to surpass Nvidia in market performance, driven by innovation, revenue growth, or strategic advancements.`,
+        time: '24 hours ago',
+        type: 'The Business Standard',
+        tags: ['AAPL', 'ai']
+      }
+    ]
+  
+  .row.g-3.g-lg-5.flex-between-center 
+    .col-auto
+      h4.fw-bolder Apple Stock News
+      p.mb-0.text-body-tertiary Brief summary of all projects 
+    .col-auto
+      .d-flex.align-items-center.gap-2
+        select#news-filter.form-select(name="news-filter" style="max-width: 140px;") 
+          option(value="all") All News 
+          option(value='orcl') Orcl News
+          option(value='AAPL') AAPL News
+        +Search({placeholder: 'Search news'}).w-100
+    .col-12 
+      .row.g-4.mb-4
+        .col-12.col-xxl-6
+          .card.overflow-hidden.h-xxl-100(style='max-height: 390px;')
+            img.card-img-top.h-xxl-100(src=`${CWD}assets/img/${cardItems[0].image}` alt="")
+            .card-img-overlay.d-flex.align-items-end.stock-news-tab.backdrop-faded 
+              .text-white 
+                h4.text-white.mb-2.line-clamp-1=cardItems[0].title
+                p.fs-9.text-white.line-clamp-4=cardItems[0].desc 
+                .d-flex.flex-wrap.align-items-center.gap-2.mb-3  
+                  .d-flex.align-items-center 
+                    span.uil.uil-calendar-alt.fs-10
+                    p.mb-0.fs-10.text-white.ms-1= cardItems[0].time
+                  ul.fs-10.ps-3.mb-0
+                    li=cardItems[0].type
+                if cardItems[0].tags.length > 0
+                  .d-flex.align-items.gap-2 
+                    each tag in cardItems[0].tags 
+                      a.px-2.py-1.bg-primary-subtle.rounded.fs-10.fw-bold.text-body-highlight.mb-0.text-uppercase.lh-sm(href='#!')=tag
+        .col-12.col-xxl-6 
+          .row.g-0.mb-4
+            .col-12.col-sm-4
+              img.h-100.w-100.rounded-top.rounded-top-sm-0.rounded-start-sm(src=`${CWD}assets/img/${cardItems[1].image}` alt="")
+            .col-12.col-sm-8 
+              .card.rounded-0.rounded-end-sm.h-100 
+                .card-body 
+                  +NewsCardBody(cardItems[1])
+          .row.g-0
+            .col-12.col-sm-4
+              img.h-100.w-100.rounded-start-sm.rounded-top.rounded-top-sm-0(src=`${CWD}assets/img/${cardItems[2].image}` alt="")
+            .col-12.col-sm-8
+              .card.rounded-0.rounded-end-sm.h-100 
+                .card-body 
+                  +NewsCardBody(cardItems[2])
+      .row.g-4
+        each item in cardItems.slice(3)
+          .col-12.col-sm-6.col-xxl-4 
+            .card.h-100 
+              img.card-img-top(src=`${CWD}assets/img/${item.image}` alt='image')
+              .card-body 
+                +NewsCardBody(item)
+      .row.flex-between-center.py-2.pe-0.fs-9
+        .col-auto.d-flex
+          p.mb-0.d-none.d-sm-block.me-3.fw-semibold 1 to 9 
+            span.text-body-tertiary Items of 
+            | 78
+          a.fw-semibold(href='#!' data-list-view="*")
+            | View all
+            span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+          a.fw-semibold.d-none(href='#!' data-list-view="less")
+            | View Less
+            span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        .col-auto.d-flex
+          button.page-link.disabled(data-list-pagination="prev")
+            span.fas.fa-chevron-left
+          ul.mb-0.pagination
+            li.page-item.active 
+                a.page-link(href="#!") 1
+            li.page-item 
+                a.page-link(href="#!") 2
+            li.page-item 
+              a.page-link(href="#!") ...
+            li.page-item 
+              a.page-link(href="#!")  9
+            li.page-item 
+              a.page-link(href="#!")  10
+              
+          button.page-link.pe-0(data-list-pagination="next")
+            span.fas.fa-chevron-right

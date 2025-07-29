@@ -1,0 +1,18 @@
+extends ../index
+
+
+append variables
+  - var attrsNavbarTop = {'data-navbar-appearance': 'darker'}
+  - var attrsNavbarVertical = {'data-navbar-appearance': 'darker'}
+  - var disableHorizontalNavbarAppearance = true
+  - var disableVerticalNavbarAppearance = true
+
+append navbarTop
+  if ENV === 'PROD'
+    script.
+      window.config.set({
+        phoenixNavbarVerticalStyle: 'darker',
+        phoenixNavbarTopStyle: 'darker'
+      });
+
+block afterWrapperContent

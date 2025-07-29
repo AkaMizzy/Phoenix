@@ -1,0 +1,87 @@
+mixin FlightInfo
+  div 
+    .d-flex.justify-content-between.mb-4 
+      div 
+        span.fa-solid.fa-plane.text-primary.me-2
+        h4.mb-0.d-inline-block.text-body-highlight Flight info
+      button.btn.btn-link.p-0 
+        span.fas.fa-edit.me-2
+        | Edit
+    .mb-4 
+      img(src=`${CWD}assets/img/brand/qatar-airline.png` alt='' style='height: 3.5rem').img-fluid.rounded-3
+      h5.text-nowrap.fw-normal.d-inline-block.ms-2.mb-0 Qatar Airways
+    
+    p.text-body-emphasis Travelling from 
+      strong Dhaka 
+      | to 
+      strong Cox’s Bazar
+
+    .d-flex.gap-2.flex-wrap 
+      p.mb-0.text-body-emphasis.text-nowrap Tuesday, 29 January
+        span.fas.fa-circle.text-body-tertiary.fs-11.mx-2(data-fa-transform="shrink-6")
+        | 5:00 pm
+      
+      p.mb-0.text-body-emphasis.text-nowrap
+        span.text-body-tertiary.me-2 -
+        | Tuesday, 29 January
+        span.fas.fa-circle.text-body-tertiary.fs-11.mx-2(data-fa-transform="shrink-6")
+        | 5:30 pm
+
+mixin PersonalInfo
+  div 
+    .d-flex.justify-content-between.mb-4 
+      div 
+        span.fa-solid.fa-user.text-primary.me-2
+        h4.mb-0.d-inline-block.text-body-highlight Personal info
+      button.btn.btn-link.p-0 
+        span.fas.fa-edit.me-2
+        | Edit
+
+    .bg-body-highlight.rounded-2.p-4 
+      .row.g-0.gy-5.flex-column.flex-sm-row 
+        .col.pe-4 
+          h5.mb-3 Passenger 1
+          p.mb-2 John James Johansen
+          p.mb-0 Adult 
+            span.fas.fa-circle.text-body-tertiary.fs-11.mx-2(data-fa-transform="shrink-5")
+            | Male
+        .col.border-start-sm.border-top-sm-0.border-top.border-translucent.ps-sm-4.pt-4.pt-sm-0  
+          h5.mb-3 Passenger 2
+          p.mb-2 John James Johansen
+          p.mb-0 Adult 
+            span.fas.fa-circle.text-body-tertiary.fs-11.mx-2(data-fa-transform="shrink-5")
+            | Male
+
+mixin BaggageInfo
+  div 
+    .d-flex.justify-content-between.mb-4 
+      div 
+        span.fa-solid.fa-suitcase-rolling.text-primary.me-2
+        h4.mb-0.d-inline-block.text-body-highlight Included baggage
+      button.btn.btn-link.p-0 
+        span.fas.fa-edit.me-2
+        | Edit
+
+    
+    .d-flex.gap-3.mb-4 
+      span.fas.fa-circle.text-body-quaternary.fs-11.mx-2(data-fa-transform="down-8")
+      div
+        h5.mb-2 1 personal item
+        p.mb-0.text-body-tertiary Must go under the seat in front of you
+    .d-flex.gap-3.mb-4 
+      span.fas.fa-circle.text-body-quaternary.fs-11.mx-2(data-fa-transform="down-8")
+      div
+        h5.mb-2 1 carry-on bag
+        p.mb-0.text-body-tertiary Max weight 8 kg
+    .d-flex.gap-3 
+      span.fas.fa-circle.text-body-quaternary.fs-11.mx-2(data-fa-transform="down-8")
+      div
+        h5.mb-2 1 checked bag
+        p.mb-0.text-body-tertiary Max weight 25 kg
+
+mixin FlightPaymentInfo
+  +FlightInfo
+  hr.my-5
+  +PersonalInfo
+  hr.my-5
+  +BaggageInfo

@@ -1,0 +1,23 @@
+extends LayoutTheme
+include ../mixins/travel-agency/common/TopNavbar
+include ../mixins/travel-agency/common/Navbar
+include ../mixins/travel-agency/common/FooterLinks
+include ../mixins/travel-agency/trip/TripFooter
+
+append variables
+  - var attrsFooter = { class: 'position-relative'}
+
+block mainContent
+  +TopNavbar('Trip')
+  +Navbar('trip')
+  block tripContent
+
+  block tripFooter
+    +TripFooter
+
+  .container-medium
+    +FooterLinks.mt-4.mb-3
+    +Footer.px-0
+
+  block supportChat
+    +SupportChat

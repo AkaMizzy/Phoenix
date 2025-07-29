@@ -1,0 +1,72 @@
+mixin BasicInformationForm(config)
+  form(id=`${config.formId}1` class=config.validation && 'needs-validation' data-wizard-form='1')
+    h3.mb-6 Basic information
+    h4.mb-4 Property Information
+    .form-floating
+      input.form-control(type='text' name=`${config.name}-name` id=`${config.name}wizard-name` required=config.validation placeholder='Property Name' value="With help text")
+      label(for=`${config.name}wizard-name`) Property Name
+      h5.text-end.text-body-quaternary.fw-semibold.mt-2
+        span.text-primary 15 
+        | / 60
+    .form-floating.my-3
+      textarea.form-control(placeholder='Description' name=`${config.name}-message` id=`${config.name}-wizard-des` style='height: 162px')
+      label(for=`${config.name}-wizard-des`) DESCRIPTION
+      h5.text-end.text-body-quaternary.fw-semibold.mt-2
+        span.text-primary 0 
+        | / 360
+    .row.g-3
+      .col-md-8.col-lg-12.col-xl-8
+        .form-floating
+          select.form-select(name=`${config.name}-type` id=`${config.name}property-type` required=config.validation)
+            option(selected value='1') Hotel
+            option(value='1') Flight
+            option(value='2') Trip
+          label(for=`${config.name}property-type`) Property Type
+      .col-md-4.col-lg-12.col-xl-4
+        .form-icon-container
+          .form-floating
+            select.form-select.form-icon-input(name=`${config.name}-type` id=`${config.name}rating-type` required=config.validation)
+              option(selected value='5') 5 star
+              option(value='4') 4 star
+              option(value='3') 3 star
+              option(value='2') 2 star
+              option(value='1') 1 star
+            label.text-body-tertiary.form-icon-label(for=`${config.name}rating-type`) Rating
+          span.fa-solid.fa-star.text-warning.form-icon.fs-10
+    h4.mt-6.mb-3 Contact Information
+    .row.g-3 
+      .col-md-6
+        .form-floating
+          input.form-control.input-spin-none(type='email' name=`${config.name}-email` id=`${config.name}wizard-email` required=config.validation placeholder='Email Address')
+          label(for=`${config.name}wizard-email`) Email Address
+      .col-md-6
+        .form-floating
+          input.form-control.input-spin-none(type='number' name=`${config.name}-phone` id=`${config.name}wizard-phone` required=config.validation placeholder='Phone number')
+          label(for=`${config.name}wizard-phone`) Phone number
+    h4.mt-6.mb-3 Is it part of a hotel / property chain?
+    .row.align-items-center.g-3
+      .col-sm-auto
+        .form-check.form-check-inline.me-4.me-sm-7.mb-0
+          input.form-check-input#no1(type='radio' name='CheckIsHotelRadio' value='no' checked)
+          label.form-check-label(for='no1') No
+        .form-check.form-check-inline.me-0.mb-0
+          input.form-check-input#yes1(type='radio' name='CheckIsHotelRadio' value='yes')
+          label.form-check-label(for='yes1') Yes
+      .col-sm-auto.flex-1
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-company` id=`${config.name}wizard-company` required=config.validation placeholder='Name of Company, Group or Chain' value="With help text" disabled)
+          label(for=`${config.name}wizard-company`) Name of Company, Group or Chain
+    h4.mt-6.mb-3 Do you use a Channel Management Systems?
+    .row.align-items-center.g-3
+      .col-sm-auto
+        .form-check.form-check-inline.me-4.me-sm-7.mb-0
+          input.form-check-input#no2(type='radio' name='CheckUseRadio' value='no')
+          label.form-check-label(for='no2') No
+        .form-check.form-check-inline.me-0.mb-0
+          input.form-check-input#yes2(type='radio' name='CheckUseRadio' value='yes' checked)
+          label.form-check-label(for='yes2') Yes
+      .col-sm-auto.flex-1
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-cms` id=`${config.name}wizard-cms` required=config.validation placeholder='CMS Provider name' value="")
+          label(for=`${config.name}wizard-cms`) CMS Provider name
+          span.fa-solid.fa-search.position-absolute.text-body-quaternary.fs-9.end-0.top-0.mt-3.me-3(data-fa-transform="down-2")

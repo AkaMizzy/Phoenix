@@ -1,0 +1,46 @@
+mixin SeasonOfTour 
+  +Section('container-medium').pt-6.pt-md-10.pb-10
+    +Background({image: `${CWD}assets/img/bg/bg-left-27.png`, attrs: { style: { 'background-size': 'auto', 'background-position': 'left'}}, className: "d-none d-xl-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-27.png`, attrs: { style: { 'background-size': 'auto', 'background-position': 'right'}}, className: "d-none d-xl-block"})
+    .row.g-3.position-relative
+      .col-lg-6
+        .row.g-3
+          .col-md-7
+            h4.fw-semibold.mb-3 Season of
+            h2.fs-4.fw-semibold.mb-3.mb-md-4 Tour & 
+              span.text-primary-light.fw-bold Travel
+            p.mb-3.mb-md-0.text-body-tertiary This is the perfect season for tours and travels. At Phoenix, you can easily select the best travel option for your next vacation
+              span.d-none.d-lg-inline-block.d-xl-none ... 
+              span.d-lg-none.d-xl-inline This will help you with the pricing that you’ll need, the accommodation facilities, food and beverages, and water rides.
+          .col-6.col-md-5
+            .img-zoom-hover.position-relative.h-100.rounded-3.overflow-hidden
+              a(href="#!")
+                img(src=`${CWD}assets/img/gallery/35.png`, alt="").w-100.h-100.object-fit-cover
+              .backdrop-faded
+                a(href="#!").fw-bold.fs-7.text-white.stretched-link New Zealand
+                p.mb-0.text-white.fs-9 17 Hotels
+          .col-6.col-md-5
+            .img-zoom-hover.position-relative.h-100.rounded-3.overflow-hidden
+              a(href="#!") 
+                img(src=`${CWD}assets/img/gallery/36.png`, alt="").w-100.h-100.object-fit-cover
+              .backdrop-faded
+                a(href="#!").fw-bold.fs-7.text-white London
+                p.mb-0.text-white.fs-9 17 Hotels
+          .col-md-7
+            .img-zoom-hover.position-relative.h-100.rounded-3.overflow-hidden
+              a(href="#!") 
+                img(src=`${CWD}assets/img/gallery/37.png`, alt="" height=220).w-100.h-md-100.object-fit-cover
+              .backdrop-faded
+                a(href="#!").fw-bold.fs-7.text-white Maui
+                p.mb-0.text-white.fs-9 14 Hotels
+      .col-lg-6
+        .d-flex.flex-column.gap-3.h-100
+          .img-zoom-hover.position-relative.h-100.rounded-3.overflow-hidden
+            a(href="#!") 
+              img(src=`${CWD}assets/img/gallery/38.png`, alt="" height=220).w-100.h-lg-100.object-fit-cover
+            .backdrop-faded
+              a(href="#!").fw-bold.fs-7.text-white Bali, Indonesia
+              p.mb-0.text-white.fs-9 51 Hotels
+          button.btn.btn-primary.w-100.py-3.fs-8
+            | Explore more
+            span.fa-solid.fa-chevron-right.ms-2(data-fa-transform="down-2")

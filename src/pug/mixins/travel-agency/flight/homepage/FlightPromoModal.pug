@@ -1,0 +1,20 @@
+mixin FlightPromoModal 
+  .modal.fade(tabindex="-1" id="flightPromoModal" data-phoenix-modal!={ autoShow: true } aria-hidden="true")
+    .modal-dialog.modal-dialog-centered.modal-md
+      .modal-content
+        .modal-body.p-6
+          .position-absolute.end-0.top-0
+            button.btn.btn-link.text-danger.px-3(data-bs-dismiss="modal" aria-label="Close")
+              span.fa-solid.fa-times(data-fa-transform='down-2')
+          .text-center 
+            img.d-dark-none.img-fluid.mb-4(src=`${CWD}assets/img/spot-illustrations/44.png` width=130 alt="")
+            img.d-light-none.img-fluid.mb-4(src=`${CWD}assets/img/spot-illustrations/44-dark.png` width=130 alt="")
+            h1.text-success Save 20%
+            h3.mb-2.text-body on your next flight - Join now!
+            p.mb-4.fs-9 Sign up now to save up to 20% on flights with our free membership program!
+            .d-flex.gap-2.align-items-center.mb-4
+              input.form-control(type="email" placeholder="Your email address")
+              button.btn.btn-primary.rounded.text-nowrap.px-sm-6 Sign-up
+            p.mb-1.fs-9.text-body-quaternary Subscribe for exclusive offers. 
+              a(href="#!") Privacy Policy
+            button.btn.btn-link.p-0.fs-10.text-decoration-underline.text-body-tertiary(data-bs-dismiss="modal" data-disable-modal-auto-show aria-label="Close") Don’t show it again

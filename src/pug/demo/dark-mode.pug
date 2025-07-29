@@ -1,0 +1,12 @@
+extends ../index
+
+append variables
+  - var attrsHtml = Object.assign(attrsHtml, { 'data-bs-theme': "dark"})
+
+append headScripts
+  script.
+    window.config.set({
+      phoenixTheme: 'dark'
+    });
+
+block afterWrapperContent

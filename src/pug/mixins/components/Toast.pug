@@ -1,0 +1,98 @@
+mixin ToastBasicExampleDemo
+  .toast.show(role='alert' aria-live='assertive' aria-atomic='true' data-bs-autohide="false")
+    .toast-header
+      = '\n'
+      strong.me-auto Bootstrap
+      small.text-body-secondary 11 mins ago
+      = '\n'
+      button.btn.ms-2.p-0(type='button' data-bs-dismiss='toast' aria-label='Close')
+        span.uil.uil-times.fs-7
+
+    .toast-body
+      | Hello, world! This is a toast message.
+   
+mixin ToastRightPlaceDemo
+  .position-relative.mb-4(aria-live='polite' aria-atomic='true' style='min-height: 130px;')
+    .toast.show.position-absolute.top-0.end-0
+      .toast-header
+        = '\n'
+        strong.me-auto Bootstrap
+        = '\n'
+        small.text-body-secondary 11 mins ago
+        = '\n'
+        button.btn.ms-2.p-0(type='button' data-bs-dismiss='toast' aria-label='Close')
+          span.uil.uil-times.fs-7
+      .toast-body
+        | Hello, world! This is a toast message.
+
+
+mixin ToastMiddlePlaceDemo
+  .d-flex.flex-center(aria-live='polite' aria-atomic='true' style='min-height: 300px;')
+    .toast.show(role='alert' data-bs-autohide='false' aria-live='assertive' aria-atomic='true')
+      .toast-header
+        strong.me-auto Bootstrap
+        = '\n'
+        small.text-body-secondary 11 mins ago
+        = '\n'
+        button.btn.ms-2.p-0(type='button' data-bs-dismiss='toast' aria-label='Close')
+          span.uil.uil-times.fs-7
+      .toast-body
+        | Hello, world! This is a toast message.
+
+mixin LiveToastDemo
+  button.btn.btn-primary#liveToastBtn(type='button') Show live toast
+  .position-fixed.bottom-0.end-0.p-3(style='z-index: 5')
+    #liveToast.toast.fade(role='alert' aria-live='assertive' aria-atomic='true')
+      .toast-header
+        = '\n'
+        strong.me-auto Bootstrap
+        = '\n'
+        small.text-body-secondary 11 mins ago
+        = '\n'
+        button.btn.ms-2.p-0(type='button' data-bs-dismiss='toast' aria-label='Close')
+          span.uil.uil-times.fs-7
+      .toast-body
+        | Hello, world! This is a toast message.
+
+mixin TranslucentDemo
+  .toast.show(role='alert' data-bs-autohide='false' aria-live='assertive' aria-atomic='true')
+    .toast-header
+      = '\n'
+      strong.me-auto Bootstrap
+      = '\n'
+      small.text-body-secondary 11 mins ago
+      = '\n'
+      button.btn.ms-2.p-0(type='button' data-bs-dismiss='toast' data-bs-theme="dark" aria-label='Close')
+        span.uil.uil-times.fs-7
+    .toast-body
+      | Hello, world! This is a toast message.
+      
+
+mixin ToastColorSchemesDemo
+  .d-flex
+    .toast.show.align-items-center.text-white.dark__text-gray-1100.bg-primary.border-0(role='alert' data-bs-autohide='false' aria-live='assertive' aria-atomic='true')
+      .d-flex
+        .toast-body
+          = '\n'  
+          | Hello, world! This is a toast message.
+          = '\n'
+        = '\n'
+        button.btn.ms-2.p-0(type='button' data-bs-dismiss='toast' aria-label='Close')
+          span.uil.uil-times.fs-7.text-white
+
+mixin CustomContentDemo
+  .toast.show.align-items-center(role='alert' data-bs-autohide='false' aria-live='assertive' aria-atomic='true')
+    .d-flex
+      .toast-body
+        | Hello, world! This is a toast message.
+      = '\n'
+      button.btn.ms-2.p-0(type='button' data-bs-dismiss='toast' aria-label='Close')
+        span.uil.uil-times.fs-7
+    .py-3.border-top.border-translucent
+      = '\n'
+      button.btn.btn-primary.btn-sm(type='button') Take action
+      = '\n'
+      button.btn.btn-secondary.btn-sm.ms-2(type='button' data-bs-dismiss='toast') Close
+
+        
+

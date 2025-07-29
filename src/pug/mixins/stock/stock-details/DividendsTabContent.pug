@@ -1,0 +1,338 @@
+mixin DividendCardItem(item)
+  .col-6.col-xxl-3(class=item.className)
+    .d-flex.gap-3.flex-column.flex-sm-row.flex-xxl-column
+      .icon-item.border.p-2.rounded.d-flex.flex-center(class=`border-${item.color}-light bg-${item.color}-subtle`)
+        span.uil(class=`${item.icon} text-${item.color}-darker`)
+      .text-nowrap 
+        h5.fs-9.fs-sm-8.text-body-highlight.lh-sm= item.title
+        h4.fs-8.fs-sm-7.mb-0.text-body.fw-bolder.lh-sm=  item.content
+
+mixin DividendRecordTableDataRow(item, index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.fs-9.align-middle.ps-0
+      .form-check.mb-0.fs-8
+        input.form-check-input(type='checkbox' data-bulk-select-row!=item)
+    td.align-middle.dividendDate.white-space-nowrap
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0=item.date
+    td.align-middle.cashAmount.white-space-nowrap
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0 $#{item.amount}
+    td.align-middle.text-center.status
+      span.badge.badge-phoenix.fs-10.rounded-pill(class=`badge-phoenix-${item.cashStatus.badge}`)=item.cashStatus.title
+    td.align-middle.text-end.recordDate.white-space-nowrap.pe-5
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0=item.recordDate
+    td.align-middle.payDate.white-space-nowrap.ps-5
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0 #{item.payDate ? item.payDate : 'N/A'}
+    td.align-middle.white-space-nowrap.text-end.pe-0
+      .position-relative
+        .hover-actions
+          button.btn.btn-sm.btn-phoenix-secondary.me-1.fs-10
+            span.fas.fa-check
+          button.btn.btn-sm.btn-phoenix-secondary.fs-10
+            span.fas.fa-trash
+      +StockDropdown.fs-10
+
+mixin DividendChartContainer(item)
+  .col-xxl-6 
+    .row.g-3.g-lg-5.flex-between-center.mb-4 
+      .col-auto 
+        h4= item.title 
+        p.text-body-tertiary.mb-0= item.desc 
+      .col-auto.d-flex.align-items-center.gap-2 
+        select.form-select.form-select-sm(name=item.form.name id=item.form.id)
+          each opt in item.form.options 
+            option(value=opt.value)= opt.label
+        button.btn.btn-sm.btn-phoenix-secondary.bg-body-emphasis.bg-body-hover.action-btn(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" )
+          span.fas.fa-ellipsis-h(data-fa-transform="shrink-2")
+        ul.dropdown-menu.dropdown-menu-end
+          li
+            a.dropdown-item(href='#') Action
+          li
+            a.dropdown-item(href='#') Another action
+          li
+            a.dropdown-item(href='#') Something else here
+
+    div(class=item.echarts style='width: 100%; min-height: 300px;')
+
+mixin DividendsTabContent
+  -
+    var dividendCardItem = [
+      {
+        icon: 'uil-usd-circle',
+        color: 'success',
+        title: 'Dividend Yield',
+        content: '2.80%',
+        className: 'pe-5 pb-4 border-bottom border-end'
+      },
+      {
+        icon: 'uil-dollar-sign',
+        color: 'warning',
+        title: 'Annual Dividend',
+        content: '$1.00',
+        className: ' pb-4 ps-5 px-xxl-5 border-bottom border-end-xxl'
+      },
+      {
+        icon: 'uil-dollar-alt',
+        color: 'danger',
+        title: 'Ex-Dividend Date',
+        content: 'Aug 12, 2024',
+        className: 'py-4 pt-xxl-0 px-xxl-5 pe-5 border-bottom border-end'
+      },
+      {
+        icon: 'uil-bill',
+        color: 'primary',
+        title: 'Payout Frequency',
+        content: 'Quarterly',
+        className: 'py-4 pt-xxl-0 ps-5  border-bottom'
+      },
+      {
+        icon: 'uil-invoice',
+        color: 'info',
+        title: 'Payout Ratio',
+        content: '15.23%',
+        className: 'py-4 pb-xxl-0 pe-5 pe-md-0 pe-lg-5 border-bottom border-end  border-end-xxl border-bottom-xxl-0'
+      },
+      {
+        icon: 'uil-arrow-growth',
+        color: 'success',
+        title: 'Dividend Growth',
+        content: '4.26%',
+        className: 'py-4 ps-5 pe-xxl-5 pb-xxl-0 border-bottom border-bottom-xxl-0 border-end-xxl'
+      },
+      {
+        icon: 'uil-process',
+        color: 'primary',
+        title: 'Buyback Yield',
+        content: '2.57%',
+        className: 'pt-4 pe-5 px-xxl-5 border-end'
+      },
+      {
+        icon: 'uil-chart-line',
+        color: 'warning',
+        title: 'Shareholder Yield',
+        content: '3.00%',
+        className: 'pt-4 ps-5'
+      },
+    ]
+  .alert.alert-phoenix-secondary.mb-4(role='alert')
+    h4.alert-heading.text-body-tertiary.mb-2 Apple's Dividend Distribution
+    p.text-body-tertiary.mb-0 Apple offers a $1.00 yearly dividend per share, or 0.44% return. The dividend is distributed every three months, and as of August 12, 2024, there was no ex-dividend date.
+
+  .card.mb-4 
+    .card-body
+      .row.g-0
+        each item in dividendCardItem 
+          +DividendCardItem(item)
+  -
+    var chartItem = [
+      {
+        title: 'Dividends',
+        desc: 'Dividend Income Basics',
+        form: {
+          name: 'dividends',
+          id: 'dividends',
+          options: [
+            {
+              value: 9,
+              label: '9 Years'
+            },
+            {
+              value: 8,
+              label: '8 Years'
+            },
+            {
+              value: 7,
+              label: '7 Years'
+            }
+          ]
+        },
+        echarts:  'echart-dividends-bar-chart'
+      },
+      {
+        title: 'Dividend Growth',
+        desc: 'Boosting Dividend Income',
+        form: {
+          name: 'dividend-growth',
+          id: 'growth',
+          options: [
+            {
+              value: 7,
+              label: '7 Years'
+            },
+            {
+              value: 8,
+              label: '8 Years'
+            },
+            {
+              value: 9,
+              label: '9 Years'
+            }
+          ]
+        },
+        echarts: 'echart-dividend-growth-chart'
+      }
+    ]
+  .row.g-3.mb-4 
+    each item in chartItem 
+      +DividendChartContainer(item)
+  .row.g-3.flex-between-center 
+    .col-auto
+      h4 Dividend Record
+      p.text-body-tertiary.mb-0 Brief summary of all projects
+    .col-auto
+      select#record-action.form-select.form-select-sm(name="action") 
+        option(value="export") Export 
+        option(value='import') View 
+        option(value="remove")  Remove 
+    -
+      var dividendRecordData = [
+        {
+          date: 'Sep 6, 2024',
+          amount: '0.12',
+          cashStatus: {
+            title: 'pending',
+            badge: 'warning',
+          },
+          recordDate: 'Sep 19, 2024'
+        },
+        {
+          date: 'Jun 7, 2024',
+          amount: '0.20',
+          cashStatus: {
+            title: 'pending',
+            badge: 'warning',
+          },
+          recordDate: 'Jun 20, 2024'
+        },
+        {
+          date: 'Nov 30, 2023',
+          amount: '1.78',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Mar 14, 2024',
+          payDate: 'Mar 14, 2024'
+        },
+        {
+          date: 'Jun 1, 2023',
+          amount: '0.76',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Dec 14, 2023',
+          payDate: 'Dec 14, 2023'
+        },
+        {
+          date: 'Dec 1, 2022',
+          amount: '1.90',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Sep 14, 2023',
+          payDate: 'Sep 14, 2023'
+        },
+        {
+          date: 'Mar 5, 2020',
+          amount: '2.87',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Jun 15, 2023',
+          payDate: 'Jun 15, 2023'
+        },
+        {
+          date: 'Sep 5, 2019',
+          amount: '5.87',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Mar 16, 2023',
+          payDate: 'Mar 16, 2023'
+        },
+        {
+          date: 'Jun 6, 2019',
+          amount: '12.98',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Dec 15, 2022',
+          payDate: 'Dec 15, 2022'
+        },
+        {
+          date: 'Mar 7, 2019',
+          amount: '2.10',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Sep 15, 2022',
+          payDate: 'Sep 15, 2022'
+        },
+        {
+          date: 'Dec 6, 2018',
+          amount: '10.54',
+          cashStatus: {
+            title: 'canceled',
+            badge: 'danger',
+          },
+          recordDate: 'Jun 14, 2020'
+        },
+        {
+          date: 'Jun 13, 2018',
+          amount: '23.54',
+          cashStatus: {
+            title: 'done',
+            badge: 'success',
+          },
+          recordDate: 'Dec 14, 2020',
+          payDate: 'Dec 14, 2020'
+        }
+      ]
+
+    .col-12.mt-3
+      #dividendTable(data-list!={
+        valueNames: ["dividendDate", "cashAmount", "status", "recordDate", "payDate"],
+        page: 10,
+        pagination: true
+      })
+        .table-responsive.scrollbar
+          table.table.fs-9.mb-0.border-top.border-translucent
+            thead
+              tr.text-uppercase
+                th.white-space-nowrap.fs-9.ps-0.align-middle
+                  .form-check.mb-0.fs-8
+                    input.form-check-input#checkbox-bulk-dividend-record-select(
+                      type='checkbox' 
+                      data-bulk-select!={
+                        body: "table-dividend-record-body",
+                      }
+                    )
+                th.sort.white-space-nowrap.align-middle(scope='col' style='min-width:200px;' data-sort="dividendDate") Ex-dividend date
+                th.sort.align-middle(scope='col' data-sort="cashAmount" style='min-width:200px;') Cash amount
+                th.sort.align-middle.text-center(scope='col' data-sort="status" style='min-width:200px;') Payment Status
+                th.sort.align-middle.text-end.pe-5(scope='col' style='min-width:200px;' data-sort="recordDate") Record date
+                th.sort.text-start.ps-5.align-middle(scope='col' style='min-width:200px;' data-sort="payDate") Pay Date
+                th.sort.text-end.pe-0.align-middle(scope='col')
+            tbody.list#table-dividend-record-body
+              each row, index in dividendRecordData 
+                +DividendRecordTableDataRow(row, index)
+        .row.align-items-center.justify-content-between.py-2.pe-0.fs-9.pagination-subtle
+          .col-auto.d-flex
+            p.mb-0.d-none.d-sm-block.me-3.fw-semibold.text-body(data-list-info)
+            a.fw-semibold(href='#!' data-list-view="*")
+              | View all
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+            a.fw-semibold.d-none(href='#!' data-list-view="less")
+              | View Less
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+          .col-auto.d-flex
+            button.page-link(data-list-pagination="prev")
+              span.fas.fa-chevron-left
+            ul.mb-0.pagination.fs-9
+            button.page-link.pe-0(data-list-pagination="next")
+              span.fas.fa-chevron-right

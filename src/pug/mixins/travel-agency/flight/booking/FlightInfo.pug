@@ -1,0 +1,53 @@
+mixin FlightInfo 
+  .card.bg-body-highlight&attributes(attributes) 
+    .card-body.p-4.p-lg-6 
+      .row.g-0.justify-content-between 
+        .col-lg-8.mb-5.mb-lg-0 
+          .row.gy-4 
+            .col-12 
+              .row.align-items-center 
+                .col-md-3.text-md-end.mb-2.mb-md-0 
+                  h2 13:45
+                  p.mb-0.text-nowrap 23 January, 2023
+                .col-md-auto.d-none.d-md-block.text-center 
+                  span.fas.fa-circle.text-body-quaternary.fs-11 
+                .col-md-auto 
+                  h5 DAC - Dhaka 
+                    span.text-body-tertiary.fw-normal (Hazrat Shahjalal Intl. Airport)
+            
+            .col-12 
+              .row.align-items-center 
+                .col-auto.col-md-3.text-md-end 
+                  p.mb-0.text-body-quaternary 0h 45m
+                .col-auto.text-md-center 
+                  img(src=`${CWD}assets/img/icons/long-arrow-down.svg`, alt="") 
+                .col-auto 
+                  p.mb-0.text-body-quaternary Qatar Airways 
+            
+            .col-12 
+              .row.align-items-center 
+                .col-md-3.text-md-end.mb-2.mb-md-0 
+                  h2 14:15
+                  p.mb-0.text-nowrap 23 January, 2023
+                .col-md-auto.d-none.d-md-block.text-center  
+                  span.fas.fa-circle.text-body-quaternary.fs-11 
+                .col-md-auto 
+                  h5 CXB - Cox’s Bazar 
+                    span.text-body-tertiary.fw-normal (Cox’s Bazar Intl. Airport) 
+        .col-lg-4
+          .ps-lg-6.pt-5.pt-lg-0.border-top.border-top-lg-0.border-start-lg.border-translucent 
+            .row.g-lg-3.g-md-0.g-3.flex-between-center
+              .col-md-auto.col-lg-12
+                .text-nowrap 
+                  img(src=`${CWD}assets/img/brand/qatar-airline.png` alt='' width=32).rounded-2
+                  h5.text-nowrap.fw-normal.d-inline-block.ms-2.mb-0 Qatar Airways
+              .col-auto.col-lg-12
+                h5.text-nowrap Flight number
+                p.mb-0 VQ 935
+              .col-auto.col-lg-12
+                h5.text-nowrap Flight model
+                p.mb-0 ATR735
+              .col-auto.col-lg-12
+                h5.mb-0.text-nowrap
+                  span.fa-solid.fa-couch.me-2
+                  | Economy

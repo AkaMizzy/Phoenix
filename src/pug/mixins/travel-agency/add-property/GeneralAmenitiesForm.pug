@@ -1,0 +1,93 @@
+include ../common/PriceTierForm
+
+mixin GeneralAmenitiesForm(config, title)
+  form(id=`${config.formId}3` class=config.validation && 'needs-validation' novalidate data-wizard-form='3')
+    div(class=`${title === "Amenities" ? "d-sm-flex flex-between-center gap-3" : ""}`)
+      h3(class=`${title !== "Amenities" ? "mb-6" : "mb-4 mb-sm-0"}`)= title
+      .row.g-3
+        .col-sm-auto.flex-sm-fill
+          .form-floating
+            input.form-control(type='text' name=`${config.name}-search-amenities` id=`${config.name}wizard-search-amenities` required=config.validation placeholder='Search amenities' value="")
+            label(for=`${config.name}wizard-search-amenities`) Search amenities
+            span.fa-solid.fa-search.position-absolute.text-body-quaternary.fs-9.end-0.top-0.mt-3.me-3(data-fa-transform="down-2")
+        .col-sm-auto
+          button.btn.btn-phoenix-primary.w-100.h-100.fs-8
+            span.fa-solid.fa-plus.me-2
+            | Add amenity
+    .accordion-button-arrow-icon.accordion.mt-2#generalAmenitiesAccordion 
+      .accordion-item.px-0.py-3
+        h5.accordion-header
+          button.accordion-button.py-0.text-body-highlight(type="button" data-bs-toggle="collapse" data-bs-target="#popularAmenities" aria-expanded="true" aria-controls="popularAmenities")
+            span.circle-icon-item.border.border-primary.text-primary.me-3
+              span.fa-solid.fa-fire
+            span.flex-1 Popular amenities
+        #popularAmenities.accordion-collapse.collapse.ms-md-9.show(data-bs-parent="#generalAmenitiesAccordion")
+          +PriceTierForm({id: "wifi", name: "Wifi"}).my-3
+          +PriceTierForm({id: "breakfast", name: "Breakfast"}).mb-3
+          +PriceTierForm({id: "gym", name: "Gym"}).mb-3
+          +PriceTierForm({id: "swimming", name: "Swimming pool"}).mb-3
+          +PriceTierForm({id: "in-room", name: "In-room coffee/tea"}).mb-3
+          +PriceTierForm({id: "daily-housekeeping", name: "Daily housekeeping"}).mb-3
+          +PriceTierForm({id: "bar", name: "Bar / Lounge"}).mb-3
+          +PriceTierForm({id: "laundry", name: "Laundry"}).mb-3
+          +PriceTierForm({id: "newspaper", name: "Newspaper"}).mb-3
+          +PriceTierForm({id: "bicycle", name: "Bicycle"}).mb-3
+          +PriceTierForm({id: "air", name: "Air conditioning"}).mb-3
+          +PriceTierForm({id: "games", name: "Games room"}).mb-3
+          +PriceTierForm({id: "beach", name: "Beach view"})
+      .accordion-item.px-0.py-3
+        h5.accordion-header
+          button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#foodAndDrink" aria-expanded="false" aria-controls="foodAndDrink")
+            span.circle-icon-item.border.border-primary.text-primary.me-3
+              span.fa-solid.fa-utensils
+            span.flex-1.me-2 Food & Drink
+        #foodAndDrink.accordion-collapse.collapse.ms-md-9(data-bs-parent="#generalAmenitiesAccordion")
+          +PriceTierForm({id: "restaurants", name: "Restaurants"}).my-3
+          +PriceTierForm({id: "bars", name: "Bars"}).mb-3
+          +PriceTierForm({id: "in-room-dining", name: "In-Room Dining"}).mb-3
+          +PriceTierForm({id: "family-friendly-dining", name: "Family-Friendly Dining"}).mb-3
+          +PriceTierForm({id: "breakfast-buffet", name: "Breakfast Buffet"})
+      .accordion-item.px-0.py-3
+        h5.accordion-header
+          button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#outdoorAndView" aria-expanded="false" aria-controls="outdoorAndView")
+            span.circle-icon-item.border.border-primary.text-primary.me-3
+              span.fa-solid.fa-umbrella-beach
+            span.flex-1.me-2 Outdoor & View
+        #outdoorAndView.accordion-collapse.collapse.ms-md-9(data-bs-parent="#generalAmenitiesAccordion")
+          +PriceTierForm({id: "garden-or-courtyard", name: "Garden or Courtyard"}).my-3
+          +PriceTierForm({id: "scenic-views", name: "Scenic Views"}).mb-3
+          +PriceTierForm({id: "sunbathing-areas", name: "Sunbathing Areas"}).mb-3
+          +PriceTierForm({id: "outdoor-lounge-areas", name: "Outdoor Lounge Areas"})
+      .accordion-item.px-0.py-3
+        h5.accordion-header
+          button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#intertainment" aria-expanded="false" aria-controls="intertainment")
+            span.circle-icon-item.border.border-primary.text-primary.me-3
+              span.fa-solid.fa-cart-shopping
+            span.flex-1.me-2 Entertainment & Family Services
+        #intertainment.accordion-collapse.collapse.ms-md-9(data-bs-parent="#generalAmenitiesAccordion")
+          +PriceTierForm({id: "game-room", name: "Game Room"}).my-3
+          +PriceTierForm({id: "play-area", name: "Children's Play Area"}).mb-3
+          +PriceTierForm({id: "sports-facilities", name: "Sports Facilities"}).mb-3
+          +PriceTierForm({id: "babysitting-services", name: "Babysitting Services"})
+      .accordion-item.px-0.py-3
+        h5.accordion-header
+          button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#mediaAndTechnology" aria-expanded="false" aria-controls="mediaAndTechnology")
+            span.circle-icon-item.border.border-primary.text-primary.me-3
+              span.fa-solid.fa-video
+            span.flex-1.me-2 Media & Technology
+        #mediaAndTechnology.accordion-collapse.collapse.ms-md-9(data-bs-parent="#generalAmenitiesAccordion")
+          +PriceTierForm({id: "high-speed-internet", name: "High-Speed Internet"}).my-3
+          +PriceTierForm({id: "business-center", name: "Business Center"}).mb-3
+          +PriceTierForm({id: "video-conferencing", name: "Video Conferencing Facilities"}).mb-3
+          +PriceTierForm({id: "vr", name: "Virtual Reality (VR) Experiences"})
+      .accordion-item.px-0.py-3
+        h5.accordion-header
+          button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#accessibility" aria-expanded="false" aria-controls="accessibility")
+            span.circle-icon-item.border.border-primary.text-primary.me-3
+              span.fa-solid.fa-universal-access
+            span.flex-1.me-2 Accessibility
+        #accessibility.accordion-collapse.collapse.ms-md-9(data-bs-parent="#generalAmenitiesAccordion")
+          +PriceTierForm({id: "accessible-common-areas", name: "Accessible Common Areas"}).my-3
+          +PriceTierForm({id: "accessible-parking-spaces", name: "Accessible Parking Spaces"}).mb-3
+          +PriceTierForm({id: "accessible-fitness-center", name: "Accessible Fitness Center"}).mb-3
+          +PriceTierForm({id: "accessible-swimmings-pool", name: "Accessible Swimming Pool"})

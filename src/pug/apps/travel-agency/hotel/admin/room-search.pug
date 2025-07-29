@@ -1,0 +1,367 @@
+extends ../../../../layouts/LayoutTheme
+include ../../../../mixins/travel-agency/room-search/RoomCard
+include ../../../../mixins/travel-agency/room-search/RoomFilterOffcanvas
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-9
+    .row.align-items-end.mb-5.gy-3
+      .col(style='max-width: 290px')
+        h2 Rooms 
+      .col-xl
+        .row.gx-2.gx-xl-3.gy-3
+          .col-sm-auto.order-1.order-sm-0.me-sm-2.d-xl-none
+            button.btn.btn-lg.btn-phoenix-secondary.text-body-tertiary.w-100(data-phoenix-toggle='offcanvas' data-phoenix-target='#roomFilterOffcanvas') 
+              span.fa-solid.fa-filter.me-2
+              | Filter
+          .col.col-sm-5.col-xxl-3
+            .form-floating.w-auto
+              input.form-control.datetimepicker#checkIn(type="text" placeholder="H:i" data-options!={
+                disableMobile:true,
+                mode: "range",
+                minDate: "today",
+                dateFormat: "d-m-y",
+              })
+              label(for="checkIn") Select time range
+              span.fa-solid.fa-calendar-alt.position-absolute.top-0.end-0.mt-3.me-3
+          .col.col-sm-auto.flex-grow-0
+            button.btn.btn-lg.btn-phoenix-primary.px-xxl-6.text-nowrap
+              span.d-none.d-xl-inline-block Update 
+              span.fa-solid.fa-search.fs-9.ms-xl-2
+          .col.col-sm-auto.ms-auto.flex-grow-0
+            button.btn.btn-lg.btn-phoenix-secondary.ms-auto.text-nowrap
+              span.d-none.d-xl-inline-block Refresh 
+              span.fa-solid.fa-rotate.fs-9.ms-xl-2
+    .row.gx-6
+      .col-xl-auto
+        .phoenix-offcanvas-filter-xl.phoenix-offcanvas.phoenix-offcanvas-fixed.bg-body.scrollbar.overflow-x-hidden#roomFilterOffcanvas(data-breakpoint='xl')
+          +RoomFilterOffcanvas
+        .phoenix-offcanvas-backdrop.d-xl-none(data-phoenix-backdrop)
+      .col.w-xl-25
+        -
+          var rooms = [
+            {
+              name: 'Double Bed',
+              category: 'Presidential Suite',
+              price: '699.67',
+              img: '/img/hotels/70.png',
+              bedRooms: '01',
+              beds: "02",
+              guest: '02',
+              child: "01",
+              bathrooms: "01",
+              available: 20,
+              total: 100,
+              availableOnDates: [
+                {
+                  date: '10 March',
+                  price: '599.00',
+                  units: '09'
+                },
+                {
+                  date: '11 March',
+                  price: '599.00',
+                  units: '06'
+                },
+                {
+                  date: '12 March',
+                  price: '599.00',
+                  units: '03'
+                },
+                {
+                  date: '13 March',
+                  price: '699.00',
+                  priceUp: true
+                },
+                {
+                  date: '14 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '15 March',
+                  price: '599.00',
+                  units: '08',
+                },
+                {
+                  date: '16 March',
+                  price: '499.00',
+                  units: '12',
+                  priceDown: true
+                },
+                {
+                  date: '17 March',
+                  price: '599.00',
+                  units: '09',
+                },
+                {
+                  date: '18 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '19 March',
+                  price: '599.00',
+                  units: '02',
+                },
+                {
+                  date: '20 March',
+                  price: '599.00',
+                  units: '04',
+                },
+              ],
+              amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone']
+            },
+            {
+              name: 'Queen bed',
+              category: 'Deluxe Room',
+              price: '400.5',
+              img: '/img/hotels/71.png',
+              bedRooms: '02',
+              beds: "02",
+              guest: '02',
+              child: "01",
+              bathrooms: "02",
+              available: 25,
+              total: 77,
+              availableOnDates: [
+                {
+                  date: '10 March',
+                  price: '599.00',
+                  units: '09'
+                },
+                {
+                  date: '11 March',
+                  price: '599.00',
+                  units: '06'
+                },
+                {
+                  date: '12 March',
+                  price: '599.00',
+                  units: '03'
+                },
+                {
+                  date: '13 March',
+                  price: '699.00',
+                  priceUp: true
+                },
+                {
+                  date: '14 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '15 March',
+                  price: '599.00',
+                  units: '08',
+                },
+                {
+                  date: '16 March',
+                  price: '499.00',
+                  units: '12',
+                  priceDown: true
+                },
+                {
+                  date: '17 March',
+                  price: '599.00',
+                  units: '09',
+                },
+                {
+                  date: '18 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '19 March',
+                  price: '599.00',
+                  units: '02',
+                },
+                {
+                  date: '20 March',
+                  price: '599.00',
+                  units: '04',
+                },
+              ],
+              amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone']
+            },
+            {
+              name: 'Twin bed',
+              category: 'Family Room',
+              price: '600.41',
+              img: '/img/hotels/72.png',
+              bedRooms: '03',
+              beds: "05",
+              guest: '07',
+              child: "01",
+              bathrooms: "03",
+              available: 8,
+              total: 12,
+              availableOnDates: [
+                {
+                  date: '10 March',
+                  price: '599.00',
+                  units: '09'
+                },
+                {
+                  date: '11 March',
+                  price: '599.00',
+                  units: '06'
+                },
+                {
+                  date: '12 March',
+                  price: '599.00',
+                  units: '03'
+                },
+                {
+                  date: '13 March',
+                  price: '699.00',
+                  priceUp: true
+                },
+                {
+                  date: '14 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '15 March',
+                  price: '599.00',
+                  units: '08',
+                },
+                {
+                  date: '16 March',
+                  price: '499.00',
+                  units: '12',
+                  priceDown: true
+                },
+                {
+                  date: '17 March',
+                  price: '599.00',
+                  units: '09',
+                },
+                {
+                  date: '18 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '19 March',
+                  price: '599.00',
+                  units: '02',
+                },
+                {
+                  date: '20 March',
+                  price: '599.00',
+                  units: '04',
+                },
+              ],
+              amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone']
+            },
+            {
+              name: 'Single bed',
+              category: 'Honeymoon Suite',
+              price: '350.8',
+              img: '/img/hotels/73.png',
+              bedRooms: '01',
+              beds: "01",
+              guest: '02',
+              child: "00",
+              bathrooms: "01",
+              available: 5,
+              total: 15,
+              availableOnDates: [
+                {
+                  date: '10 March',
+                  price: '599.00',
+                  units: '09'
+                },
+                {
+                  date: '11 March',
+                  price: '599.00',
+                  units: '06'
+                },
+                {
+                  date: '12 March',
+                  price: '599.00',
+                  units: '03'
+                },
+                {
+                  date: '13 March',
+                  price: '699.00',
+                  priceUp: true
+                },
+                {
+                  date: '14 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '15 March',
+                  price: '599.00',
+                  units: '08',
+                },
+                {
+                  date: '16 March',
+                  price: '499.00',
+                  units: '12',
+                  priceDown: true
+                },
+                {
+                  date: '17 March',
+                  price: '599.00',
+                  units: '09',
+                },
+                {
+                  date: '18 March',
+                  price: '599.00',
+                  units: '10',
+                },
+                {
+                  date: '19 March',
+                  price: '599.00',
+                  units: '02',
+                },
+                {
+                  date: '20 March',
+                  price: '599.00',
+                  units: '04',
+                },
+              ],
+              amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone']
+            },
+          ]
+        each room, index in rooms
+          +RoomCard(room, index)(class=`${index !== rooms.length - 1 ? "mb-3" : ""}`)
+        .border.p-3.rounded-3.mt-5.d-flex.flex-end-center.gap-3.gap-sm-6.flex-wrap
+          h2.text-body.mb-0
+            span.fs-9.text-body-tertiary.fw-bold.me-2 Total :
+            | 04
+          a(href="#!").btn.btn-primary.px-sm-7
+            | Confirm Booking
+            span.fa-solid.fa-chevron-right.ms-2

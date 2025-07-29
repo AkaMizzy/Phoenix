@@ -1,0 +1,246 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Styling',
+      description:'We recommend you customize your theme styles using the user style files. You can customize the theme’s styles with the following approaches:'
+    }
+
+block component
+  +ComponentCard({title: 'Gulp based workflow', hideNavTab: true}).my-4
+    p.mb-1 You can add your own SCSS and override the theme style in the 
+      code src/scss/user.scss
+      |  file.
+    .border.border-translucent.rounded-1.bg-body-emphasis.px-3.py-2.mb-4
+      code user.scss
+    p.mb-1 To make broader changes to the design of the theme, such as changing the color scheme or font sizes, use 
+      code src/scss/_user-variables.scss
+      | . Any variable from 
+      code node_modules/bootstrap/scss/variables
+      |  or 
+      code src/scss/theme/_variables.scss
+      |  can be overridden with your own value.
+    .border.border-translucent.rounded-1.bg-body-emphasis.px-3.py-2.mb-4
+      code _user-variables.scss
+    p.mb-1 To remove bootstrap components, update 
+      code src/scss/_bootstrap.scss
+      |  file.
+    .border.border-translucent.rounded-1.bg-body-emphasis.px-3.py-2
+      code _bootstrap.scss
+
+  +ComponentCard({title: 'If you are not using Gulp based workflow', hideNavTab: true}).my-4
+    p.mb-1 You can add your own CSS and override the theme style in the 
+      code public/assets/css/user.css
+      |  file.
+    .border.border-translucent.rounded-1.bg-body-emphasis.px-3.py-2
+      code user.css
+
+  +ComponentCard({title: 'Changing theme colors', hideNavTab: true}).my-4
+    p.mb-1 Changing theme colors 
+      code public/assets/css/user.css
+      |  file.
+    .border.border-translucent.rounded-1.bg-body-emphasis.px-3.py-2
+      code user.css
+
+
+  .card.mb-3
+    .card-header
+      h5.mb-0.fs-6(data-anchor) Changing theme colors
+    .card-body.bg-body-highlight
+      h5(data-anchor) Gulp based workflow
+
+      p If you are using gulp base work flow, you can update your theme colors with two different approaches.
+
+
+      h6.mb-3.fs-7.mt-6(data-anchor) 1. Using scss variable:
+      .px-4
+        p.mb-1 You can bring your necessary variable colors form  
+          code src/scss/theme/_colors.scss 
+          | and paste it into 
+          code src/scss/_user-variables.scss 
+          | then update variables as your necessity. We recommend to follow this approach.
+        .border.border-translucent.rounded-1.bg-body-emphasis.px-3.py-2.mb-3
+          code _user-variables.scss
+
+
+        p  Light mode is default theme style in phoenix. So, if you update any bootstrap’s SCSS variables, it will effect in Light mode. If you want to update any color, find the corresponding variable for this color and place theme to _user-variables.scss file. For example:
+        pre
+          code.lang-css. 
+            //*-----------------------------------------------
+            //|   Theme Colors
+            //-----------------------------------------------*/
+
+            $primary: $blue !default; 
+            $secondary: $gray-600 !default;
+            $success: $green !default;
+            $info: $cyan !default;
+            $warning: $yellow !default;
+            $danger: $red !default;
+            $light: $gray-100 !default;
+            $dark: $gray-1100 !default;  
+
+        p.mt-3 Most of the background and text colors used from body colors, to update the colors change the corresponding variables.
+        pre
+          code.lang-css. 
+            //*-----------------------------------------------
+            //|   Body Colors
+            //-----------------------------------------------*/
+
+            $body-color: $gray-900 !default;
+            $body-bg: $gray-50 !default;
+
+            $body-secondary-color: $gray-800 !default;
+            $body-secondary-bg: $gray-200 !default;
+
+            $body-tertiary-color: $gray-700 !default;
+            $body-tertiary-bg: $gray-300 !default;
+
+            $body-quaternary-color: $gray-500 !default;
+            $body-quaternary-bg: $gray-400 !default;
+
+            $body-emphasis-color: $gray-1100 !default;
+            $body-emphasis-bg: $white !default;
+
+            $body-highlight-color: $gray-1000 !default;
+            $body-highlight-bg: $gray-100 !default;
+
+
+        p.mt-3 If you want to update any theme colors for dark mode, update 
+          code $theme-colors-dark
+          | variable and to update the grays colors you have to update the 
+          code $grays-dark 
+          | variable.
+
+        pre
+          code.lang-css. 
+            /*-----------------------------------------------
+            |   Theme Styles
+            -----------------------------------------------*/
+            $theme-colors-dark: (
+              'primary': $primary-dark,
+              'secondary': $secondary-dark,
+              'success': $success-dark,
+              'info': $info-dark,
+              'warning': $warning-dark,
+              'danger': $danger-dark,
+            ) !default;
+
+        h6.mt-4.fs-7.mb-2.fw-semibold All Colors
+        p.mb-1  All 
+          strong #{title} 
+          | colors are available as Sass variables and Sass map in 
+          code src/scss/theme/_colors.scss 
+          | file. To avoid increased file sizes, we don’t create text or background color classes for each of these variables. Instead, we choose a subset of these colors for a theme palette.
+        p You'll find all the colors used in the theme in a sass map name 
+          code $theme-color-shades 
+          | in 
+          code src/scss/theme/_colors.scss 
+          | file.
+          | If you want to use any 
+          strong #{title} 
+          | color to generate 
+          code text/bg 
+          | utility class, Add the color variable in 
+          code $theme-color-shades 
+          | map. If you want to add/change color for dark mode, update the 
+          code $theme-color-shades-dark 
+          | map. 
+
+        pre
+          code.lang-css. 
+            $theme-color-shades: (
+              'primary-lighter': $blue-200,
+              'primary-light': $blue-300,
+              'primary-dark': $blue-600,
+              'primary-darker': $blue-700,
+
+              'secondary-lighter': $gray-200,
+              'secondary-light': $gray-300,
+              'secondary-dark': $gray-1000,
+              'secondary-darker': $gray-700,
+
+              'warning-lighter': $orange-200,
+              'warning-light': $orange-300,
+              'warning-dark': $orange-600,
+              'warning-darker': $orange-700,
+
+              'danger-lighter': $red-200,
+              'danger-light': $red-300,
+              'danger-dark': $red-600,
+              'danger-darker': $red-700,
+
+              'success-lighter': $green-200,
+              'success-light': $green-300,
+              'success-dark': $green-600,
+              'success-darker': $green-700,
+
+              'info-lighter': $cyan-200,
+              'info-light': $cyan-300,
+              'info-dark': $cyan-600,
+              'info-darker': $cyan-700,
+            ) !default;
+            
+              
+
+
+      h6.mb-3.mt-8.fs-7(data-anchor) 2. Using CSS variable:
+      .px-4
+        .border.border-translucent.rounded-1.bg-body-emphasis.px-3.py-2.mb-3
+          code _user.scss
+        p To update theme color with this approach, you have to update CSS variable for both modes. If you change any color you have to assign its corresponding RGB color too. Please note that sometimes you may need to update corresponding component's CSS variable. For example:
+        pre
+          - var successRgb = '#{to-rgb($success)}'
+          - var dangerRgb = '#{to-rgb($danger)}'
+          - var success = '#{$success}'
+          - var danger = '#{$danger}'
+          code.lang-css.
+            /*-----------------------------------------------
+            |   Theme Styles
+            -----------------------------------------------*/
+            $success: #00d27a;
+            $danger: #e63757;
+            :root, [data-bs-theme='light'] {
+              --phoenix-primary:  #{success};
+              --phoenix-primary-rgb: #{successRgb};
+              ...
+              ...
+              ...
+            }
+            [data-bs-theme='dark']{
+              --phoenix-primary: #{danger};
+              --phoenix-primary-rgb: #{dangerRgb};
+              .card{
+                --phoenix-card-bg: #{success};
+              }
+            }
+
+
+        h5.mt-4(data-anchor) If you are not using Gulp based workflow 
+        p You can add your own CSS and override the theme style in the 
+          code public/assets/css/user.css 
+          | file. You can update all theme colors including grays using css variables. If you change any color you have to assign its corresponding rgb color. Sometimes you may need to update corresponding component's css variable too.
+
+        pre
+          code.lang-css.
+            /*-----------------------------------------------
+            |   Theme Styles
+            -----------------------------------------------*/
+            :root, [data-bs-theme='light'] {
+              --phoenix-primary:  #00d27a;
+              --phoenix-primary-rgb: 0, 210, 122;
+              ...
+              ...
+              ...
+              /* grays */
+              --phoenix-gray-100:  #f9fafd;
+              --phoenix-gray-100-rgb: 249, 250, 253;
+            }
+            [data-bs-theme='dark']{
+              --phoenix-primary:  #e63757;
+              --phoenix-primary-rgb: 230, 55, 87;
+
+              .card{
+                --phoenix-card-bg: #00d27a;
+              }
+            }

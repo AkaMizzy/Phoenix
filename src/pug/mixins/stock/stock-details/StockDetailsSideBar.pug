@@ -1,0 +1,162 @@
+include ./StockDetailsSideBarTable
+
+mixin StockDetailSideBar
+  .offcanvas.offcanvas-end.stock-offcanvas-xl.bg-body-emphasis.border-xl.rounded-xl.scrollbar#stockDetailsSidebar(aria-labelledby='offcanvasStockDetails' style="max-width:24rem;")  
+    .offcanvas-body.p-0
+      .card.border-0
+        .card-body 
+          .row.g-0.flex-between-center.mb-4 
+            .col-auto
+              h4.text-body-highlight.font-bold.mb-0.text-lg-center Stock Details 
+            .col-auto.d-xl-none
+              button.btn.btn-link.btn-sm.fs-8.text-body(data-bs-dismiss='offcanvas' aria-label='close')
+                span.fa-solid.fa-xmark
+          .card.border.p-3.text-center.bg-body.mb-3  
+            h3.mb-2.lh-sm.text-body.d-flex.align-items-center.gap-2.justify-content-center 
+              | $226.51
+              span.badge.badge-phoenix.badge-phoenix-success.fs-10 +0.62 (0.27%)
+            h6.lh-sm.text-body.mb-2 
+              | Real time quote: 
+              | Sep 24, 2024, 
+              span.text-nowrap 1:34 PM
+            .row.py-3
+              .col-6.border-end 
+                h6.lh-sm.text-body Bid x Size 
+                h5.fw-semibold.text-body.mb-0 
+                  | 226.51
+                  span.fs-9 x 100
+              .col-6
+                h6.lh-sm.text-body Ask x Size 
+                h5.fw-semibold.text-body.mb-0 
+                  | 226.51
+                  span.fs-9 x 100
+
+          ul#buyAndSellTab.mb-3.nav.nav-underline.text-center.gap-0.optionChainTableHeader(role='tablist')
+            li.nav-item.w-50
+              a#buy-tab.nav-link.active(
+                href="#tab-buy" 
+                data-bs-toggle="tab" 
+                role="tab" 
+                aria-controls='tab-buy'
+                aria-selected='true'
+              ) Buy
+
+            li.nav-item.w-50
+              a#sell-tab.nav-link(
+                href="#tab-sell" 
+                data-bs-toggle="tab" 
+                role="tab" 
+                aria-controls='tab-sell'
+                aria-selected='false'
+              ) Sell 
+          #buyAndSellTabContent.tab-content.mb-3
+            #tab-buy.tab-pane.fade.show.active(role="tabpanel" aria-labelledby='buy-tab')
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Order type
+                select.form-select(name="order-type")
+                  option(value='market') Market buy 
+                  option(value='share') Share buy
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Shares
+                input.form-control(type="text" name="shares" placeholder='Enter shares')
+
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Amount
+                .input-group
+                  span.input-group-text.border-end-0 $
+                  input.form-control(type="text" name="amount" placeholder='Enter amount')
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Account
+                select.form-select(name="account")
+                  option(value='') Select account 
+                  option(value='debit') Debit
+              
+              .d-flex.flex-between-center.gap-3.mb-3
+                h5.text-body.fw-semibold.mb-0 Available cash
+                p.mb-0 $65.89 USD
+              .d-flex.flex-wrap.gap-2
+                button.btn.btn-sm.btn-primary.flex-1 Buy Share
+                button.btn.btn-sm.btn-phoenix-secondary 
+                  span.fas.fa-clock 
+                button.btn.btn-sm.btn-phoenix-secondary 
+                  span.fas.fa-eye 
+            #tab-sell.tab-pane.fade(role="tabpanel" aria-labelledby='sell-tab')
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Order type
+                select.form-select(name="sellOrderType")
+                  option(value='market') Market Sell 
+                  option(value='share') Share sell
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Shares
+                input.form-control(type="text" name="sellShares" placeholder='Enter shares')
+
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Amount
+                .input-group
+                  span.input-group-text.border-end-0 $
+                  input.form-control(type="text" name="sellAmount" placeholder='Enter amount')
+              .mb-3
+                label.fs-9.lh-sm.fw-semibold.mb-2.text-body-emphasis.ps-0 Account
+                select.form-select(name="sellAccount")
+                  option(value='') Select account 
+                  option(value='debit') Debit
+              
+              .d-flex.flex-between-center.gap-3.mb-3
+                h5.text-body.fw-semibold.mb-0 Available shares
+                p.mb-0 100
+              .d-flex.flex-wrap.gap-2
+                button.btn.btn-sm.btn-primary.flex-1 Sell Share
+                button.btn.btn-sm.btn-phoenix-secondary 
+                  span.fas.fa-clock 
+                button.btn.btn-sm.btn-phoenix-secondary 
+                  span.fas.fa-eye 
+          .d-flex.flex-between-center.border-y.py-3.mb-4
+            h5.text-body.mb-0 Stock available
+            a.d-flex.align-items-center.gap-2.link-primary.fw-bold(href="#!")
+              | 32,432,234
+              span.fas.fa-up-right-from-square
+
+          h5.lh-sm.text-center.fw-bolder Options Chain
+
+          - 
+            var tabHeaderItems = [
+              { id: '1', date: 'May 20, 24', className: 'active'},
+              { id: '2', date: 'Jun 01, 24'},
+              { id: '3', date: 'Jun 15, 24'},
+              { id: '4', date: 'Jun 29, 24'},
+              { id: '5', date: 'Jul 11, 24'},
+              { id: '6', date: 'Jul 28, 24'}
+            ]
+          .swiper-theme-container.nav.tabDetailsOptionChainTab
+            .swiper.theme-slider(data-swiper!={
+              loop:true,
+              slidesPerView: 3,
+              breakpoints: {
+                0: {
+                  slidesPerView: 3
+                },
+                992: {
+                  slidesPerView: 2.8
+                },
+                1400: {
+                  slidesPerView: 3
+                }
+              },
+              grabCursor: true,
+              navigation: true
+            })
+              .swiper-wrapper
+                each item, index in tabHeaderItems 
+                  .swiper-slide.nav-item 
+                    button.nav-link.text-center.fs-9.lh-sm.w-100(class=item.className)= item.date
+              .swiper-nav 
+                .swiper-button-next 
+                  span.fas.fa-chevron-right.nav-icon
+                .swiper-button-prev
+                  span.fas.fa-chevron-left.nav-icon
+
+          +StockDetailsSideBarTable
+          a.btn.btn-sm.btn-phoenix-primary.w-100(href='#!')
+            | View full stock details
+            span.ms-2.fas.fa-up-right-from-square
+            

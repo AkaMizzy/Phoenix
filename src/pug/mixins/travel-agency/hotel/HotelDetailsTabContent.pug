@@ -1,0 +1,608 @@
+mixin RoomInfo(data, index)
+  .row.g-3.mb-4
+    .col-lg-8.col-xxl-7
+      .row.flex-lg-nowrap.g-3.mb-2
+        .col-md-auto
+          h4.mb-0.fw-semibold
+            span.fa-solid.fa-circle.fs-9.text-body-quaternary.me-2(data-fa-transform='up-1')
+            | #{data.name}
+        .col-md-auto.d-flex.align-items-center
+          .vr.bg-body-secondary.me-3.d-none.d-md-block
+          - var n = 0;
+          while n < data.beds
+            span.fa-solid.fa-bed.text-primary.fs-9(class=`${n != data.beds - 1 ? "me-1" : ""}`)
+            - n++
+          .vr.bg-body-secondary.mx-3
+          - var n = 0;
+          while n < data.person
+            span.fa-solid.fa-user.text-primary.fs-9(class=`${n != data.person - 1 ? "me-1" : ""}`)
+            - n++
+          .vr.bg-body-secondary.mx-3
+          if data.breakfast 
+            span.fa-solid.fa-mug-saucer.text-primary.fs-9
+            .vr.bg-body-secondary.mx-3
+          span.badge.badge-phoenix.badge-phoenix-info #{data.discount}% OFF
+      p.mb-0= data.desc
+    .col-lg-4.col-xxl-5
+      h3.mb-2.d-flex.align-items-center.justify-content-lg-end.gap-2
+        span.fs-9.text-body-quaternary.fw-normal.text-decoration-line-through $#{data.price}
+        | $#{data.discountPrice}
+      h5.text-body.text-lg-end.fw-normal +$#{data.tax} for tax and fees
+  .row.g-3 
+    .col-lg-7
+      .row.gx-2.h-100
+        each img in data.images
+          .col-4
+            a(href=`${CWD}assets${img}` data-gallery=`room-gallery-${index}`)
+              img(src=`${CWD}assets${img}`, alt="").w-100.h-100.object-fit-cover.rounded-2
+    .col-lg-4.col-xl-5.col-xxl-4.ms-auto
+      .card.bg-body-highlight
+        .card-body
+          ul.mb-2.list-unstyled.d-flex.list.flex-wrap.gap-2
+            each item in data.amenities.slice(0, 6)
+              li.text-body-highlight.fs-9.me-1.mb-0.lh-1
+                span.fa-solid.fa-check.text-success.me-1 
+                | #{item}
+          a(href="#!").fw-bold.fs-9 Show other amenities 
+      button.btn.btn-outline-primary.w-100.mt-3 Add room
+
+mixin Description
+  h3.mb-3.fw-bold Description
+  p.text-body Welcome to our hotel, an opulent and cozy setting with everything you need for a comfortable and happy stay. The city's biggest attractions, dining, shopping, and entertainment options are close to our hotel, which is situated in a desirable area.
+  p.text-body Your comfort is our top priority when designing our rooms and suites, which include soft beds, fine linens, and contemporary conveniences like flat-screen TVs, fast internet access, and mini-fridges. Also, each room features a sizeable workstation, making it the perfect accommodation for business traveler's who need to remain connected and productive.
+  .p-3.border.bg-body-highlight.border-translucent.rounded-2.d-flex.flex-between-center.flex-wrap.gap-3
+    h5.mb-0 
+      span.text-body-tertiary.fw-normal Number of rooms : 
+      | 70
+    h5.mb-0 
+      span.text-body-tertiary.fw-normal Number of floors : 
+      | 14
+    h5.mb-0 
+      span.text-body-tertiary.fw-normal Construction year : 
+      | 2018
+  .card.bg-body.mt-5
+    .card-body 
+      .mapbox-container.rounded-2.border.border-translucent.mb-4
+        #mapbox(data-mapbox != {
+          attributionControl: false,
+          center: [-74.0020158, 40.7228022],
+          zoom: 14,
+          scrollZoom: false
+        } style='height: 300px; width: 100%')
+      p.mb-2.text-body-tertiary.text-uppercase
+        span.fa-solid.fa-map-marker-alt.text-body-emphasis.me-2
+        | Museum
+      h5 
+        | 1.5 km 
+        span.text-body-tertiary.fw-normal from 
+        | Museum of Liberation War, Dhaka
+      hr.my-4
+      p.mb-2.text-body-tertiary.text-uppercase
+        span.fa-solid.fa-map-marker-alt.text-body-emphasis.me-2
+        | Historical monument
+      h5 
+        | 3.5 km 
+        span.text-body-tertiary.fw-normal from 
+        | Lalbagh Kella
+
+mixin Policy
+  h3.mb-5 Policy
+  .card.bg-body-highlight.mb-3
+    .card-body
+      .row.g-3
+        .col-sm-3
+          h5.mb-0 
+            span.fa-solid.fa-clock.fs-9.me-1(data-fa-transform='up-1')
+            | Check in
+        .col-sm-9 
+          .progress.overflow-visible(role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 8px")
+            .progress-bar.position-relative.ms-auto.overflow-visible.rounded(style="width: 50%")
+              span.text-info.position-absolute.mt-5.text-body.fs-10 12 am
+          .d-flex.flex-between-center.w-100
+            span.text-info.text-body.fs-10.mt-1 6 am 
+            span.text-info.text-body.fs-10.mt-1 6 pm
+  .card.bg-body-highlight.mb-3
+    .card-body
+      .row.g-3
+        .col-sm-3
+          h5.mb-0 
+            span.fa-solid.fa-clock.fs-9.me-1(data-fa-transform='up-1')
+            | Check out
+        .col-sm-9 
+          .progress.overflow-visible(role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="height: 8px")
+            .progress-bar.position-relative.overflow-visible.rounded(style="width: 50%")
+              span.text-info.position-absolute.mt-5.text-body.fs-10.end-0 12 am
+          .d-flex.flex-between-center.w-100
+            span.text-info.text-body.fs-10.mt-1 6 am 
+            span.text-info.text-body.fs-10.mt-1 6 pm
+  .card.bg-body-highlight.mb-3
+    .card-body
+      .row.g-3
+        .col-sm-3
+          h5.mb-0 
+            span.fa-solid.fa-baby.fs-9.me-1(data-fa-transform='up-1')
+            | Baby policy
+        .col-sm-9
+          h5.mb-2.text-success Allowed
+          p.mb-0.text-body Children under the age of five can stay in the same room as their parents and receive complimentary breakfast. Children from 5 to 10 years old will be charged $1,500 for extra bed and breakfast. Extra Breakfast Charge: $400 NET per night (for adults). Extra Breakfast Charge $200 NET Per Night (Above 5 to 11 Years)
+  .card.bg-body-highlight.mb-3
+    .card-body
+      .row.g-3.align-items-center
+        .col-5.col-sm-3
+          h5.mb-0 
+            span.fa-solid.fa-paw.fs-9.me-1(data-fa-transform='up-1')
+            | Pet policy
+        .col-7.col-sm-9
+          h5.mb-0.text-warning Not Allowed
+  .card.bg-body-highlight
+    .card-body
+      .row.g-3.align-items-center
+        .col-5.col-sm-3
+          h5.mb-0 
+            span.fa-solid.fa-credit-card.fs-9.me-1(data-fa-transform='up-1')
+            | Payment
+        .col-7.col-sm-9
+          img(src=`${CWD}assets/img/logos/mastercard.png`, alt="").me-3
+          img(src=`${CWD}assets/img/logos/american_express.png`, alt="").me-3
+          img(src=`${CWD}assets/img/logos/visa.png`, alt="")
+
+
+mixin Facilities
+  -
+    var amenities = [
+      {
+        title: 'Airport shuttle', 
+        icon: 'fa-solid fa-car',
+        classes: 'border'
+      },
+      {
+        title: 'Free wifi',
+        icon: 'fa-solid fa-wifi',
+        classes: 'border-bottom border-top-sm border-end border-start border-start-sm-0'
+      },
+      {
+        title: 'Restaurant',
+        icon: 'fa-solid fa-utensils',
+        classes: 'border-end border-start border-start-md-0 border-top-md border-bottom'
+      },
+      {
+        title: 'Smoking zone',
+        icon: 'fa-solid fa-smoking',
+        classes: 'border-end border-start border-start-sm-0 border-start-md border-bottom'
+      },
+      {
+        title: 'Room service',
+        icon: 'fa-solid fa-user',
+        classes: 'border-bottom border-end border-start border-start-md-0'
+      },
+      {
+        title: 'Pet-Friendly',
+        icon: 'fa-solid fa-dog',
+        classes: 'border-bottom border-end border-start border-start-sm-0'
+      },
+      {
+        title: 'Free parking',
+        icon: 'fa-solid fa-square-parking',
+        classes: 'border-x border-bottom'
+      },
+      {
+        title: 'Beach-front',
+        icon: 'fa-solid fa-umbrella-beach',
+        classes: 'border-bottom border-end border-start border-start-sm-0'
+      },
+      {
+        title: 'Facilities for disabled guests',
+        icon: 'fa-solid fa-wheelchair',
+        classes: 'border-bottom border-end border-start border-start-md-0'
+      },
+      {
+        title: 'Bar',
+        icon: 'fa-solid fa-wine-glass',
+        classes: 'border-x border-bottom border-start border-start-sm-0 border-start-md'
+      },
+      {
+        title: 'Free Breakfast',
+        icon: 'fa-solid fa-utensils',
+        classes: 'border-bottom border-end border-start border-start-md-0'
+      },
+      {
+        title: '24-hour front desk',
+        icon: 'fa-solid fa-bell-concierge',
+        classes: 'border-bottom border-end border-start border-start-sm-0'
+      }
+    ]
+  h3.mb-5.fw-bold Facilities
+  h5.mb-3 Most popular
+  .row.g-0
+    each item in amenities
+      .col-sm-6.col-md-4
+        .d-flex.align-items-center.gap-2.px-4.py-3.h-100.border-translucent(class=`${item.classes}`)
+          span.fs-9.text-warning(class=`${item.icon}`)
+          h5.text-body-tertiary.mb-0.fw-normal= item.title
+  h6.text-warning.text-uppercase.fw-normal.my-5
+    span.me-2 *
+    | ADDITIONAL CHARGES
+  -
+    var charges = [
+      {
+        title: 'Washroom',
+        icon: 'fa-solid fa-bath',
+        items: [
+          {
+            name: 'Toilet'
+          },
+          {
+            name: 'Bath'
+          }
+        ]
+      },
+      {
+        title: 'Outdoors',
+        icon: 'fa-solid fa-tree',
+        items: [
+          {
+            name: 'Beachfront'
+          },
+          {
+            name: 'BBQ facilities',
+            required: true,
+          },
+          {
+            name: 'Garden'
+          }
+        ]
+      },
+      {
+        title: 'Activities',
+        icon: 'fa-solid fa-bicycle',
+        items: [
+          {
+            name: 'Bicycle rental'
+          },
+          {
+            name: 'Beach',
+          },
+          {
+            name: 'Water sport facilities',
+            required: true,
+          },
+          {
+            name: 'Horse riding',
+            required: true,
+          },
+          {
+            name: 'Wind surfing',
+            required: true,
+          }
+        ]
+      },
+      {
+        title: 'Food & Drink',
+        icon: 'fa-solid fa-utensils',
+        items: [
+          {
+            name: 'Fruits'
+          },
+          {
+            name: 'Kid meals',
+          },
+          {
+            name: 'Snack bar',
+            required: true,
+          },
+          {
+            name: 'Bar',
+            required: true,
+          },
+          {
+            name: 'Restaurant',
+          }
+        ]
+      },
+      {
+        title: 'Internet',
+        icon: 'fa-solid fa-wifi',
+        items: [
+          {
+            name: 'WiFi'
+          },
+        ]
+      },
+      {
+        title: 'Parking',
+        icon: 'fa-solid fa-square-parking',
+        desc: 'On-site, free private parking is possible (reservations are not needed).',
+        items: [
+          {
+            name: 'Street Parking'
+          },
+        ]
+      },
+      {
+        title: 'Reception Service',
+        icon: 'fa-solid fa-bell-concierge',
+        items: [
+          {
+            name: 'Luggage storage'
+          },
+          {
+            name: 'Tour desk',
+          },
+          {
+            name: '24-hour front desk',
+          }
+        ]
+      },
+      {
+        title: 'Cleaning service',
+        icon: 'fa-solid fa-broom',
+        items: [
+          {
+            name: 'Daily housekeeping',
+            required: true,
+          },
+          {
+            name: 'Trouser press',
+          },
+          {
+            name: 'Ironing service',
+          },
+          {
+            name: 'Dry cleaning',
+          },
+          {
+            name: 'Laundry',
+          }
+        ]
+      },
+      {
+        title: 'Business facilities',
+        icon: 'fa-solid fa-briefcase',
+        items: [
+          {
+            name: 'Fax / photocopying',
+          },
+          {
+            name: 'Business centre',
+          },
+          {
+            name: 'Meeting / banquet facilities',
+            required: true
+          }
+        ]
+      },
+      {
+        title: 'Safety and security',
+        icon: 'fa-solid fa-briefcase',
+        items: [
+          {
+            name: 'CCTV outside property',
+          },
+          {
+            name: 'key card access',
+          },
+          {
+            name: 'Safety deposit box',
+          }
+        ]
+      },
+      {
+        title: 'General',
+        icon: 'fa-solid fa-info-circle',
+        items: [
+          {
+            name: 'Minimarket on site',
+          },
+          {
+            name: 'Shared lounge / TV area',
+          },
+          {
+            name: 'Designated smoking area',
+          },
+          {
+            name: 'Air conditioning',
+          },
+          {
+            name: 'Car hire',
+          },
+          {
+            name: 'Lift',
+          },
+          {
+            name: 'Barber / beauty shop',
+          },
+          {
+            name: 'Airport shuttle',
+            required: true
+          },
+          {
+            name: 'Non-smoking rooms'
+          },
+          {
+            name: 'Room service'
+          },
+        ]
+      },
+      {
+        title: 'Accessibility',
+        icon: 'fa-solid fa-wheelchair',
+        items: [
+          {
+            name: 'Elevator access',
+          }
+        ]
+      },
+      {
+        title: 'Languages spoken',
+        icon: 'fa-solid fa-earth',
+        items: [
+          {
+            name: 'Bangla'
+          },
+          {
+            name: 'English'
+          }
+        ]
+      },
+      {
+        title: 'Ghosts haunting',
+        icon: 'fa-solid fa-ghost',
+        items: [
+          {
+            name: 'Not that much'
+          }
+        ]
+      },
+    ]
+  .row.g-3 
+    .col-auto.col-md-4
+      each category, index in charges.slice(0, 5)
+        h5.mb-3
+          span.fs-9.me-2(class=`${category.icon}`)
+          | #{category.title}
+        ul.list-unstyled(class=`${index !== 4 ? "mb-5" : 'mb-sm-0'}`)
+          each item in category.items
+            li.text-body-highlight
+              span.fa-solid.fa-check.fs-9.text-success.me-2
+              | #{item.name}
+    .col-6.col-md-4
+      each category, index in charges.slice(5, 10)
+        h5.mb-3
+          span.fs-9.me-2(class=`${category.icon}`)
+          | #{category.title}
+        if category.desc 
+          p.mb-2.fs-9.text-body-tertiary= category.desc
+        ul.list-unstyled(class=`${index !== 4 ? "mb-5" : 'mb-sm-0'}`)
+          each item in category.items
+            li.text-body-highlight
+              span.fa-solid.fa-check.fs-9.text-success.me-2
+              | #{item.name}
+    .col-auto.col-md-4
+      each category, index in charges.slice(10)
+        h5.mb-3
+          span.fs-9.me-2(class=`${category.icon}`)
+          | #{category.title}
+        ul.list-unstyled(class=`${index !== 4 ? "mb-5" : 'mb-0'}`)
+          each item in category.items
+            li.text-body-highlight
+              span.fa-solid.fa-check.fs-9.text-success.me-2
+              | #{item.name}
+
+mixin Reviews 
+  h3.mb-5 Reviews
+  -
+    var ratings = [
+      {
+        name: "Staff",
+        rating: '4.0'
+      },
+      {
+        name: "Comfort",
+        rating: '4.0'
+      },
+      {
+        name: "Facilities",
+        rating: '4.5'
+      },
+      {
+        name: "Location",
+        rating: '3.5'
+      },
+      {
+        name: "Cleanliness",
+        rating: '4.8'
+      },
+      {
+        name: "Free WiFi",
+        rating: '5.0'
+      },
+    ]
+  .row.gx-md-6.gx-xl-8.gy-2
+    each item in ratings 
+      .col-md-6.col-lg-5
+        .row.align-items-center.g-0
+          .col-4
+            h5.mb-0.text-body.text-nowrap= item.name
+          .col-8
+            .d-flex.align-items-center.gap-2 
+              span.badge.text-bg-primary.fs-8= item.rating.toString()
+              .progress.w-100(role="progressbar" aria-label="review" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100")
+                .progress-bar.rounded(style=`width: ${parseFloat(item.rating) * 20}%`)
+  -
+    var reviews = [
+      {
+        avatar: 'team/59.webp',
+        name: 'Navina Koothrapali',
+        country: 'India',
+        flag: '/img/country/india.png',
+        service: 'Single Room with Private Bathroom',
+        date: 'January, 2023',
+        travelerType: 'Solo traveler',
+        rating: '4.5',
+        liked: 'The amazing facilities at this hotel just left me speechless. Modern and equipped with everything I needed to maintain my workout schedule while on vacation, the fitness center was state-of-the-art. Another highlight was the indoor pool, which had crystal-clear water and lots of lounge couches for relaxation.',
+        disLiked: 'It is necessary to provide some amenities for guests, such as drinking water and toothpaste.',
+        hotelsReply: 'Thank you for choosing us. We will try to improve accordingly.'
+      },
+      {
+        avatar: 'team/58.webp',
+        name: 'Weston Ryan',
+        country: 'Norway',
+        flag: '/img/country/norway.png',
+        service: 'Double Room with Private Bathroom',
+        date: 'February, 2023',
+        travelerType: 'Couple traveler',
+        rating: '3.5',
+        liked: 'The amenities at this hotel were excellent during my most recent time there. The gym was up-to-date and well-stocked, allowing me to continue my exercise regimen while I was away from home. The spa was another noteworthy aspect that offered a restful and revitalising experience.',
+        disLiked: 'It was a letdown to stay at this motel. Small, out-of-date, and lacking in comforts, the room. The staff was unwelcoming.',
+        hotelsReply: 'Thank you for choosing us. We will try to improve accordingly.'
+      },
+      {
+        avatar: '/team/30.webp',
+        name: 'Travis Adams',
+        country: 'Canada',
+        flag: '/img/country/canada.png',
+        service: 'Single Room with Private Bathroom',
+        date: 'March, 2023',
+        travelerType: 'Solo traveler',
+        rating: '4.6',
+        liked: "At this hotel, I had a fantastic time! The amenities were excellent, including a lovely pool, a cutting-edge gym, and a soothing spa. Also, the staff went above and beyond to make sure my stay was nice. They were really friendly. My stay was made comfortable and enjoyable by the room's size, comfort, and facilities. Also, the on-site restaurant was outstanding, with delectable fare and first-rate service.",
+        disLiked: 'Due to the uncleanliness and subpar treatment, I was quite dissatisfied with my stay at this hotel.',
+        hotelsReply: "Sorry for the inconvenience. We'll investigate."
+      },
+    ]
+  hr.mt-5.mb-8
+  each review, index in reviews
+    .d-flex.align-items-center.position-relative.gap-2.mb-3
+      +Avatar({img: review.avatar, size: 's'})
+      a(href="#!").fw-semibold.text-body-emphasis.stretched-link= review.name
+      img(src=`${CWD}assets${review.flag}`, alt="")
+    .d-flex.align-items-center.flex-wrap.gap-5.mb-5
+      .d-flex.align-items-center.gap-4
+        .border-end.pe-4
+          span.badge.text-bg-primary.fs-8= review.rating
+        a(href="#!").text-body-tertiary
+          span.fa-solid.fa-bed.me-2.fs-9
+          | #{review.service}
+      .d-flex.align-items-center.gap-5
+        h5.fw-normal.text-body-tertiary
+          span.fa-solid.fa-calendar.me-2.fs-9
+          | #{review.date}
+        h5.fw-normal.text-body-tertiary
+          span.fa-solid.fa-user.me-2.fs-9
+          | #{review.travelerType}
+    .d-flex.gap-3.mb-5
+      span.fa-solid.fa-thumbs-up.text-success(data-fa-transform="down-5")
+      p.mb-0 
+        | #{review.liked}
+    .d-flex.gap-3.mb-5
+      span.fa-solid.fa-thumbs-down.text-body-quaternary(data-fa-transform="down-5")
+      p.mb-0 
+        | #{review.disLiked}
+    .card.bg-body-highlight 
+      .card-body 
+        h6.mb-2.fw-bolder.text-body-quaternary.text-uppercase
+          span.fa-solid.fa-reply.me-2
+          | Hotel's Reply:
+        p.mb-0= review.hotelsReply
+    hr.mt-8(class=`${index !== reviews.length - 1 ? "mb-8" : "mb-0"}`)
+  button.btn.bg-body.border-translucent.text-body-quaternary.fw-bolder.mt-n4 Show 2 more replies

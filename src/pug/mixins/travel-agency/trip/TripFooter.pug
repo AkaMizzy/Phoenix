@@ -1,0 +1,28 @@
+mixin FooterList(...items)
+  each item in items
+    li
+      a.text-secondary-lighter(href='#!')= item
+
+mixin TripFooter 
+  +Section('container-medium').py-6
+    +Background({
+      image: `${CWD}assets/img/bg/47.png`,
+      className: 'overlay bg-opacity-75',
+      attrs: {
+        style: 'background-position: center; background-size: cover',
+      }
+    })
+    .row.position-relative.align-items-center.gy-3
+      .col-xxl-4.order-1.order-xxl-0
+        ul.list-unstyled.d-flex.gap-3.gap-xxl-4.flex-wrap.mb-0.justify-content-center.justify-content-xxl-start
+          +FooterList('Home', 'Terms', 'Talent & culture', 'Destination')
+      .col-sm-8.col-md-7.col-lg-5.col-xl-4.mx-auto.mb-3.mb-xxl-0
+        h2.mb-4.fw-semibold.text-white.text-center.lh-sm Subscribe to get notified about the latest news
+        .d-flex.gap-2
+          .form-icon-container.flex-1
+            input.form-control.form-icon-input(type="text" placeholder="Your email address")
+            span.fa-solid.fa-envelope.form-icon.text-body.fs-9
+          button.btn.btn-primary.rounded Sign up
+      .col-xxl-4.order-2.order-xxl-0
+        ul.list-unstyled.d-flex.gap-3.gap-xxl-4.flex-wrap.mb-0.justify-content-center.justify-content-xxl-end
+          +FooterList('Refund policy', 'Sitemap', 'EMI Policy', 'Privacy Policy')

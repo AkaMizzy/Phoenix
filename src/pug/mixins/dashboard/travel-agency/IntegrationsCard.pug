@@ -1,0 +1,16 @@
+mixin IntegrationsCard 
+  .card&attributes(attributes)
+    +Background({
+      image: `${CWD}assets/img/spot-illustrations/39.png`,
+      className: 'bg-card',
+      attrs: {
+        style: 'background-position: bottom right 0px; background-size: auto',
+      }
+    })
+    .card-body.z-5
+      div
+        h3.text-body-highlight.mb-3 Phoenix integrations
+        p.text-body-tertiary.mb-4.w-75.w-xl-100 Phoenix improves efficiency instantly and effortlessly <br class="d-none d-xxl-block"> by allowing easy & simple connection <br class="d-none d-xl-block"> to other popular programs
+        a(href="#!").btn.btn-sm.btn-phoenix-primary 
+          span.fa-solid.fa-link.me-1 
+          | Connect Now

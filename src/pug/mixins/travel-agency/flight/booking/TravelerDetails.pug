@@ -1,0 +1,106 @@
+mixin TravelerInfo(id) 
+  .card.bg-body&attributes(attributes)  
+    .card-header.bg-body-highlight
+      .d-flex.flex-between-center
+        h5.mb-0.text-nowrap
+          span.fa-solid.fa-user.fs-9.me-2.text-primary
+          | Person #{id}
+        .form-check.mb-0
+          input.form-check-input(type='checkbox' value='' id=`saveInfo-${id}`)
+          label.form-check-label.fs-8.fw-normal.mb-0.text-body-emphasis(for=`saveInfo-${id}`)
+            | Save traveler info
+    .card-body
+      h6.mb-0.fw-semibold.fs-9.text-body-tertiary Personal info
+      hr.my-2
+      .row.g-3.mb-6
+        .col-md-6
+          label(for=`firstName-${id}`).fw-bold.text-body-highlight.mb-2 First name
+          input.form-control(id=`firstName-${id}` type='text' placeholder='First name')
+        .col-md-6
+          label(for=`lastName-${id}`).fw-bold.text-body-highlight.mb-2 Last name
+          input.form-control(id=`lastName-${id}` type='text' placeholder='Last name')
+      h6.mb-0.fw-semibold.fs-9.text-body-tertiary Contact info
+      hr.my-2
+      .row.g-3.mb-6
+        .col-md-6
+          label(for=`email-${id}`).fw-bold.text-body-highlight.mb-2 Email
+          input.form-control(id=`email-${id}` type='email' placeholder='Email')
+        .col-md-6
+          label(for=`phone-${id}`).fw-bold.text-body-highlight.mb-2 Phone
+          input.form-control(id=`phone-${id}` type='tel' placeholder='XXX-XXX-XXXX')
+      h6.mb-0.fw-semibold.fs-9.text-body-tertiary Passport info
+      hr.my-2
+      .row.g-3.mb-3
+        .col-md-6
+          label(for=`passportNum-${id}`).fw-bold.text-body-highlight.mb-2 Passport Number
+          input.form-control(id=`passportNum-${id}` type='text' placeholder='Passport number')
+        .col-md-6
+          label(for=`passportExpiry-${id}`).fw-bold.text-body-highlight.mb-2 Passport expiry date
+          input.form-control.datetimepicker(id=`passportExpiry-${id}` type="text" placeholder="Select date" data-options!={disableMobile:true, dateFormat:'j M, Y',})
+
+      .row.g-3
+        .col-md-6 
+          .dropzone.dropzone-multiple.p-0(id=`passportFrontPage-${id}` data-dropzone data-options!={ url: 'valid/url', maxFiles: 1, dictDefaultMessage: 'Choose or Drop a file here' })
+            .fallback
+              input(type="file" name="file")
+            .dz-message.text-body-tertiary.text-opacity-85(data-dz-message) 
+              h6.mb-1.text-body-quaternary Upload or drag
+              h6.mb-3.text-body-secondary The photo of the front page of your passport
+              img.mt-3(src=`${CWD}assets/img/icons/image-icon.png`, width=42 alt="").me-2
+
+            .dz-preview.dz-preview-multiple.m-0.d-flex.flex-column
+
+              .d-flex.pb-3.border-bottom.border-translucent.media.px-2
+                .border.p-2.rounded-2.me-2
+                  img.rounded-2(src=`${CWD}assets/img/icons/file.png` alt="..." data-dz-thumbnail).dz-image
+                .flex-1.d-flex.flex-between-center
+                  div
+                    span.fw-bold.fs-9(data-dz-name)
+                    .d-flex.align-items-center
+                      p.mb-0.fs-9.text-body-quaternary.lh-1(data-dz-size)
+                      .dz-progress
+                        span.dz-upload(data-dz-uploadprogress='')
+                    span.fs-10.text-danger(data-dz-errormessage)
+                  .dropdown
+                    button.btn.btn-link.text-body-quaternary.btn-sm.dropdown-toggle.btn-reveal.dropdown-caret-none(type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                      span.fas.fa-ellipsis-h
+                    .dropdown-menu.dropdown-menu-end.border.border-translucent.py-2
+                      a.dropdown-item(href="#!" data-dz-remove) Remove File
+        .col-md-6 
+          .dropzone.dropzone-multiple.p-0(id=`passportBackPage-${id}` data-dropzone data-options!={ url: 'valid/url', maxFiles: 1, dictDefaultMessage: 'Choose or Drop a file here' })
+            .fallback
+              input(type="file" name="file")
+            .dz-message.text-body-tertiary.text-opacity-85(data-dz-message) 
+              h6.mb-1.text-body-quaternary Upload or drag
+              h6.mb-3.text-body-secondary The photo of the back page of your passport
+              img.mt-3(src=`${CWD}assets/img/icons/image-icon.png`, width=42 alt="").me-2
+
+            .dz-preview.dz-preview-multiple.m-0.d-flex.flex-column
+
+              .d-flex.pb-3.border-bottom.border-translucent.media.px-2
+                .border.p-2.rounded-2.me-2
+                  img.rounded-2(src=`${CWD}assets/img/icons/file.png` alt="..." data-dz-thumbnail).dz-image
+                .flex-1.d-flex.flex-between-center
+                  div
+                    span.fw-bold.fs-9(data-dz-name)
+                    .d-flex.align-items-center
+                      p.mb-0.fs-9.text-body-quaternary.lh-1(data-dz-size)
+                      .dz-progress
+                        span.dz-upload(data-dz-uploadprogress='')
+                    span.fs-10.text-danger(data-dz-errormessage)
+                  .dropdown
+                    button.btn.btn-link.text-body-quaternary.btn-sm.dropdown-toggle.btn-reveal.dropdown-caret-none(type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                      span.fas.fa-ellipsis-h
+                    .dropdown-menu.dropdown-menu-end.border.border-translucent.py-2
+                      a.dropdown-item(href="#!" data-dz-remove) Remove File
+
+mixin TravelerDetails 
+  div&attributes(attributes) 
+    .mb-4 
+      h3 Traveler Details
+      small 
+        span.fas.fa-info-circle.me-2.text-info 
+        | As mentioned in your passport or government approved IDs
+
+    +TravelerInfo('1').mb-4
+    +TravelerInfo('2').mb-4

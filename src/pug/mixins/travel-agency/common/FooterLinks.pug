@@ -1,0 +1,21 @@
+mixin FooterLinks 
+  .row.flex-center.justify-content-md-between.align-items-md-center.gy-2&attributes(attributes)
+    .col-auto
+      a.navbar-brand(href=`${CWD}${paths['default-dashboard']}`)
+        +Logo
+    .col-auto
+      ul.d-flex.flex-center.flex-wrap.gap-x-5.gap-y-1.list-unstyled.mb-0
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='#!') Become a Host
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='#!') Blog
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='#!') Career
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='mailto:example@gmail.com') 
+            span.fa-regular.fa-envelope.me-2(data-fa-transform="down-1")
+            | Support
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href="tel:+01123581321") 
+            span.fa-brands.fa-whatsapp.me-2
+            | +01 123 581321

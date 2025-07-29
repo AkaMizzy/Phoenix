@@ -1,0 +1,24 @@
+extends layouts/LayoutTheme
+
+append scripts
+  script(src=`${CWD}vendors/lottie/lottie.min.js`)
+
+block content
+  .row.flex-center.content-min-h.pb-9.g-0
+    .col-xxl-10
+      .row.align-items-xl-center.g-2
+        .col-xl-6.order-xl-1
+          .d-flex.flex-center
+            .w-xl-100.animation
+              .lottie.d-dark-none(data-options!={ path: `${CWD}assets/img/animated-icons/coming-soon-light.json` })
+              .lottie.d-light-none(data-options!={ path: `${CWD}assets/img/animated-icons/coming-soon-dark.json` })
+        .col-xl-6 
+          .d-flex.justify-content-center.mt-xl-15
+            .text-container.text-center.text-xl-start
+              img.d-dark-none.mb-5.mb-xl-10.w-75.w-lg-50.w-xl-75.w-xxl-100(src=`${CWD}assets/img/spot-illustrations/42.png`, alt="")
+              img.d-light-none.mb-5.mb-xl-10.w-75.w-lg-50.w-xl-75.w-xxl-100(src=`${CWD}assets/img/spot-illustrations/dark_42.png`, alt="")
+              h2.text-gray-800.fs-xl-6.mb-3 This page is on the way !
+              p.mb-6 Our developers are on the last stage of developing this page. We're just ironing out the kinks. You'll receive it on the next update. Lets go!
+              a(href=`${CWD}${paths['default-dashboard']}`).btn.btn-lg.btn-primary
+                span.fa-solid.fa-chevron-left.me-2
+                | Go to Homepage

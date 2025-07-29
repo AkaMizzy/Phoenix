@@ -1,0 +1,102 @@
+include ./DividendsTabContent
+include ./FinancialStatementTabContent
+include ./ForecastTabContent
+include ./NewsTabContent
+include ./EventsTabContent
+include ./CompanyProfileTabContent
+
+mixin StockDetailsTab 
+  -
+    var navItems = [
+      {
+        id: 'tab-chart',
+        href: 'chart-tab',
+        label: 'Chart',
+      },
+      {
+        id: 'tab-dividend',
+        href: 'dividend-tab',
+        label: 'Dividends',
+      },
+      {
+        id: 'tab-finStates',
+        href: 'finStates-tab',
+        label: 'Financial Statement',
+      },
+      {
+        id: 'tab-forecast',
+        href: 'forecast-tab',
+        label: 'Forecast',
+      },
+      {
+        id: 'tab-news',
+        href: 'news-tab',
+        label: 'News',
+      },
+      {
+        id: 'tab-events',
+        href: 'events-tab',
+        label: 'Events',
+      },
+      {
+        id: 'tab-comProfile',
+        href: 'comProfile-tab',
+        label: 'Company Profile',
+      },
+      {
+        id: 'tab-empty1',
+        href: 'empty1-tab',
+        label: '',
+        className: 'disabled h-100',
+        navItemClass: 'flex-1 d-none d-md-inline'
+      }
+    ]
+  ul#stockDetailsTab.nav.nav-underline.optionChainTableHeader.gap-0.flex-nowrap.scrollbar.mb-4(role='tablist')
+    each item, index in navItems
+      li.nav-item(class=item.navItemClass ? item.navItemClass : '') 
+        a.nav-link.pt-0.text-nowrap(
+          id=item.id 
+          href=`#${item.href}` 
+          data-bs-toggle="tab"
+          role='tab'
+          aria-controls=item.href === 'empty1-tab' ? undefined : item.href
+          aria-selected=index===0 ? 'true' : 'false'
+          class=`${index===0 ? 'active ps-0 pe-3' : 'px-3'} ${item.className || ''}` 
+        )=  item.label
+  #stockDetailsTabContent.tab-content
+    #chart-tab.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='tab-chart')
+      .row.flex-between-center.g-3.mb-4 
+        .col-auto 
+          h4 Share Report 
+          p.text-body-tertiary.mb-0 Updated inventory according to the sales report.
+        .col-auto.d-flex.gap-2
+          select#chart-filter.form-select.form-select-sm(name="filter-chart")
+            option(value="daily") Daily 
+            option(value="weekly")  Weekly 
+            option(value="monthly") Monthly 
+            option(value='yearly')  Yearly 
+
+          button.btn.btn-phoenix-secondary.btn-sm 
+            span.fas.fa-magnifying-glass-plus
+
+          button.btn.btn-phoenix-secondary.btn-sm 
+            span.fas.fa-magnifying-glass-minus
+      .echart-stock-share-candlestick-chart(style="width: 100%; height: 80vh;")
+
+    #dividend-tab.tab-pane.fade(role='tabpanel' aria-labelledby='tab-dividend')
+      +DividendsTabContent
+
+    #finStates-tab.tab-pane.fade(role='tabpanel' aria-labelledby='tab-finStates')
+      +FinancialStatementTabContent 
+
+    #forecast-tab.tab-pane.fade(role='tabpanel' aria-labelledby='tab-forecast')
+      +ForecastTabContent
+
+    #news-tab.tab-pane.fade(role='tabpanel' aria-labelledby='tab-news')
+      +NewsTabContent
+
+    #events-tab.tab-pane.fade(role='tabpanel' aria-labelledby='tab-events')
+      +EventsTabContent
+    
+    #comProfile-tab.tab-pane.fade(role='tabpanel' aria-labelledby='tab-comProfile')
+      +CompanyProfileTabContent

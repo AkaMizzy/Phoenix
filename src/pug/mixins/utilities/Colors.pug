@@ -1,0 +1,23 @@
+mixin ColorExample  
+  - var bodyColors = ['body', 'body-highlight', 'body-secondary', 'body-tertiary', 'body-quaternary', 'body-emphasis']
+  - var colorsVariant = ['subtle','light', 'lighter', 'dark', 'darker', 'emphasis']
+  each color, index in colors 
+    p(class=`text-${color}${color === 'light' ? ' bg-dark' : ''}`)
+      | text-#{color}
+  each color, index in bodyColors 
+    p(class=`text-${color}${color === 'light' ? ' bg-dark' : ''}`)
+      | text-#{color}
+  each color, index in colors 
+    each variant, index in colorsVariant 
+      span.pe-3(class=`text-${color}-${variant} ${variant === 'subtle' ? ' bg-dark dark__bg-gray-400' : ''} ${variant === 'dark' && color === 'secondary' ? ' bg-white' : ''}`)
+        | text-#{color}-#{variant}
+      br
+
+
+mixin ColorOpacityExample 
+  .text-primary.mb-1 This is default primary text
+  .text-primary(style="--bs-text-opacity: .5;").mb-1 This is 50% opacity primary text using inline css
+  .text-primary.text-opacity-75.mb-1 This is 75% opacity primary text using utility class
+  .text-primary.text-opacity-50.mb-1 This is 50% opacity primary text using utility class
+  .text-primary.text-opacity-25.mb-1 This is 25% opacity primary text using utility class
+

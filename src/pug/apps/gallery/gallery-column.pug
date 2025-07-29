@@ -1,0 +1,136 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/gallery/GalleryTabs
+include ../../mixins/gallery/GalleryLayoutMenu
+
+append variables
+  -
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+append scripts
+  script(src=`${CWD}vendors/isotope-layout/isotope.pkgd.min.js`)
+  script(src=`${CWD}vendors/isotope-packery/packery-mode.pkgd.min.js`)
+  script(src=`${CWD}vendors/imagesloaded/imagesloaded.pkgd.min.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+
+append styles 
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+block content
+  .mb-9
+    h2.mb-5 Gallery
+    .d-flex.flex-wrap.gap-3.justify-content-between
+      div
+        button.btn.btn-primary.me-4
+          span.fas.fa-plus.me-2
+          | Add New
+        button.btn.btn-link.text-body.me-4.px-0
+          span.fa-solid.fa-file-export.fs-9.me-2
+          | Export
+      +Search({placeholder: 'Search by name'})
+    .d-md-flex.d-lg-block.d-xl-flex.justify-content-between.gap-4.my-4
+      +GalleryLayoutMenu('column').mb-3.mb-md-0.mb-lg-3.mb-xl-0.order-md-1.order-lg-0.order-xl-1
+      +GalleryTabs
+    .position-relative
+      .row.gx-7.gy-5.overflow-hidden#image_gallery(data-gallery-column data-sl-isotope!={
+        layoutMode: 'packery',
+      })
+        -
+          var images = [
+            {
+              img: '/img/gallery/65.png',
+              largeImg: '/img/gallery/65.png',
+              category: 'ecommerce',
+              title: 'Pixel 4a'
+            },
+            {
+              img: '/img/gallery/68.png',
+              largeImg: '/img/gallery/68.png',
+              category: 'project-management',
+              title: 'Wooden Beetle'
+            },
+            {
+              img: '/img/gallery/71.png',
+              largeImg: '/img/gallery/71.png',
+              category: 'photography',
+              title: 'Sunset'
+            },
+            {
+              img: '/img/gallery/74.png',
+              largeImg: '/img/gallery/74.png',
+              category: 'photography',
+              title: 'Nature'
+            },
+            {
+              img: '/img/gallery/75.png',
+              largeImg: '/img/gallery/75.png',
+              category: 'project-management',
+              title: 'Mockup'
+            },
+            {
+              img: '/img/gallery/66.png',
+              largeImg: '/img/gallery/66.png',
+              category: 'photography',
+              title: 'Mountain Sunset'
+            },
+            {
+              img: '/img/gallery/69.png',
+              largeImg: '/img/gallery/69.png',
+              category: 'project-management',
+              title: 'Ear Buds'
+            },
+            {
+              img: '/img/gallery/72.png',
+              largeImg: '/img/gallery/72.png',
+              category: 'ecommerce',
+              title: 'Basketball Shoes'
+            },
+            {
+              img: '/img/gallery/76.png',
+              largeImg: '/img/gallery/76.png',
+              category: 'photography',
+              title: 'Pixel Watch'
+            },
+            {
+              img: '/img/gallery/70.png',
+              largeImg: '/img/gallery/70.png',
+              category: 'ecommerce',
+              title: 'Plant During Daytime'
+            },
+            {
+              img: '/img/gallery/67.png',
+              largeImg: '/img/gallery/67.png',
+              category: 'photography',
+              title: 'Dog Sitting'
+            },
+            {
+              img: '/img/gallery/73.png',
+              largeImg: '/img/gallery/73.png',
+              category: 'ecommerce',
+              title: 'Pixel 4a 5g'
+            },
+          ]
+        each item, index in images
+          +SingleImage(item, index)
+
+mixin SingleImage(item, index)
+  a(href=`${CWD}assets${item.img}` data-gallery='gallery-column' class=`${item.category}`).col-sm-6.col-md-4.col-xl-3.isotope-item.img-zoom-hover.text-decoration-none
+    .overflow-hidden.rounded
+      img(src=`${CWD}assets${item.img}` alt='').img-fluid
+    .d-flex.mt-3
+      div
+        h4.title= item.title 
+        p.mb-0.text-capitalize.text-body= item.category.split('-').join(' ')

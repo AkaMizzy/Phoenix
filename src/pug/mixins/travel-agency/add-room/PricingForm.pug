@@ -1,0 +1,203 @@
+mixin PricingForm(config)
+  form(id=`${config.formId}2` class=config.validation && 'needs-validation' data-wizard-form='2')
+    h3.mb-6 Pricing
+    h4.mb-2 Base price per night
+    p.mb-5.text-body-tertiary Get a great value stay with us, starting at our base price per night.
+    .nav.nav-tabs.mb-2(id='day-week-pricing' role='tablist')
+      .form-check.form-check-inline.me-3
+        input.form-check-input.active(type='radio' id='all-day-tab' name='dayWeekPricing' checked data-bs-toggle="tab" data-bs-target="#allDayPricing" aria-controls="allDayPricing" aria-selected="true")
+        label.form-check-label(for='all-day-tab') Across all days
+      .form-check.form-check-inline
+        input.form-check-input(type='radio' id='day-of-week-tab' name='dayWeekPricing' data-bs-toggle="tab" data-bs-target="#dayOfWeekPricing" aria-controls="dayOfWeekPricing" aria-selected="true")
+        label.form-check-label(for='day-of-week-tab') By day of week
+    .tab-content
+      .tab-pane.fade.show.active(id='allDayPricing' role="tabpanel" aria-labelledby="all-day-tab" tabindex="0")
+        .row.gx-2.w-sm-60
+          .col-8
+            .form-floating
+              input.form-control(type='text' name='room-price' id='room-price' required=config.validation placeholder='Room price')
+              label(for='room-price') Room price
+          .col-4
+            .form-floating
+              select.form-select(name='room-price-currency' id='room-price-currency' required=config.validation)
+                option(value='1') USD
+                option(value='2') EUR
+                option(value='2') BDT
+              label(for='room-price-currency') Currency
+      .tab-pane.fade(id='dayOfWeekPricing' role="tabpanel" aria-labelledby="day-of-week-tab" tabindex="0")
+        .card.bg-body-highlight
+          .card-body
+            .row.gx-2.justify-content-between
+              .col.col-sm-auto
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='date') Date
+                .form-icon-container
+                  input#date.form-control.datetimepicker.form-icon-input(type='text' placeholder='Start date', data-options!={
+                    disableMobile:true,
+                    mode: "range",
+                    minDate: "today",
+                    dateFormat: "d-m-y",
+                  })
+                  span.fa-solid.fa-calendar-alt.form-icon.fs-9.text-body-tertiary(data-fa-transform='up-1')
+              .col-auto
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='day-of-week-currency') Currency
+                select.form-select(name='day-of-week-currency' id='day-of-week-currency' required=config.validation)
+                  option(value='1') USD
+                  option(value='2') EUR
+                  option(value='2') BDT
+            hr.mb-2
+            .row.g-2
+              .col-4.col-sm
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='sunday') Sunday
+                input.form-control.input-spin-none(id="sunday" type="number" value=100)
+              .col-4.col-sm
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='monday') Monday
+                input.form-control.input-spin-none(id="monday" type="number" value=100)
+              .col-4.col-sm
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='tuesday') Tuesday
+                input.form-control.input-spin-none(id="tuesday" type="number" value=100)
+              .col-4.col-sm
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='wednesday') Wednesday
+                input.form-control.input-spin-none(id="wednesday" type="number" value=100)
+              .col-4.col-sm
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='thursday') Thursday
+                input.form-control.input-spin-none(id="thursday" type="number" value=100)
+              .col-4.col-sm
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='friday') Friday
+                input.form-control.input-spin-none(id="friday" type="number" value=100)
+              .col-4.col-sm
+                label.mb-1.text-body-highlight.fw-bold.fs-9(for='saturday') Saturday
+                input.form-control.input-spin-none(id="saturday" type="number" value=100)
+    label.mb-2.mt-5.lh-1.text-body-highlight.fw-bold How many people are included in the base rate?
+    .form-floating.w-sm-60
+      select.form-select(name='people-select' id='people-select' required=config.validation)
+        option(value='1') 05 People
+        option(value='2') 10 People
+        option(value='2') 15 People
+      label(for='people-select') Select
+    .d-flex.align-items-center.gap-2.mt-7
+      label.fs-7.fw-bold.text-body-emphasis(for='extraBedSwitch') Extra bed option
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="extraBedSwitch" type="checkbox" role="button" data-bs-toggle="collapse" data-bs-target="#extraBedCollapse" aria-expanded="false" aria-controls="extraBedCollapse" aria-pressed='true')
+    p.fs-9.text-body-tertiary.mb-0 Can you provide extra bed
+    .collapse#extraBedCollapse
+      .mt-4
+        .row.gx-3
+          .col-6.col-sm-4.col-xxl-5
+            label.mb-1.text-body-highlight.fw-bold(for='number-of-bed-pricing') Number of bed
+            .input-group.gap-1(data-quantity)
+              button.btn.btn-phoenix-primary.px-3.bg-body-emphasis.bg-body-hover.rounded(data-type="minus") -
+              input.form-control.flex-1.border-translucent.input-spin-none.text-center.rounded(id="number-of-bed-pricing" type="number" value='2')
+              button.btn.btn-phoenix-primary.px-3.bg-body-emphasis.bg-body-hover.rounded(data-type="plus") +
+          .col-6.col-sm-4.col-xxl-5
+            label.mb-1.text-body-highlight.fw-bold(for='pricing-bed-type') Bed type
+            select.form-select(id='pricing-bed-type')
+              option Twin bed
+              option King bed
+              option Queen bed
+              option Single bed
+              option Double bed
+              option Twin XL bed
+              option Quad Bed
+              option Quad Bed
+              option Executive Suite
+              option Bunk Bed
+        h5.mt-4.mb-3 Check the box(es) if you can accommodate the following guests in extra beds.
+        .row.gx-2.gy-0.align-items-center.mb-3
+          .col-12.col-sm-auto 
+            .form-check
+              input.form-check-input(type='checkbox' id='age-range-1')
+              label.form-check-label.text-body-emphasis(for='age-range-1') 02-06 year olds
+          .col-auto 
+            .form-floating
+              input.form-control(type='text' name='room-price' id='room-price-1' required=config.validation placeholder='Room price')
+              label(for='room-price-1') Room price
+          .col-auto 
+            .form-floating
+              select.form-select(name='room-price-currency' id='room-price-currency-1' required=config.validation)
+                option(value='1') USD
+                option(value='2') EUR
+                option(value='2') BDT
+              label(for='room-price-currency-1') Currency
+        .row.gx-2.gy-0.align-items-center.mb-3
+          .col-12.col-sm-auto
+            .form-check
+              input.form-check-input(type='checkbox' id='age-range-2')
+              label.form-check-label.text-body-emphasis(for='age-range-2') 07-12 year olds
+          .col-auto 
+            .form-floating
+              input.form-control(type='text' name='room-price' id='room-price-2' required=config.validation placeholder='Room price')
+              label(for='room-price-2') Room price
+          .col-auto 
+            .form-floating
+              select.form-select(name='room-price-currency' id='room-price-currency-2' required=config.validation)
+                option(value='1') USD
+                option(value='2') EUR
+                option(value='2') BDT
+              label(for='room-price-currency-2') Currency
+        .row.gx-2.gy-0.align-items-center.mb-3
+          .col-12.col-sm-auto
+            .form-check
+              input.form-check-input(type='checkbox' id='age-range-3')
+              label.form-check-label.text-body-emphasis(for='age-range-3') 12-16 year olds
+          .col-auto 
+            .form-floating
+              input.form-control(type='text' name='room-price' id='room-price-3' required=config.validation placeholder='Room price')
+              label(for='room-price-3') Room price
+          .col-auto 
+            .form-floating
+              select.form-select(name='room-price-currency' id='room-price-currency-3' required=config.validation)
+                option(value='1') USD
+                option(value='2') EUR
+                option(value='2') BDT
+              label(for='room-price-currency-3') Currency
+        .row.gx-2.gy-0.align-items-center
+          .col-12.col-sm-auto 
+            .form-check
+              input.form-check-input(type='checkbox' id='age-range-4')
+              label.form-check-label.text-body-emphasis.me-5(for='age-range-4') For adults
+          .col-auto 
+            .form-floating
+              input.form-control(type='text' name='room-price' id='room-price-4' required=config.validation placeholder='Room price')
+              label(for='room-price-4') Room price
+          .col-auto 
+            .form-floating
+              select.form-select(name='room-price-currency' id='room-price-currency-4' required=config.validation)
+                option(value='1') USD
+                option(value='2') EUR
+                option(value='2') BDT
+              label(for='room-price-currency-4') Currency
+    h4.mb-2.mt-7 Breakfast
+    p.mb-4.text-body-tertiary Do you own multiple hotels, or are you part of a property management company or group?
+    .nav.nav-tabs.mb-2(id='breakfastTab' role='tablist')
+      .form-check.form-check-inline.me-3
+        input.form-check-input.active(type='radio' id='breakfast-included-tab' name='breakfast-radio' checked data-bs-toggle="tab" data-bs-target="#breakfastInCluded" aria-controls="breakfastInCluded" aria-selected="true")
+        label.form-check-label(for='breakfast-included-tab') Yes, it's included in the price
+      .form-check.form-check-inline
+        input.form-check-input(type='radio' id='breakfast-not-included-tab' name='breakfast-radio' data-bs-toggle="tab" data-bs-target="#breakfastNotIncluded" aria-controls="breakfastNotIncluded" aria-selected="true")
+        label.form-check-label(for='breakfast-not-included-tab') No
+    .tab-content
+      .tab-pane.fade.show.active.w-sm-60(id='breakfastInCluded' role="tabpanel" aria-labelledby="breakfast-included-tab" tabindex="0")
+        h5.text-body-highlight.my-4 What type of food is available for breakfast for guests?
+        .form-floating
+          select.form-select(name='breakfast-type-1' id='breakfast-type-1' required=config.validation)
+            option(value='1') Continental breakfast
+            option(value='2') Option 2
+            option(value='2') Option 3
+          label(for='breakfast-type-1') Option 1
+        .form-floating.my-2
+          select.form-select(name='breakfast-type-2' id='breakfast-type-2' required=config.validation)
+            option(value='1') American breakfast
+            option(value='2') Option 2
+            option(value='2') Option 3
+          label(for='breakfast-type-2') Option 2
+        .form-floating
+          select.form-select(name='breakfast-type-3' id='breakfast-type-3' required=config.validation)
+            option(value='1') Option 1
+            option(value='2') Option 2
+            option(value='2') Option 3
+          label(for='breakfast-type-3') Option 3
+        .text-center.mt-4
+          a(href="#!").fw-bold.fs-9
+            span.fa-solid.fa-plus.me-2
+            | Add more
+      .tab-pane(id='breakfastNotIncluded' role="tabpanel" aria-labelledby="breakfast-not-included-tab" tabindex="0")

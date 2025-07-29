@@ -1,0 +1,21 @@
+mixin GetApp 
+  section.pt-9.pb-10
+    +Background({image: `${CWD}assets/img/bg/bg-left-33.png`, attrs: { style: { 'background-size': 'auto','background-position':'-8% 38px'}}, className: "d-none d-xl-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-33.png`, attrs: { style: { 'background-size': '18%','background-position':'right'}}, className: "d-none d-xl-block"})
+    .bg-get-app
+    .container-medium.position-relative
+      .row.g-0.justify-content-center
+        .col-lg-10.col-xl-8.col-xxl-7
+          .d-md-flex.align-items-center.gap-5.text-center.text-md-start
+            img(src=`${CWD}assets/img/spot-illustrations/i-phone.png`, alt="" style="max-height: 540px").img-fluid.d-dark-none
+            img(src=`${CWD}assets/img/spot-illustrations/i-phone-dark.png`, alt="" style="max-height: 540px").img-fluid.d-light-none
+            .mt-5.mt-md-0
+              .d-none.d-md-block
+                img(src=`${CWD}assets/img/spot-illustrations/41.png`, alt="" width=200).d-dark-none
+                img(src=`${CWD}assets/img/spot-illustrations/dark_41.png`, alt="" width=200).d-light-none
+              h3.fw-bolder.mt-4 Get The App Now
+              p.text-body-tertiary Designed to provide the best user experience possible to all our customers with activities ranging from anything thinkable to the unthinkables.
+              a(href="#!").me-2
+                img(src=`${CWD}assets/img/generic/play-store.png`, alt="" height=32)
+              a(href="#!")
+                img(src=`${CWD}assets/img/generic/app-store.png`, alt="" height=32)

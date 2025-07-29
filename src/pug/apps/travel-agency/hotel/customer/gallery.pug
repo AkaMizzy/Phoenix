@@ -1,0 +1,98 @@
+extends ../../../../layouts/LayoutHotel
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Gallery';
+
+prepend styles 
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+prepend scripts 
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`) 
+
+block hotelContent
+  +Section("container-medium").pt-6.pb-9
+    nav.mb-3(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#') Page 1
+        li.breadcrumb-item
+          a(href='#') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-5 Gallery
+    -
+      var images = [
+        {
+          img: '/img/hotels/74.png',
+          largeImg: '/img/hotels/84.jpg',
+        },
+        {
+          img: '/img/hotels/75.png',
+          largeImg: '/img/hotels/85.jpg',
+          classes: 'col-6',
+        },
+        {
+          img: '/img/hotels/76.png',
+          largeImg: '/img/hotels/86.jpg',
+          classes: 'col-6',
+        },
+        {
+          video: '/video/3.mp4',
+        },
+        {
+          img: '/img/hotels/78.png',
+          largeImg: '/img/hotels/87.jpg',
+          classes: 'col-sm-6',
+        },
+        {
+          img: '/img/hotels/79.png',
+          largeImg: '/img/hotels/88.jpg',
+          classes: 'col-sm-6',
+        },
+        {
+          img: '/img/hotels/80.png',
+          largeImg: '/img/hotels/89.jpg',
+          classes: 'col-md-6',
+        },
+        {
+          img: '/img/hotels/81.png',
+          largeImg: '/img/hotels/90.jpg',
+        },
+        {
+          img: '/img/hotels/82.png',
+          largeImg: '/img/hotels/91.jpg',
+          classes: 'col-6',
+        },
+        {
+          img: '/img/hotels/83.png',
+          largeImg: '/img/hotels/92.jpg',
+          classes: 'col-6',
+        },
+      ]
+    .row.g-2.g-sm-3
+      .col-md-6
+        .row.g-2.g-sm-3
+          each item in images.slice(0, 3)
+            div(class=`${item.classes}`)
+              a(href=`${CWD}assets${item.largeImg}` data-gallery='default-gallery')
+                img(src=`${CWD}assets${item.img}`, alt="").img-fluid.rounded-2
+      .col-md-6
+        .video-container.h-100
+          a(href=`${CWD}assets${images[3].video}` data-gallery='default-gallery')
+            video.video.w-100.h-100.object-fit-cover.overflow-hidden.rounded-2(muted data-play-on-hover)
+              source(src=`${CWD}assets${images[3].video}` type="video/mp4")
+            .circle-icon-item.position-absolute.top-50.start-50.translate-middle.bg-body-emphasis.rounded-pill.bg-opacity-50
+              span.fa-solid.fa-video.text-body.fs-9.fs-sm-8
+      each item in images.slice(4, 7)
+        div(class=`${item.classes}`)
+          a(href=`${CWD}assets${item.largeImg}` data-gallery='default-gallery')
+            img(src=`${CWD}assets${item.img}`, alt="").img-fluid.rounded-2
+      .col-md-6
+        .row.g-2.g-sm-3
+          each item in images.slice(7)
+            div(class=`${item.classes}`)
+              a(href=`${CWD}assets${item.largeImg}` data-gallery='default-gallery')
+                img(src=`${CWD}assets${item.img}`, alt="").img-fluid.rounded-2

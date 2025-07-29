@@ -1,0 +1,12 @@
+mixin FlightBottomBar(config)
+  .flight-bottom-bar.bg-secondary(data-bs-theme="light")&attributes(attributes)
+    .container-small.py-3
+      .d-flex.gap-4.gap-sm-6.align-items-center.justify-content-end
+        h6.text-white 
+          span.me-2 Total 
+          span.me-2 : 
+          | BDT
+          span.fs-5.ms-2 4,609
+        a.btn.btn-primary.flex-1.text-nowrap(href=`${config ? `${CWD}${paths[config.href]}` : '#!'}` style="max-width: 17rem") 
+          | Continue
+          span.fa-solid.fa-chevron-right.fs-9.ms-2

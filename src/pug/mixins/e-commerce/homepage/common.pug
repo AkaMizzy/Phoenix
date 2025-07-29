@@ -1,0 +1,41 @@
+mixin Product(product)
+  .position-relative.text-decoration-none.product-card.h-100
+    .d-flex.flex-column.justify-content-between.h-100
+      div
+        .border.border-1.border-translucent.rounded-3.position-relative.mb-3
+          button.btn.btn-wish.btn-wish-primary.z-2.d-toggle-container(class=`${product.wishListed ? 'active' : ''}` data-bs-toggle="tooltip" data-bs-placement="top" title!=product.wishListed ? 'Remove from wishlist' : 'Add to wishlist')
+            if product.wishListed 
+              span.fas.fa-heart(data-fa-transform='down-1')
+            else
+              span.fas.fa-heart.d-block-hover(data-fa-transform='down-1')
+              span.far.fa-heart.d-none-hover(data-fa-transform='down-1')
+          img.img-fluid(src=`${CWD}assets/img/products/${product.image}`, alt="")
+          if product.verified
+            span.badge.text-bg-success.fs-10.product-verified-badge Verified
+              span.fas.fa-check.ms-1
+        a.stretched-link(href=`${CWD}${paths['e-commerce-fe-product-details']}`)
+          h6.mb-2.lh-sm.line-clamp-3.product-name=product.name
+        if product.star
+          p.fs-9
+            +Rating(product.star)
+            if product.rated
+              span.text-body-quaternary.fw-semibold.ms-1=`(${product.rated} people rated)`
+      div
+        if product.extra
+          p.fs-9(class=product.extraClass)=product.extra 
+        if product.extra2
+          p.fs-9(class=product.extra2Class)=product.extra2
+        if product.salePrice
+          if product.price
+            .d-flex.align-items-center.mb-1
+              p.me-2.text-body.text-decoration-line-through.mb-0=`$${product.price}`
+              h3.text-body-emphasis.mb-0=`$${product.salePrice}`
+          else
+            h3.text-body-emphasis=`$${product.salePrice}`
+        if product.colors
+          p.text-body-tertiary.fw-semibold.fs-9.lh-1(class=`${product.dealEndTime ? '' : 'mb-0'}`)=`${product.colors} colors`
+        if product.dealEndTime
+          p.text-success.fw-bold.fs-9.lh-1.mb-0=`Deal time ends in ${product.dealEndTime}`
+        if product.offer
+          h6.text-success.lh-1.mb-0=`${product.offer} off`
+

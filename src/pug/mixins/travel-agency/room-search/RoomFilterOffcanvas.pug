@@ -1,0 +1,174 @@
+mixin RoomFilterOffcanvas
+  .pe-1(data-collapse-all)
+    .d-flex.align-items-center
+      h3.text-body-highlight Filters
+      button.btn.btn-phoenix-secondary.px-3.ms-auto.me-2.me-xl-0(data-btn-collapse-all) Collapse all
+      button.btn.d-xl-none.p-0(data-phoenix-dismiss="offcanvas")
+        span.uil.uil-times.fs-8
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapsePriceRange' role='button' aria-expanded='true' aria-controls='collapsePriceRange')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Price Range
+    .collapse.show#collapsePriceRange
+      .border-bottom.pb-4.pt-1
+        .noUi-target-primary.noUi-handle-primary.noUi-slider-slim.noUi-handle-circle.bg-primary-subtle.px-2.mb-3(data-nouislider!={
+          range: {
+            'min': 500,
+            'max': 2000
+          },
+          start: [699, 1299], 
+          connect: true 
+        })
+        .row.g-2
+          .col-6
+            .form-floating
+              input.form-control.input-spin-none(type='number' name='price-range-min' id='price-range-min' placeholder='Min' value='699')
+              label(for='price-range-min') Min
+          .col-6
+            .form-floating
+              input.form-control.input-spin-none(type='number' name='price-range-max' id='price-range-max' placeholder='Max' value='1299')
+              label(for='price-range-max') Max
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseAdult' role='button' aria-expanded='true' aria-controls='collapseAdult')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Adult
+    .collapse.show#collapseAdult
+      .border-bottom.pb-4
+        .input-group.gap-2(data-quantity)
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+            span.fa-solid.fa-minus.px-1
+          input.form-control.form-control-lg.border-translucent.input-spin-none.text-center.rounded(id="adult" type="number" value='2')
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+            span.fa-solid.fa-plus.px-1
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseChild' role='button' aria-expanded='true' aria-controls='collapseChild')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Child
+    .collapse.show#collapseChild
+      .border-bottom.pb-4
+        .input-group.gap-2(data-quantity)
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+            span.fa-solid.fa-minus.px-1
+          input.form-control.form-control-lg.border-translucent.input-spin-none.text-center.rounded(id="child" type="number" value='2')
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+            span.fa-solid.fa-plus.px-1
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseBedroom' role='button' aria-expanded='true' aria-controls='collapseBedroom')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Bedroom
+    .collapse.show#collapseBedroom
+      .border-bottom.pb-4
+        .input-group.gap-2(data-quantity)
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+            span.fa-solid.fa-minus.px-1
+          input.form-control.form-control-lg.border-translucent.input-spin-none.text-center.rounded(id="bedroom" type="number" value='2')
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+            span.fa-solid.fa-plus.px-1
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseNumOfBed' role='button' aria-expanded='true' aria-controls='collapseNumOfBed')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Number of Bed
+    .collapse.show#collapseNumOfBed
+      .border-bottom.pb-4
+        .input-group.gap-2(data-quantity)
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+            span.fa-solid.fa-minus.px-1
+          input.form-control.form-control-lg.border-translucent.input-spin-none.text-center.rounded(id="numberOfBed" type="number" value='2')
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+            span.fa-solid.fa-plus.px-1
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseBathroom' role='button' aria-expanded='true' aria-controls='collapseBathroom')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Bathroom
+    .collapse.show#collapseBathroom
+      .border-bottom.pb-4
+        .input-group.gap-2(data-quantity)
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+            span.fa-solid.fa-minus.px-1
+          input.form-control.form-control-lg.border-translucent.input-spin-none.text-center.rounded(id="bathroom" type="number" value='2')
+          button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+            span.fa-solid.fa-plus.px-1
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseRoomCategory' role='button' aria-expanded='false' aria-controls='collapseRoomCategory')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Room Category
+    .collapse#collapseRoomCategory
+      .border-bottom.pb-4(data-list!={
+        valueNames: ["room"]
+      })
+        -
+          var roomCategories = [
+            "Any",
+            "Deluxe King Room",
+            "Deluxe Twin Room",
+            "Junior King Suite",
+            "One-Bedroom Deluxe Suite",
+            "One-Bedroom Executive Suite",
+            "Presidential Suite",
+            "Club King Room",
+            "Twin Room",
+            "Club Twin Room",
+            "Premium King Room",
+            "Deluxe King Suite",
+            "Executive King Suite",
+          ]
+        +Search({placeholder: 'Search Room'}).w-100
+        .list
+          each item in roomCategories
+            .form-check.mt-3
+              input.form-check-input(type="checkbox" value="" id=`${item.split(" ").join("-")}`)
+              label.form-check-label.fs-8.text-body-highlight.room(for=`${item.split(" ").join("-")}`)= item
+        a(href="#!").mt-2.fw-bold.d-inline-block Show more items
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseBedType' role='button' aria-expanded='false' aria-controls='collapseBedType')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Bed Type
+    .collapse#collapseBedType
+      .border-bottom.pb-4(data-list!={
+        valueNames: ["bed"]
+      })
+        -
+          var roomCategories = [
+            "Cribs",
+            "Double beds",
+            "King bed",
+            "Queen bed",
+            "Rollaway bed",
+            "Sofa bed",
+            "Twin bed",
+            "Futon",
+          ]
+        +Search({placeholder: 'Search Room'}).w-100
+        .list
+          each item in roomCategories
+            .form-check.mt-3
+              input.form-check-input(type="checkbox" value="" id=`${item.split(" ").join("-")}`)
+              label.form-check-label.fs-8.text-body-highlight.bed(for=`${item.split(" ").join("-")}`)= item
+        a(href="#!").mt-2.fw-bold.d-inline-block Show more items
+
+    a.btn.collapse-indicator.px-0.py-2.d-flex.align-items-center.mt-3(data-bs-toggle='collapse' href='#collapseAmenities' role='button' aria-expanded='false' aria-controls='collapseAmenities')
+      span.fa-solid.fa-caret-down.toggle-icon.text-body.me-2
+      h5.text-body-highlight Amenities
+    .collapse#collapseAmenities
+      div(data-list!={
+        valueNames: ["amenities"]
+      })
+        -
+          var roomCategories = [
+            "Wifi",
+            "Washer",
+            "Kitchen",
+            "Dryer",
+            "Air conditioning",
+            "Heating"
+          ]
+        +Search({placeholder: 'Search Room'}).w-100
+        .list
+          each item in roomCategories
+            .form-check.mt-3
+              input.form-check-input(type="checkbox" value="" id=`${item.split(" ").join("-")}`)
+              label.form-check-label.fs-8.text-body-highlight.amenities(for=`${item.split(" ").join("-")}`)= item
+        a(href="#!").mt-2.fw-bold.d-inline-block Show more items
+    .sticky-bottom.bg-body.pt-4.pb-4.pb-xl-0
+      button.btn.btn-phoenix-secondary.me-2 Reset
+      button.btn.btn-primary.px-7 Apply

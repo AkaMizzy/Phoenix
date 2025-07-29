@@ -1,0 +1,44 @@
+include ./FlightFilters
+
+mixin FlightFilterModal 
+  .modal.fade(tabindex="-1" id="flightFilterModal" aria-labelledby="flightFilterModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-fullscreen-md-down(style="max-width: 53.313rem")
+      form.modal-content
+        .modal-header.p-4.pb-3.align-items-start.border-0
+          div 
+            h4.mb-2.text-body-highlight#flightFilterModalLabel Filter
+            p.mb-0 Search for flights according to your preferences
+          button.btn.btn-close.fs-10(type='button' data-bs-dismiss="modal" aria-label="Close")
+        .modal-body.scrollbar.px-4.py-3
+          .row.g-5
+            .col-md-6
+              .row.g-0
+                .col-12
+                  +FlightStops.mb-6
+                .col-12
+                  +FlightSchedules.mb-6
+                .col-12
+                  +FlightAirlines.mb-6
+                .col-12
+                  +FlightDuration
+            .col-md-6
+              .row.g-0
+                .col-12
+                  +FlightPriceCalculator.mb-6
+                .col-12
+                  +FlightAirports.mb-6
+                .col-12
+                  +FlightBaggage.mb-6
+                .col-12
+                  +FlightCabin.mb-6
+                .col-12
+                  +FlightAircraft
+
+        .modal-footer.border-0.p-4.pt-0
+          .w-100.d-flex.flex-wrap.gap-3.border-top.border-translucent.pt-4 
+            button.m-0.btn.btn-lg.btn-phoenix-primary.text-nowrap 
+              span.fa-solid.fa-rotate.me-sm-2
+              span.d-none.d-sm-inline-block Reset filter
+            button.m-0.btn.btn-lg.btn-primary.text-nowrap.flex-1 
+              span.fa-solid.fa-magnifying-glass.me-2
+              | Update results

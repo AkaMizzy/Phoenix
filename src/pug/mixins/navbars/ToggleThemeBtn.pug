@@ -1,0 +1,28 @@
+mixin ToggleThemeBtn(id='themeControlToggle')
+  .theme-control-toggle.fa-icon-wait&attributes(attributes)
+    input.form-check-input.ms-0.theme-control-toggle-input(
+      type='checkbox'
+      data-theme-control="phoenixTheme"
+      value='dark'
+      id=id
+    )
+    label.mb-0.theme-control-toggle-label.theme-control-toggle-light(for=id data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;")
+      span.icon(data-feather='moon')
+    label.mb-0.theme-control-toggle-label.theme-control-toggle-dark(for=id data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;")
+      span.icon(data-feather='sun')
+
+mixin ToggleThemeBtnSlim
+  .theme-control-toggle.fa-ion-wait.pe-2&attributes(attributes)
+    input#themeControlToggle.form-check-input.ms-0.theme-control-toggle-input(
+      type='checkbox'
+      data-theme-control="phoenixTheme"
+      value='dark'
+    )
+    label.mb-0.theme-control-toggle-label.theme-control-toggle-light(for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme")
+      span.d-none.d-sm-flex.flex-center(style="height:16px;width:16px;")
+        span.me-1.icon(data-feather='moon')
+      span.fs-9.fw-bold Dark
+    label.mb-0.theme-control-toggle-label.theme-control-toggle-dark(for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch theme")
+      span.d-none.d-sm-flex.flex-center(style="height:16px;width:16px;")
+        span.me-1.icon(data-feather='sun')
+      span.fs-9.fw-bold Light

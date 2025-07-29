@@ -1,0 +1,453 @@
+mixin GanttChartActions 
+  .gantt-header.p-4.px-lg-6.py-sm-3
+    .row.gx-0.gy-3.justify-content-between
+      .col-md-auto.d-flex.align-items-center
+        h3.mb-0 Gantt Chart 
+        button.btn.btn-primary.btn-sm.ms-auto.ms-md-3(data-gantt-add-task)
+          span.fas.fa-plus
+          span.ms-2.d-md-none.d-xl-inline Add Task
+      .col-md-auto
+        .row.align-items-center.gy-3.gx-0
+          .col-sm-auto
+            +GanttSearchBox
+          .col-auto.d-flex.align-items-center.ms-sm-auto
+            .border-start.d-none.d-md-inline.ms-md-3(style='height: 20px; width: 2px')
+            .form-check.form-switch.mb-0.ms-sm-3
+              input(class='form-check-input' data-gantt-zoom='fit' id="ganttZoomToFit" checked type='checkbox')
+              label.form-check-label.text-nowrap(for="ganttZoomToFit") Auto Fit
+            select.form-select.form-select-sm.ms-3(aria-label="Default select example" data-gantt-view)
+              option(value="days") Day
+              option(value="weeks") Weekly
+              option(value='months' selected) Monthly
+              option(value='years') Year
+          .col-auto.d-flex.align-items-center.ms-auto.ms-sm-3
+            .border-start.d-none.d-sm-inline.me-3(style='height: 20px; width: 2px')
+            button.btn.btn-link.btn-sm.text-body.px-0.text-nowrap.ms-n1(data-bs-toggle='modal' data-bs-target='#ganttTaskFilterModal')
+              span.fa-solid.fa-filter.fs-9
+              span.d-none.d-xl-inline.ms-2 Filter
+            button.btn.btn-link.btn-sm.text-body.px-0.text-nowrap.ms-3(data-bs-toggle='modal' data-bs-target='#ganttOptionsModal')
+              span.fa-solid.fa-gear.fs-9
+              span.d-none.d-xl-inline.ms-2 Options 
+
+mixin AddNewTaskModal 
+  .modal(id="ganttAddTaskModal" tabindex='-1' aria-labelledby="addTaskModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content(class="bg-body-highlight")
+        .modal-header.p-4.pb-3.align-items-start.border-0
+          h3.mb-0.text-body-highlight#addTaskModalLabel Create New Task
+          button.btn.btn-close.fs-10(type='button' data-bs-dismiss="modal" aria-label="Close")
+        .modal-body.px-4
+          form#addTaskForm
+            .mb-4
+              label.fw-bold.text-body-highlight.mb-2(for="createTaskName") Task Name
+              input#createTaskName.form-control(type="text" placeholder="Enter task name" )  
+            .row.g-3
+              .col-7.col-sm-8
+                label.fw-bold.text-body-highlight(for="createTaskStartDate") Start Date
+                .flatpickr-input-container.mt-2
+                  input.form-control.ps-6.datetimepicker#createTaskStartDate(type="text" data-options!={dateFormat:'M j, Y',disableMobile:true,defaultDate: "Mar 2, 2022"})
+                  span.uil.uil-calendar-alt.flatpickr-icon.text-body  
+              .col-5.col-sm-4
+                label.fw-bold.text-body-highlight(for="createTaskDuration") Time Duration
+                .form-icon-container.mt-2
+                  input.form-control.form-icon-input.ps-6#createTaskDuration(type="number" placeholder='0 days')
+                  span.fas.fa-clock.text-body.fs-9.form-icon
+
+        .modal-footer.border-0.px-4.pb-3
+          button.btn.btn-phoenix-secondary(type="button" data-bs-dismiss="modal") Cancel 
+          button#createNewTask.btn.btn-primary(type="button") Create New Task 
+
+mixin DeleteTaskModal 
+  .modal(id="ganttDeleteTaskModal" tabindex='-1' aria-labelledby="deleteTaskModal" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header.p-4.pb-3.align-items-start
+          h3.mb-2.text-body-highlight#deleteTaskModal Delete Task
+          button.btn.btn-close(type='button' data-bs-dismiss="modal" aria-label="Close")
+
+        .modal-body.px-4
+          p Are you sure you want to delete this task permanently? Once deleted, it cannot be recovered or undone.
+        .modal-footer.px-4.pb-3
+          button#ganttConfirmDeleteTask.btn.btn-subtle-danger(type="button") Delete task
+          button.btn.btn-phoenix-secondary(type="button" data-bs-dismiss="modal") Cancel
+
+mixin SubTasks(index)
+  h5.mb-3.mt-4 Subtasks
+  .d-flex.flex-between-center.hover-actions-trigger.py-3.border-top
+    .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1.min-h-auto
+      input.subtask-checkbox.form-check-input.form-check-line-through.mt-0.me-3(type="checkbox" id=`subtask${index}1`)
+      label.form-check-label.mb-0.fs-8(for=`subtask${index}1`) Study Dragons
+    .hover-actions.end-0
+      button.btn.btn-sm.me-1.fs-10.text-body-tertiary.px-0.me-3
+        span.fa-solid.fa-pencil
+      button.btn.btn-sm.text-body-tertiary.px-0
+        span.fa-solid.fa-xmark.fs-8
+
+  .d-flex.flex-between-center.hover-actions-trigger.py-3.border-top
+    .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1.min-h-auto
+      input.subtask-checkbox.form-check-input.form-check-line-through.mt-0.me-3(type="checkbox" id=`subtask${index}2`)
+      label.form-check-label.mb-0.fs-8(for=`subtask${index}2`) Procrastinate a bit
+    .hover-actions.end-0
+      button.btn.btn-sm.me-1.fs-10.text-body-tertiary.px-0.me-3
+        span.fa-solid.fa-pencil
+      button.btn.btn-sm.text-body-tertiary.px-0
+        span.fa-solid.fa-xmark.fs-8
+
+  .d-flex.flex-between-center.hover-actions-trigger.py-3.border-top.border-bottom.mb-3
+    .form-check.mb-1.mb-md-0.d-flex.align-items-center.lh-1.min-h-auto
+      input.subtask-checkbox.form-check-input.form-check-line-through.mt-0.me-3(type="checkbox" id=`subtask${index}3`)
+      label.form-check-label.mb-0.fs-8(for=`subtask${index}3`) Staring at the notebook for 5 mins
+    .hover-actions.end-0
+      button.btn.btn-sm.me-1.fs-10.text-body-tertiary.px-0.me-3
+        span.fa-solid.fa-pencil
+      button.btn.btn-sm.text-body-tertiary.px-0
+        span.fa-solid.fa-xmark.fs-8
+  a.fw-bold.fs-9(href='#!')
+    span.fas.fa-plus.me-1
+    | Add subtask
+
+
+mixin Attachment 
+  h5.mb-3.mt-4 Attachment
+
+mixin EditTaskOffcanvas 
+  .gantt-offcanvas.z-5
+    .offcanvas.offcanvas-end(tabindex="-1" id="taskDetailsOffcanvas")
+      .offcanvas-header.border-bottom
+        .d-flex.justify-content-between.w-100
+          button.btn.btn-phoenix-secondary.me-1.mb-1.text-success(type="button") 
+            span.fas.fa-check.me-2(data-fa-transform="shrink-3") 
+            | Mark Complete
+          .d-flex.gap-2
+            button(class='btn btn-phoenix-secondary btn-square px-2')
+              span.fa-solid.fa-thumbs-up
+            button(class='btn btn-phoenix-secondary btn-square px-2')
+              span.fa-solid.fa-paperclip
+            button(class='btn btn-phoenix-secondary btn-square px-2')
+              span.fa-solid.fa-list-check
+            button(class='btn btn-phoenix-secondary btn-square px-2')
+              span.fa-solid.fa-link
+            button(class='btn btn-phoenix-secondary btn-square px-2' data-bs-dismiss="offcanvas" aria-label="Close" )
+              span.fa-solid.fa-xmark
+      .offcanvas-body
+        input.form-control.mb-3#taskDetailsName(type='text' value='title' class='fs-8') 
+        h5.mb-3 Assignee
+        -
+          var members = [
+            {
+              name: 'Tyrion Lannister',
+              avatar: '/team/33.webp',
+            },
+            {
+              name: 'Milind Mikuja',
+              avatar: '/team/30.webp'
+            },
+            {
+              name: 'Stanly Drinkwater',
+              avatar: '/team/31.webp'
+            },
+            {
+              name: 'Josef Stravinsky',
+              avatar: '/team/60.webp'
+            },
+            {
+              name: 'Igor Borvibson',
+              avatar: '/team/65.webp'
+            }
+          ]
+        .d-flex
+          each member in members
+            .dropdown
+              a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close="outside")
+                +Avatar({size: 'm', img: `${member.avatar}`, round: 'circle'}).me-2.border.border-light-subtle.rounded-pill
+              +AvatarDropdownMenu(member)
+          a(href="#!").text-decoration-none.text-body-secondary
+            .circle-btn.bg-body-secondary.mx-auto
+              span.fas.fa-plus(data-fa-transform="shrink-2")
+        form#taskForm
+          .row.mt-3.gy-3
+            .col-6.col-sm-4 
+              label.fw-bold.text-body-highlight.mb-2(for="taskDetailsStartDate") Start Date
+              .flatpickr-input-container
+                input.form-control.ps-6.datetimepicker#taskDetailsStartDate
+                span.uil.uil-calendar-alt.flatpickr-icon.text-body  
+            .col-6.col-sm-4 
+              label.fw-bold.text-body-highlight.mb-2(for="taskDetailsEndDate") End Date
+              .flatpickr-input-container
+                input.form-control.ps-6.datetimepicker#taskDetailsEndDate(disabled)
+                span.uil.uil-calendar-alt.flatpickr-icon.text-body  
+            .col-6.col-sm-4 
+              label.fw-bold.text-body-highlight.mb-2(for="taskDetailsDuration") Duration 
+                span.text-body-quaternary.fw-normal (Days)
+              .form-icon-container
+                input.form-control.form-icon-input.ps-6#taskDetailsDuration(type="number" placeholder='0 days')
+                span.fas.fa-clock.text-body.fs-9.form-icon
+            .col-6.col-sm-4
+              label.fw-bold.text-body-highlight.mb-2(for="selectProject") Select Project
+              select.form-select#selectProject(aria-label="Default select example")
+                option(selected) Our new projects
+                option(value="1") Phoenix
+                option(value="2") Falcon
+                option(value="3") Sparrow
+            .col-6.col-sm-4 
+              label.fw-bold.text-body-highlight.mb-2(for="priority") Priority
+              select#priority.form-select(aria-label="Default select example")
+                option(selected) Urgent
+                option(value="1") High
+                option(value="2") Medium
+                option(value="3") Low
+            .col-6.col-sm-4 
+              label.fw-bold.text-body-highlight.mb-2(for="onTrack") Status
+              select#onTrack.form-select(aria-label="Default select example")
+                option(selected) On track
+                option(value="1") One
+                option(value="2") Two
+                option(value="3") Three
+
+          .card.mt-4
+            .card-body.p-3
+              .d-flex.justify-content-between.align-items-center
+                h4.mb-0 Dependency
+                button.btn.btn-link.pe-0 Add new
+              .bg-body.p-3.mt-3.rounded
+                .row.gy-3
+                  .col-sm-8 
+                    h5.mb-3 Dependency type
+                    .d-sm-flex.gap-3
+                      select#Dependency1.form-select(aria-label="Default select example")
+                        option(selected) Blocked by
+                        option(value="1") Blocking
+                        option(value="2") Paused
+                      select#Dependency2.form-select.mt-2.mt-sm-0(aria-label="Default select example")
+                        option(selected) Start to start
+                        option(value="1") Finish to Finish
+                        option(value="2") Start to Finish
+                        option(value="3") Finish to Start
+                  .col-sm-4 
+                    h5.mb-3 Select task
+                    .d-sm-flex 
+                      select#selectTask1.form-select(aria-label="Default select example")
+                        option(selected) Select Task
+                        option(value="1") One
+                        option(value="2") Two
+                        option(value="3") Three
+                hr.my-4    
+                .row.gy-3
+                  .col-sm-8 
+                    h5.mb-3 Dependency type
+                    .d-sm-flex.gap-3
+                      select#dependency3.form-select(aria-label="Default select example")
+                        option(selected) Blocking
+                        option(value="1") Blocked by
+                        option(value="2") Paused
+                      select#dependency4.form-select.mt-2.mt-sm-0(aria-label="Default select example")
+                        option(selected) Start to start
+                        option(value="1") Finish to Finish
+                        option(value="2") Start to Finish
+                        option(value="3") Finish to Start
+                  .col-sm-4 
+                    h5.mb-3 Select task
+                    .d-flex 
+                      select#selectTask6.form-select(aria-label="Default select example")
+                        option(selected) Select task
+                        option(value="1") One
+                        option(value="2") Two
+                        option(value="3") Three
+
+          label.fw-bold.text-body-highlight.mb-2.mt-4(for="EditTaskNotes") Description
+          textarea.form-control.mb-3#EditTaskNotes Complete the project documentation by outlining key processes, roles, and responsibilities to ensure smooth and efficient workflow execution.
+
+          +SubTasks
+
+          .dropzone.dropzone-multiple.p-0.mt-4#my-awesome-dropzone(data-dropzone)
+            .fallback
+              input(name='file' type='file', multiple)
+            .dz-message.text-body-tertiary.text-opacity-85.d-flex.flex-center(data-dz-message style='height:140px;width:140px;') 
+              span.fa-solid.fa-plus(class='fs-4')
+            .dz-preview.d-flex.flex-wrap.mt-2
+              .rounded-2.overflow-hidden.me-2.mb-2.position-relative(style='height:140px;width:140px;')
+                img(src=`${CWD}assets/img/products/23.png` alt="..." data-dz-thumbnail).w-100.h-100.object-fit-cover
+                button.btn.dropdown-toggle.dropdown-caret-none.px-3.text-body.bg-body.dz-remove.w-auto.h-auto.py-0.border(type='button' data-bs-toggle='dropdown' aria-expanded='false' style="top: 16px; right: 16px")
+                  span.fa-solid.fa-ellipsis
+                ul.dropdown-menu.dropdown-menu-end.py-1
+                  li
+                    a.dropdown-item(href='#!' data-dz-remove) Remove
+          .d-flex.border-top.pt-4.gap-3.mt-4
+            button.btn.btn-phoenix-danger.ms-auto(id='ganttDeleteTask' type="button") Delete Task 
+            button#ganttUpdateTask.btn.btn-phoenix-primary(type="button") Save Task 
+    .phoenix-offcanvas-backdrop(data-phoenix-backdrop)
+
+mixin DeleteLinkModal 
+  .modal(id="ganttDeleteLinkModal" tabindex='-1' aria-labelledby="deleteLinkModal" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header.p-4.pb-3.align-items-start
+          h3.mb-2.text-body-highlight#deleteLinkModal Delete Link
+          button.btn.btn-close(type='button' data-bs-dismiss="modal" aria-label="Close")
+
+        .modal-body.px-4
+          p Are you sure you want to delete this link permanently? Once deleted, it cannot be recovered or undone.
+        .modal-footer.px-4.pb-3
+          button#ganttDeleteLinkBtn.btn.btn-subtle-danger(type="button") Delete link
+          button.btn.btn-phoenix-secondary(type="button" data-bs-dismiss="modal") Cancel
+
+mixin TaskFilterModal 
+  .modal.modal-lg(id="ganttTaskFilterModal" tabindex='-1' aria-labelledby="ganttFilterModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header.p-4.pb-3.align-items-start
+          h3.mb-2.text-body-highlight#ganttFilterModalLabel Filter
+          button.btn.btn-close(type='button' data-bs-dismiss="modal" aria-label="Close")
+
+        .modal-body.px-4
+          .row.g-3
+            .col-6
+              label.fw-bold.text-body-highlight.mb-2(for="filterStartDate") Start Date
+              .flatpickr-input-container
+                input.form-control.ps-6.datetimepicker#filterStartDate(type="text" data-options!={dateFormat:'M j, Y',disableMobile:true,defaultDate: "Mar 2, 2022"})
+                span.uil.uil-calendar-alt.flatpickr-icon.text-body  
+            .col-6
+              label.fw-bold.text-body-highlight.mb-2(for="completedOn") Completed on
+              select.form-select#completedOn(aria-label="Default select example")
+                option(selected) Last 7 Days
+                option(value="1") Last 30 Days
+                option(value="2") Last 90 Days
+                option(value="3") Last 6 Months
+                option(value="3") Last 12 Months
+            .col-6
+              label.fw-bold.text-body-highlight.mb-2(for="completionStatus") Completion Status
+              select.form-select#completionStatus(aria-label="Default select example")
+                option(selected) Not Started
+                option(value="1") In Progress
+                option(value="2") Completed
+                option(value="3") Overdue
+                option(value="3") Cancelled
+                option(value="3") On Hold
+            .col-6
+              label.fw-bold.text-body-highlight.mb-2(for="filterPriority") Priority
+              select.form-select#filterPriority(aria-label="Default select example")
+                option(selected) Urgent
+                option(value="1") High
+                option(value="2") Medium
+                option(value="3") Low
+            .col-6
+              label.fw-bold.text-body-highlight.mb-2(for="lastModifiedON") Last modified on
+              select.form-select#lastModifiedON(aria-label="Default select example")
+                option(selected) Last 7 Days
+                option(value="1") Last 30 Days
+                option(value="2") Last 90 Days
+                option(value="3") Last 6 Months
+                option(value="3") Last 12 Months
+            .col-6
+              label.fw-bold.text-body-highlight.mb-2(for="filterTaskType") Task type
+              select.form-select#filterTaskType(aria-label="Default select example")
+                option(selected) Administrative
+                option(value="1") Development
+                option(value="2") Design
+                option(value="3") Testing
+                option(value="4") Deployment
+                option(value="5") Research
+
+        .modal-footer.px-4.pb-3.border-0
+          button#ganttResetFilterBtn.btn.btn-subtle-primary.btn-sm.px-4(type="button")
+            span.fa-solid.fa-sync.me-2
+            | Reset
+          button.btn.btn-primary.btn-sm.px-8(type="button" data-bs-dismiss="modal") Done
+
+mixin GanttSearchBox
+  .search-box.gantt-search-box
+    form.position-relative
+      input.form-control.search-input.search.form-control-sm(data-gantt-search type='search' class=inputClass placeholder='Search...', aria-label='Search')
+      span.fas.fa-search.search-box-icon(data-fa-transform='up-1 shrink-2')
+    .btn-close.position-absolute.end-0.top-50.translate-middle.cursor-pointer.shadow-none.me-1(data-gantt-search-dismiss)
+      button.btn.btn-link.p-0(aria-label="Close")
+
+mixin OptionsModal 
+  .modal.modal-md(id="ganttOptionsModal" tabindex='-1' aria-labelledby="OptionsModal" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered(style="max-width: 630px")
+      .modal-content
+        .modal-header.p-4.pb-3.align-items-start
+          h3.mb-2.text-body-highlight#OptionsModal
+          button.btn.btn-close(type='button' data-bs-dismiss="modal" aria-label="Close")
+
+        .modal-body.p-4
+          form#ganttOptionsForm
+            .d-flex.align-items-center.justify-content-between
+              label.fw-bold.text-body-highlight(for="taskOptionSelect") Color task by
+              button.btn.btn-link.pe-0 Add new
+            select.form-select#taskOptionSelect(aria-label="Default select example")
+              option(selected) Section
+              option(value="1") Phoenix
+              option(value="2") Falcon
+              option(value="3") Sparrow
+            label.fw-bold.text-body-highlight.mb-2.mt-3(for="optionsDate") Baseline
+            .flatpickr-input-container
+              input.form-control.ps-6.datetimepicker#optionsDate(placeholder='dd/mm/yy')
+              span.uil.uil-calendar-alt.flatpickr-icon.text-body  
+
+            .d-flex.align-items-center.justify-content-between.mt-4
+              h4.mb-0 Show baseline 
+              .d-flex.align-items-center
+                .form-check.me-3
+                  label No 
+                  input.form-check-input#hideBaseline(type='radio' checked name='showBaseline')
+                .form-check 
+                  label Yes 
+                  input.form-check-input#ShowBaseline(type='radio' name='showBaseline')
+
+            .d-flex.justify-content-between.align-items-center.mt-4
+              div 
+                h4 Auto-schedule tasks 
+                p.mb-0.fs-9 Assign date to new tasks automatically 
+              .form-check.form-switch.mb-0.fs-6
+                input.form-check-input#isAutoScheduleTask(type='checkbox' role='switch')
+            hr
+            .card 
+              .card-body.p-3
+                .form-switch.form-check.mb-3
+                  label.form-check-label(for='manageDependencies' ) Manage dependencies
+                  input.form-check-input#manageDependencies(type='checkbox' role='switch')
+                .bg-primary-subtle.rounded-3.p-4
+                  -
+                    var dependencies = [
+                      {
+                        title: 'Keep the buffer intact.',
+                        description: 'Preserve the intervals of time between related tasks.'
+                      },
+                      {
+                        title: 'Use the buffer.',
+                        description: 'Unless there is a problem, use the amount of time that is required between dependent tasks.'
+                      },
+                      {
+                        title: 'None',
+                        description: 'In the event of a conflict, disregard the interval between dependent tasks.'
+                      }
+                    ];
+                  each item,index in dependencies
+                    .d-flex.align-items-center 
+                      .form-check.mb-0
+                        input.form-check-input(type='checkbox')
+                      h5.mb-0=item.title
+                    p.fs-9.fw-semibold.text-body.ms-4(class=(index === dependencies.length - 1 ? 'mb-0' : 'mb-4'))=item.description
+            .d-flex.justify-content-between.align-items-center.mt-4
+              div 
+                h4 Weekend awareness
+                p.mb-0.fs-9 Task dates will take the weekend into consideration and try to avoid it.
+              .form-check.form-switch.mb-0.fs-6
+                input.form-check-input#weekendCheck(type='checkbox' role='switch')
+        .modal-footer.p-4
+          button#optionModal.btn.btn-subtle-danger(type="button" data-bs-dismiss="modal") Cancel
+          button.btn.btn-phoenix-primary(type="button" data-bs-dismiss="modal") Save Changes
+
+//- <div class='dropdown'>
+//-   <a href='#!' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close='outside'
+//-     class='dropdown-toggle dropdown-caret-none avatar avatar-s'>
+//-     <div class='avatar-name rounded-circle'>
+//-       <span>+${owners.length - 2}</span>
+//-     </div>
+//-   </a>
+//-   <ul class="dropdown-menu dropdown-menu-end py-0">
+//-     <li><a class="dropdown-item" href="#">Action</a></li>
+//-     <li><a class="dropdown-item" href="#">Another action</a></li>
+//-   </ul>
+//- </div>

@@ -1,0 +1,51 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/stock/watchlist/CollapsibleContainer
+include ../../mixins/stock/watchlist/WatchlistTab
+
+append variables 
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+
+append scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}assets/js/pages/stock-portfolio-watchlist.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+
+
+block content
+  h2.mb-4 Watchlist
+
+  .row.flex-between-center.g-3.g-lg-5.mb-4 
+    .col-auto
+      h4 My Watchlist 
+      p.mb-0.text-body-tertiary Brief summary of all projects
+    .col-auto 
+      button.btn.btn-phoenix-secondary.me-2
+        span.fa-solid.fa-sort.me-2 
+        | Reorder Symbol 
+      button.btn.btn-phoenix-secondary
+        span.fa-solid.fa-add.me-2 
+        | Add Symbol
+  .row.pb-5.pb-md-7.pb-xl-9 
+    .col-12
+      +CollapsibleContainer.mb-3
+      +WatchlistTab

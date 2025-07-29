@@ -1,0 +1,154 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Color',
+      description:'Phoenix is supported by an extensive color system that themes our styles and components. This enables more comprehensive customization and extension for any project.',
+    }
+
+mixin ColorDemo(color)
+  tr
+    td(rowspan='2')
+      strong.text-capitalize=color 
+    td.ps-0
+      .p-5.rounded-2(style=`background-color: var(--phoenix-${color}-color)`)
+    td
+      code --phoenix-#{color}-color
+      br
+      code --phoenix-#{color}-color-rgb
+    td
+      if color === 'body-highlight'
+        code text-#{color}
+      else 
+        code text-body-#{color}
+
+  tr 
+    td
+      .p-5.rounded-2(style=`background-color: var(--phoenix-${color}-bg)`)
+    td 
+      code --phoenix-#{color}-bg
+      br
+      code --phoenix-#{color}-bg-rgb
+    td 
+      if color === 'body-highlight'
+        code bg-#{color}
+      else 
+        code bg-body-#{color}
+
+
+mixin ColorShadesDemo(color)
+  - var variants = ['subtle', 'lighter', 'light', 'dark', 'darker', 'emphasis']
+  tr
+    td(rowspan='7')
+      strong.text-capitalize=color 
+    td.ps-0
+      .p-5.rounded-2(class=`bg-${color}`)
+    td
+      code --phoenix-#{color}
+      br
+      code --phoenix-#{color}-rgb
+    td
+      code text-#{color}
+      br
+      code bg-#{color}
+
+  each variant in variants
+    if variant === 'subtle'
+      tr
+        td.ps-0
+          .p-5.rounded-2(class=`bg-${color}-${variant}`)
+        td
+          code --phoenix-#{color}-bg-#{variant}
+        td
+          code text-#{color}-#{variant}
+          br
+          code bg-#{color}-#{variant}
+
+    else if variant === 'emphasis'
+      tr
+        td.ps-0
+          .p-5.rounded-2(class=`bg-${color}-${variant}`)
+        td
+          code --phoenix-#{color}-text-#{variant}
+        td
+          code text-#{color}-#{variant}
+          br
+          code bg-#{color}-#{variant}
+    else
+      tr
+        td.ps-0
+          .p-5.rounded-2(class=`bg-${color}-${variant}`)
+        td
+          code --phoenix-#{color}-#{variant}
+          br
+          code --phoenix-#{color}-#{variant}-rgb
+        td
+          code text-#{color}-#{variant}
+          br
+          code bg-#{color}-#{variant}
+
+block component
+
+
+  .card.mb-3.mt-7
+    .card-header
+      h5.fs-6(data-anchor) Colors
+      p Phoenix comes with lots of colors and variants. We added 
+        code quaternary 
+        | and 
+        code body-highlight 
+        | colors besides 
+        code secondary 
+        | and 
+        code tertiary 
+        | colors and also theme colors shades.
+
+    .card-body 
+      .table-responsive.scrollbar
+        table.table.table-swatches 
+          thead 
+            tr 
+              th.ps-0(style="width: 20%; min-width: 100px") Name 
+              th(style="width: 20%; min-width: 130px") Swatch 
+              th(style="width: 40%; min-width: 330px") CSS variables 
+              th(style="width: 20%; min-width: 230px") Class 
+          tbody
+            // ----- scope start -------
+            tr
+              td(rowspan='2')
+                strong Body 
+              td.ps-0
+                .p-5.rounded-2(style="background-color: var(--phoenix-body-color)")
+              td
+                code --phoenix-body-color
+                br
+                code --phoenix-body-color-rgb
+              td
+                code text-body
+
+            tr 
+              td
+                .p-5.rounded-2(style="background-color: var(--phoenix-body-bg)")
+              td 
+                code --phoenix-body-bg
+                br
+                code --phoenix-body-bg-rgb
+              td 
+                code bg-body
+
+            // ----- scope end --------
+            // ----- scope start ------
+
+            //- +ColorDemo('body')
+            +ColorDemo('secondary')
+            +ColorDemo('tertiary')
+            +ColorDemo('quaternary')
+            +ColorDemo('body-highlight')
+            +ColorDemo('emphasis')
+            +ColorShadesDemo('primary')
+            +ColorShadesDemo('secondary')
+            +ColorShadesDemo('success')
+            +ColorShadesDemo('danger')
+            +ColorShadesDemo('warning')
+            +ColorShadesDemo('info')

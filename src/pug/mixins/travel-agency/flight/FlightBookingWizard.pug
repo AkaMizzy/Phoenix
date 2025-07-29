@@ -1,0 +1,35 @@
+mixin FlightBookingWizard(activeItem)
+  .theme-wizard.flight-booking-wizard(style="width: 18.125rem")
+    ul.nav.justify-content-between.nav-wizard.nav-wizard-success
+      - 
+        var wizardItems = [
+          {
+            name: 'Flight',
+            icon: 'fas fa-plane',
+            doneIcon: 'fas fa-check',
+            url: 'flight-homepage',
+          },
+          {
+            name: 'Booking',
+            icon: 'fas fa-user',
+            doneIcon: 'fas fa-check',
+            url: 'flight-booking'
+          },
+          {
+            name: 'Payment',
+            icon: 'fas fa-money-bill',
+            doneIcon: 'fas fa-check',
+            url: 'flight-payment'
+          },
+        ];
+      - var doneItems = wizardItems.filter(item => wizardItems.indexOf(item) < wizardItems.findIndex(i => i.name === activeItem))
+      each item, index in wizardItems
+        - var isDone = doneItems.some(i => i.name === item.name);
+        - var isComplete = doneItems.some(i => i.name === item.name);
+        li.nav-item
+          a(href=`${CWD}${paths[item.url]}` data-wizard-step=`${index+1}` class=`${isDone ? 'done complete' : activeItem === item.name ? 'active' : ''}`).nav-link.fw-semibold
+            .d-inline-block.text-center
+              span.nav-item-circle-parent
+                span.d-block.nav-item-circle
+                  span(class=`${isDone ? item.doneIcon : item.icon}`)
+              span.mt-1.fs-9 #{item.name}

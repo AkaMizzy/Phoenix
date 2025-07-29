@@ -1,0 +1,52 @@
+extends ../../../../layouts/LayoutTheme
+include ../../../../mixins/travel-agency/add-room/AddRoomWizard
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dropzone/dropzone.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/dropzone/dropzone-min.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+
+append variables
+  -
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-9
+    h2.fs-5.mb-4.mb-xl-5 Add New Room
+    .theme-wizard(data-theme-wizard data-wizard-modal-disabled)
+      .row.gx-0.gx-xl-5
+        .col-xl-4.order-xl-1
+          +WizardHeader({tab1:'#add-room-wizard-tab1',tab2:'#add-room-wizard-tab2',tab3:'#add-room-wizard-tab3',tab4:'#add-room-wizard-tab4', tab5:'#add-room-wizard-tab5'})
+        .col-xl-8.flex-1
+          +WizardContent({
+            name: 'add-room-wizard',
+            formId: 'addPropertyWizardForm',
+            tab1: 'add-room-wizard-tab1',
+            tab2: 'add-room-wizard-tab2',
+            tab3: 'add-room-wizard-tab3',
+            tab4: 'add-room-wizard-tab4',
+            tab5: 'add-room-wizard-tab5',
+            validation: false,
+            url: `${CWD}${paths['forms-wizard']}`
+          })
+          .mt-6.d-flex.flex-wrap.gap-2(data-wizard-footer)
+            button.btn.btn-phoenix-danger(type='button') Discard
+            button.btn.btn-phoenix-primary(type='button') Save draft
+            button.btn.btn-primary.px-6.px-sm-11(type='submit' data-wizard-next-btn) Continue

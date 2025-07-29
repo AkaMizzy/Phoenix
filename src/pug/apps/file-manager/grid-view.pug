@@ -1,0 +1,82 @@
+extends ../../layouts/LayoutFileManager
+include ../../mixins/file-manager/MyFile
+include ../../mixins/file-manager/FileDetails
+include ../../mixins/file-manager/MyFilesHeader
+
+append scripts
+  script(src=`${CWD}assets/js/pages/file-manager.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+
+append styles 
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+append variables
+  - var attrsHtml = {class: 'file-manager'}
+  -
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block fileManagerContent
+  .card.mt-5
+    .card-header.py-3.px-4
+      +MyFilesHeader('grid-view')
+    .card-body.pt-0
+      .myfiles-action-bar.mx-n4.mb-4
+        h6.mb-0.text-body-tertiary#file-manager-replace-element Total 16 items
+        #file-manager-actions.d-none
+          .d-flex.align-items-center
+            button.btn.p-0.text-body-secondary.fs-8.me-2.me-sm-3(data-remove-bulk-check)
+              span.fa-solid.fa-xmark(data-fa-transform='down-1')
+            h6.mb-0.me-4.text-nowrap.text-body-tertiary(data-files-selected) 1 item selected
+            .d-flex.gap-1.gap-sm-2
+              button.btn.btn-phoenix-secondary.fs-10.btn-square-sm.d-none.d-sm-block(data-bs-toggle="tooltip" data-bs-title="Download")
+                span.fa-solid.fa-download
+              button.btn.btn-phoenix-secondary.fs-10.btn-square-sm.d-none.d-sm-block(data-bs-toggle="tooltip" data-bs-title="Delete")
+                span.fa-solid.fa-trash
+              button.btn.btn-phoenix-secondary.fs-10.btn-square-sm.d-none.d-sm-block(data-bs-toggle="tooltip" data-bs-title="Share")
+                span.fa-solid.fa-share-nodes
+              .dropdown
+                button.btn.btn-phoenix-secondary.fs-10.btn-square-sm(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+                  span.fa-solid.fa-ellipsis
+                .dropdown-menu.dropdown-menu-end
+                  a.dropdown-item.fw-semibold(href='#') Share
+                  a.dropdown-item.fw-semibold(href='#') Download
+                  a.dropdown-item.fw-semibold(href='#') Duplicate
+                  a.dropdown-item.fw-semibold(href='#') Move
+                  a.dropdown-item.fw-semibold(href='#') Rename
+                  a.dropdown-item.fw-semibold(href='#') Move to Bin
+                  hr.dropdown-divider
+                  a.dropdown-item.fw-semibold.text-danger(href='#') Delete
+        button.btn.btn-phoenix-secondary.fs-10.btn-square-sm.d-none.d-xxl-block(data-toggle-file-details data-bs-toggle="tooltip" data-bs-title)
+          span.fa-solid.fa-info-circle
+        button.btn.btn-phoenix-secondary.fs-10.btn-square-sm.d-xxl-none(data-toggle-file-details data-bs-toggle="tooltip" data-bs-title data-phoenix-toggle='offcanvas' data-phoenix-target='#fileDetailsOffcanvas')
+          span.fa-solid.fa-info-circle
+      .row.gx-xxl-9#bulk-select-body
+        .col
+          .files-container(data-files-container)
+            .form-check.d-none
+              input.form-check-input#bulk-select-file-manager(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "bulk-select-body",
+                  actions: "bulk-select-actions",
+                  replacedElement: "bulk-select-replace-element"
+                }
+              )
+            each file, index in myFiles
+              +MyFile(file, index)
+        .col-auto.px-0.px-xxl-5.border-start-xxl.border-translucent(data-details-container)
+          +FileDetails

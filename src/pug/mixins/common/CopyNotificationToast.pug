@@ -1,0 +1,6 @@
+mixin CopyNotificationToast
+  .position-fixed.bottom-0.end-0.p-3(style='z-index: 1050')
+    #icon-copied-toast.toast.align-items-center.text-white.bg-dark.border-0(role='alert' aria-live='assertive' aria-atomic='true')
+      .d-flex(data-bs-theme="dark")
+        .toast-body.p-3
+        button.btn-close.me-2.m-auto(type='button' data-bs-dismiss='toast' aria-label='Close')

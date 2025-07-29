@@ -1,0 +1,326 @@
+mixin HotelDetailsTable 
+  -
+    var hotelPhotos = [
+      {
+        name: 'Bubble Hotel Bali Ubud',
+        rating: '3.0',
+        images: ["/img/hotels/40.png", "/img/hotels/41.png", "/img/hotels/42.png", "/img/hotels/43.png", "/img/hotels/44.png", ]
+      },
+      {
+        name: 'ONAYA Bali Resort',
+        rating: '4.0',
+        images: ["/img/hotels/45.png", "/img/hotels/46.png", "/img/hotels/47.png", "/img/hotels/48.png", "/img/hotels/49.png", ]
+      },
+      {
+        name: 'Gynandha Ubud Cottage',
+        rating: '5.0',
+        images: ["/img/hotels/50.png", "/img/hotels/51.png", "/img/hotels/52.png", "/img/hotels/53.png", "/img/hotels/54.png", ]
+      }
+    ]
+  -
+    var ratingData = [
+      {
+        name: "Staff",
+        ratings: ['4.0', '4.0', '4.0']
+      },
+      {
+        name: "Comfort",
+        ratings: ['4.5', '4.5', '4.5']
+      },
+      {
+        name: "Facilities",
+        ratings: ['4.8', '4.8', '4.8']
+      },
+      {
+        name: "Location",
+        ratings: ['4.0', '4.0', '4.0']
+      },
+      {
+        name: "Cleanliness",
+        ratings: ['3.5', '3.5', '3.5']
+      },
+      {
+        name: "Free WiFi",
+        ratings: ['5.0', '5.0', '5.0']
+      },
+    ]
+  -
+    var facilities = [
+      ['Free - Breakfast', 'Beach View', 'Airport Shuttle', 'Gym', 'Swimming Pool', 'Free Parking'],
+      ['Free - Breakfast', 'Fitness Center', 'Airport Shuttle', 'Bar/Lounge', 'Accommodation', 'Room Service'],
+      ['Reception Desk', 'Meeting Rooms', 'Restaurant', 'ATM/Banking Services', 'Business Center', 'Free Parking'],
+    ]
+  table.table.table-layout-fixed.table-compare.mb-0
+    thead
+      tr
+        th.p-0.border-0(style='width: 225px')
+        th.p-0.border-0
+        th.p-0.border-0
+        th.p-0.border-0
+    //- Picture table
+    tbody
+      tr
+        td.ps-4.pt-4.pb-3.fw-bold.border-0 Hotel picture
+      tr
+        td.border-0.bg-body-highlight.py-0
+        each item, index in hotelPhotos
+          td.border-0.py-0(style='min-width: 250px' class=`${index !== hotelPhotos.length - 1 ? "ps-3 pe-0" : "ps-3"}`)
+            .position-relative
+              .swiper-theme-container.rounded-2.overflow-hidden
+                .swiper.theme-slider(data-swiper!={
+                  autoplay: true,
+                  loop: true,
+                  pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                  },
+                })
+                  .swiper-wrapper
+                    each img in item.images
+                      .swiper-slide
+                        img(src=`${CWD}assets${img}`, alt="").w-100.h-100
+                  .swiper-pagination
+              span.badge.badge-phoenix.fs-10.badge-phoenix-warning.position-absolute.top-0.start-0.ms-3.mt-3
+                span.fa-solid.fa-star.me-1
+                | #{item.rating}
+              button.btn.btn-wish.position-absolute.top-0.end-0.mt-3.me-3
+                span.far.fa-heart
+            .position-relative
+              input.form-control.form-control-lg.mt-2.pe-5(type="text" placeholder='Enter hotel name' value=`${item.name}`)
+              span.fa-solid.fa-search.fs-9.text-body-quaternary.position-absolute.top-0.end-0.mt-3.me-3(data-fa-transform='down-2')
+      //- Review table
+      tr
+        td.pt-4.pb-3.ps-4.fw-bold(colspan='4') Hotel Review
+      each item, index in ratingData
+        tr
+          td.px-4.align-middle.bg-body-highlight.border-end-lg.border-translucent
+            h6.text-body.fw-bolder.text-uppercase.mb-0= item.name
+          td.px-3.border-end.border-translucent
+            .d-flex.align-items-center.gap-2
+              span.badge.text-bg-primary.fs-8= item.ratings[0].toString()
+              .progress.w-100.bg-body-highlight(role="progressbar" aria-label="review" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style='height: 8px')
+                .progress-bar.rounded(style=`width: ${parseFloat(item.ratings[0]) * 20}%`)
+          td.px-3.border-end.border-translucent
+            .d-flex.align-items-center.gap-2
+              span.badge.text-bg-primary.fs-8= item.ratings[1].toString()
+              .progress.w-100.bg-body-highlight(role="progressbar" aria-label="review" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style='height: 8px')
+                .progress-bar.rounded(style=`width: ${parseFloat(item.ratings[1]) * 20}%`)
+          td.px-3.border-end-lg.border-translucent
+            .d-flex.align-items-center.gap-2
+              span.badge.text-bg-primary.fs-8= item.ratings[2].toString()
+              .progress.w-100.bg-body-highlight(role="progressbar" aria-label="review" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style='height: 8px')
+                .progress-bar.rounded(style=`width: ${parseFloat(item.ratings[2]) * 20}%`)
+      //- Facilities table
+      tr
+        td.pt-4.pb-3.ps-4.fw-bold(colspan='4') Facilities at a Glance
+      tr
+        td.px-4.align-middle.border-end-lg.border-translucent.bg-body-highlight
+          h6.text-body.fw-bolder.text-uppercase.mb-0 Hotel facilities
+        each items, index in facilities
+          td.border-translucent.px-3(class=`${index === facilities.length - 1 ? "border-end-lg" : 'border-end'}`)
+            ul.columns-xl-2.mb-0.list-unstyled
+              each item in items
+                li.text-body-highlight.fs-9
+                  span.fa-solid.fa-check.text-success.me-2
+                  | #{item}
+              //- each item in items 
+              //-   .col-xl-6
+              //-     h6.text-body-highlight.fw-normal 
+              //-       span.fa-solid.fa-check.text-success.me-2
+              //-       | #{item}
+
+mixin RoomDetailsTable 
+  -
+    var rooms = [
+      {
+        type: 'Deluxe Room',
+        price: '279.98',
+        discountPrice: '259.65',
+        images: ['/img/hotels/55.png', '/img/hotels/56.png', '/img/hotels/57.png', '/img/hotels/58.png', '/img/hotels/59.png', ],
+        beds: '01',
+        adults: '02',
+        childs: '00',
+        bathrooms: '01'
+      },
+      {
+        type: 'Deluxe Room',
+        price: '299.76',
+        discountPrice: '260.99',
+        images: ['/img/hotels/60.png', '/img/hotels/61.png', '/img/hotels/62.png', '/img/hotels/63.png', '/img/hotels/64.png', ],
+        beds: '01',
+        adults: '02',
+        childs: '00',
+        bathrooms: '01'
+      },
+      {
+        type: 'Deluxe Room',
+        price: '309.89',
+        discountPrice: '299.98',
+        images: ['/img/hotels/65.png', '/img/hotels/66.png', '/img/hotels/67.png', '/img/hotels/68.png', '/img/hotels/69.png', ],
+        beds: '01',
+        adults: '02',
+        childs: '00',
+        bathrooms: '01'
+      },
+    ]
+  -
+    var amenities = [
+      {
+        name: 'Airport shuttle',
+        availability: [true, true, false]
+      },
+      {
+        name: 'Free wifi',
+        availability: [true, true, true]
+      },
+      {
+        name: 'Restaurant',
+        availability: [false, false, true]
+      },
+      {
+        name: 'Smoking zone',
+        availability: [false, false, true]
+      },
+      {
+        name: 'Room service',
+        availability: [true, false, true]
+      },
+      {
+        name: 'Free parking',
+        availability: [true, false, true]
+      },
+      {
+        name: 'Pet-Friendly',
+        availability: [true, true, false]
+      },
+      {
+        name: 'Beach-front',
+        availability: [true, false, false]
+      },
+      {
+        name: 'Facilities for disabled guests',
+        availability: [false, true, true]
+      },
+      {
+        name: 'Bar',
+        availability: [false, false, true]
+      },
+      {
+        name: 'Free Breakfast',
+        availability: [true, true, true]
+      },
+      {
+        name: '24-hour front desk',
+        availability: [false, false, false]
+      },
+    ]
+  table.table.table-layout-fixed.table-compare.mb-0
+    thead
+      tr
+        th.p-0.border-0(style='width: 225px')
+        th.p-0.border-0
+        th.p-0.border-0
+        th.p-0.border-0
+    //- Accommodation table
+    tbody
+      tr 
+        td.ps-4.pt-4.pb-3.fw-bold(colspan='4') Accommodation
+      tr
+        td.px-4.align-middle.border-end-lg.border-translucent.bg-body-highlight
+          h6.text-body.fw-bolder.text-uppercase.mb-0 room type
+        each item, index in rooms
+          td.border-translucent.px-3(class=`${index === rooms.length - 1 ? "border-end-lg" : 'border-end'}`)
+            .d-flex.flex-wrap.flex-between-center.gap-2
+              h4.mb-0= item.type 
+              button.btn.btn-phoenix-primary(data-bs-toggle="modal" data-bs-target="#changeRoomModal") Change Room
+      tr
+        td.px-4.align-middle.border-end-lg.border-translucent.bg-body-highlight
+          h6.text-body.fw-bolder.text-uppercase.mb-0 Room price
+        each item, index in rooms
+          td.border-translucent.px-3(class=`${index === rooms.length - 1 ? "border-end-lg" : 'border-end'}`)
+            h3.d-flex.align-items-center.gap-2
+              span.fs-9.text-body-quaternary.fw-normal.text-decoration-line-through $#{item.price}
+              |  $#{item.discountPrice} 
+              span.fs-9.fw-bold / night
+            p.mb-0 Inclusive of all taxes and fees
+      tr
+        td.px-4.align-middle.border-end-lg.border-translucent.bg-body-highlight
+          h6.text-body.fw-bolder.text-uppercase.mb-0 Room picture
+        each item, index in rooms
+          td.border-translucent.px-3(style='min-width: 250px' class=`${index === rooms.length - 1 ? "border-end-lg" : 'border-end'}`)
+            .swiper-theme-container
+              .swiper.theme-slider(data-swiper!={
+                loop: true,
+                spaceBetween: 8,
+                slidesPerView: 3,
+                centeredSlide: true,
+                grabCursor: true,
+              })
+                .swiper-wrapper
+                  each img in item.images
+                    .swiper-slide
+                      img(src=`${CWD}assets${img}`, alt="").img-fluid.rounded-2
+              .swiper-nav.swiper-nav-inside
+                .swiper-button-next.bg-transparent.border-0
+                  span.fas.fa-chevron-right.text-white(data-fa-transform='shrink-3')
+                .swiper-button-prev.bg-transparent.border-0
+                  span.fas.fa-chevron-left.text-white(data-fa-transform='shrink-3')
+      tr
+        td.px-4.align-middle.border-end-lg.border-translucent.bg-body-highlight
+          h6.text-body.fw-bolder.text-uppercase.mb-0 Room Details
+        each item, index in rooms
+          td.border-translucent.px-3(class=`${index === rooms.length - 1 ? "border-end-lg" : 'border-end'}`)
+            h6.fw-semibold.text-body-highlight.mb-2
+              span.fa-solid.fa-bed.me-2.text-primary
+              | #{item.beds} Double Bed
+            h6.fw-semibold.text-body-highlight.mb-2
+              span.fa-solid.fa-user.me-2.text-primary
+              | #{item.adults} Adults
+            h6.fw-semibold.text-body-highlight.mb-2
+              span.fa-solid.fa-baby.me-2.text-primary
+              | #{item.childs} Child
+            h6.fw-semibold.text-body-highlight
+              span.fa-solid.fa-bath.me-2.text-primary
+              | #{item.bathrooms} Bathroom
+      //- Popular amenities table
+      tr
+        td.pt-4.pb-3.ps-4.fw-bold(colspan='4') Popular Amenities
+      each item in amenities
+        tr
+          td.px-4.align-middle.border-end-lg.border-translucent.bg-body-highlight
+            h6.text-body.fw-bolder.text-uppercase.mb-0= item.name
+          td.px-3.align-middle.border-end-lg.border-translucent
+            if item.availability[0]
+              h6.text-body 
+                span.fa-solid.fa-circle-check.text-success.me-2
+                | Available
+            else 
+              h6.text-body 
+                span.fa-solid.fa-circle-xmark.text-secondary-light.me-2
+                | Not Available
+          td.px-3.align-middle.border-end-lg.border-translucent
+            if item.availability[1]
+              h6.text-body 
+                span.fa-solid.fa-circle-check.text-success.me-2
+                | Available
+            else 
+              h6.text-body 
+                span.fa-solid.fa-circle-xmark.text-secondary-light.me-2
+                | Not Available
+          td.px-3.align-middle.border-end-lg.border-translucent
+            if item.availability[2]
+              h6.text-body 
+                span.fa-solid.fa-circle-check.text-success.me-2
+                | Available
+            else 
+              h6.text-body 
+                span.fa-solid.fa-circle-xmark.text-secondary-light.me-2
+                | Not Available
+      tr 
+        td.border-0.pb-0
+        td.border-0.px-3.pb-0
+          a(href="#!").btn.btn-outline-primary.w-100 View room details
+        td.border-0.px-3.pb-0
+          a(href="#!").btn.btn-outline-primary.w-100 View room details
+        td.border-0.px-3.pb-0
+          a(href="#!").btn.btn-outline-primary.w-100 View room details

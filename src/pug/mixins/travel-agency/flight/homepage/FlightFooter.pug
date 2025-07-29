@@ -1,0 +1,44 @@
+mixin FooterForm 
+  .input-group.gap-2
+    .form-icon-container.flex-1
+      input.form-control.form-icon-input(type="email" placeholder="Your email address")
+      span.fa-solid.fa-envelope.form-icon(data-fa-transform="up-2")
+    button.btn.btn-primary.rounded Sign up
+
+mixin FlightFooterLinks
+  .d-flex.flex-column.flex-lg-row.gap-lg-6.gap-2.align-items-center.justify-content-lg-end.justify-content-center  
+    ul.nav
+      li.nav-item
+        a.nav-link.link-light(href='#!') About
+      li.nav-item
+        a.nav-link.link-light(href='#!') Policy
+      li.nav-item
+        a.nav-link.link-light(href='#!') Terms & Condition
+    div
+      a.pe-1.me-2.link-light(href='#!')
+        span.fab.fa-facebook
+      a.pe-1.me-2.link-light(href='#!')
+        span.fab.fa-twitter
+      a.pe-1.me-2.link-light(href='#!')
+        span.fab.fa-instagram
+      a.link-light(href='#!')
+        span.fab.fa-youtube
+
+
+mixin FlightFooter 
+  footer&attributes(attributes)
+    .container-small-md.px-0.px-md-3
+      .position-relative.overflow-hidden.rounded-md-2
+        +Background({
+          image: `${CWD}assets/img/bg/45.png`,
+          attrs: {
+            style: 'background-position: center; background-size: cover',
+          },
+          className: 'bg-holder overlay bg-opacity-75'
+        })
+
+        .row.g-lg-0.gy-3.position-relative.justify-content-center.py-9.px-3.px-sm-6.px-xl-15
+          .col-11.col-sm-8.col-lg-5
+            +FooterForm
+          .col-md-7(data-bs-theme="light")
+            +FlightFooterLinks

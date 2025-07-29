@@ -1,0 +1,85 @@
+mixin SinglePost(config)
+  .position-relative.w-100.h-100
+    img(src=`${CWD}assets${config.img}`, alt="").w-100.h-100.object-fit-cover
+    .backdrop-faded.p-4.p-md-6
+      .d-flex.align-items-center.mb-2
+        span.text-secondary-lighter.me-2(data-feather='calendar')
+        h6.mb-0.fw-semibold.text-secondary-lighter.pe-3.me-3.border-end= config.date
+        span.fa-solid.fa-star.text-warning.fs-9.me-2
+        h6.mb-0.text-secondary-lighter.fw-semibold= config.rating
+      a(href="#!").text-white.fw-bold.fs-7= config.title
+
+
+
+mixin LatestPosts 
+  section.pb-7.pt-0.overflow-x-hidden
+    +Background({image: `${CWD}assets/img/bg/bg-left-31.png`, attrs: { style: { 'background-size': '22%','background-position':'left', 'z-index': '1'}}, className: "d-none d-xl-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-31.png`, attrs: { style: { 'background-size': '15%','background-position':'right bottom' , 'z-index': '1'}}, className: "d-none d-xl-block"})
+    .bg-latest-posts
+    .container-medium.text-center.position-relative.z-2
+      h3.mb-2.text-body-emphasis Our Latest Posts For Travellers
+      p.mb-0.text-body-tertiary.mb-13 Find the best travel memories from our past tours and get a clear idea of what we do.
+    -
+      var posts = [
+        {
+          title: "Beautiful Frence, Let's Travelling!",
+          date: 'Monday, Nov 07, 2022',
+          rating: '4.8',
+          img: '/img/gallery/48.png',
+        },
+        {
+          title: "Man Standing on Watching Mountain",
+          date: 'Monday, Nov 06, 2022',
+          rating: '4.5',
+          img: '/img/gallery/49.png',
+        },
+        {
+          title: "Beautiful Bali Indonesia, Let's Travelling!",
+          date: 'Monday, Nov 05, 2022',
+          rating: '4.2',
+          img: '/img/gallery/50.png',
+        },
+        {
+          title: "Chasing sunsets, making memories worldwide.",
+          date: 'Monday, Nov 04, 2022',
+          rating: '4.5',
+          img: '/img/gallery/64.png',
+        },
+      ]
+    .swiper-theme-container.swiper-zooming-slider
+      .swiper-container.theme-slider(data-swiper!={
+        loop: true,
+        slidesPerView: 1.3,
+        spaceBetween: 32,
+        speed: 2000,
+        autoplay: true,
+        centeredSlides: true,
+        simulateTouch: false,
+        breakpoints: {
+          540: {
+            slidesPerView: 1.5,
+          },
+          768: {
+            slidesPerView: 1.8,
+          },
+          1200: {
+            slidesPerView: 2,
+          },
+          1530: {
+            slidesPerView: 2.8,
+          },
+        },
+      })
+        .swiper-wrapper
+          each post in posts 
+            .swiper-slide.rounded-3.overflow-hidden
+              +SinglePost(post)
+      .swiper-nav
+        .swiper-button-next
+          span.fas.fa-chevron-right.text-primary(data-fa-transform='shrink-3')
+        .swiper-button-prev
+          span.fas.fa-chevron-left.text-primary(data-fa-transform='shrink-3')
+    .text-center.mt-12.position-relative.z-2
+      button.btn.btn-link.p-0.fs-8
+        | View all
+        span.fa-solid.fa-chevron-right.ms-2(data-fa-transform='shrink-1')

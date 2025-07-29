@@ -1,0 +1,39 @@
+extends ../dashboard/project-management
+
+
+append variables
+  - var attrsHtml = Object.assign(attrsHtml, { 'data-navigation-type': "horizontal", 'data-navbar-horizontal-shape': "slim" })
+  - 
+    var attrsBody = {
+      class: 'nav-slim'
+    }
+
+  - var disableNavigationType = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+
+append headScripts
+  if ENV === 'PROD'
+    script.
+      window.config.set({
+        phoenixNavbarPosition: 'horizontal',
+        phoenixNavbarTopShape: 'slim',
+        phoenixNavbarTopStyle: 'darker'
+      });
+  else
+    script.
+      window.config.set({
+        phoenixNavbarTopStyle: 'darker'
+      });
+
+
+block navbarVertical
+
+block navbarTop
+  +NavbarTopSlim({
+    toggleID: 'navbarTopCollapse',
+    links: false,
+    search: true
+  }).navbar-expand-lg(data-navbar-appearance= 'darker')
+
+block afterWrapperContent

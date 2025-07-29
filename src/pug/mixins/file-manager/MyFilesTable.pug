@@ -1,0 +1,88 @@
+mixin MyFilesTableRow(data, index, myFiles)
+  tr.user-select-none
+    td.align-middle.white-space-nowrap.py-0(class=`${index === myFiles.length - 1 ? "border-bottom-0" : ''}`)
+      .underline-on-hover.d-flex.align-items-center.position-relative.gap-3
+        input.form-check-input.fs-8.mt-0(type='checkbox' id=data.id data-bulk-select-row data-file=data.id)
+        label.square-icon-box.border.border-translucent.overflow-hidden.stretched-link(for=data.id data-file=data.id)&attributes(data.type === 'video' || data.type === 'image' ? {'data-file-thumbnail': data.type === 'video' ? data.video : data.img} : {})
+          if data.type === 'folder'
+            span.fa-solid.fa-folder.fs-9(class=`${data.id === 3 ? 'text-info-light' : 'text-body-tertiary'}`)
+          if data.type === 'doc'
+            span.fa-solid.fa-file-word.fs-9.text-body-tertiary
+          if data.type === 'xls'
+            span.fa-solid.fa-file-excel.fs-9.text-body-tertiary
+          if data.type === 'source-code'
+            span.fa-solid.fa-file-invoice.fs-9.text-body-tertiary
+          if data.type === 'zip'
+            span.fa-solid.fa-file-zipper.fs-9.text-body-tertiary
+          if data.type === 'html'
+            span.fa-solid.fa-file-code.fs-9.text-body-tertiary
+          if data.type === 'pdf'
+            span.fa-solid.fa-file-pdf.fs-9.text-body-tertiary
+          if data.type === 'xlx'
+            span.fa-solid.fa-file-invoice.fs-9.text-body-tertiary
+          if data.type === 'csv'
+            span.fa-solid.fa-file-csv.fs-9.text-body-tertiary
+          if data.img
+            img(src=`${CWD}assets/${data.img}` alt="").w-100.h-100.pointer-events-none
+          if data.video
+            img(src=`${CWD}assets/${data.video.split(".")[0]}.png` alt="").w-100.h-100.pointer-events-none
+        a.fw-semibold.text-body-highlight.name(href="#!")= data.name
+    td.align-middle.shared.white-space-nowrap.ps-3(class=`${index === myFiles.length - 1 ? "border-bottom-0" : ''}`)
+      .avatar-group.avatar-group-dense
+        each member in data.assignees
+          a.dropdown-toggle.dropdown-caret-none.d-inline-block(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false' data-bs-auto-close="outside")
+            if member.avatar
+              +Avatar({
+                size: 's',
+                img: member.avatar,
+                round: 'circle',
+                imgClass: member.avatar==="team/avatar.webp" ? 'avatar-placeholder' : ''
+            }).rounded-circle.border.border-light-subtle
+            else if member.avatar === ''
+              .avatar.avatar-s.border.border-light-subtle
+                .avatar-name.rounded-circle
+                  span=member.name.charAt(0).toUpperCase()
+          +AvatarDropdownMenu(member) 
+        if data.more
+          +Avatar({size: 's', more: data.more, round: 'circle'}).rounded-circle
+    td.align-middle.modified.time.white-space-nowrap.fw-semibold.text-body-tertiary(class=`${index === myFiles.length - 1 ? "border-bottom-0" : ''}`)= data.modified
+    td.align-middle.file-size.white-space-nowrap.fw-semibold.text-body-tertiary(class=`${index === myFiles.length - 1 ? "border-bottom-0" : ''}`)= data.size || data.itemCount
+    td.align-middle.text-end.time.white-space-nowrap(class=`${index === myFiles.length - 1 ? "border-bottom-0" : ''}`)
+      .btn-reveal-trigger
+        button.btn.btn-sm&attributes(attributes)(type='button' class='btn-reveal' id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+          span.fas.fa-ellipsis-h.text-body-tertiary(class=iconClass)
+        .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+          a.dropdown-item.fw-semibold(href='#') Share
+          a.dropdown-item.fw-semibold(href='#') Download
+          a.dropdown-item.fw-semibold(href='#') Duplicate
+          a.dropdown-item.fw-semibold(href='#') Move
+          a.dropdown-item.fw-semibold(href='#') Rename
+          a.dropdown-item.fw-semibold(href='#') Move to Bin
+          hr.dropdown-divider
+          a.dropdown-item.fw-semibold.text-danger(href='#') Delete
+
+mixin MyFilesTable
+  .table-responsive.ms-n1.ps-1.me-n1.pe-1.scrollbar(data-files-container data-list!={
+    valueNames: ["name", "shared", "modified", "file-size"]
+  })
+    table.table.fs-9.mb-0
+      thead
+        tr
+          th.ps-0.pt-0.white-space-nowrap.align-middle.d-flex.align-items-center(scope='col')
+            .form-check.mb-0.fs-8
+              input.form-check-input#bulk-select-file-manager(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "bulk-select-body",
+                  actions: "bulk-select-actions",
+                  replacedElement: "bulk-select-replace-element"
+                }
+              )
+            span.sort.ms-8(data-sort="name") NAME
+          th.sort.pt-0.align-middle(scope='col' data-sort="shared" style='min-width:150px;') SHARED
+          th.sort.pt-0.align-middle(scope='col' data-sort="modified" style='min-width:150px;') LAST MODIFIED
+          th.sort.pt-0.align-middle(scope='col' style='max-width:130px;' data-sort="file-size") FILE SIZE
+          th.sort.pt-0.text-end.pe-0.align-middle(scope='col')
+      tbody.list#table-latest-review-body
+        each row,index in myFiles.slice(0, 16)
+          +MyFilesTableRow(row, index, myFiles.slice(0, 16))

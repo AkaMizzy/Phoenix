@@ -1,0 +1,9 @@
+mixin CouponCard
+  .card.bg-info-subtle.border-info-subtle.coupon-card-sticky-top&attributes(attributes)
+    .card-body
+      h4 Have a coupon?
+      p.mb-4.fs-9.text-body-tertiary Enter code to get a discount
+      .input-group.gap-2
+        .form-icon-container.flex-1
+          input.form-control(type="text" placeholder="Coupon Code")
+        button.btn.btn-primary.rounded Submit

@@ -1,0 +1,466 @@
+mixin PreviewItem(item, index, length)
+  tr 
+    td.border-top.pt-3.text-nowrap(class=`${index !== length - 1 ? " pb-3" : ""}`)
+      h5.fw-semibold.text-body-highlight.mb-0= item.property
+    td.border-top.px-3.pt-3.w-max-content(class=`${index !== length - 1 ? " pb-3" : ""}`)
+      p.mb-0.w-max-content :
+    td.border-top.pt-3(class=`${index !== length - 1 ? " pb-3" : ""} ${item.property!=="Property Information" ? 'text-nowrap': ''}`)
+      p.mb-0.text-body-secondary= item.value
+
+mixin Preview 
+  h3.mb-2 We’re building your property
+  p.mb-5.text-body-tertiary We're working on getting your property set up and ready for guests. Stay tuned for updates and start accepting bookings soon!
+  .alert.alert-subtle-success.alert-dismissible.fade.show.mb-5(role="alert")
+    p.mb-0.flex-1.fw-semibold.fs-9.fs-sm-8 Congratulations on your successful listing! Join a community of hospitality professionals as a host. Your hard work will turn your home into a sought-after destination. We anticipate hearing about your achievements.
+    button.btn-close(type="button" data-bs-dismiss="alert" aria-label="Close")
+  .accordion-button-arrow-icon.accordion.mt-2#previewAccordion
+    .accordion-item.border.rounded-3.bg-body-emphasis.p-3.p-sm-4.mb-5
+      h5.accordion-header
+        button.accordion-button.py-0.text-body-highlight(type="button" data-bs-toggle="collapse" data-bs-target="#basicInfo" aria-expanded="true" aria-controls="basicInfo")
+          img(src=`${CWD}assets/img/icons/info.svg`, alt="").me-2.d-dark-none
+          img(src=`${CWD}assets/img/icons/info_dark.svg`, alt="").me-2.d-light-none
+          span.fs-sm-7 Basic Information
+      #basicInfo.accordion-collapse.collapse.show(data-bs-parent="#previewAccordion")
+        -
+          var basicInfo = [
+            {
+              property: 'Property name',
+              value: 'Phoenix Oasis',
+            },
+            {
+              property: 'Property Information',
+              value: 'Welcome to Phoenix Oasis, where luxury meets tranquility. Our hotel offers lavish accommodations, exquisite dining, rejuvenating spa experiences, and stunning views. Experience opulence redefined in a haven of serenity.',
+            },
+            {
+              property: 'Property type',
+              value: 'Hotel',
+            },
+            {
+              property: 'Rating',
+              value: '5 Star',
+            },
+            {
+              property: 'Email address',
+              value: 'phoenix.oasis@email.com',
+            },
+            {
+              property: 'Mobile number',
+              value: '(934) 907-3716',
+            },
+            {
+              property: 'Property chain',
+              value: 'Not-available',
+            },
+            {
+              property: 'CMS',
+              value: 'Available',
+            },
+            {
+              property: 'CMS provider name',
+              value: 'Eagle Eye',
+            }
+          ]
+        .mt-4.scrollbar
+          a(href="#!").fs-9.fw-semibold.mb-2.d-inline-block Edit info
+          table.w-100
+            tr
+              th(style='width: 176px')
+              th(style='width: 32px')
+              th(style="min-width: 300px")
+            each item, index in basicInfo
+              +PreviewItem(item, index, basicInfo.length)
+    .accordion-item.border.rounded-3.bg-body-emphasis.p-3.p-sm-4.mb-5
+      h5.accordion-header
+        button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#location" aria-expanded="true" aria-controls="location")
+          img(src=`${CWD}assets/img/icons/location.svg`, alt="").me-2.d-dark-none
+          img(src=`${CWD}assets/img/icons/location_dark.svg`, alt="").me-2.d-light-none
+          span.fs-sm-7 Location
+      #location.accordion-collapse.collapse(data-bs-parent="#previewAccordion")
+        -
+          var location = [
+            {
+              property: 'Apartment / Street',
+              value: '123 Luxe Boulevard',
+            },
+            {
+              property: 'State',
+              value: 'Suite 567',
+            },
+            {
+              property: 'Country / Region',
+              value: 'United States',
+            },
+            {
+              property: 'City',
+              value: 'Sunshine City',
+            },
+            {
+              property: 'Zip code',
+              value: 'AZ 85001',
+            }
+          ]
+        .mt-4.scrollbar
+          a(href="#!").fs-9.fw-semibold.mb-2.d-inline-block Edit location
+          table.w-100
+            tr
+              th(style='width: 176px')
+              th(style='width: 32px')
+              th
+            each item, index in location
+              +PreviewItem(item, index, location.length)
+    .accordion-item.border.rounded-3.bg-body-emphasis.p-3.p-sm-4.mb-5
+      h5.accordion-header
+        button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#generalAmenities" aria-expanded="true" aria-controls="generalAmenities")
+          img(src=`${CWD}assets/img/icons/bed-double.svg`, alt="").me-2.d-dark-none
+          img(src=`${CWD}assets/img/icons/bed-double_dark.svg`, alt="").me-2.d-light-none
+          span.fs-sm-7 General Amenities
+      #generalAmenities.accordion-collapse.collapse(data-bs-parent="#previewAccordion")
+        -
+          var amenities = [
+            {
+              property: 'Wifi',
+              value: 'Available',
+            },
+            {
+              property: 'Hotel Bar',
+              value: 'Available',
+            },
+            {
+              property: 'Restaurant',
+              value: 'Available',
+            },
+            {
+              property: 'Common Areas',
+              value: 'Available',
+            },
+            {
+              property: 'Pool',
+              value: 'Available',
+            },
+            {
+              property: 'Tennis Courts',
+              value: 'Available',
+            },
+            {
+              property: 'No Smoking',
+              value: 'Available',
+            },
+            {
+              property: 'Air Conditioning',
+              value: 'Available',
+            },
+            {
+              property: 'Parking',
+              value: 'Available',
+            },
+            {
+              property: 'Bathtub',
+              value: 'Available',
+            },
+            {
+              property: 'Beach View',
+              value: 'Available',
+            },
+            {
+              property: 'Flat-screen TV',
+              value: 'Available',
+            },
+            {
+              property: 'Balcony',
+              value: 'Available',
+            },
+          ]
+        .mt-4.scrollbar
+          a(href="#!").fs-9.fw-semibold.mb-2.d-inline-block Edit amenities
+          table.w-100
+            tr
+              th(style='width: 176px')
+              th(style='width: 32px')
+              th
+            each item, index in amenities
+              +PreviewItem(item, index, amenities.length)
+    .accordion-item.border.rounded-3.bg-body-emphasis.p-3.p-sm-4.mb-5
+      h5.accordion-header
+        button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#pictures" aria-expanded="true" aria-controls="pictures")
+          img(src=`${CWD}assets/img/icons/picture.svg`, alt="").me-2.d-dark-none
+          img(src=`${CWD}assets/img/icons/picture_dark.svg`, alt="").me-2.d-light-none
+          span.fs-sm-7 Picture
+      #pictures.accordion-collapse.collapse(data-bs-parent="#previewAccordion")
+        -
+          var pictures = [
+            "/img/gallery/59.png",
+            "/img/gallery/60.png",
+            "/img/gallery/61.png",
+            "/img/gallery/62.png",
+            "/img/gallery/63.png",
+          ]
+        .mt-4
+          a(href="#!").fs-9.fw-semibold.mb-2.d-inline-block Edit pictures
+          .row.g-2.g-sm-3
+            each item in pictures 
+              .col-sm-4
+                img(src=`${CWD}assets${item}`, alt="" height=160).rounded-2.w-100.object-fit-cover
+
+    .accordion-item.border.rounded-3.bg-body-emphasis.p-3.p-sm-4.mb-5
+      h5.accordion-header
+        button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#finance" aria-expanded="true" aria-controls="finance")
+          img(src=`${CWD}assets/img/icons/dollar-alt.svg`, alt="").me-2.d-dark-none
+          img(src=`${CWD}assets/img/icons/dollar-alt_dark.svg`, alt="").me-2.d-light-none
+          span.fs-sm-7 Finance
+      #finance.accordion-collapse.collapse(data-bs-parent="#previewAccordion")
+        -
+          var financeData = [
+            {
+              name: 'Payment from PBM',
+              data: [
+                {
+                  property: 'Payment currency',
+                  value: 'US Dollar',
+                },
+                {
+                  property: 'Payment method',
+                  value: 'Electronic Funds Transfer (EFT)',
+                },
+                {
+                  property: 'Received payment',
+                  value: 'Credit Card',
+                },
+                {
+                  property: 'Card type',
+                  value: 'Visa Debit Card',
+                },
+                {
+                  property: 'Card number',
+                  value: '123 456 7890',
+                },
+                {
+                  property: 'Card holder name',
+                  value: 'Phoenix Oasis ',
+                },
+                {
+                  property: 'Commission Percentage',
+                  value: 'Flat 10%',
+                },
+                {
+                  property: 'Invoice email',
+                  value: 'Not-Available',
+                }
+              ]
+            },
+            {
+              name: 'Payment from Guests (On property)',
+              data: [
+                {
+                  property: 'Cash payment',
+                  value: 'No',
+                },
+                {
+                  property: 'Card Payment',
+                  value: 'No',
+                },
+                {
+                  property: 'MFS / Online Payment',
+                  value: 'No',
+                }
+              ]
+            }
+          ]
+        .mt-4
+          a(href="#!").fs-9.fw-semibold.mb-2.d-inline-block Edit finance
+          each category, index in financeData
+            h5.fw-bolder.mb-3(class=`${index !== 0 ? "mt-4" : ""}`)= category.name 
+            .scrollbar
+              table.w-100
+                tr
+                  th(style='width: 176px')
+                  th(style='width: 32px')
+                  th
+                each item, index in category.data 
+                  +PreviewItem(item, index, category.data.length)
+    .accordion-item.border.rounded-3.bg-body-emphasis.p-3.p-sm-4.mb-5
+      h5.accordion-header
+        button.accordion-button.py-0.text-body-highlight.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#policy" aria-expanded="true" aria-controls="policy")
+          img(src=`${CWD}assets/img/icons/file-check-alt.svg`, alt="").me-2.d-dark-none
+          img(src=`${CWD}assets/img/icons/file-check-alt_dark.svg`, alt="").me-2.d-light-none
+          span.fs-sm-7 Policy
+      #policy.accordion-collapse.collapse(data-bs-parent="#previewAccordion")
+        -
+          var policiesData = [
+            {
+              name: 'Check-in-Policy',
+              data: [
+                {
+                  property: 'Check-in type',
+                  value: 'Limited Check-in',
+                },
+                {
+                  property: 'Check-in start',
+                  value: '09:00 AM',
+                },
+                {
+                  property: 'Age Restriction',
+                  value: 'No',
+                },
+                {
+                  property: 'Deposit at Check-in',
+                  value: 'No',
+                },
+                {
+                  property: 'Documentation at Check-in',
+                  value: 'No',
+                },
+                {
+                  property: 'Late check-in',
+                  value: 'Flat 10%',
+                },
+                {
+                  property: 'Check-in end',
+                  value: '12:00 PM',
+                }
+              ]
+            },
+            {
+              name: 'Checkout Policy',
+              data: [
+                {
+                  property: 'Checkout before',
+                  value: '11:00 AM',
+                },
+                {
+                  property: 'Flexible Checkout',
+                  value: 'Available',
+                },
+                {
+                  property: 'Type',
+                  value: 'Amount per night',
+                },
+                {
+                  property: 'Amount',
+                  value: '$100.00',
+                }
+              ]
+            },
+            {
+              name: 'Cancellation Policy',
+              data: [
+                {
+                  property: 'Type',
+                  value: 'Optimal refund',
+                },
+                {
+                  property: 'Full refund',
+                  value: 'No',
+                },
+                {
+                  property: 'Partial refund',
+                  value: 'No',
+                }
+              ]
+            },
+            {
+              name: 'Pet Policy',
+              data: [
+                {
+                  property: 'Type',
+                  value: 'Allowed',
+                },
+                {
+                  property: 'Pet Restricted Zones',
+                  value: 'Not-Available',
+                },
+                {
+                  property: 'Additional Charges',
+                  value: 'No',
+                }
+              ]
+            },
+            {
+              name: 'Child Policy',
+              data: [
+                {
+                  property: 'Age Segment 1',
+                  value: '0 - 7 Years',
+                },
+                {
+                  property: 'Age Segment 2',
+                  value: '7 -12 Years',
+                },
+                {
+                  property: 'Age Segment 3',
+                  value: '12 -18 Years',
+                },
+                {
+                  property: 'Documentation Requirement',
+                  value: 'Not-Available',
+                }
+              ]
+            },
+            {
+              name: 'Included Taxes in your rate',
+              data: [
+                {
+                  property: 'Vat',
+                  value: 'Available',
+                },
+                {
+                  property: 'Type',
+                  value: 'Amount per night',
+                },
+                {
+                  property: 'Amount',
+                  value: '$100.00',
+                },
+                {
+                  property: 'Deposit at Check-in',
+                  value: 'No',
+                },
+                {
+                  property: 'GST',
+                  value: 'No',
+                },
+                {
+                  property: 'Hotel tax',
+                  value: 'No',
+                },
+                {
+                  property: 'City / District tax',
+                  value: 'No',
+                },
+                {
+                  property: 'Tourist tax',
+                  value: 'No',
+                }
+              ]
+            },
+            {
+              name: 'Your Documentations',
+              data: [
+                {
+                  property: 'Property Registration No.',
+                  value: 'Null',
+                },
+                {
+                  property: 'Business Registration No.',
+                  value: 'Null',
+                },
+                {
+                  property: 'Taxpayer Identification No.',
+                  value: 'Null',
+                }
+              ]
+            },
+          ]
+        .mt-4
+          a(href="#!").fs-9.fw-semibold.mb-2.d-inline-block Edit policies
+          each category, index in policiesData
+            h5.mb-3.fw-bolder(class=`${index !== 0 ? "mt-4" : ""}`)= category.name
+            .scrollbar
+              table.w-100
+                tr
+                  th(style='width: 176px')
+                  th(style='width: 32px')
+                  th
+                each item, index in category.data 
+                  +PreviewItem(item, index, category.data.length)
+  .mt-6
+    button.btn.btn-primary.px-6.px-sm-11(type='submit') Done

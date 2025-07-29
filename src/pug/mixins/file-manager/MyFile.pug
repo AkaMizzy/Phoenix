@@ -1,0 +1,51 @@
+mixin MyFile(file, index)
+  .text-center(data-play-on-container-hover=file.type === 'video')
+    .file-box-wrapper.img-zoom-hover
+      input.form-check-input.form-check-input-transparent.position-absolute.top-0.start-0.mt-3.ms-3.z-1(type="checkbox" name='fileManagerFiles' id=`${file.id}` data-bulk-select-row data-file=file.id)
+      label.stretched-link.position-absolute.top-0.start-0.w-100.h-100(for=`${file.id}` data-file=file.id)&attributes(file.type === 'video' || file.type === 'image' ? {'data-file-thumbnail': file.type === 'video' ? file.video : file.img} : {})
+      .position-relative.h-100
+        .file-box.overflow-hidden
+          if file.type === 'folder'
+            span.fa-solid.fa-folder.fs-3(class=`${file.id === 3 ? 'text-info-light' : 'text-body-tertiary'}`)
+          if file.type === 'doc'
+            span.fa-solid.fa-file-word.fs-3.text-body-tertiary
+          if file.type === 'xls'
+            span.fa-solid.fa-file-excel.fs-3.text-body-tertiary
+          if file.type === 'source-code'
+            span.fa-solid.fa-file-invoice.fs-3.text-body-tertiary
+          if file.type === 'zip'
+            span.fa-solid.fa-file-zipper.fs-3.text-body-tertiary
+          if file.type === 'html'
+            span.fa-solid.fa-file-code.fs-3.text-body-tertiary
+          if file.type === 'pdf'
+            span.fa-solid.fa-file-pdf.fs-3.text-body-tertiary
+          if file.type === 'xlx'
+            span.fa-solid.fa-file-invoice.fs-3.text-body-tertiary
+          if file.type === 'csv'
+            span.fa-solid.fa-file-csv.fs-3.text-body-tertiary
+          if file.type === 'image'
+            img(src=`${CWD}assets/${file.img}`, alt="").w-100.h-100.object-fit-cover
+          if file.type === 'video'
+            .video-container.h-100
+              video.video.d-block.h-100.w-100.overflow-hidden.object-fit-cover(muted data-play-on-hover poster=`${CWD}assets/${file.video.split('.')[0]}.png`)
+                source(src=`${CWD}assets/${file.video}` type="video/mp4")
+        if file.type === 'video'
+          button.btn.p-0.circle-icon-item-md.bg-body-emphasis.bg-opacity-50.position-absolute.top-50.start-50.translate-middle.z-3(data-bs-theme='light' data-video-controller)
+            span.play-icon.pointer-events-none
+              span.fa-solid.fa-play.text-body-secondary.fs-9(data-fa-transform='down-1')
+            span.pause-icon.pointer-events-none
+              span.fa-solid.fa-pause.text-body-secondary.fs-9(data-fa-transform='down-1')
+      .dropdown.lh-1.position-absolute.top-0.end-0.mt-2.me-2
+        button.btn.btn-square-sm.text-body.position-relative.z-1(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+          span.fas.fa-ellipsis-v(data-fa-transform="shrink-2")
+        .dropdown-menu.dropdown-menu-end
+          a.dropdown-item.fw-semibold.text-decoration-none(href='#') Share
+          a.dropdown-item.fw-semibold.text-decoration-none(href='#') Download
+          a.dropdown-item.fw-semibold.text-decoration-none(href='#') Duplicate
+          a.dropdown-item.fw-semibold.text-decoration-none(href='#') Move
+          a.dropdown-item.fw-semibold.text-decoration-none(href='#') Rename
+          a.dropdown-item.fw-semibold.text-decoration-none(href='#') Move to Bin
+          hr.dropdown-divider
+          a.dropdown-item.fw-semibold.text-decoration-none.text-danger(href='#') Delete
+      a(href="#!").d-block.fw-bold.text-body-highlight.mt-2.text-nowrap.text-truncate.fs-9.fs-sm-8= file.name
+      h6.mb-0.fw-semibold.text-body-tertiary.fs-10.fs-sm-9 #{file.size || file.itemCount}

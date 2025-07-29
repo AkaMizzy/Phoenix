@@ -1,0 +1,84 @@
+mixin TripAvailabilityModal 
+  #trilAvailabilityModal.modal.fade(data-bs-keyboard="false" tabindex="-1" aria-labelledby="trilAvailabilityModal")
+    .modal-dialog.modal-md.modal-dialog-centered
+      .modal-content
+        .modal-header.justify-content-between.align-items-start.gap-5.px-4.pt-4.pb-3.border-0
+          h2.mb-0 Walk where the king walked once in Wakanda
+          button.btn.p-0.text-body-quaternary.fs-6(data-bs-dismiss="modal" aria-label="Close")
+            span.fas.fa-times
+        .modal-body.p-4
+          .row.g-5.mb-4
+            .col-md-5 
+              label.fw-bold.mb-2.fs-7.text-body-emphasis(for='tripDate') Choose your preferred date
+              .form-icon-container.flatpickr-input-container
+                input#tripDate.form-control.form-icon-input.datetimepicker(type='text' placeholder='22 May, 2024', data-options!={disableMobile:true})
+                span.fa-solid.fa-calendar.text-body.fs-9.form-icon
+            .col-md-7 
+              .row.g-3
+                .col-auto.col-sm-6
+                  label.fw-bold.mb-2.fs-7.text-body-emphasis Adults
+                  .input-group.gap-2(data-quantity)
+                    button.btn.btn-phoenix-primary.rounded.px-3(data-type="minus")
+                      span.fa-solid.fa-minus
+                    input.form-control.border-translucent.input-spin-none.text-center.rounded(id="adult" type="number" value='2')
+                    button.btn.btn-phoenix-primary.rounded.px-3(data-type="plus")
+                      span.fa-solid.fa-plus
+                .col-auto.col-sm-6
+                  label.fw-bold.mb-2.fs-7.text-body-emphasis Children
+                  .input-group.gap-2(data-quantity)
+                    button.btn.btn-phoenix-primary.rounded.px-3(data-type="minus")
+                      span.fa-solid.fa-minus
+                    input.form-control.border-translucent.input-spin-none.text-center.rounded(id="children" type="number" value='2')
+                    button.btn.btn-phoenix-primary.rounded.px-3(data-type="plus")
+                      span.fa-solid.fa-plus
+          -
+            var options = [
+              {
+                name: 'Economy Plan',
+                services: [
+                  'Non A/C transport',
+                  'No extra luggage carrier',
+                ],
+                perPersonCost: '87.00',
+                totalCost: '87.00',
+                additionalCost: 0
+              },
+              {
+                name: 'Business/Premium Plan',
+                services: [
+                  'A/C transport',
+                  'Extra luggage carrier',
+                ],
+                perPersonCost: '120.00',
+                totalCost: '120.00',
+                additionalCost: 0
+              }
+            ]
+          each option, index in options
+            input.card-form-check-input.d-none(type="radio" name='availableOption' id=`${option.name.split(' ').join('-')}` checked=index === 0)
+            .position-relative
+              label.stretched-link(for=`${option.name.split(' ').join('-')}`)
+              .card(class=`${index !== options.length - 1 ? '' : ''}`)
+                .card-body
+                  h4.mb-4
+                    span.radio-circle.me-2
+                    | #{option.name}
+                  ul.list-unstyled.mb-0 
+                    each item in option.services
+                      li.d-flex.mb-1
+                        span.fa-solid.fa-circle.text-secondary-light.me-3(style='width: 6px; height: 6px' data-fa-transform='down-20')
+                        | #{item}
+                  hr.my-4
+                  h5.fw-normal.mb-4 1 adult x $#{option.perPersonCost}
+                  .p-3.rounded-2.bg-body-highlight
+                    h4 Total $#{option.totalCost}
+                    if option.additionalCost === 0
+                      p.fs-9.mb-0 ( No additional taxes or booking fees )
+          label.fw-bold.mb-2.mt-5.fs-7.text-body-emphasis(for='selectTime') Select time
+          select.form-select.w-sm-50#selectTime
+            option(value='') 8:00 AM
+            option(value='') 12:00 PM
+            option(value='') 3:00 PM
+          a(href=`${CWD}${paths['trip-checkout']}`).btn.btn-primary.btn-lg.w-100.mt-6
+            | Proceed to booking
+            span.fa-solid.fa-chevron-right.fs-9.ms-2

@@ -1,0 +1,34 @@
+extends ../layouts/LayoutTheme
+include ../mixins/chat/ChatData
+include ../mixins/chat/ChatThreadDetails
+include ../mixins/chat/ChatSidebar
+include ../mixins/chat/ChatContent
+include ../mixins/gantt-chart/GanttChart
+
+prepend styles
+  link(href=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dropzone/dropzone.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+  script(src=`${CWD}vendors/dropzone/dropzone-min.js`)
+  script(src=`${CWD}assets/js/pages/gantt-chart.js`)
+
+append variables
+  - var attrsContent = { class: 'gantt-content' };
+
+block content
+  +GanttChartActions
+  .gantt-app-container.scrollbar
+    #gantt-app(style={ width: '100%', height: '100%'} )
+
+append afterMainContent
+  +AddNewTaskModal
+  +DeleteTaskModal 
+  +EditTaskOffcanvas
+  +DeleteLinkModal
+  +TaskFilterModal
+  +OptionsModal

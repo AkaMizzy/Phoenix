@@ -1,0 +1,36 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutSplitAuth
+
+
+block wrapperContent
+  +LayoutSplitBasic({img:30})
+    .text-center.mb-7
+      h3.text-body-highlight Sign In
+      p.text-body-tertiary Get access to your account
+    +SocialButtons({title:'Sign in'})
+    .position-relative
+      hr.bg-body-secondary.mt-5.mb-4
+      .divider-content-center or use email
+    .mb-3.text-start
+      label.form-label(for='email') Email address
+      .form-icon-container
+        input#email.form-control.form-icon-input(type='email' placeholder='name@example.com')
+        span.fas.fa-user.text-body.fs-9.form-icon
+    .mb-3.text-start
+      label.form-label(for='password') Password
+      .form-icon-container(data-password)
+        input#password.form-control.form-icon-input.pe-6(type='password' placeholder='Password' data-password-input)
+        span.fas.fa-key.text-body.fs-9.form-icon
+        button.btn.px-3.py-0.h-100.position-absolute.top-0.end-0.fs-7.text-body-tertiary(data-password-toggle)
+          span.uil.uil-eye.show
+          span.uil.uil-eye-slash.hide
+    .row.flex-between-center.mb-7
+      .col-auto
+        .form-check.mb-0
+          input#basic-checkbox.form-check-input(type='checkbox' checked='checked')
+          label.form-check-label.mb-0(for='basic-checkbox') Remember me
+      .col-auto
+        a.fs-9.fw-semibold(href=`${CWD}pages/authentication/simple/forgot-password.html`) Forgot Password?
+    button.btn.btn-primary.w-100.mb-3 Sign In
+    .text-center
+      a.fs-9.fw-bold(href=`${CWD}${paths['split-signup']}`) Create an account

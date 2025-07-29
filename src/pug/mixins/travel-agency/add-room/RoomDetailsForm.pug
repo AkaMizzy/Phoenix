@@ -1,0 +1,143 @@
+mixin RoomDetailsForm(config)
+  form(id=`${config.formId}1` class=config.validation && 'needs-validation' data-wizard-form='1')
+    h3.mb-6 Room Details
+    h4.mb-2 Share your room details
+    p.mb-4.text-body-tertiary Enjoy a comfortable stay in our well-appointed rooms with a variety of options to choose from.
+    .row.g-3.g-sm-4.mb-6
+      .col-sm-6.col-md-7
+        label.mb-1.text-body-highlight.fw-bold(for='room-category') Room category
+        select.form-select(id='room-category')
+          option King
+          option Bridal suite
+          option Single room
+      .col-sm-6.col-md-5
+        label.mb-1.text-body-highlight.fw-bold(for='room-name') Room name (Optional)
+        input.form-control(id="room-name" type="text" placeholder="Enter name")
+    .row.gx-3.gx-sm-4.gy-3.mb-6
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='bed-type') Bed type
+        select.form-select(id='bed-type')
+          option Twin bed
+          option King bed
+          option Queen bed
+          option Single bed
+          option Double bed
+          option Twin XL bed
+          option Quad Bed
+          option Executive Suite
+          option Bunk Bed
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='adult') Adult
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="adult" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='child-allow') Children allowed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="child-allow" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='number-of-bed') Number of bed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="number-of-bed" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='bathroom') Bathroom
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="bathroom" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='balcony') Balcony
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="balcony" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+    .row.g-3.g-sm-4
+      .col-6
+        label.mb-1.text-body-highlight.fw-bold(for='room-of-this-type') Room of this type
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="room-of-this-type" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6
+        label.mb-1.text-body-highlight.fw-bold Room size (OPT)
+        .input-group
+          input.form-control.form-icon-input(id="room-size" type="text" placeholder="Size")
+          button.btn.px-3.bg-body-emphasis.bg-body-hover.rounded.rounded-start-0.border(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+            span.me-2 sq. m
+            span.fa-solid.fa-chevron-down.fs-10
+          ul.dropdown-menu.dropdown-menu-end
+            li
+              a.dropdown-item(href='#!') sq. m
+            li
+              a.dropdown-item(href='#!') sq. ft
+            li
+              a.dropdown-item(href='#!') sq. in
+
+    h4.mt-7.mb-2 Sleeping arrangements
+    p.mb-4.text-body-tertiary Sleep well in our comfortable rooms with modern amenities.
+    .row.gx-3.gx-sm-4.gy-3
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='single-bed') Single bed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="single-bed" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='double-bed') Double bed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="double-bed" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='queen-bed') Queen bed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="queen-bed" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='king-bed') King bed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="king-bed" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='sofa-bed') Sofa bed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="sofa-bed" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus
+      .col-6.col-sm-4
+        label.mb-1.text-body-highlight.fw-bold(for='extra-bed') Extra bed
+        .input-group(data-quantity)
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="minus")
+            span.fa-solid.fa-minus
+          input.form-control.input-spin-none.text-center(id="extra-bed" type="number" value='2')
+          button.btn.border.px-3.bg-body-emphasis.bg-body-hover.lh-1(data-type="plus")
+            span.fa-solid.fa-plus

@@ -1,0 +1,49 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/stock/portfolio/MyPortfolioMainContent
+include ../../mixins/stock/portfolio/MyPortfolioSidebar
+
+
+append variables 
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+prepend styles
+
+prepend scripts
+
+append scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}assets/js/pages/stock-portfolio-watchlist.js`)
+
+block content
+  .row.flex-between-center.g-3.g-lg-5.mb-3
+    .col-auto
+      h2.mb-0 My Portfolio
+    .col-auto 
+      button.btn.btn-phoenix-secondary.bg-body-emphasis.me-2
+        | Create new Portfolio 
+        span.fa-solid.fa-add.ms-2 
+      button.btn.btn-phoenix-secondary.bg-body-emphasis.btn-sm.px-md-4
+        span.fa-solid.fa-print 
+        span.d-none.d-md-inline.ms-2  Print
+      button.btn.btn-sm.btn-phoenix-secondary.bg-body-emphasis.d-xl-none.ms-2#portfolioOffcanvas(data-bs-toggle='offcanvas' data-bs-target='#portfolioSidebar' aria-controls='portfolioSidebar')
+        span.fa-solid.fa-mattress-pillow
+  .row.g-3.g-lg-5.pb-5.pb-md-7.pb-xl-9 
+    .col-xl-7.flex-1
+      +MyPortfolioMainContent
+    .col-xl-5.portfolio-sidebar-container
+      +MyPortfolioSidebar

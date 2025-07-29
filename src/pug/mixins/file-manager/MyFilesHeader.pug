@@ -1,0 +1,15 @@
+mixin MyFilesHeader(page)
+  .row.g-3.flex-between-center
+    .col-auto
+      h5.mb-0 My Files
+    .col-auto.d-flex
+      a(href=`${CWD}${paths['file-grid-view']}` class=`${page === 'grid-view' ? 'border-primary text-primary' : ''}` data-bs-toggle="tooltip" data-bs-title="Grid view").btn.btn-phoenix-secondary.btn-square.me-2
+        span.fa-solid.fa-table-cells-large
+      a(href=`${CWD}${paths['file-list-view']}` class=`${page === 'list-view' ? 'border-primary text-primary' : ''}` data-bs-toggle="tooltip" data-bs-title="List view").btn.btn-phoenix-secondary.btn-square
+        span.fa-solid.fa-list
+      select.form-select.mx-2.mx-sm-3
+        option Sort by - Date created
+        option Sort by - Name
+        option Sort by - Size
+      .form-check.form-switch.d-flex.align-items-center
+        input.form-check-input(type="checkbox" role="switch" id="viewAsGroup" data-bs-toggle="tooltip" data-bs-title="View as group")

@@ -1,0 +1,93 @@
+extends ../../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Range Slider',
+      description: 'A lightweight, ARIA-accessible JavaScript range slider with multi-touch and keyboard support. Fast and has no dependencies.',
+      url: `https://refreshless.com/nouislider/`,
+      linkText: 'Documentation for noUiSlider'
+    }
+
+  -
+    var rightNav = [
+      {
+        name: 'Default',
+        id: '#default',
+      },
+      {
+        name: 'Range Connect',
+        id: '#range-connect',
+      },
+      {
+        name: 'Colored Sliders',
+        id: '#colored-sliders',
+      },
+      {
+        name: 'Styling',
+        id: '#styling',
+      },
+    ]
+
+prepend styles
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+
+block component 
+  .mb-9
+    +ComponentCard({
+      title: 'Default',
+      anchor: true,
+    }).mb-3.mt-6
+      div(data-nouislider)
+
+    +ComponentCard({
+      title: 'Range Connect',
+      anchor: true,
+    }).mb-3
+      div(data-nouislider!={
+        start: [20, 80],
+        connect: true
+      })
+
+    +ComponentCard({
+      title: 'Colored Sliders',
+      anchor: true,
+    }).mb-3
+      .noUi-primary.mb-4(data-nouislider!={ start: [45] })
+      .noUi-success.mb-4(data-nouislider!={ start: [35] })
+      .noUi-info.mb-4(data-nouislider!={ start: [40] })
+      .noUi-warning.mb-4(data-nouislider!={ start: [70] })
+      .noUi-danger(data-nouislider!={ start: [65] })
+
+    +ComponentCard({
+      title: 'Styling',
+      anchor: true,
+      description: ''
+    }).mb-3
+      .noUi-target-primary.noUi-handle-primary.noUi-slider-slim.noUi-handle-circle.px-0.mb-4(data-nouislider!={start:[45]})
+      .noUi-primary-lighter.noUi-handle-primary.noUi-slider-medium.noUi-handle-circle.px-1.mb-4(data-nouislider!={start:[45]})
+      .noUi-primary-lighter.noUi-slider-large.noUi-handle-primary.noUi-handle-circle.ps-5.pe-3(data-nouislider!={
+        range: {
+          'min': 0,
+          'max': 250
+        },
+        start: [20, 150], 
+        connect: true,
+      })
+
+    +ComponentCard({
+      title: 'Stylesheet',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib
+        link(href=`vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+
+    +ComponentCard({
+      title: 'Javascript',
+      hideNavTab: true
+    }).my-4
+      +ComponentCardLib
+        script(src=`vendors/nouislider/nouislider.min.js`)

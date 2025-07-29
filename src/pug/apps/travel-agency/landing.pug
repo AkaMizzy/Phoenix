@@ -1,0 +1,45 @@
+extends  ../../layouts/LayoutTheme
+include  ../../mixins/travel-agency/landing/Navbar
+include  ../../mixins/travel-agency/landing/TopNavbar
+include  ../../mixins/travel-agency/landing/HeroHeader
+include  ../../mixins/travel-agency/landing/SeasonOfTour
+include  ../../mixins/travel-agency/landing/BestPlaces
+include  ../../mixins/travel-agency/landing/BestHotels
+include  ../../mixins/travel-agency/landing/Gallery
+include  ../../mixins/travel-agency/landing/LatestPosts
+include  ../../mixins/travel-agency/landing/Cta
+include  ../../mixins/travel-agency/landing/LatestPhotos
+include  ../../mixins/travel-agency/landing/GetApp
+include  ../../mixins/travel-agency/landing/Footer
+
+append styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/isotope-layout/isotope.pkgd.min.js`)
+  script(src=`${CWD}vendors/imagesloaded/imagesloaded.pkgd.min.js`)
+  script(src=`${CWD}vendors/isotope-packery/packery-mode.pkgd.min.js`)
+  script(src=`${CWD}vendors/bigpicture/BigPicture.js`)
+  script(src=`${CWD}vendors/typed.js/typed.umd.js`)
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+append variables
+  - var attrsBody = { style: "--phoenix-scroll-margin-top: 1.2rem;", class: 'bg-body-emphasis'};
+  - var disableNavigationType = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableHorizontalNavbarAppearance = true;
+
+block mainContent
+  +TopNavbar
+  +Navbar
+  +HeroHeader
+  +SeasonOfTour 
+  +BestPlaces
+  +BestHotels
+  +Gallery
+  +LatestPosts
+  +Cta
+  +LatestPhotos
+  +GetApp
+  +FooterLanding

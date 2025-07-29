@@ -1,0 +1,133 @@
+mixin HotelFilterOffcanvas 
+  .offcanvas.offcanvas-end(tabindex="-1" id="hotelFilterOffcanvas" aria-labelledby="hotelFilterOffcanvasLabel")
+    .offcanvas-header.p-4.bg-body-highlight
+      h5.mb-0.text-body-highlight(id='hotelFilterOffcanvasLabel') Filter
+      button.btn.btn-close(data-bs-dismiss="offcanvas" aria-label="Close")
+    .offcanvas-body.scrollbar.p-4
+      h4.text-body-highlight.mb-4 Price Range
+      .row.g-2 
+        .col-6
+          .form-icon-container
+            input.form-control.form-icon-input(type='text' placeholder='Minimum amount: $245')
+            span.fa-solid.fa-dollar-sign.form-icon.text-body-tertiary.fs-9
+        .col-6
+          .form-icon-container
+            input.form-control.form-icon-input(type='text' placeholder='Maximum amount: $245')
+            span.fa-solid.fa-dollar-sign.form-icon.text-body-tertiary.fs-9
+      .noUi-primary-lighter.noUi-slider-large.noUi-handle-primary.noUi-handle-circle.ps-5.pe-3.mt-3(data-nouislider!={
+        range: {
+          'min': 0,
+          'max': 250
+        },
+        start: [20, 150], 
+        connect: true 
+      })
+      hr.my-5
+      h4.mb-4.text-body-highlight Amenities
+      p.text-body-tertiary Essentials
+      .row.g-3 
+        .col-6 
+          .form-check
+            input.form-check-input(id="wifi" type="checkbox" value="wifi" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='wifi') Wifi
+          .form-check
+            input.form-check-input(id="kitchen" type="checkbox" value="kitchen" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='kitchen') Kitchen
+          .form-check
+            input.form-check-input(id="air-conditioning" type="checkbox" value="air-conditioning" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='air-conditioning') Air conditioning
+        .col-6 
+          .form-check
+            input.form-check-input(id="washer" type="checkbox" value="washer" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='washer') Washer
+          .form-check
+            input.form-check-input(id="dryer" type="checkbox" value="dryer" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='dryer') Dryer
+          .form-check
+            input.form-check-input(id="heating" type="checkbox" value="heating" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='heating') Heating
+      p.text-body-tertiary.mt-3 Location
+      .row.g-3 
+        .col-6 
+          .form-check
+            input.form-check-input(id="beach-front" type="checkbox" value="beach-front" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='beach-front') Beach-front
+          .form-check
+            input.form-check-input(id="near-markets" type="checkbox" value="near-markets" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='near-markets') Near markets
+        .col-6 
+          .form-check
+            input.form-check-input(id="water-front" type="checkbox" value="water-front" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='water-front') Water-front
+      a.fw-bold.fs-9.mt-3.d-inline-block(href="#!") Show more items
+      hr.my-5
+      h4.mb-4.text-body-highlight Number of Private Bathrooms
+      .input-group.gap-2.w-70.w-sm-50(data-quantity)
+        button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+          span.fa-solid.fa-minus
+        input.form-control.border-translucent.input-spin-none.text-center.rounded(id="private-bathrooms" type="number" value='2')
+        button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+          span.fa-solid.fa-plus
+      h4.mb-4.mt-5.text-body-highlight Number of Bedrooms
+      .input-group.gap-2.w-70.w-sm-50(data-quantity)
+        button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+          span.fa-solid.fa-minus
+        input.form-control.border-translucent.input-spin-none.text-center.rounded(id="bedrooms" type="number" value='2')
+        button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+          span.fa-solid.fa-plus
+      h4.mb-4.mt-5.text-body-highlight Number of Beds
+      .input-group.gap-2.w-70.w-sm-50(data-quantity)
+        button.btn.btn-phoenix-primary.px-3.rounded(data-type="minus")
+          span.fa-solid.fa-minus
+        input.form-control.border-translucent.input-spin-none.text-center.rounded(id="beds" type="number" value='2')
+        button.btn.btn-phoenix-primary.px-3.rounded(data-type="plus")
+          span.fa-solid.fa-plus
+      hr.my-5
+      h4.mb-4 Rating
+      input.rating-radio(type="radio" class="btn-check" name="ratingOption" id="option1" checked)
+      label.btn.w-100.d-flex.align-items-center.gap-1.mb-2(for="option1")
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-check.ms-auto.text-primary.check-icon
+      input.rating-radio(type="radio" class="btn-check" name="ratingOption" id="option2")
+      label.btn.w-100.d-flex.align-items-center.gap-1.mb-2(for='option2')
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.text-body.ms-1.fs-8.fw-normal and above
+        span.fa-solid.fa-check.ms-auto.text-primary.check-icon
+      input.rating-radio(type="radio" class="btn-check" name="ratingOption" id="option3")
+      label.btn.w-100.d-flex.align-items-center.gap-1.mb-2(for='option3')
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.text-body.ms-1.fs-8.fw-normal and above
+        span.fa-solid.fa-check.ms-auto.text-primary.check-icon
+      input.rating-radio(type="radio" class="btn-check" name="ratingOption" id="option4")
+      label.btn.w-100.d-flex.align-items-center.gap-1.mb-2(for='option4')
+        span.fa-solid.fa-star.text-warning
+        span.fa-solid.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.text-body.ms-1.fs-8.fw-normal and above
+        span.fa-solid.fa-check.ms-auto.text-primary.check-icon
+      input.rating-radio(type="radio" class="btn-check" name="ratingOption" id="option5")
+      label.btn.w-100.d-flex.align-items-center.gap-1(for='option5')
+        span.fa-solid.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.fa-regular.fa-star.text-warning
+        span.text-body.ms-1.fs-8.fw-normal and above
+        span.fa-solid.fa-check.ms-auto.text-primary.check-icon
+    .p-4.border-top.border-translucent.d-flex.gap-2
+      button.btn.btn-lg.btn-phoenix-primary Reset
+      button.btn.btn-lg.btn-primary.flex-1 Show 445 items

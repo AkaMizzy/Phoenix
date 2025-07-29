@@ -1,0 +1,29 @@
+extends ../index
+
+append variables
+  - var attrsHtml = Object.assign(attrsHtml, { 'data-navigation-type': "combo", 'data-navbar-horizontal-shape': 'slim' })
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+
+append headScripts
+  if ENV === 'PROD'
+    script.
+      window.config.set({
+        phoenixNavbarPosition: 'combo',
+        phoenixNavbarTopShape: 'slim',
+        phoenixNavbarTopStyle: 'default'
+      });
+
+block navbarTop
+  +NavbarComboSlim({
+    toggleID: 'navbarVerticalCollapse',
+    links: false,
+    search: true
+}).navbar-expand-lg
+
+  if ENV === "PROD"
+    script.
+      var navbarVertical = document.querySelector('.navbar-vertical');
+      navbarVertical.removeAttribute('style');
+
+block afterWrapperContent

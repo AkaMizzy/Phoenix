@@ -1,0 +1,97 @@
+mixin VisitorsTableRow(data)
+  tr
+    td.py-2.white-space-nowrap.ps-0.country
+      a.d-flex.align-items-center.text-primary.py-md-1.py-xxl-0(href='#!')
+        img(src=`${CWD}assets${data.country.flag}`, alt='' width=40)
+        p.mb-0.ps-3.fw-bold.fs-9=data.country.name
+    td.py-2.align-middle.users
+      h6=data.users.number
+        span.text-body-tertiary.fw-semibold.ms-2=`(${data.users.percantage})`
+    td.py-2.align-middle.text-end.status
+      span.badge.badge-phoenix.fs-10(class=`badge-phoenix-${data.status.type}`)
+        span.fa-solid.fa-plus.me-1
+        | #{data.status.label}
+
+mixin VisitorsCard 
+  -
+    var visitorData = [
+      {
+        country:{
+          name: 'India',
+          flag: '/img/country/india-2.png'
+        },
+        users: {
+          number: '92,896',
+          percantage: '41.6%'
+        },
+        status: {
+          type: 'info',
+          label: '15.21%'
+        }
+      },
+      {
+        country:{
+          name: 'China',
+          flag: '/img/country/china-2.png'
+        },
+        users: {
+          number: '50,496',
+          percantage: '32.8%'
+        },
+        status: {
+          type: 'warning',
+          label: '05.21%'
+        }
+      },
+      {
+        country:{
+          name: 'USA',
+          flag: '/img/country/usa-2.png'
+        },
+        users: {
+          number: '45,679',
+          percantage: '24.3%'
+        },
+        status: {
+          type: 'primary',
+          label: '22.12%'
+        }
+      },
+    ]
+  .card.h-100(data-list!={
+    valueNames: ["country", "users", "status"],
+    page: 4
+  })&attributes(attributes)
+    .card-header.border-0.d-flex.justify-content-between.align-items-start 
+      div
+        h3.text-body-highlight Visitors
+        p.mb-0.text-body-tertiary Users across countries
+      .dropdown
+        button.btn.btn-sm.btn-phoenix-secondary.bg-body-emphasis.bg-body-hover.action-btn(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" )
+          span.fas.fa-ellipsis-h(data-fa-transform="shrink-2")
+        .dropdown-menu.dropdown-menu-end
+          a.dropdown-item(href='#') Action
+          a.dropdown-item(href='#') Another action
+          a.dropdown-item(href='#') Something else here
+    .card-body.py-0
+      h4.d-flex.align-items-center.gap-2.text-body-highlight.mb-3
+        span.real-time-user(data-countup!={endValue: 119}) 0
+        span.fs-9.fw-normal User per second
+      .echart-country-wise-visitors(style="height: 43px; width: 100%")
+      .table-responsive.scrollbar.mt-3
+        table.table.fs-10.mb-0
+          thead
+            tr
+              th.sort.ps-0.align-middle(data-sort='country' style="min-width: 100px") COUNTRY NAME
+              th.sort.align-middle(data-sort='users' style="min-width: 115px") USERS
+              th.sort.text-end.align-middle(data-sort='status' ) STATUS
+          tbody.list#table-country-wise-visitors
+            each row in visitorData
+              +VisitorsTableRow(row)
+    .card-footer.pt-3.border-0
+      .d-flex.align-items-center
+        .pagination.d-none
+        p.mb-0.d-none.d-sm-block.me-3.fw-semibold.text-body(data-list-info)
+        a.fw-bold.fs-9.ms-auto(href='#!')
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')

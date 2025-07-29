@@ -1,0 +1,12 @@
+mixin AddFolderModal
+  #addFolderModal.modal.fade(tabindex="-1")
+    .modal-dialog.modal-dialog-centered
+      .modal-content.border.border-translucent
+        form#addFolderForm(autocomplete="off")&attributes(attributes)
+          .modal-header.p-4.pb-0.border-0.flex-between-center
+            h4.modal-title Add new folder
+          .modal-body.p-4
+            input.form-control(placeholder='Folder name' id="addFolder" type="text")
+          .modal-footer.d-flex.justify-content-end.align-items-center.p-4.pt-0.border-0
+            button.btn.btn-link.text-danger.px-3.mx-0(type='button' data-bs-dismiss='modal' aria-label='Close') Cancel
+            button.btn.btn-sm.btn-primary.px-5.mx-0(type="submit") Apply

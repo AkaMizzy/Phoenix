@@ -1,0 +1,229 @@
+include ./MostRecentForecastTable
+
+mixin FinancialTableContent(item, index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.fs-9.align-middle.ps-0
+      .form-check.mb-0.fs-8
+        input.form-check-input(type='checkbox' data-bulk-select-row!=item)
+    td.align-middle.endingYear.white-space-nowrap
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0=item.endingYear
+    td.align-middle.revenue.white-space-nowrap
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0 #{item.revenue}
+    td.align-middle.revenueGrowth
+      p.fs-9.fw-semibold.mb-0(class=item.revenueGrownDirection ? 'text-success-dark' : 'text-danger-dark')=item.revenueGrowth
+    td.align-middle.eps.ps-5
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0=item.eps
+    td.align-middle.epsGrowth.white-space-nowrap.ps-5
+      p.fs-9.fw-semibold.mb-0(class=item.epsGrowthDirection ? 'text-success-dark' : 'text-danger-dark')=item.epsGrowth
+    td.align-middle.forwardPE.ps-5
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0=item.forwardPE
+    td.align-middle.noANalysts.ps-5
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0=item.noAnalysts
+    td.align-middle.white-space-nowrap.pe-0
+      +StockDropdown.fs-10
+
+mixin ForecastTabContent 
+  .row.g-3.g-lg-5.flex-between-center.mb-4 
+    .col-auto
+      h4 Economic Prediction
+      p.text-body-tertiary.mb-0 Brief summary of all projects 
+    .col-auto
+      .d-flex.align-items-center.gap-2
+        select#forecast-amount.form-select.form-select-sm(name="amount") 
+          option(value="million") Annual 
+          option(value='billions') Half Annual 
+          option(value="remove")  Quarterly 
+        select#operations.form-select.form-select-sm(name="operations") 
+          option(value="export") Export 
+          option(value='view') View 
+          option(value="remove")  Remove 
+  -
+    var forecastCardData = [
+      {
+        title: 'Revenue This Year',
+        amount: '185.10B',
+        from: '171.84B',
+        isGrown: true,
+        count: 7.71,
+        className: 'pb-4 border-bottom border-bottom-xxl-0 border-end-sm pe-sm-4  py-xxl-0',
+        echart: 'echart-revenue-this-year-chart',
+        chartClass: 'revenue-this-year-chart'
+      },
+      {
+        title: 'Revenue Next Year',
+        amount: '200.210B',
+        from: '185.10B',
+        isGrown: true,
+        count: 0.06,
+        className: 'border-bottom border-bottom-xxl-0 border-end-xxl px-sm-4 py-4 pe-xl-3 pe-xxl-4 pt-sm-0 pb-xxl-0',
+        echart: 'echart-revenue-next-year-chart',
+        chartClass: 'revenue-next-year-chart'
+      },
+      {
+        title: 'EPS This Year',
+        amount: '10.39',
+        from: '7.32',
+        isGrown: true,
+        count: 41.95,
+        className: 'border-bottom border-bottom-sm-0 border-end-sm pe-sm-4 px-xxl-4 py-4 pb-sm-0 py-xxl-0',
+        echart: 'echart-eps-this-year-chart',
+        chartClass: 'eps-this-year-chart'
+      },
+      {
+        title: 'EPS Next Year',
+        amount: '8.30',
+        from: '10.39',
+        isGrown: false,
+        count: 6.90,
+        className: 'ps-sm-4 pt-4 pe-sm-4 pe-xl-3 pe-xxl-4 pt-xxl-0',
+        echart: 'echart-eps-next-year-chart',
+        chartClass: 'eps-next-year-chart'
+      }
+    ]
+  .card.mb-3
+    .card-body 
+      .row.g-0
+        each item, index in forecastCardData
+          .col-sm-6.col-xxl-3(class=item.className)
+            h5.text-body-highlight.mb-3= item.title
+            .row.flex-between-center
+              .col-9.pe-xl-0.order-xxl-1 
+                h4.mb-2 $#{item.amount}
+                .d-flex.align-items-center.gap-2 
+                  h6.text-body-tertiary.fw-semibold.mb-0.text-nowrap From #{item.from} 
+                  .badge.badge-phoenix.fs-10(class=item.isGrown ? 'badge-phoenix-success' : 'badge-phoenix-danger')
+                    | #{item.count}%
+                    span.fas.ms-1(
+                      class=item.isGrown ? 
+                      'text-success-darker fa-chevron-up' 
+                      : 'text-danger-darker fa-chevron-down'
+                    )
+              .col-3.col-xxl-12.mb-xxl-3.ps-0.ps-xxl-3.d-flex.justify-content-end.justify-content-xxl-start
+                div(class=`${item.echart} ${item.chartClass}`)
+  -
+    var financialTableData = [
+      {
+        endingYear: "Sep 28, 2019",
+        revenue: "$137.24B",
+        revenueGrowth: "-2.04",
+        eps: "4.57",
+        epsGrowth: "-0.34",
+        forwardPE: "N/A",
+        noAnalysts: "N/A",
+        revenueGrownDirection: false,
+        epsGrowthDirection: false,
+      },
+      {
+        endingYear: "Sep 26, 2020",
+        revenue: "$122.49B",
+        revenueGrowth: "5.51",
+        eps: "4.33",
+        epsGrowth: "10.44",
+        forwardPE: "N/A",
+        noAnalysts: "N/A",
+        revenueGrownDirection: true,
+        epsGrowthDirection: true,
+      },
+      {
+        endingYear: "Sep 25, 2021",
+        revenue: "$127.00B",
+        revenueGrowth: "33.26",
+        eps: "6.70",
+        epsGrowth: "71.04",
+        forwardPE: "N/A",
+        noAnalysts: "N/A",
+        revenueGrownDirection: true,
+        epsGrowthDirection: true,
+      },
+      {
+        endingYear: "Sep 24, 2022",
+        revenue: "$156.74B",
+        revenueGrowth: "7.79",
+        eps: "6.13",
+        epsGrowth: "8.91",
+        forwardPE: "N/A",
+        noAnalysts: "N/A",
+        revenueGrownDirection: true,
+        epsGrowthDirection: true,
+      },
+      {
+        endingYear: "Sep 30, 2023",
+        revenue: "$171.84B",
+        revenueGrowth: "-2.80",
+        eps: "7.32",
+        epsGrowth: "0.33",
+        forwardPE: "N/A",
+        noAnalysts: "N/A",
+        revenueGrownDirection: false,
+        epsGrowthDirection: true,
+      },
+      {
+        endingYear: "Sep 30, 2024",
+        revenue: "$185.10B",
+        revenueGrowth: "3.86",
+        eps: "10.39",
+        epsGrowth: "11.54",
+        forwardPE: "N/A",
+        noAnalysts: "N/A",
+        revenueGrownDirection: true,
+        epsGrowthDirection: true,
+      },
+      {
+        endingYear: "Sep 30, 2025",
+        revenue: "$185.20B",
+        revenueGrowth: "7.96",
+        eps: "10.30",
+        epsGrowth: "11.55",
+        forwardPE: "32.54",
+        noAnalysts: "46",
+        revenueGrownDirection: true,
+        epsGrowthDirection: true,
+      }
+    ];
+
+  #forecast.mb-5(data-list!={
+    valueNames: ["endingYear", "revenue", "revenueGrowth", "eps", "epsGrowth", 'forwardPE', 'noAnalysts'],
+    page: 6,
+  })
+    .table-responsive.scrollbar
+      table.table.fs-9.mb-0.border-top.border-translucent
+        thead
+          tr.text-uppercase
+            th.white-space-nowrap.fs-9.ps-0.align-middle
+              .form-check.mb-0.fs-8
+                input.form-check-input#checkbox-bulk-forecast-select(
+                  type='checkbox' 
+                  data-bulk-select!={
+                    body: "table-financial-forecast-body",
+                  }
+                )
+            th.sort.white-space-nowrap.align-middle(scope='col' style='min-width:7.5rem;' data-sort="endingYear") Ending year
+            th.sort.align-middle(scope='col' data-sort="revenue" style='min-width:7.5rem;') revenue
+            th.sort.align-middle(scope='col' data-sort="revenueGrowth" style='min-width:7.5rem;') revenue growth
+            th.sort.align-middle.ps-5(scope='col' style='min-width:7.5rem;' data-sort="eps") eps
+            th.sort.ps-5.align-middle(scope='col' style='min-width:7.5rem;' data-sort="epsGrowth") eps growth
+            th.sort.ps-5.align-middle(scope='col' style='min-width:7.5rem;' data-sort="forwardPE") forward pe
+            th.sort.ps-5.align-middle(scope='col' style='min-width:7.5rem;' data-sort="noAnalysts") no. analysts
+            th.sort.pe-0.align-middle(scope='col' style="min-width: 3rem;")
+        tbody.list#table-financial-forecast-body
+          each row, index in financialTableData 
+            +FinancialTableContent(row, index)
+  .row.g-3.g-lg-5.mb-5
+    .col-xxl-6
+      .row.g-3.g-lg-5.flex-between-center 
+        .col-auto
+          h4 Forecast of Revenue
+          p.mb-0 Understanding Dividend Income Basics
+        .col-auto
+          +StockDropdown.btn-phoenix-secondary
+        
+      .echart-forecast-of-revenue-chart(style="min-height: 300px;")
+    .col-xxl-6
+      .row.g-3.g-lg-5.flex-between-center 
+        .col-auto
+          h4 Growth in Revenue
+          p.mb-0 No. of bookings fulfilled &amp; cancelled
+        .col-auto
+          +StockDropdown.btn-phoenix-secondary
+      .echart-growth-in-revenue-chart(style='min-height: 300px;')
+  +MostRecentForecastTable

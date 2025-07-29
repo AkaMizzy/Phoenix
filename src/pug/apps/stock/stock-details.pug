@@ -1,0 +1,60 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/stock/stock-details/StockDetailsTab 
+include ../../mixins/stock/stock-details/StockDropdown 
+include ../../mixins/stock/stock-details/StockDetailsSideBar
+
+
+append variables 
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+prepend styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts
+
+append scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}assets/js/pages/stock-details.js`)
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+
+
+block content
+  h2.mb-4.text-body-emphasis Stock Details
+
+  .row.pb-9.gx-4 
+    .col-xl-7.pe-lg-2.flex-1
+      h4 Apple Inc. (AAPL)
+      h6.fw-semibold.mb-4 NASDAQ: AAPL · Real-Time Price · USD
+      +StockDetailsTab
+      .row.gap-3.g-0.flex-between-center.mx-n4.px-4.mx-lg-n6.px-lg-6.bg-body-secondary.py-3.border-y.mt-4.position-sticky.bottom-0.z-3.d-xl-none.stock-details-footer
+        .col-auto
+           .d-flex.align-items-center.gap-2 
+            h3.mb-0.text-body $226.51
+            .badge.badge-phoenix.badge-phoenix-success +0.62 (0.27%)
+        .col-12.col-sm-auto
+          .d-flex.flex-wrap.gap-2
+            button.btn.btn-primary.flex-1#offcanvasStockDetails(data-bs-toggle='offcanvas' data-bs-target='#stockDetailsSidebar' aria-controls="stockDetailsSidebar") Buy Share
+            button.btn.btn-phoenix-secondary 
+              span.fas.fa-clock 
+            button.btn.btn-phoenix-secondary 
+              span.fas.fa-eye 
+    .col-xl-5.top-stock-card-container
+      +StockDetailSideBar
+  

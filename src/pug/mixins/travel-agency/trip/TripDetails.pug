@@ -1,0 +1,256 @@
+mixin ListItem(property)
+  li.mb-1.d-flex&attributes(attributes)
+    span.fa-solid.fa-circle.text-secondary-light.me-3.fs-11(data-fa-transform='down-13 shrink-4')
+    | #{property}
+
+mixin TripDetails
+  .row.justify-content-between.gx-0.gy-5
+    .col-xl-7
+      a.btn.px-4.py-3.py-sm-4.d-flex.flex-between-center.collapse-indicator.bg-body-highlight(data-bs-toggle='collapse' href='#collapseWhatToExpect' role='button' aria-expanded='true' aria-controls='collapseWhatToExpect')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight What to expect
+        span.fa-solid.fa-chevron-down.toggle-icon
+      .collapse.show#collapseWhatToExpect
+        .py-6.px-4 
+          -
+            var items = [
+              {
+                title: 'Breakfast in Birnin Zana',
+                description: 'Enjoy the traditional Wakandan bread and butter, along with the sweet aroma of freshly baked cakes, beside the large streets of Birnin Zana.',
+                duration: '30 min',
+                location: 'Royal street, Birnin Zana'
+              },
+              {
+                title: 'Safari at the Alkama fields',
+                description: 'Observe the Wakandan wildlife in its natural habitat in the savanna of Alkama.',
+                duration: '2 hours',
+                location: 'Zone 23, Alkama'
+              },
+              {
+                title: 'Jabari tribe habitats',
+                description: 'See the colorful lifestyle of the people from the Jabari tribe. Interact with the locals, visit their shops, and buy famous traditional Jabari articles of clothing. ',
+                duration: '1 hour',
+                location: 'Jabariland'
+              },
+              {
+                title: 'King T’Challa’s memorial',
+                description: "Visit the tomb of the greatest king of Wakanda, King T'Challa, the black panther.",
+                duration: '1 hour',
+                location: 'Birnin Bashenga'
+              },
+              {
+                title: 'Lunch',
+                description: 'Have lunch with the authentic cuisine of Wakanda at the mountaintop restaurant of Mena Ngai.',
+                duration: '1 hour',
+                location: 'Vibranium hill top restaurant, the Great Mount'
+              },
+            ]
+          each item, index in items
+            div(class=`${index !== items.length - 1 ? 'mb-5' : ''}`)
+              .d-flex.align-items-center.gap-2
+                span.bg-secondary.rounded-pill.d-flex.flex-center.text-white(style='width: 27px; height: 27px') #{index + 1}
+                h5.text-body-highlight.mb-0= item.title
+              p.my-2= item.description
+              .d-flex.gap-3.gap-xl-4.flex-wrap
+                h5.text-body-highlight.fw-semibold.mb-0 
+                  span.fa-solid.fa-clock.text-body-quaternary.me-2
+                  | Duration : 
+                  span.text-body-tertiary.fw-normal= item.duration
+                h5.text-body-highlight.fw-semibold.mb-0 
+                  span.fa-solid.fa-map-marker-alt.text-body-quaternary.me-2
+                  | Location : 
+                  span.text-body-tertiary.fw-normal= item.location
+
+      a.btn.px-4.py-3.py-sm-4.d-flex.flex-between-center.collapse-indicator.bg-body-highlight.mt-4(data-bs-toggle='collapse' href='#collapseIncluded' role='button' aria-expanded='false' aria-controls='collapseIncluded')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight What are included or excluded
+        span.fa-solid.fa-chevron-down.toggle-icon
+      .collapse#collapseIncluded
+        .py-6.px-4
+          -
+            var items = [
+              {
+                type: 'Included',
+                properties: [
+                  'PhoenixTrip experience brokerage free',
+                  'Bottled water',
+                  'Professional guide',
+                  'Hotel pickup and drop off',
+                  'Private tour',
+                ]
+              },
+              {
+                type: 'Excluded',
+                properties: [
+                  'Gratuities',
+                  'Snacks',
+                  'Air-conditioned vehicle'
+                ]
+              }
+            ]
+          each item, index in items 
+            h5.mb-3.text-body-highlight 
+              span.fa-solid.me-2(class=`${index === 0 ? 'fa-thumbs-up' : 'fa-thumbs-down'}`)
+              | #{item.type}
+            ul.list-unstyled(class=`${index === 0 ? 'mb-4' : 'mb-0'}`)
+              each property in item.properties
+                +ListItem(property)
+
+      a.btn.px-4.py-3.py-sm-4.d-flex.flex-between-center.collapse-indicator.bg-body-highlight.mt-4(data-bs-toggle='collapse' href='#collapseDeparture' role='button' aria-expanded='false' aria-controls='collapseDeparture')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight Departure and return
+        span.fa-solid.fa-chevron-down.toggle-icon
+      .collapse#collapseDeparture
+        .py-6.px-4
+          -
+            var items = [
+              {
+                title: 'Departure details',
+                description: "Traveler pickup is offered. We will pickup you all from your pickup places even it's home or hotel inside Birnin Zana. Hotel pickup is offered. View the hotel list on our checkout page to see if yours is included."
+              },
+              {
+                title: 'Return details',
+                description: "Returns to the original departure point."
+              }
+            ]
+          each item, index in items 
+            .card.bg-transparent(class=`${index === 0 ? 'mb-3' : ''}`)
+              .card-body
+                h5.mb-3= item.title 
+                p.mb-0= item.description
+
+      a.btn.px-4.py-3.py-sm-4.d-flex.flex-between-center.collapse-indicator.bg-body-highlight.mt-4(data-bs-toggle='collapse' href='#collapseAccessibility' role='button' aria-expanded='false' aria-controls='collapseAccessibility')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight Accessibility
+        span.fa-solid.fa-chevron-down.toggle-icon
+      .collapse#collapseAccessibility
+        .py-6.px-4
+          - var items = ['Infant seats available', 'Wheelchair accessible', 'Service animals allowed', 'Infants must sit on lap']
+          ul.list-unstyled 
+            each item in items 
+              +ListItem(item)
+          p 
+            | If you have questions about accessibility, we’d be happy to help. Just call the number below and reference the product code: 
+            span.text-body-emphasis.fw-semibold 74936P4
+          a(href="tel:+1800000000") +1 800 000 000
+
+      a.btn.px-4.py-3.py-sm-4.d-flex.flex-between-center.collapse-indicator.bg-body-highlight.mt-4(data-bs-toggle='collapse' href='#collapseAdditionalInfo' role='button' aria-expanded='false' aria-controls='collapseAdditionalInfo')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight Additional Information
+        span.fa-solid.fa-chevron-down.toggle-icon
+      .collapse#collapseAdditionalInfo
+        .py-6.px-4
+          -
+            var items = [
+              'Confirmation will be received at time of booking',
+              'Minimum age is 18 years',
+              'Infant meals not included',
+              'A minimum if 01 people per booking is required',
+              'Most travelers can participate',
+              'This tour is to explore the city using local transportation like rickshaw , tuktuk, uber.',
+              "Woman's need to cover the head during visiting mosque",
+              'This is a private tour / activity. Only your group will particiapte.',
+              ]
+          ul.list-unstyled.mb-0
+            each item in items 
+              +ListItem(item)
+
+      a.btn.px-4.py-3.py-sm-4.d-flex.flex-between-center.collapse-indicator.bg-body-highlight.mt-4(data-bs-toggle='collapse' href='#collapsePolicy' role='button' aria-expanded='false' aria-controls='collapsePolicy')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight Policy
+        span.fa-solid.fa-chevron-down.toggle-icon
+      .collapse#collapsePolicy
+        .py-6.px-4
+          -
+            var items = [
+              {
+                type: 'Cancellation',
+                properties: [
+                  'To cancel any tour, an email has to be sent to tours@phoenix.com mentioning the tour booking ID and details about the cancellation.',
+                  'The time of sending the email will be considered as the time of cancellation.',
+                  'The email will be considered as the final application for cancellation. A phone call to the Phoenix hotline number or any other team member of Phoenix will not be considered as a request for cancellation of booking.'
+                ]
+              },
+              {
+                type: 'Refund',
+                properties: [
+                  'The full amount of the tour fee will be refunded if the booking is canceled five (5) days prior to the start of the experience/tour.',
+                  'Fifty Percent (50%) of the tour fee will be refunded if the booking is canceled three (3) days prior to the start of the experience/tour.',
+                  'No refund will be provided if the booking is canceled less than three (3) days prior to the start of the experience/tour.',
+                  'Convenience fee is non-refundable and will be deducted from the paid amount.',
+                  'All refunds will be processed within seven (7) working days.'
+                ]
+              },
+              {
+                type: 'Child policy',
+                properties: [
+                  'No fee will be needed for children below the age of four (4). No separate seat will be provided in case of transportation and accommodation.',
+                  '50% fee must be paid for any child between the age of five (5) and ten (10) years old.',
+                  'Full amount of money must be paid for anyone above ten (10) years old.'
+                ]
+              },
+            ]
+          each item, index in items
+            .card.bg-transparent(class=`${index !== items.length - 1 ? 'mb-3' : ''}`)
+              .card-body 
+                h5.mb-3= item.type 
+                ul.list-unstyled.mb-0
+                  each property, propertyIndex in item.properties
+                    +ListItem(property)(class=`${propertyIndex !== item.properties - 1 ? 'mb-3' : ''}`)
+    .col-xl-4
+      .border.border-translucent.rounded-2#mapbox-cluster(style='height: 240px;')
+      h6.my-3.py-3.px-2.rounded-2.bg-body-secondary.text-center Day 1
+      .row.gx-5.gy-0.position-relative
+        +Background({
+          image: `${CWD}assets/img/bg/bg-41.svg`,
+          className: 'tour-direction-bg d-none d-sm-block',
+        })
+        -
+          var items = [
+            {
+              serial: 1,
+              name: 'Breakfast',
+            },
+            {
+              serial: 2,
+              name: 'Desert safari',
+            },
+            {
+              serial: 3,
+              name: 'Jabari tribe habitats',
+            },
+            {
+              serial: 4,
+              name: 'King T’Challa’s memorial',
+            },
+            {
+              serial: 5,
+              name: 'Lunch',
+            },
+          ]
+        .col-sm-6.position-relative
+          .p-2.rounded-2.bg-body-highlight.mb-3.position-relative
+            .tour-direction-line.border-start.border-dashed
+            a.btn.p-0.d-flex.justify-content-between.collapse-indicator(data-bs-toggle='collapse' href='#collapsePicupPoint' role='button' aria-expanded='true' aria-controls='collapsePicupPoint')
+              .d-flex
+                span.d-inline-flex.flex-center.rounded-pill.border.me-2(style='min-width: 23px; height: 23px')
+                  span.fa-solid.fa-map-marker-alt.fs-9
+                div
+                  h6.mb-2.text-start Pickup point
+                  h6.text-start.fw-normal.text-body-tertiary Birnin Zana bus terminal
+              span.fa-solid.fa-chevron-down.toggle-icon(style='width: 10px; height: 10px')
+            .collapse.show#collapsePicupPoint
+              h6.fw-normal.text-body-tertiary.pt-3.ps-1
+                span.fa-solid.fa-clock.text-body-quaternary.me-2
+                | 10:00 am local time
+          each item, index in items.slice(0, 3)
+            .p-2.rounded-2.bg-body-highlight.d-flex.align-items-center.gap-2.mb-3.position-relative
+              .tour-direction-line.border-start.border-dashed(class=`${index === 2 ? 'd-sm-none' : ''}`)
+              span.bg-secondary.rounded-pill.d-flex.flex-center.text-white.fs-9(style='min-width: 23px; height: 23px') #{item.serial}
+              h6.mb-0.text-body-highlight= item.name
+        .col-sm-6.position-relative
+          each item, index in items.slice(3)
+            .p-2.rounded-2.bg-body-highlight.d-flex.align-items-center.gap-2.mb-3.position-relative
+              .tour-direction-line.border-start.border-dashed
+              span.bg-secondary.rounded-pill.d-flex.flex-center.text-white.fs-9(style='min-width: 23px; height: 23px') #{item.serial}
+              h6.mb-0.text-body-highlight= item.name
+          .p-2.rounded-2.bg-body-highlight.d-flex.align-items-center.gap-2.mb-3
+            span.d-inline-flex.flex-center.rounded-pill.border.me-2(style='min-width: 23px; height: 23px')
+              span.fa-solid.fa-map-marker-alt.fs-9
+            h6.mb-0.text-body-highlight Drop-off point
+
+      h6.mb-0.py-3.px-2.rounded-2.bg-body-secondary.text-center Tour ends

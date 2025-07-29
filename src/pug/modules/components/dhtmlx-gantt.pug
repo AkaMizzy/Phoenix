@@ -1,0 +1,44 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  -
+    var pageHeader = {
+      title: 'DHTMLX Gantt',
+      description: "DHTMLX Gantt is an open source JavaScript Gantt chart library that helps you illustrate and manage a project schedule in a nice-looking diagram.",
+      url: `https://github.com/DHTMLX/gantt`,
+      linkText: 'DHTMLX Gantt',
+      breadcrumb:[
+        {
+          name:'Components',
+          link:'#!'
+        },
+        {
+          name:'DHTMLX Gantt',
+          active:true
+        },
+      ]
+    }
+  
+block component
+  .mb-9
+    +ComponentCard({title: 'Html', hideNavTab: true}).mb-4.mt-5
+      pre.scrollbar.my-5
+        code.language-html
+          +escape
+            .gantt-app-container.scrollbar
+              #gantt-app(style={ width: '100%', height: '100%'} )
+
+    +ComponentCard({
+      title: 'Stylesheet',
+      hideNavTab: true
+    }).mb-3
+      +ComponentCardLib
+        link(href=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.css`, rel='stylesheet')
+
+    +ComponentCard({
+      title: 'Javascript',
+      hideNavTab: true
+    }).mb-3
+      +ComponentCardLib
+        script(src=`${CWD}vendors/dhtmlx-gantt/dhtmlxgantt.js`)
+        script(src=`${CWD}assets/js/pages/gantt-chart.js`)

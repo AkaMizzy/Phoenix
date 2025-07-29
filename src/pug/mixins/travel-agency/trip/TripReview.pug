@@ -1,0 +1,170 @@
+mixin TripReview
+  .row.align-items-center.gy-5
+    .col-xl-5.col-xxl-4
+      .d-flex.align-items-center.gap-3.flex-wrap
+        h3.mb-0 5.0
+        div.pe-3.border-end-sm.border-translucent
+          +Rating(5).me-1.fs-9
+          span.fw-semibold.text-body-tertiary ( 32 reviews )
+        span.badge.badge-phoenix.badge-phoenix-success.border-0.px-3.py-2.fs-8.text-capitalize Recommended
+    .col-xl-7.col-xxl-8
+      .d-flex.gap-5.gap-md-6.gap-xl-8.gap-xxl-6.flex-wrap
+        -
+          var reviewStats = [
+            {
+              name: 'Excellent',
+              count: 24
+            },
+            {
+              name: 'Very good',
+              count: 8
+            },
+            {
+              name: 'Average',
+              count: 0
+            },
+            {
+              name: 'Poor',
+              count: 0
+            },
+            {
+              name: 'Terrible',
+              count: 0
+            }
+          ]
+        each item, index in reviewStats 
+          .d-lg-flex.d-xl-block.d-xxl-flex.align-items-center.gap-3(class=`${index === 0 ? 'ms-xl-auto' : ''}`)
+            .echart-trip-review.order-lg-1.order-xl-0.order-xxl-1.mx-auto(style="height: 60px; width: 60px" data-options!={
+              series: [
+                {
+                  data: [
+                    {
+                      value: item.count
+                    }
+                  ],
+                }
+              ]
+            })
+            h5.mb-0.mt-2.mt-lg-0.mt-xl-2.mt-xxl-0.text-center= item.name
+  button.btn.btn-phoenix-secondary.my-5 Write a review
+  -
+    var reviews = [
+      {
+        name: 'Navina Koothrapali',
+        avatar: '/team/59.webp',
+        rating: '5',
+        title: 'Memorable day in Wakanda',
+        description: "First time here in Wakanda, nice weather but one thing can't miss out was the one day highlight city tour guided by Shuri from Panther Travels. Shuri came in earlier to pick me up at the hotel and we started the tour with a good briefing by him. The activities were packed and the information given to me was clear and useful, really appreciated Shuri's knowledge and care for the tour, which included memorable stories of not only Birnin but also people in Wakanda. Look forward to coming back again! Navina Koothrapali from Hong Kong",
+        liked: 35,
+        disLiked: 2,
+        date: 'Oct 2022',
+        replies: [
+          {
+            name: 'Panther Travels Limited',
+            text: "Great to have your review on our tour. It's our honor to get a tourist like you. Good luck to you. Hope to see you again."
+          }
+        ]
+      },
+      {
+        name: 'Henry Cavill',
+        avatar: '/team/58.webp',
+        rating: '5',
+        title: 'Unforgettable experience',
+        description: "Great tour in beautiful Wakanda. Everything we imagined about Wakanda changed in a day. Kind and lovely people all around. Unforgettable experience.",
+        images: [
+          {
+            img: '/img/trip/25.png',
+            largeImg: '/img/trip/25_large.jpg'
+          },
+          {
+            img: '/img/trip/26.png',
+            largeImg: '/img/trip/26_large.jpg'
+          },
+          {
+            img: '/img/trip/27.png',
+            largeImg: '/img/trip/27_large.jpg'
+          },
+          {
+            img: '/img/trip/28.png',
+            largeImg: '/img/trip/28_large.jpg'
+          },
+          {
+            img: '/img/trip/29.png',
+            largeImg: '/img/trip/29_large.jpg'
+          },
+          {
+            img: '/img/trip/30.png',
+            largeImg: '/img/trip/30_large.jpg'
+          }
+        ],
+        liked: 24,
+        disLiked: 3,
+        date: 'Oct 2022',
+        replies: [
+          {
+            name: 'Panther Travels Limited',
+            text: "Thanks for this review. It is a great motivation from you. Hope to see you again in Wakanda. Good luck."
+          }
+        ]
+      },
+      {
+        name: 'Ibn Batuta',
+        avatar: '/team/60.webp',
+        rating: '4',
+        title: "Great 1 day trip which makes you feel as if you've seen the whole of Wakanda",
+        description: "I've seen so much in one day thanks to the great guidance of Mehdi, who customized the trip as per how we felt. I recommend this trip and this guide.",
+        images: [
+          {
+            img: '/img/trip/31.png',
+            largeImg: '/img/trip/31_large.jpg'
+          },
+          {
+            img: '/img/trip/32.png',
+            largeImg: '/img/trip/32_large.jpg'
+          },
+          {
+            img: '/img/trip/33.png',
+            largeImg: '/img/trip/33_large.jpg'
+          }
+        ],
+        liked: 45,
+        disLiked: 1,
+        date: 'Oct 2022',
+        replies: [
+          {
+            name: 'Panther Travels Limited',
+            text: "Thanks for this review. It is a great motivation from you. Hope to see you again in Wakanda. Good luck."
+          }
+        ]
+      }
+    ]
+  each review, index in reviews
+    .card.bg-transparent(class=`${index !== reviews.length - 1 ? 'mb-3' : ''}`)
+      .card-body
+        .d-flex.align-items-center.gap-3
+          .d-flex.align-items-center.gap-2.position-relative
+            +Avatar({size: 's', img: `${review.avatar}`})
+            a(href="#!").text-body-emphasis.fw-semibold.stretched-link= review.name
+          .d-flex.gap-2
+            h6.text-body-tertiary.mb-0
+              span.fa-solid.fa-thumbs-up.text-body-quaternary.me-1
+              | #{review.liked}
+            h6.text-body-tertiary.mb-0
+              span.fa-solid.fa-thumbs-down.text-secondary-light.me-1
+              | #{review.disLiked}
+        .d-flex.my-3
+          +Rating(review.rating).me-1.fs-9
+        h4.mb-2= review.title
+        p.text-body-tertiary= review.date
+        p= review.description
+        if review.images 
+          .d-flex.gap-2.flex-wrap
+            each img in review.images 
+              a(href=`${CWD}assets${img.largeImg}` data-gallery=`trip-details-gallery-${index}`)
+                img(src=`${CWD}assets${img.img}`, alt="").img-fluid.rounded-2
+        if review.replies
+          .mt-5.border-start.border-translucent.ps-4
+            each reply in review.replies 
+              a(href="#!").fw-bold= reply.name
+              span.ms-1.text-body-quaternary replied
+              p.mt-2= reply.text

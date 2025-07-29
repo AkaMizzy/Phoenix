@@ -1,0 +1,56 @@
+mixin StockDetailsSideBarTable 
+  -
+    var tableData = {
+      calls: [
+        {
+          bid: '25.15',
+          ask: '25.30',
+        },
+        {
+          bid: '20.80',
+          ask: '20.90',
+        },
+        {
+          bid: '18.90',
+          ask: '19.00',
+        }
+      ],
+      strikePrices: ['1,656.00', '1,657.00', '1,590.00'],
+      puts: [
+        {
+          bid: '1.25',
+          ask: '1.27'
+        },
+        {
+          bid: '1.87',
+          ask: '1.89'
+        },
+        {
+          bid: '2.19',
+          ask: '2.26'
+        }
+      ]
+    }
+
+  .table-responsive.scrollbar 
+    table.table.text-center
+      thead 
+        tr.fs-9.border-top.border-translucent
+          th(colspan='2') Calls
+          th.border-x.border-translucent Strike Price 
+          th(colspan='2') Puts
+        tr.fs-10.text-uppercase 
+          th BID
+          th ASK 
+          th.border-x.border-translucent Strike
+          th BID
+          th ASK
+      tbody 
+        each call, callIndex in tableData.calls 
+          tr.fs-9.fw-semibold
+            td.text-info-dark #{call.bid}
+            td.text-info-dark #{call.ask}
+            td.border-x.border-translucent.text-body-tertiary.fw-bold #{tableData.strikePrices[callIndex]}
+            if tableData.puts[callIndex] 
+              td.text-info-dark #{tableData.puts[callIndex].bid || '-'} 
+              td.text-info-dark #{tableData.puts[callIndex].ask || '-'}

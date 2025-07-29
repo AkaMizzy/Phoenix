@@ -1,0 +1,59 @@
+extends layouts/LayoutTheme
+include mixins/dashboard/common
+include mixins/dashboard/e-commerce/Stats
+include mixins/dashboard/e-commerce/EcomCharts
+include mixins/dashboard/e-commerce/TotalSalesChart
+include mixins/dashboard/e-commerce/StatCard
+include mixins/dashboard/e-commerce/TopRegions
+include mixins/dashboard/e-commerce/LatestReviews
+
+prepend scripts
+  script(src=`${CWD}vendors/leaflet/leaflet.js`)
+  script(src=`${CWD}vendors/leaflet.markercluster/leaflet.markercluster.js`)
+  script(src=`${CWD}vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js`)
+
+append scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}assets/js/dashboards/ecommerce-dashboard.js`)
+
+append styles
+  link(href=`${CWD}vendors/leaflet/leaflet.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/leaflet.markercluster/MarkerCluster.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/leaflet.markercluster/MarkerCluster.Default.css`, rel='stylesheet')
+
+block content
+  .pb-5
+    .row.g-4
+      .col-12.col-xxl-6
+        .mb-8
+          h2.mb-2 Ecommerce Dashboard
+          h5.text-body-tertiary.fw-semibold Here’s what’s going on at your business right now
+        +Stats
+
+        hr.bg-body-secondary.mb-6.mt-4
+        +TotalSalesChart
+      .col-12.col-xxl-6
+        .row.g-3
+          .col-12.col-md-6
+            +TotalOrders
+          .col-12.col-md-6
+            +NewCustomers
+          .col-12.col-md-6
+            +TopCoupons
+          .col-12.col-md-6
+            +PayingCustomer
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-body-emphasis.pt-7.border-y
+    +LatestReviews
+  .row.gx-6
+    .col-12.col-xl-6
+      +TopRegionsTable
+    .col-12.col-xl-6
+      .mx-n4.mx-lg-n6.ms-xl-0.h-100
+        .h-100.w-100
+          #map.h-100.bg-body-emphasis(style="min-height: 300px;")
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-body-emphasis.pt-6.pb-9.border-top
+    .row.g-6
+      .col-12.col-xl-6
+        +ProjectionVsActual
+      .col-12.col-xl-6
+        +ReturningCustomerRate

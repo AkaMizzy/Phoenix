@@ -1,0 +1,57 @@
+extends ../../../../layouts/LayoutHotel
+include ../../../../mixins/travel-agency/hotel/HotelCompare
+include ../../../../mixins/travel-agency/hotel/ChangeRoomModal
+include ../../../../mixins/travel-agency/hotel/HotelSearch
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Hotel Compare';
+
+prepend scripts
+  script(src=`${CWD}vendors/leaflet/leaflet.js`)
+  script(src=`${CWD}vendors/leaflet.markercluster/leaflet.markercluster.js`)
+  script(src=`${CWD}vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js`)
+
+append scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}assets/js/pages/hotel-compare.js`)
+
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+append styles
+  link(href=`${CWD}vendors/leaflet/leaflet.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/leaflet.markercluster/MarkerCluster.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/leaflet.markercluster/MarkerCluster.Default.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+block hotelContent
+  +Section("container-medium").pt-6.pb-9
+    nav.mb-3(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#') Page 1
+        li.breadcrumb-item
+          a(href='#') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-4 Hotel Compare
+    +HotelSearch({background: false})
+    .h-100.w-100.border.rounded-3.overflow-hidden.my-5
+      #map.h-100.bg-body-emphasis(style="min-height: 220px;")
+    .position-relative.scrollbar
+      a.btn.p-4.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight.position-sticky.start-0(data-bs-toggle='collapse' href='#hotelDetailsCollapse' role='button' aria-expanded='true' aria-controls='hotelDetailsCollapse')
+        h4.mb-0 Hotel Details
+        span.fa-solid.fa-chevron-down.toggle-icon.text-body
+      .collapse.show#hotelDetailsCollapse
+        +HotelDetailsTable
+      a.btn.p-4.mt-8.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight.position-sticky.start-0(data-bs-toggle='collapse' href='#roomDetailsCollapse' role='button' aria-expanded='true' aria-controls='roomDetailsCollapse')
+        h4.mb-0 Room Details
+        span.fa-solid.fa-chevron-down.toggle-icon.text-body
+      .collapse.show#roomDetailsCollapse
+        +RoomDetailsTable
+  +ChangeRoomModal

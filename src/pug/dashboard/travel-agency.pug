@@ -1,0 +1,64 @@
+extends ../layouts/LayoutTheme
+include ../mixins/dashboard/travel-agency/Stats
+include ../mixins/dashboard/travel-agency/VisitorsCard
+include ../mixins/dashboard/travel-agency/FinancialActivities
+include ../mixins/dashboard/travel-agency/HolidaysNextMonth
+include ../mixins/dashboard/travel-agency/Flights
+include ../mixins/dashboard/travel-agency/IntegrationsCard
+include ../mixins/dashboard/travel-agency/GrossProfitCard
+include ../mixins/dashboard/travel-agency/BookingsCard
+
+prepend styles
+  link(href=`${CWD}vendors/mapbox-gl/mapbox-gl.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}assets/js/dashboards/travel-agency-dashboard.js`)
+  script(src=`${CWD}vendors/mapbox-gl/mapbox-gl.js`)
+  script(src="https://unpkg.com/@turf/turf@6/turf.min.js")
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+
+block content
+  .row.mb-4.mb-xl-6.mb-xxl-4.gy-3.justify-content-between
+    .col-auto
+      h2.mb-0.text-body-emphasis Travel Agency
+    .col-auto
+      .d-flex.gap-3
+        a(href="#!").btn.btn-phoenix-primary
+          span.fa-solid.fa-plus.me-2
+          | New Package
+        a(href="#!").btn.btn-primary.px-4.px-sm-11
+          span.fa-regular.fa-calendar-days.me-2
+          | Book Now
+  .row.gx-3
+    .col-xxl-7
+      .row.gx-7.pe-xxl-3
+        .col-12.col-xl-5.col-xxl-12
+          .row.g-0
+            .col-6.col-xl-12.col-xxl-6.border-bottom.border-end.border-end-xl-0.border-end-xxl.pb-4.pt-4.pt-xl-0.pt-xxl-4.pe-4.pe-sm-5.pe-xl-0.pe-xxl-5
+              +BookingValue
+            .col-6.col-xl-12.col-xxl-6.border-bottom.py-4.ps-4.ps-sm-5.ps-xl-0.ps-xxl-5
+              +FlightBooking
+            .col-6.col-xl-12.col-xxl-6.border-bottom-xl.border-bottom-xxl-0.border-end.border-end-xl-0.border-end-xxl.py-4.pe-4.pe-sm-5.pe-xl-0.pe-xxl-5
+              +Commission
+            .col-6.col-xl-12.col-xxl-6.py-4.ps-4.ps-sm-5.ps-xl-0.ps-xxl-5
+              +CancelBooking
+        .col-12.col-xl-7.col-xxl-12
+          +FinancialActivities.mt-5.mt-xl-0.mt-xxl-5.mb-5.mb-xxl-0
+    .col-xxl-5
+      .row.g-3
+        .col-12.col-md-6.col-xxl-12
+          +VisitorsCard
+        .col-12.col-md-6.col-xxl-12
+          +HolidaysNextMonth
+        .col-12 
+          +IntegrationsCard.mb-3
+  .row.g-3.mb-5
+    .col-xl-5.col-xxl-7 
+      +GrossProfitCard
+    .col-xl-7.col-xxl-5
+      +BookingsCard
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.pb-9.bg-body-emphasis.border-top
+    +Flights

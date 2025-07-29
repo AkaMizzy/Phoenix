@@ -1,0 +1,45 @@
+mixin TripSearch 
+  section.py-0
+    +Background({
+      image: `${CWD}assets/img/bg/46.png`,
+      className: 'overlay bg-opacity-50',
+      attrs: {
+        style: 'background-position: center; background-size: cover',
+      }
+    })
+    .container-medium.position-relative.pt-11.pb-15
+      h2.text-center.text-white.mb-4 Where do you want to go?
+      .position-relative.w-md-70.w-lg-50.mx-auto.mb-4.mb-lg-10
+        input.form-control.py-3.ps-4.pe-6.rounded-pill.fs-8(type='text' placeholder='Search for a location')
+        span.fa-solid.fa-search.position-absolute.top-0.end-0.mt-4.me-4.fs-8.text-body-tertiary(data-fa-transform='up-3')
+      .d-flex.justify-content-center
+        -
+          var checks = [
+            {
+              id: 'attraction-shows',
+              label: 'Attraction & Shows'
+            },
+            {
+              id: 'activities',
+              label: 'Activities'
+            },
+            {
+              id: 'day-tours',
+              label: 'Day-tours'
+            },
+            {
+              id: 'adventures',
+              label: 'Adventures'
+            },
+            {
+              id: 'sight-seeing',
+              label: 'Sight-seeing'
+            }
+          ]
+        .d-none.d-lg-flex.gap-2
+          each item, index in checks
+            input.btn-check.trip-filter-checkbox(type="checkbox" name='trip-type' id=`${item.id}` checked=index === 0 ? true : undefined)
+            label.btn.btn-phoenix-secondary.text-nowrap.px-3(for=`${item.id}`) #{item.label}
+        button.btn.btn-phoenix-secondary.ms-lg-auto(type="button" data-bs-toggle="offcanvas" data-bs-target="#tripFilterOffcanvas" aria-controls="tripFilterOffcanvas")
+          span.fa-solid.fa-filter.fs-10.me-2
+          | Filter

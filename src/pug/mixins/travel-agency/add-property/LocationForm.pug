@@ -1,0 +1,41 @@
+mixin LocationForm(config)
+  form(id=`${config.formId}2` class=config.validation && 'needs-validation' novalidate data-wizard-form='2')
+    h3.mb-6 Location
+    .form-icon-container
+      .form-floating
+        input.form-control.form-icon-input(type='text' name=`${config.name}-search-address` id=`${config.name}wizard-search-address` required=config.validation placeholder='Search address...')
+        label.text-body-tertiary.form-icon-label(for=`${config.name}wizard-search-address`) Search address...
+      span.fa-solid.fa-location-dot.text-body.form-icon.fs-10
+      span.fa-solid.fa-location-crosshairs.position-absolute.text-primary.fs-9.end-0.top-0.mt-3.me-3(data-fa-transform="down-2")
+    .mapbox-container.rounded-3.border.overflow-hidden.mt-3.mb-6
+      #mapbox(data-mapbox != {
+      attributionControl: false,
+      center: [-74.0020158, 40.7228022],
+      zoom: 14,
+      scrollZoom: false
+    } style='height: 250px')
+    .form-floating
+      input.form-control(type='text' name=`${config.name}-street` id=`${config.name}wizard-street` required=config.validation placeholder='Apartment / Street')
+      label(for=`${config.name}wizard-street`) Apartment / Street
+    .row.gx-3.my-3
+      .col-md-6
+        .form-floating.mb-3.mb-md-0
+          input.form-control(type='text' name=`${config.name}-city` id=`${config.name}wizard-city` required=config.validation placeholder='City')
+          label(for=`${config.name}wizard-city`) City
+      .col-md-6
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-state` id=`${config.name}wizard-state` required=config.validation placeholder='State (Optional)')
+          label(for=`${config.name}wizard-state`) State (Optional)
+    .row.g-3
+      .col-md-6
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-zip-code` id=`${config.name}wizard-zip-code` required=config.validation placeholder='Zip Code')
+          label(for=`${config.name}wizard-zip-code`) Zip Code
+      .col-md-6
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-country` id=`${config.name}wizard-country` required=config.validation placeholder='Country / Region')
+          label(for=`${config.name}wizard-country`) Country / Region
+    .d-flex.align-items-center.gap-3.mt-6
+      h4 Show your specific location
+      .form-check.form-switch
+        input.form-check-input(id="locationSwitchCheckChecked" type="checkbox" checked="")

@@ -1,0 +1,36 @@
+mixin FinancialActivities 
+  div&attributes(attributes)
+    .row.flex-between-end.gy-3.gx-2
+      .col-auto
+        h3.text-body-highlight Financial activities
+        p.mb-0.text-body-tertiary Yearly Balance
+      .col-12.col-sm-auto.ms-auto.order-1.order-sm-0.order-md-1.order-lg-0.order-xxl-1
+        select.form-select.form-select-sm.pe-9.w-auto(data-activities-options)
+          option(value=0) Hotel
+          option(value=1) Flight
+          option(value=2) Trip
+      .col-auto.order-md-1.order-lg-0.order-xxl-1
+        .dropdown
+          button.btn.btn-sm.btn-phoenix-secondary.bg-body-emphasis.bg-body-hover.action-btn(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" )
+            span.fas.fa-ellipsis-h(data-fa-transform="shrink-2")
+          .dropdown-menu.dropdown-menu-end
+            a.dropdown-item(href='#') Action
+            a.dropdown-item(href='#') Another action
+            a.dropdown-item(href='#') Something else here
+      .col-12.col-md-auto.col-lg-12.col-xxl-auto.mx-auto.order-1.order-sm-0
+        .d-flex.justify-content-center.gap-6.gap-xxl-4
+          button.btn.d-flex.align-items-center.p-0.shadow-none.fw-semibold#profit
+            span.bg-primary-light.me-2(style="width: 16px; height: 6px; border-radius: 1px" data-bs-theme='light')
+            span.text-body-secondary Profit
+          button.btn.d-flex.align-items-center.p-0.shadow-none.fw-semibold#revenue
+            span.bg-success-light.me-2(style="width: 16px; height: 6px; border-radius: 1px" data-bs-theme='light')
+            span.text-body-secondary Revenue
+          button.btn.d-flex.align-items-center.p-0.shadow-none.fw-semibold#expanses
+            span.bg-info-light.me-2(style="width: 16px; height: 6px; border-radius: 1px" data-bs-theme='light')
+            span.text-body-secondary Expanses
+    .echart-financial-Activities(
+      data-options!={
+      optionOne: 'profit',
+      optionTwo: 'revenue',
+      optionThree: 'expanses'
+    })

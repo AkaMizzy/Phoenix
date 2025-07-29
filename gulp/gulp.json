@@ -1,0 +1,185 @@
+{
+  "rtl": true,
+  "dir": {
+    "dev": "public",
+    "prod": "build"
+  },
+  "style": {
+    "src": "src/scss/**/*.scss",
+    "dest": "assets/css"
+  },
+  "script": {
+    "src": [
+      "src/js/utils.js",
+      "src/js/detector.js",
+      "src/js/node.js",
+      "src/js/**/!(utils | detector | node)*.js",
+      "!src/js/emoji-button.js",
+      "!src/js/charts/echarts/examples/*.js",
+      "!src/js/theme/charts/echarts/echarts-example.js",
+      "!src/js/flatpickr.js",
+      "!src/js/config.js",
+      "!src/js/phoenix.js",
+      "src/js/phoenix.js",
+      "src/js/config.js"
+    ],
+    "configNavbar": "src/js/config.js",
+    "echartsExample": [
+      "src/js/utils.js",
+      "src/js/charts/echarts/echarts-utils.js",
+      "src/js/charts/echarts/examples/*.js",
+      "!src/js/theme/charts/echarts/echarts-example.js",
+      "src/js/theme/charts/echarts/echarts-example.js"
+    ],
+    "bundles": [
+      {
+        "path": "src/js/phoenix.js",
+        "name": "phoenix",
+        "dest": "assets/js"
+      },
+      {
+        "path": "src/js/pages/ecommerce-dashboard.js",
+        "name": "ecommerce",
+        "dest": "assets/js/dashboards"
+      },
+      {
+        "path": "src/js/pages/projectmanagement-dashboard.js",
+        "name": "projectManagement",
+        "dest": "assets/js/dashboards"
+      },
+      {
+        "path": "src/js/pages/crm-dashboard",
+        "name": "crm",
+        "dest": "assets/js/dashboards"
+      },
+      {
+        "path": "src/js/pages/crm-analytics",
+        "name": "crm-analytics",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/report-details.js",
+        "name": "report-details",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/project-details.js",
+        "name": "projectDetails",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/calendar.js",
+        "name": "calendar",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/showcase.js",
+        "name": "showcase",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/config.js",
+        "name": "config",
+        "dest": "assets/js"
+      },
+      {
+        "path": "src/js/theme/charts/echarts/echarts-example.js",
+        "name": "echarts-example",
+        "dest": "assets/js"
+      },
+      {
+        "path": "src/js/pages/chat.js",
+        "name": "chat",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/kanban.js",
+        "name": "kanban",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/travel-agency-dashboard.js",
+        "name": "travelAgency",
+        "dest": "assets/js/dashboards"
+      },
+      {
+        "path": "src/js/pages/hotel-compare.js",
+        "name": "hotel-compare",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/trip.js",
+        "name": "trip",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/file-manager.js",
+        "name": "fileManager",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/stock-dashboard.js",
+        "name": "stock-dashboard",
+        "dest": "assets/js/dashboards"
+      },
+      {
+        "path": "src/js/pages/stock-details.js",
+        "name": "stock-details",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/stock-portfolio-watchlist.js",
+        "name": "stock-portfolio-watchlist",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/gantt-chart.js",
+        "name": "ganttChart",
+        "dest": "assets/js/pages"
+      },
+      {
+        "path": "src/js/pages/advance-ajax-table.js",
+        "name": "advanceAjaxTable",
+        "dest": "assets/js/pages"
+      }
+    ],
+    "dest": "assets/js"
+  },
+  "pug": {
+    "base": "src/pug",
+    "src": {
+      "all": "src/pug/**/*.pug",
+      "pages": [
+        "*.pug",
+        "apps/**/*.pug",
+        "authentication/**/*.pug",
+        "dashboard/**/*.pug",
+        "demo/**/*.pug",
+        "documentation/**/*.pug",
+        "modules/**/*.pug",
+        "pages/**/*.pug"
+      ]
+    },
+    "dest": ""
+  },
+  "product": {
+    "paths": [
+      "gulp/**/*.*",
+      "public/**/*.*",
+      "src/**/*.*",
+      ".babelrc",
+      ".eslintignore",
+      ".eslintrc.json",
+      ".gitignore",
+      ".npmrc",
+      ".prettierrc",
+      "gulpfile.js",
+      "jsconfig.json",
+      "package-lock.json",
+      "package.json",
+      "README.md",
+      "vendors.json"
+    ]
+  },
+  "watch": ["assets/img", "assets/data", "assets/video", "vendors"]
+}

@@ -1,0 +1,197 @@
+mixin PreviewItem(item, index, length)
+  tr 
+    td.text-nowrap.py-2
+      .d-flex.gap-2
+        span.fs-9(class=`${item.icon}`)
+        h5.mb-0= item.property
+    td.py-2.pe-1.px-sm-3
+      h5.fw-normal.mb-0 :
+    td.py-2
+      h5.fw-normal.mb-0.text-body-secondary= item.value
+
+mixin Preview 
+  h3.mb-2 We’re building your listing
+  p.mb-5.text-body-tertiary We're working on getting your property set up and ready for guests. Stay tuned for updates and start accepting bookings soon!
+  .alert.alert-subtle-success.alert-dismissible.fade.show.mb-5(role="alert")
+    p.mb-0.flex-1.fw-semibold.fs-9.fs-sm-8 Congratulations on your successful listing! Join a community of hospitality professionals as a host. Your hard work will turn your home into a sought-after destination. We anticipate hearing about your achievements.
+    button.btn-close(type="button" data-bs-dismiss="alert" aria-label="Close")
+  -
+    var details = [
+      {
+        property: 'Room type',
+        value: "Presidential suite",
+        icon: 'fa-solid fa-border-all'
+      },
+      {
+        property: 'Room name',
+        value: "Kempinski Jakarta",
+        icon: 'fa-solid fa-file-pen'
+      },
+      {
+        property: 'Bedroom’s',
+        value: "01",
+        icon: 'fa-solid fa-file-pen'
+      },
+      {
+        property: 'Number of beds',
+        value: "01",
+        icon: 'fa-solid fa-bed'
+      },
+      {
+        property: 'Room size',
+        value: "2.13 x 3.66 sq.m",
+        icon: 'fa-solid fa-person-shelter'
+      },
+      {
+        property: 'Adults',
+        value: "02",
+        icon: 'fa-solid fa-user'
+      },
+      {
+        property: 'Childs',
+        value: "01",
+        icon: 'fa-solid fa-children'
+      },
+      {
+        property: 'Bathroom’s',
+        value: "02",
+        icon: 'fa-solid fa-bath'
+      },
+      {
+        property: 'Balcony',
+        value: "01",
+        icon: 'fa-solid fa-person-booth'
+      },
+    ]
+  h4.text-body.mb-3 
+    | Room information
+    a(href="#!").fs-9.mx-2 Edit
+  .row.gx-7.gx-xl-4.gx-xxl-7
+    .col-md-7.col-xxl-6
+      table.table.table-borderless.mb-0
+        tr
+          th.p-0(style='width: 155px')
+          th.p-0(style='width: 16px')
+          th.p-0
+        each item, index in details.slice(0, 5)
+          +PreviewItem(item, index, details.length)
+    .col-md-5.col-xxl-6
+      table.table.table-borderless.mb-0
+        tr
+          th.p-0(style='width: 155px')
+          th.p-0(style='width: 16px')
+          th.p-0
+        each item, index in details.slice(5)
+          +PreviewItem(item, index, details.length)
+  h4.text-body.mb-4.mt-5
+    | Pricing
+    a(href="#!").fs-9.mx-2 Edit
+  h6.mb-2 Across all days
+  h3.mb-0 $894
+  h4.text-body.mb-3.mt-7
+    | Amenities
+    a(href="#!").fs-9.mx-2 Edit
+  -
+    var amenities = [
+      {
+        property: 'Wifi',
+        value: 'Free',
+        icon: 'fa-solid fa-wifi'
+      },
+      {
+        property: 'Restaurant',
+        value: 'Launch & Dinner',
+        icon: 'fa-solid fa-utensils'
+      },
+      {
+        property: 'Pool',
+        value: 'Paid',
+        icon: 'fa-solid fa-person-swimming'
+      },
+      {
+        property: 'No smoking',
+        value: 'Available',
+        icon: 'fa-solid fa-ban-smoking'
+      },
+      {
+        property: 'Parking',
+        value: 'Paid',
+        icon: 'fa-solid fa-square-parking'
+      },
+      {
+        property: 'Beach view',
+        value: 'Available',
+        icon: 'fa-solid fa-umbrella-beach'
+      },
+      {
+        property: 'Balcony',
+        value: 'Sea View',
+        icon: 'fa-solid fa-person-booth'
+      },
+      {
+        property: 'Hotel bar',
+        value: 'Paid',
+        icon: 'fa-solid fa-wine-glass'
+      },
+      {
+        property: 'Common areas',
+        value: 'Available',
+        icon: 'fa-solid fa-people-roof'
+      },
+      {
+        property: 'Tennis courts',
+        value: 'Free',
+        icon: 'fa-solid fa-table-tennis-paddle-ball'
+      },
+      {
+        property: 'Air conditioning',
+        value: 'Available',
+        icon: 'fa-solid fa-snowflake'
+      },
+      {
+        property: 'Bathtub',
+        value: 'Available',
+        icon: 'fa-solid fa-bath'
+      },
+      {
+        property: 'Flat-screen TV',
+        value: 'Paid',
+        icon: 'fa-solid fa-tv'
+      },
+    ]
+  .row.gx-7.gx-xl-4.gx-xxl-7
+    .col-md-7.col-xxl-6
+      table.table.table-borderless.mb-0
+        tr
+          th.p-0(style='width: 155px')
+          th.p-0(style='width: 16px')
+          th.p-0
+        each item, index in amenities.slice(0, 7)
+          +PreviewItem(item, index, amenities.length)
+    .col-md-5.col-xxl-6
+      table.table.table-borderless.mb-0
+        tr
+          th.p-0(style='width: 155px')
+          th.p-0(style='width: 16px')
+          th.p-0
+        each item, index in amenities.slice(7)
+          +PreviewItem(item, index, amenities.length)
+  h4.text-body.mb-4.mt-7
+    | Picture
+    a(href="#!").fs-9.mx-2 Edit
+  -
+    var pictures = [
+      "/img/gallery/59.png",
+      "/img/gallery/60.png",
+      "/img/gallery/61.png",
+      "/img/gallery/62.png",
+      "/img/gallery/63.png",
+    ]
+  .row.g-3
+    each item in pictures 
+      .col-sm-4
+        img(src=`${CWD}assets${item}`, alt="" height=160).rounded-2.w-100.object-fit-cover
+  .mt-6.d-flex.flex-wrap.gap-2
+    button.btn.btn-phoenix-danger(type='button') Discard
+    button.btn.btn-phoenix-primary(type='button') Save draft
+    button.btn.btn-primary.px-6.px-sm-11(type='submit') Open for Booking

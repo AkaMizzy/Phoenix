@@ -1,0 +1,10 @@
+mixin FileDetails
+  .phoenix-offcanvas.file-details-offcanvas.scrollbar.overflow-x-hidden.bg-body-emphasis#fileDetailsOffcanvas(data-breakpoint='xxl')
+    button.btn.p-0.fs-8.d-xxl-none.position-absolute.top-0.end-0.mt-4.me-4(data-phoenix-dismiss="offcanvas")
+      span.fa-solid.fa-xmark
+    div(data-file-details)
+      .text-center.px-4
+        img.d-dark-none.img-fluid(src=`${CWD}assets/img/spot-illustrations/46.png`, alt="")
+        img.d-light-none.img-fluid(src=`${CWD}assets/img/spot-illustrations/dark_46.png`, alt="")
+        h5.mt-4 Select an item to view more information
+  .phoenix-offcanvas-backdrop.d-xxl-none(data-phoenix-backdrop)

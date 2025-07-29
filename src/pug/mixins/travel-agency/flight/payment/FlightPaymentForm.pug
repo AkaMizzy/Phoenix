@@ -1,0 +1,58 @@
+mixin FlightPaymentForm
+  .card&attributes(attributes)
+    .card-body
+      form(id='flightCheckoutForm')
+        h3.mb-5 Payment Method
+        .row.gx-xxl-6.mb-5
+          .col-md-auto
+            .form-check
+              input.form-check-input#creditCard(type='radio' name='paymentMethod' checked)
+              label.form-check-label.fs-8.text-body.text-nowrap.d-flex.gap-2(for='creditCard')
+                | Credit card
+                img.h-100(src=`${CWD}assets/img/logos/visa.png`, alt="")
+                img.h-100(src=`${CWD}assets/img/logos/discover.png`, alt="")
+                img.h-100(src=`${CWD}assets/img/logos/mastercard.png`, alt="")
+                img.h-100(src=`${CWD}assets/img/logos/american_express.png`, alt="")
+          .col-md-auto
+            .form-check
+              input.form-check-input#paypal(type='radio' name='paymentMethod')
+              label.form-check-label.fs-8.text-body.text-nowrap(for='paypal') Paypal
+          .col-md-auto
+            .form-check
+              input.form-check-input#coupon(type='radio' name='paymentMethod')
+              label.form-check-label.fs-8.text-body.text-nowrap(for='coupon') Coupon
+        .row.gx-3.gy-4
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1(for='selectCard') Select card
+            select#selectCard.form-select.text-body-emphasis
+              option(selected='selected') Select a card
+              option(value='visa') Visa
+              option(value='discover') Discover
+              option(value='mastercard') Mastercard
+              option(value='american-express') American Express
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1(for='inputCardNumber') Card number
+            input#inputCardNumber.form-control(type='number' placeholder="Enter card number" aria-label="Card number")
+          .col-12
+            label.fw-bold.text-body-highlight.mb-1(for='inputName') Full name
+            input#inputName.form-control(type='text' placeholder='Ansolo Lazinatov' aria-label="Full name")
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1 Expires on
+            .d-flex
+              select.form-select.text-body-emphasis.me-3
+                option(selected='selected') Month
+                option January
+                option February
+                option March
+              select.form-select.text-body-emphasis
+                option(selected='selected') Year
+                - var n = 1990
+                  while n < 2023
+                    option(value=n)=n++
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1(for='inputCardCVC') CVC
+            input#inputCardCVC.form-control(type='number' placeholder="Enter a valid CVC" aria-label="CVC")
+          .col-12
+            .form-check
+              input#gridCheck.form-check-input(type='checkbox')
+              label.form-check-label.text-body-emphasis.fs-8(for='gridCheck') Save Card Details

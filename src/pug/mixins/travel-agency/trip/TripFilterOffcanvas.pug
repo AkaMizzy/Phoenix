@@ -1,0 +1,254 @@
+mixin TripFilterOffcanvas 
+  .offcanvas.offcanvas-end(tabindex="-1" id="tripFilterOffcanvas" aria-labelledby="tripFilterOffcanvasLabel")
+    .offcanvas-header.p-4.bg-body-highlight
+      h5.mb-0.text-body-highlight(id='tripFilterOffcanvasLabel') Filter
+      button.btn.btn-close(data-bs-dismiss="offcanvas" aria-label="Close")
+    .offcanvas-body.scrollbar.px-4.pt-4.pb-5
+      h4.text-body-highlight.mb-4 Price Range
+      .row.g-2 
+        .col-6
+          .form-icon-container
+            input.form-control.form-icon-input(type='text' placeholder='Minimum amount: $245')
+            span.fa-solid.fa-dollar-sign.form-icon.text-body-tertiary.fs-9
+        .col-6
+          .form-icon-container
+            input.form-control.form-icon-input(type='text' placeholder='Maximum amount: $245')
+            span.fa-solid.fa-dollar-sign.form-icon.text-body-tertiary.fs-9
+      .noUi-primary-lighter.noUi-slider-large.noUi-handle-primary.noUi-handle-circle.ps-5.pe-3.mt-3(data-nouislider!={
+        range: {
+          'min': 0,
+          'max': 250
+        },
+        start: [20, 150], 
+        connect: true 
+      })
+      hr.my-5
+      .d-lg-none
+        h4.mb-4.text-body-highlight Category
+        -
+          var filters = [
+            {
+              label: 'Attraction & Shows',
+              id: 'attraction-shows-offcanvas'
+            },
+            {
+              label: 'Activities',
+              id: 'activities-offcanvas'
+            },
+            {
+              label: 'Day-tours',
+              id: 'day-tours-offcanvas'
+            },
+            {
+              label: 'Adventures',
+              id: 'adventures-offcanvas'
+            },
+            {
+              label: 'Sight-seeing',
+              id: 'Sight-seeing-offcanvas'
+            },
+          ]
+        .row.g-2
+          each item, index in filters 
+            .col-6
+              input.btn-check.trip-filter-checkbox(type="checkbox" name='trip-type' id=`${item.id}` checked=index === 0 ? true : undefined)
+              label.btn.btn-phoenix-secondary.text-nowrap.px-3.w-100(for=`${item.id}`) #{item.label}
+        hr.my-5
+      h4.mb-4.text-body-highlight Duration
+      .row.g-3 
+        .col-6
+          .form-check
+            input.form-check-input(id="durationLess6" type="checkbox" value="durationLess6" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='durationLess6') Less than 6 hours
+          .form-check.mb-0
+            input.form-check-input(id="duration12to24" type="checkbox" value="duration12to24" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='duration12to24') 12 - 24 hours
+        .col-6 
+          .form-check
+            input.form-check-input(id="duration6to12" type="checkbox" value="duration6to12" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='duration6to12') 6 - 12 hours
+          .form-check.mb-0
+            input.form-check-input(id="duration24plus" type="checkbox" value="duration24plus" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='duration24plus') 24+ hours
+      hr.my-5
+      h4.mb-4.text-body-highlight Time
+      - 
+        var duration = [
+          {
+            id: 'duration8AMTo10AM',
+            label: '8 AM - 10 AM'
+          },
+          {
+            id: 'duration10AMTo12PM',
+            label: '10 AM - 12 PM'
+          },
+          {
+            id: 'duration12PMTo2PM',
+            label: '12 PM - 2 PM'
+          },
+          {
+            id: 'duration2PMTo4PM',
+            label: '2 PM - 4 PM'
+          },
+          {
+            id: 'duration4PMTo6PM',
+            label: '4 PM - 6 PM'
+          },
+          {
+            id: 'duration6PMTo8PM',
+            label: '6 PM - 8 PM'
+          },
+        ]
+      .row.g-2
+        each item in duration
+          .col-4
+            input.btn-check.flight-filter-checkbox(type="checkbox" name=`${item.name}` id=`${item.id}`)
+            label.btn.btn-phoenix-secondary.text-nowrap.w-100.px-0(for=`${item.id}`) #{item.label}
+      hr.my-5
+      h4.mb-4.text-body-highlight Travel Style
+      .row.g-3 
+        .col-6
+          .form-check
+            input.form-check-input(id="soloTravel" type="checkbox" value="soloTravel" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='soloTravel') Solo Travel
+          .form-check.mb-0
+            input.form-check-input(id="familyFriendly" type="checkbox" value="familyFriendly" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='familyFriendly') Family-Friendly
+        .col-6 
+          .form-check
+            input.form-check-input(id="groupTravel" type="checkbox" value="groupTravel" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='groupTravel') Group Travel
+          .form-check.mb-0
+            input.form-check-input(id="adventureTravel" type="checkbox" value="adventureTravel" )
+            label.form-check-label.fs-8.text-body-highlight.fw-normal(for='adventureTravel') Adventure Travel
+      a.fw-bold.fs-9.mt-3.d-inline-block(href="#!") Show more items
+      hr.my-5
+      h4.mb-4 Tags
+      -
+        var tags = [
+          {
+            type: 'Destination Type',
+            checks: [
+              {
+                label: 'Beach',
+                id: 'beach'
+              },
+              {
+                label: 'Mountain',
+                id: 'mountain'
+              },
+              {
+                label: 'City',
+                id: 'city'
+              },
+              {
+                label: 'Countryside',
+                id: 'countryside'
+              },
+              {
+                label: 'Island',
+                id: 'island'
+              },
+              {
+                label: 'Jungle',
+                id: 'jungle'
+              }
+            ]
+          },
+          {
+            type: 'Activities',
+            checks: [
+              {
+                label: 'Hiking',
+                id: 'hiking'
+              },
+              {
+                label: 'Camping',
+                id: 'camping'
+              },
+              {
+                label: 'Sightseeing',
+                id: 'sightseeing'
+              },
+              {
+                label: 'Wildlife Viewing',
+                id: 'wildlifeViewing'
+              }
+            ]
+          },
+          {
+            type: 'Season',
+            checks: [
+              {
+                label: 'Summer',
+                id: 'summer'
+              },
+              {
+                label: 'Winter',
+                id: 'winter'
+              },
+              {
+                label: 'Spring',
+                id: 'spring'
+              },
+              {
+                label: 'Fall/Autumn',
+                id: 'fallAutumn'
+              }
+            ]
+          },
+          {
+            type: 'Budget',
+            checks: [
+              {
+                label: 'Luxury',
+                id: 'luxury'
+              },
+              {
+                label: 'Mid-range',
+                id: 'midRange'
+              },
+              {
+                label: 'Budget',
+                id: 'budget'
+              }
+            ]
+          },
+          {
+            type: 'Accommodation',
+            checks: [
+              {
+                label: 'Hotel',
+                id: 'hotel'
+              },
+              {
+                label: 'Resort',
+                id: 'resort'
+              },
+              {
+                label: 'Vacation Rental',
+                id: 'vacationRental'
+              },
+              {
+                label: 'Homestay',
+                id: 'homestay'
+              }
+            ]
+          }
+        ]
+      each category in tags
+        h5.fw-normal.my-3.text-body-quaternary= category.type
+        .row.gx-3
+          each item in category.checks
+            .col-6
+              .form-check
+                input.form-check-input(id=`${item.id}` type="checkbox" value=`${item.id}` )
+                label.form-check-label.fs-8.text-body-highlight.fw-normal(for=`${item.id}`)= item.label
+      a.fw-bold.fs-9.mt-3.d-inline-block(href="#!") Less items
+    .p-4.border-top.border-translucent.d-flex.gap-2
+      button.btn.btn-lg.btn-phoenix-primary
+        span.fa-solid.fa-arrows-rotate.me-2.fs-9
+        | Reset
+      button.btn.btn-lg.btn-primary.flex-1 
+        span.fa-solid.fa-search.me-2.fs-9
+        | Update result

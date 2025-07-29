@@ -1,0 +1,18 @@
+mixin HotelCard(data)
+  .hover-actions-trigger.mx-auto.rounded-3.overflow-hidden
+    img(src=`${CWD}assets${data.img}`, alt="").img-fluid
+    .hover-actions.top-0.end-0.mt-4.me-4.z-5
+      button.btn.btn-wish
+        span.far.fa-heart(data-fa-transform='down-1')
+    .backdrop-faded.backdrop-secondary-dark.h-100.d-flex.flex-column.justify-content-end
+      a.stretched-link.fs-7.text-white.fw-bold(href=`${CWD}${paths['hotel-details']}`)= data.name
+      p.mb-2.text-secondary-lighter
+        span.fa-solid.fa-map-marker-alt.me-2
+        | #{data.location}
+      .d-flex.align-items-center.gap-3
+        span.badge.badge-phoenix.badge-phoenix-warning.fs-8.fw-normal
+          span.fa-solid.fa-star.me-1.fs-9(data-fa-transform='up-1')
+          span.badge-label= data.rating
+        h4.mb-0.text-white.fw-bold.text-nowrap
+          | $#{data.price} 
+          span.text-secondary-lighter.fs-8.fw-normal / night

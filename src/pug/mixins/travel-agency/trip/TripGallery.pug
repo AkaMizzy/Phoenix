@@ -1,0 +1,63 @@
+mixin TripGallery
+  .row.g-2.g-md-3 
+    .col-md-6
+      - var sliderImages = ['/img/trip/10.png', '/img/trip/17.png', '/img/trip/18.png']
+      .swiper-theme-container.rounded-2.overflow-hidden
+        .swiper.swiper.theme-slider(data-swiper!={
+          slidesPerView: 1,
+          loop: true,
+          autoplay: true,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+          },
+        })
+          .swiper-wrapper
+            each img in sliderImages
+              .swiper-slide
+                img(src=`${CWD}assets${img}`, alt="").w-100.h-100.object-fit-cover
+        .swiper-pagination
+        .swiper-nav.swiper-nav-inside
+          .swiper-button-next.bg-transparent.border-0.text-white
+            span.fas.fa-chevron-right.nav-icon
+          .swiper-button-prev.bg-transparent.border-0.text-white
+            span.fas.fa-chevron-left.nav-icon
+    .col-md-6
+      -
+        var images = [
+          {
+            img: '/img/trip/19.png',
+            largeImg: '/img/trip/11.jpg'
+          },
+          {
+            img: '/img/trip/20.png',
+            largeImg: '/img/trip/12.jpg'
+          },
+          {
+            img: '/img/trip/21.png',
+            largeImg: '/img/trip/13.jpg'
+          },
+          {
+            img: '/img/trip/22.png',
+            largeImg: '/img/trip/14.jpg'
+          },
+          {
+            img: '/img/trip/23.png',
+            largeImg: '/img/trip/15.jpg'
+          },
+          {
+            img: '/img/trip/24.png',
+            largeImg: '/img/trip/16.jpg'
+          },
+        ]
+      .row.g-2.g-md-3
+        each item in images.slice(0, 5)
+          .col-4
+            a(href=`${CWD}assets${item.largeImg}` data-gallery='trip-details-gallery')
+              img(src=`${CWD}assets${item.img}`, alt="").img-fluid.rounded-2
+        .col-4
+          .position-relative.rounded-2.overflow-hidden
+            a(href=`${CWD}assets${images[5].largeImg}` data-gallery='trip-details-gallery') 
+              img(src=`${CWD}assets${images[5].img}`, alt="" height='43').img-fluid
+            .position-absolute.w-100.h-100.left-0.top-0.d-flex.flex-center.bg-black.bg-opacity-50
+              a(href=`${CWD}${paths['hotel-gallery']}`).text-white.stretched-link.fs-7.fs-lg-5.fw-bolder 24+

@@ -1,0 +1,133 @@
+mixin ImgLightBox(config)
+  .img-zoom-hover-lg.rounded-2.overflow-hidden
+    a(href="#!") 
+      img(src=`${CWD}assets/img/gallery/${config.img}.png`, alt="" height=220).w-100.object-fit-cover
+    button.btn.btn-wish.position-absolute.top-0.end-0.mt-4.me-4
+      span.far.fa-heart
+    .backdrop-faded
+      a(href="#!").text-white.fw-bolder.fs-7.stretched-link= config.location
+      h5.text-light.mb-0
+        span.fa-solid.fa-star.text-warning.me-1(data-fa-transform='shrink-2')
+        | #{config.rating}
+        span.fs-10 /5 
+        | (#{config.review}k review)
+
+mixin Gallery 
+  section.py-10.overflow-hidden
+    +Background({image: `${CWD}assets/img/bg/bg-left-30.png`, attrs: { style: { 'background-size': '40%','background-position':'left', 'z-index': '1'}}, className: "d-none d-xl-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-30.png`, attrs: { style: { 'background-size': '26%','background-position':'right 25px', 'z-index': '1'}}, className: "d-none d-xl-block"})
+    .bg-booking-gallery
+    .container-medium.position-relative.z-2
+      h3.mb-2.text-body-emphasis.text-center Popular Attractions
+      p.mb-0.text-body-tertiary.text-center.mb-5 Explore the most popular and frequently visited destinations around the world
+      ul.nav.mb-6.justify-content-center.flex-wrap.mx-auto.w-max-content(data-filter-nav)
+        li.nav-item
+          a.isotope-nav.cursor-pointer.active(data-filter='.tokyo') Tokyo
+        li.nav-item
+          a.isotope-nav.cursor-pointer(data-filter='.bali') Bali
+        li.nav-item
+          a.isotope-nav.cursor-pointer(data-filter='.sydney') Sydney
+        li.nav-item 
+          a.isotope-nav.cursor-pointer(data-filter='.paris') Paris
+      -
+        var images = [
+          {
+            img: 'tokyo-1',
+            category: 'tokyo',
+            location: 'King Power Mahanakhon',
+            rating: 4.8,
+            review: 1.4,
+          },
+          {
+            img: 'tokyo-2',
+            category: 'tokyo',
+            location: 'Meiji Jingu',
+            rating: 5.0,
+            review: 2.2,
+          },
+          {
+            img: 'tokyo-3',
+            category: 'tokyo',
+            location: 'Imperial Palace',
+            rating: 4.5,
+            review: 1.2,
+          },
+          {
+            img: 'bali-1',
+            category: 'bali',
+            location: 'Nusa Lembongan',
+            rating: 4.7,
+            review: 1.2,
+          },
+          {
+            img: 'bali-2',
+            category: 'bali',
+            location: 'Waterbom Bali',
+            rating: 4.5,
+            review: 1.8,
+          },
+          {
+            img: 'bali-3',
+            category: 'bali',
+            location: 'Kuta Beach',
+            rating: 5.0,
+            review: 4.1,
+          },
+          {
+            img: 'sydney-1',
+            category: 'sydney',
+            location: 'The Rocks',
+            rating: 4.8,
+            review: 1.9,
+          },
+          {
+            img: 'sydney-2',
+            category: 'sydney',
+            location: 'Manly Beach',
+            rating: 4.7,
+            review: 1.1,
+          },
+          {
+            img: 'sydney-3',
+            category: 'sydney',
+            location: 'Darling Harbour',
+            rating: 5.0,
+            review: 3.2,
+          },
+          {
+            img: 'paris-1',
+            category: 'paris',
+            location: 'Louvre Museum',
+            rating: 4.4,
+            review: 4.3,
+          },
+          {
+            img: 'paris-2',
+            category: 'paris',
+            location: 'Montmartre',
+            rating: 5.0,
+            review: 5.0,
+          },
+          {
+            img: 'paris-3',
+            category: 'paris',
+            location: 'Tuileries Garden',
+            rating: 4.1,
+            review: 4.5,
+          }
+        ]
+      .row.g-0.justify-content-center
+        .col-md-9.col-lg-7.col-xl-5
+          .row.gx-0.gy-3#image_gallery(data-sl-isotope!={
+            layoutMode: 'packery',
+            filter: ".tokyo"
+          })
+            each item in images 
+              .col-12.isotope-item.w-100(class=`${item.category}`)
+                +ImgLightBox(item)
+      .d-flex.align-items-center.justify-content-center.gap-3.mt-4
+        h5.mb-0 Explore more popular destination
+        .btn-ping
+          .btn-ping-bg
+          button.btn.border.p-0.fs-8.text-primary.d-flex.align-items-center.justify-content-center
+            span.fa-solid.fa-arrow-right

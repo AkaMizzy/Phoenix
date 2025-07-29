@@ -1,0 +1,64 @@
+mixin GrossProfitCard
+  -
+    var profitData = [
+      {
+        title: 'Flight',
+        bgColor: 'primary-light',
+        profit: '162,791,400',
+        percent:'15.50',
+        icon:'trending-up',
+        color:'primary'
+      },
+      {
+        title: 'Flight (Package)',
+        bgColor: 'info-light',
+        profit: '135,659,500',
+        percent:'11.09',
+        icon:'trending-down',
+        color:'danger'
+      },
+      {
+        title: 'Hotel',
+        bgColor: 'warning-light',
+        profit: '271,319,000',
+        percent:'29.98',
+        icon:'trending-up',
+        color:'success'
+      },
+      {
+        title: 'Hotel (Package)',
+        bgColor: 'success-light',
+        profit: '162,791,400',
+        percent:'03.90',
+        icon:'trending-up',
+        color:'warning'
+      },
+    ]
+  .card.h-xxl-100&attributes(attributes)
+    .card-header.pb-3
+      .row.justify-content-between.g-3
+        .col-auto 
+          h3.text-body-highlight Gross Profit
+          p.mb-0 Annual income according to the board
+        .col-auto 
+          select.form-select.form-select-sm
+            option Last Fiscal Year
+            option Last Calendar year
+            option Last Quarter
+    .card-body
+      .row.align-items-center.h-100.gy-5
+        .col-12.col-md-auto.col-xl-12.col-xxl-auto.order-md-1.order-xl-0.order-xxl-1.px-md-8.px-xl-6
+          .echart-gross-profit.mx-auto.mt-3.mt-md-0.mt-xl-3.mt-xxl-0(style="width: 250px; height: 250px")
+        .col-12.col-md-auto.col-xl-12.col-xxl-auto.flex-1.h-md-100
+          .d-flex.flex-column.justify-content-between.h-md-100.h-xl-auto.h-xxl-100
+            each item, index in profitData
+              .d-flex.align-items-center.justify-content-between
+                .d-flex.gap-2
+                  .bullet-item(class=`bg-${item.bgColor}` data-bs-theme='light')
+                  div
+                    h6.mb-0.text-body.fw-semibold.mb-2= item.title
+                    h5.mb-0.text-body $#{item.profit}
+                .d-flex.align-items-center.gap-2(class=`text-${item.color}`)
+                  span.fw-bold(data-feather=`${item.icon}` style="width: 24px; height: 24px")
+                  p.mb-0.fw-bold #{item.percent}%
+              hr(class=`${index === profitData.length - 1 ? "d-none": ''}`)

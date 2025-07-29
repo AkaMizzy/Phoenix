@@ -1,0 +1,1191 @@
+extends layouts/LayoutComponent
+
+mixin Changelog(config)
+  .card.shadow-none.border.my-3
+    .card-header.border-bottom.bg-body
+      h5.mb-2
+        code.fw-bold.fs-7=config.version
+        |  - #{config.name}
+      p.mb-0=config.date
+    .card-body
+      block
+
+append variables
+  -
+    var pageHeader = {
+      title: 'Changelog'
+    }
+
+block component
+
+  +Changelog({
+    version: 'v1.23.0',
+    name:'Pyraflame',
+    date: '15 June, 2025',
+  })
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li PACKAGE : @fortawesome/fontawesome-free 
+        code 6.5.2 
+        | to 
+        code 6.7.2
+      li PACKAGE : bigpicture 
+        code 2.6.2 
+        | to 
+        code 2.6.3
+      li PACKAGE:  Bootstrap 
+        code 5.3.3 
+        | to 
+        code 5.3.6
+      li PACKAGE : chart.js 
+        code 4.4.8 
+        | to 
+        code 4.4.9
+      li PACKAGE : choices.js 
+        code 10.2.0 
+        | to 
+        code 11.1.0
+      li PACKAGE : dayjs 
+        code 1.11.11 
+        | to 
+        code 1.11.13
+      li PACKAGE : dhtmlx-gantt 
+        code 9.0.3 
+        | to 
+        code 9.0.11
+      li PACKAGE : echarts 
+        code 5.5.0 
+        | to 
+        code 5.6.0
+      li PACKAGE : fullcalendar 
+        code 6.1.11 
+        | to 
+        code 6.1.17
+      li PACKAGE : glightbox 
+        code 3.3.0 
+        | to 
+        code 3.3.1
+      li PACKAGE : gsap 
+        code 3.12.5 
+        | to 
+        code 3.13.0
+      li PACKAGE : mapbox-gl 
+        code 3.3.0 
+        | to 
+        code 3.12.0
+      li PACKAGE : nouislider 
+        code 15.7.1 
+        | to 
+        code 15.8.1
+      li PACKAGE : prismjs 
+        code 1.29.0 
+        | to 
+        code 1.30.0
+      li PACKAGE : simplebar 
+        code 6.2.5 
+        | to 
+        code 6.3.1
+      li PACKAGE : sortablejs 
+        code 1.15.2 
+        | to 
+        code 1.15.6
+      li PACKAGE : swiper 
+        code 11.1.4 
+        | to 
+        code 11.2.8
+      li PACKAGE : tinymce 
+        code 7.0.1 
+        | to 
+        code 7.9.1
+      li JS : 
+        code src/js/theme/charts/echarts/contacts-by-source-chart.js 
+      li JS : 
+        code src/js/theme/charts/echarts/issue-discovered-chart.js 
+      li JS : 
+        code src/js/theme/choices.js 
+      li PAGE : 
+        code public/dashboard/project-management.html 
+      li PAGE : 
+        code public/apps/events/create-an-event.html
+      li PAGE : 
+        code public/modules/components/alerts.html
+      li SCSS : 
+        code src/scss/theme/helpers/_flex.scss 
+      li SCSS : 
+        code src/scss/theme/_alert.scss 
+      li SCSS : 
+        code src/scss/theme/_full-calendar.scss
+      li SCSS : 
+        code src/scss/theme/_gantt-chart.scss 
+      li SCSS : 
+        code src/scss/theme/_nav-tab.scss  
+    h6.mb-2 Fix 
+    ul.bullet-inside.ps-0 
+      li JS: 
+        code src/js/theme/charts/echarts/call-campaign-reports.js 
+      
+      li 
+        code public/modules/components/calendar.html 
+        | responsive design updated for mobile and tablet.
+      
+      li 
+        code public/apps/travel-agency/hotel/customers 
+        | footer layout updated.
+      li Other minor issue.
+
+  +Changelog({
+    version: 'v1.22.0',
+    name:'Fawkes',
+    date: '25 March, 2025',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE : 
+        code public/apps/stock/portfolio.html
+      li PAGE : 
+        code public/apps/stock/stock-details.html
+      li PAGE : 
+        code public/apps/stock/watchlist.html
+      li PAGE : 
+        code public/dashboard/stock.html
+      li JS: 
+        code src/js/pages/advance-ajax-table.js
+      li JS: 
+        code src/js/pages/chat.js
+      li JS: 
+        code src/js/pages/hotel-compare.js
+      li JS: 
+        code src/js/pages/kanban.js
+      li JS: 
+        code src/js/pages/report-details.js
+      li JS : 
+        code src/js/data/stock-data.js
+      li JS : 
+        code src/js/pages/stock-dashboard.js
+      li JS : 
+        code src/js/pages/stock-details.js
+      li JS : 
+        code src/js/pages/stock-portfolio-watchlist.js
+      li JS : 
+        code src/js/pages/trip.js
+      li JS : 
+        code src/js/theme/charts/chartjs/top-stock-chart.js
+      li JS :
+        code src/js/theme/charts/echarts/company-profile-employees-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/dividends-bar-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/dividends-growth-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/eps-this-year-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/eps-next-year-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/forecast-of-revenue-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/growth-in-revenue-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/portfolio-line-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/revenue-next-year.js
+      li JS : 
+        code src/js/theme/charts/echarts/revenue-this-year-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/stock-overview-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/stock-overview-inverted-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/stock-overview-mixed-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/stock-share-report-chart.js
+      li JS : 
+        code src/js/theme/charts/echarts/watchlist-chart-report.js
+      li SCSS : 
+        code src/scss/theme/plugins/_stock.scss
+      li PACKAGE : 
+        code chart.js
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li JS :
+        code  src/js/theme/data.js to src/js/data/data.js
+      li DOC : 
+        code Advance ajax table documentation
+      li JS : 
+        code ecommerce-dashboard.js, projectmaanagement-dashboard.js, crm-dashboard.js, travel-agency-dashboard.js 
+        | are moved to 
+        code public/assets/js/dashboards 
+      li JS : 
+        code crm-analytics.js, project-details.js, calendar.js, showcase.js, chat.js, file-manager.js, gantt-chart.js 
+        | are moved 
+        code to public/assets/js/pages
+      li  Optimized 
+        code phoenix.js 
+        | by moving some functions to page-specific script files: 
+        ul 
+          li 
+            code reportDetailsChartInit
+          li 
+            code chatInit 
+          li 
+            code createBoardInit 
+          li 
+            code kanbanInit 
+          li 
+            code mapboxClusterInit 
+          li
+            code flightMapInit
+      li 
+        code src/scss/theme/plugins/_tinymce 
+      li 
+        code src/scss/theme/plugins/_dropzone 
+  +Changelog({
+    version: 'v1.21.0',
+    name:'Dionysus',
+    date: '02 February, 2025',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE : 
+        code public/apps/gantt-chart.html
+      li DOC : 
+        code  public/modules/components/dhtmlx-gantt.html
+      li JS : 
+        code src/js/theme/ganttchart/gantt-chart.js
+      li JS : 
+        code src/js/theme/ganttchart/gantt-data.js
+      li JS : 
+        code src/js/theme/ganttchart/layout-config.js
+      li SCSS : 
+        code src/scss/theme/plugins/_gantt.scss
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li PLUGIN :
+        code  dhtmlx-gantt
+  +Changelog({
+    version: 'v1.20.1',
+    name:'Hestia',
+    date: '04 November, 2024',
+  })
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Fix the navbar on the travel agency landing page
+  +Changelog({
+    version: 'v1.20.0',
+    name:'Aphrodite',
+    date: '29 October, 2024',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/file-manager/grid-view.html
+      li PAGE :
+        code  public/apps/file-manager/list-view.html
+      li JS :
+        code  src/js/theme/file-manager/file-manager.js
+      li JS :
+        code  src/js/theme/file-manager/template.js
+      li JS :
+        code  src/js/theme/file-manager/data.js
+      li SCSS :
+        code  src/scss/theme/_file-manager.scss
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li JS :
+        code  src/js/theme/bulk-select.js
+      li JS :
+        code  src/js/theme/phoenix-offcanvas.js
+      li JS :
+        code  src/js/theme/play-on-hover.js
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Body overflow hidden issue in Phoenix offcanvas
+      li Tooltip arrow placement issue on RTL mode
+      li Other minor issues
+  +Changelog({
+    version: 'v1.19.0',
+    name:'Aion',
+    date: '06 August, 2024',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/gallery/album.html
+      li PAGE :
+        code  public/apps/gallery/gallery-column.html
+      li PAGE :
+        code  public/apps/gallery/gallery-grid.html
+      li PAGE :
+        code  public/apps/gallery/grid-with-title.html
+      li PAGE :
+        code  public/apps/gallery/gallery-masonry.html
+      li PAGE :
+        code  public/apps/gallery/gallery-slider.html
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li Change Friday and Saturday's holidays to Saturday and Sunday in the calendar
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Fix Query parameter removal issue
+      li Advance table tooltip
+      li Other minor issues
+  +Changelog({
+    version: 'v1.18.1',
+    name:'Hera',
+    date: '30 June, 2024',
+  })
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li Removed 
+        code Polyfill.io
+  +Changelog({
+    version: 'v1.18.0',
+    name:'Aether',
+    date: '10 June, 2024',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/travel-agency/trip/homepage.html
+      li PAGE :
+        code  public/apps/travel-agency/trip/trip-details.html
+      li PAGE :
+        code  public/apps/travel-agency/trip/checkout.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/customer/gallery.html
+      li JS :
+        code  src/js/theme/password-toggle.js
+      li JS :
+        code  src/js/theme/play-on-hover.js
+  +Changelog({
+    version: 'v1.17.0',
+    name:'Apollo',
+    date: '07 May, 2024',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/travel-agency/flight/homepage.html
+      li PAGE :
+        code  public/apps/travel-agency/flight/booking.html
+      li PAGE :
+        code  public/apps/travel-agency/flight/payment.html
+      li PAGE :
+        code  public/modules/components/typed-text.html
+      li PAGE :
+        code  public/modules/forms/advance/range.html
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li All dependencies have been upgraded to the latest version
+      li Removed all the scripts from demo layout pages
+      li Dropzone single image upload style
+      li Added floating label support for advance select
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Echart tooltip z-index issue
+      li Accordion button color fix
+      li Active table style
+      li Other minor design &amp; typo issues
+  +Changelog({
+    version: 'v1.16.0',
+    name:'Helios',
+    date: '08 April, 2024',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/travel-agency/hotel/admin/add-room.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/admin/room-search.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/customer/homepage.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/customer/hotel-details.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/customer/hotel-compare.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/customer/checkout.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/customer/payment.html
+      li JS :
+        code  src/js/theme/collapse-all.js
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Removed scripts and other navbars from layout pages.
+      li Other minor bugs
+
+  +Changelog({
+    version: 'v1.15.0',
+    name:'Eurus',
+    date: '12 February, 2024',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/dashboard/travel-agency.html
+      li PAGE :
+        code  public/apps/travel-agency/landing.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/admin/add-property.html
+      li PAGE :
+        code  public/apps/travel-agency/hotel/admin/room-listing.html
+      li JS :
+        code  src/js/theme/mapbox.js
+      li JS :
+        code  src/js/theme/flight-map.js
+      li JS :
+        code  src/js/theme/typed.js
+      li JS :
+        code src/js/theme/nouislider.js
+      li JS :
+        code src/js/theme/price-tier-form.js
+      li Utility classes 
+        ul 
+          li Link
+            ul
+              li 
+                code link-body
+              li 
+                code link-body-secondary
+              li 
+                code link-body-highlight
+              li 
+                code link-body-quaternary
+              li 
+                code link-body-tertiary
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Phoenix button disabled issue
+      li Vertical navbar collapse issue
+      li Horizontal navbar issue on icon hover
+      li Other minor bugs
+
+  +Changelog({
+    version: 'v1.14.0',
+    name:'Elpis',
+    date: '7 Dec, 2023',
+  })
+    .alert.alert-subtle-warning.d-flex.align-items-center(role='alert')
+      = '\n'
+      span.fas.fa-info-circle.text-warning.fs-5.me-3
+      p.mb-0.flex-1 This is a major update. Please backup your project before upgrading to the latest version
+      = '\n'
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li New theme color shades
+      li DOC: Color 
+        a(href='https://prium.github.io/phoenix/v1.14.0/documentation/customization/color.html') see documentation
+      li Utility classes 
+        ul 
+          li Text
+            ul
+              li 
+                code text-body-highlight
+              li
+                code text-body-quaternary
+              li
+                code text-body-hover
+              li
+                code text-body-secondary-hover
+              li
+                code text-body-tertiary-hover
+              li
+                code text-body-quaternary-hover
+              li
+                code text-body-highlight-hover
+              li
+                code text-{themeColor}-light
+              li
+                code text-{themeColor}-lighter
+              li
+                code text-{themeColor}-dark
+              li
+                code text-{themeColor}-darker
+          li 
+            code dark__bg-opacity-{0|25|50|75|85|100}
+          li Background
+            ul 
+              li 
+                code bg-body-emphasis
+              li 
+                code bg-body-quaternary
+              li 
+                code bg-body-highlight
+              li 
+                code bg-body-hover
+              li 
+                code bg-body-secondary-hover
+              li 
+                code bg-body-tertiary-hover
+              li 
+                code bg-body-quaternary-hover
+              li 
+                code bg-{themeColor}-light
+              li 
+                code bg-{themeColor}-lighter
+              li 
+                code bg-{themeColor}-dark
+              li 
+                code bg-{themeColor}-darker
+          li Border 
+            ul 
+              li
+                code border-translucent
+              li
+                code border-{themeColor}-light
+              li
+                code border-{themeColor}-dark
+          li Font size 
+            ul 
+              li Replaced
+                code .fs--3 
+                | with
+                code .fs-11 
+              li Replaced
+                code .fs--2 
+                | with 
+                code .fs-10 
+              li Replaced
+                code .fs–1  
+                | with 
+                code fs-9 
+              li Replaced 
+                code .fs-0  
+                | with 
+                code .fs-8 
+              li Replaced 
+                code .fs-1  
+                | with 
+                code .fs-7 
+              li Replaced 
+                code .fs-2  
+                | with 
+                code .fs-6 
+              li Replaced 
+                code .fs-3  
+                | with 
+                code .fs-5 
+              li Replaced 
+                code .fs-4  
+                | with 
+                code .fs-4 
+              li Replaced 
+                code .fs-5  
+                | with 
+                code .fs-3 
+              li Replaced 
+                code .fs-6  
+                | with 
+                code .fs-2 
+              li Replaced 
+                code .fs-7  
+                | with 
+                code .fs-1 
+
+    h6.mb-2 Updated
+    ul.bullet-inside.ps-0
+      li Bootstrap to 5.3.2
+      li All SCSS files are updated
+      li Almost all JS files are updated
+      li DOC: Styling 
+        a(href='https://prium.github.io/phoenix/v1.14.0/documentation/customization/styling.html') see documentation
+      li DOC: Dark Mode 
+        a(href='https://prium.github.io/phoenix/v1.14.0/documentation/customization/dark-mode.html') see documentation
+      li HTML: 
+        code bg-soft-{color} 
+        | to 
+        code bg-{color}-subtle
+      li HTML: 
+        code z-index-{values} 
+        | to 
+        code z-{values} 
+      li HTML: 
+        code text-none 
+        | class to 
+        code text-transform-none
+      li HTML: 
+        code {text/bg}-gray-{100-1100} 
+        | classes replaced with 
+        code {text/bg}-body-{color} 
+      li HTML: 
+        code text-{themeColor}-{variant} 
+        | classes replaced with 
+        code text-{themeColor}-light/lighter/dark/darker 
+        | classes
+      li HTML: 
+        code bg-{themeColor}-{variant} 
+        | classes replaced with 
+        code bg-{themeColor}-light/lighter/dark/darker 
+        | classes
+
+
+
+  +Changelog({
+    version: 'v1.13.0',
+    name:'Auxo',
+    date: '18 June, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/pages/faq/faq-tab.html
+      li PAGE :
+        code  public/pages/errors/403.html
+      li PAGE :
+        code  public/pages/authentication/simple/2FA.html
+      li PAGE :
+        code  public/pages/authentication/split/2FA.html
+      li PAGE :
+        code  public/pages/authentication/card/2FA.html
+      li JS :
+        code  src/js/theme/faq-tab.js
+      li JS :
+        code  src/js/theme/2fa-verification.js
+      li JS :
+        code  src/js/theme/sortable.js
+      li JS :
+        code src/js/theme/kanban.js
+      li DOC :
+        code  public/modules/components/sortable.html
+
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li Added text-decoration-underline at links.
+      li JS :
+        code src/js/theme/calendar/app-calendar.js
+
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Advance table issue fixed
+      li Other minor bugs
+
+  +Changelog({
+    version: 'v1.12.0',
+    name:'Notus',
+    date: '15 May, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/kanban/boards.html
+      li PAGE :
+        code  public/widgets.html
+      li FEATURE :
+        code  Double top navigation
+      li FEATURE :
+        code  Popover added in all avatar
+      li FEATURE :
+        code  Bootstrap validation added of each advanced input fields
+      li JS :
+        code  src/js/theme/create-board.js
+      li JS :
+        code  src/js/theme/advance-ajax-table.js
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/kanban/create-kanban-board.html
+      li DOC :
+        code  public/documentation/layouts/vertical-navbar.html
+      li DOC :
+        code  public/modules/tables/advance-tables.html
+      li DOC :
+        code  public/modules/forms/advance/advance-select.html
+      li DOC :
+        code  public/modules/forms/advance/date-picker.html
+      li JS :
+        code  src/js/theme/wizard.js
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li SCSS !default issue fixed
+      li Page scroll issue fixed after navbar vertical collapsed
+  +Changelog({
+    version: 'v1.11.0',
+    name:'Artemis',
+    date: '03 Apr, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/crm/deals.html
+      li PAGE :
+        code  public/apps/crm/reports-details.html
+      li PAGE :
+        code  public/apps/kanban/kanban.html
+      li PAGE :
+        code  public/apps/kanban/create-kanban-board.html
+      li PAGE :
+        code  public/modules/echarts/line-charts.html
+      li PAGE :
+        code  public/modules/echarts/bar-charts.html
+      li PAGE :
+        code  public/modules/echarts/candlestick-charts.html
+      li PAGE :
+        code  public/modules/echarts/geo-map.html
+      li PAGE :
+        code  public/modules/echarts/scatter-charts.html
+      li PAGE :
+        code  public/modules/echarts/pie-charts.html
+      li PAGE :
+        code  public/modules/echarts/gauge-chart.html
+      li PAGE :
+        code  public/modules/echarts/radar-charts.html
+      li PAGE :
+        code  public/modules/echarts/heatmap-charts.html
+      li DOC :
+        code  public/modules/echarts/how-to-use.html
+      li DOC :
+        code  public/modules/utilities/stacks.html
+      li DOC :
+        code  public/modules/utilities/grid.html
+      li DOC :
+        code  public/documentation/customization/configuration.html
+      li DOC :
+        code  public/documentation/customization/dark-mode.html
+      li PLUGIN :
+        code  Sortablejs  
+      li JS : 
+        code src/js/theme/randomColor.js
+      li JS : 
+        code  src/js/theme/copyLink.js
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li DOC :
+        code  public/modules/tables/advance-tables.html
+
+  +Changelog({
+    version: 'v1.10.0',
+    name:'Hephaestus',
+    date: '5 Mar, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/crm/deal-details.html
+      li PAGE :
+        code  public/apps/crm/analytics.html
+      li PAGE :
+        code  public/modules/forms/advance/emoji-button.html    
+      li FEATURE :
+        code  Chat Demo (floating widget)
+      li FEATURE :
+        code  Emoji button (picmo) dark mode version added
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Topnav dropdown spacing issue 
+      li Modal body scrolling issue
+      li Other minor bugs
+
+
+  +Changelog({
+    version: 'v1.9.0',
+    name:'Persephone',
+    date: '5 Feb, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/dashboard/crm.html
+      li PAGE :
+        code  public/apps/crm/leads.html
+      li PAGE :
+        code  public/apps/crm/lead-details.html
+      li PAGE :
+        code  public/apps/crm/reports.html
+      li PAGE :
+        code  public/apps/crm/add-contact.html
+      li PAGE :
+        code  public/pages/landing/alternate.html
+      li PAGE :
+        code  public/pages/authentication/card/sign-in.html
+      li PAGE :
+        code  public/pages/authentication/card/sign-up.html
+      li PAGE :
+        code  public/pages/authentication/card/sign-out.html
+      li PAGE :
+        code  public/pages/authentication/card/forgot-password.html
+      li PAGE :
+        code  public/pages/authentication/card/reset-password.html
+      li PAGE :
+        code  public/pages/authentication/card/lock-screen.html
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li Feature :
+        code  Horizontal Navbar new design (dropdown on hover)
+      li Feature :
+        code  Bulk select implemented on table
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Other minor bugs
+
+  +Changelog({
+    version: 'v1.8.0',
+    name:'Boreas',
+    date: '10 Jan, 2023',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/pages/pages/timeline.html
+      li PAGE :
+        code  public/modules/tables/bulk-select.html
+      li Feature :
+        code  Bulk Select
+      li Feature :
+        code  Search-box added in top navbar
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0
+      li Email page issues in slim and combo layout.
+      li Chat page issues in slim and combo layout.
+      li Other minor bugs
+
+  +Changelog({
+    version: 'v1.7.0',
+    name:'Cronus',
+    date: '14 Dec, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li Feature :
+        code  RTL
+      li Feature :
+        code  Combo Navbar
+      li Feature :
+        code  Combo Navbar Slim
+      li PAGE :
+        code  public/apps/calendar.html
+      li PAGE :
+        code  public/apps/chat.html  
+      li PAGE :
+        code  public/demo/combo-nav.html
+      li PAGE :
+        code  public/demo/combo-nav-slim.html
+      li DOC: 
+        code public/documentation/layouts/combo-navbar.html
+      li DOC: 
+        code public/modules/components/calendar.html
+      li PLUGIN: 
+        code FullCalendar
+
+  +Changelog({
+    version: 'v1.6.0',
+    name:'Erebus',
+    date: '22 Nov, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li Feature :
+        code  Dark Mode
+      li Feature :
+        code  Slim Navbar
+      li Feature :
+        code  Collapsed Navbar
+      li Feature :
+        code  Dark Navbar
+
+
+  +Changelog({
+    version: 'v1.5.0',
+    name:'Ares',
+    date: '10 Oct, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/email/inbox.html
+      li PAGE :
+        code  public/apps/email/email-detail.html
+      li PAGE :
+        code  public/apps/email/compose.html
+      li PAGE :
+        code  public/apps/social/feed.html
+      li PAGE :
+        code  public/apps/events/create-an-event.html 
+      li PAGE :
+        code  public/apps/events/event-detail.html
+
+  +Changelog({
+    version: 'v1.4.0',
+    name:'Zeus',
+    date: '15 Sept, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/e-commerce/landing/order-tracking.html
+      li PAGE :
+        code  public/apps/project-management/project-board-view.html
+      li PAGE :
+        code  public/apps/project-management/project-details.html
+      li PAGE :
+        code  public/pages/pages/pricing/pricing-grid.html
+      li PAGE :
+        code  public/modules/forms/wizard.html 
+      li PAGE :
+        code  public/landing.html
+
+
+  +Changelog({
+    version: 'v1.3.0',
+    name:'Gorgon',
+    date: '25 Aug, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/e-commerce/landing/products-filter.html
+      li PAGE :
+        code  public/apps/e-commerce/admin/refund.html
+      li PAGE :
+        code  publicapps/e-commerce/landing/wishlist.html
+      li PAGE :
+        code  public/apps/e-commerce/landing/invoice.html
+      li PAGE :
+        code  public/apps/project-management/project-list-view.html
+      li PAGE :
+        code  public/apps/project-management/project-card-view.html
+      li PAGE :
+        code  public/apps/project-management/todo-list.html
+      li PAGE :
+        code  public/apps/project-management/create-new.html
+      li SCSS :
+        code  src/scss/theme/plugins/_google-map.scss
+      li JS :
+        code  src/js/theme/product-filter.js
+
+  +Changelog({
+    version: 'v1.2.0',
+    name:'Demetra',
+    date: '2 Aug, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE :
+        code  public/apps/project-management.html
+      li PAGE :
+        code  public/apps/e-commerce/admin/add-product.html
+      li PAGE :
+        code  public/apps/e-commerce/admin/customer-details.html 
+      li PAGE :
+        code  public/apps/e-commerce/admin/customers.html
+      li PAGE :
+        code  public/apps/e-commerce/landing/order-details.html  
+      li PAGE :
+        code  public/apps/e-commerce/homepage.html
+      li PAGE :
+        code  public/apps/e-commerce/cart.html
+      li PAGE :
+        code  public/apps/e-commerce/checkout.html
+      li PAGE :
+        code  public/apps/e-commerce/product-details.html  
+      li PAGE :
+        code  public/modules/components/carousel/bootstrap.html
+      li PAGE :
+        code  public/modules/components/carousel/swiper.html
+      li PAGE :
+        code  public/modules/components/navs-and-tabs/navbar.html
+      li PAGE :
+        code  public/modules/components/navs-and-tabs/navs.html
+      li PAGE :
+        code  public/modules/components/navs-and-tabs/tabs.html
+      li PAGE :
+        code  public/modules/components/accordion.html          
+      li PAGE
+        code  public/modules/components/alerts.html
+      li PAGE :
+        code  public/modules/components/avatar.html
+      li PAGE :
+        code  public/modules/components/badge.html
+      li PAGE :
+        code  public/modules/components/breadcrumb.html
+      li PAGE :
+        code  public/modules/components/button.html
+      li PAGE :
+        code  public/modules/components/card.html
+      li PAGE :
+        code  public/modules/components/collapse.html
+      li PAGE :
+        code  public/modules/components/dropdown.html
+      li PAGE :
+        code  public/modules/components/index.html
+      li PAGE :
+        code  public/modules/components/list-group.html 
+      li PAGE :
+        code  public/modules/components/modal.html
+      li PAGE :
+        code  public/modules/components/offcanvas.html
+      li PAGE :
+        code  public/modules/components/pagination.html
+      li PAGE :
+        code  public/modules/components/placeholder.html
+      li PAGE :
+        code  public/modules/components/popovers.html
+      li PAGE :
+        code  public/modules/components/progress-bar.html
+      li PAGE :
+        code  public/modules/components/progress.html
+      li PAGE :
+        code  public/modules/components/progress-bar.html
+      li PAGE :
+        code  public/modules/components/scrollspy.html
+      li PAGE :
+        code  public/modules/components/spinners.html
+      li PAGE :
+        code  public/modules/components/tooltips.html
+      li PAGE :
+        code  public/modules/forms/advance/advance-select.html
+      li PAGE :
+        code  public/modules/forms/advance/date-picker.html
+      li PAGE :
+        code  public/modules/forms/advance/editor.html
+      li PAGE :
+        code  public/modules/forms/advance/file-uploader.html 
+      li PAGE :
+        code  public/modules/forms/advance/rating.html
+      li PAGE :
+        code  public/modules/forms/basic/floating-labels.html
+      li PAGE :
+        code  public/modules/forms/basic/input-group.html
+      li PAGE :
+        code  public/modules/forms/basic/layout.html
+      li PAGE :
+        code  public/modules/forms/basic/range.html
+      li PAGE :
+        code  public/modules/forms/basic/select.html                            
+      li PAGE :
+        code  public/modules/forms/validation.html
+      li PAGE :
+        code  public/modules/icons/feather.html
+      li PAGE :
+        code  public/modules/icons/font-awesome.html
+      li PAGE :
+        code  public/modules/icons/unicons.html
+      li PAGE :
+        code  public/modules/tables/advance-tables.html 
+      li PAGE :
+        code  public/modules/tables/basic-tables.html 
+      li PAGE :
+        code  public/modules/utilities/background.html
+      li PAGE :
+        code  public/modules/utilities/borders.html
+      li PAGE :
+        code  public/modules/utilities/colors.html 
+      li PAGE :
+        code  public/modules/utilities/display.html
+      li PAGE :
+        code  public/modules/utilities/flex.html 
+      li PAGE :
+        code  public/modules/utilities/float.html 
+      li PAGE :
+        code  public/modules/utilities/interactions.html 
+      li PAGE :
+        code  public/modules/utilities/opacity.html 
+      li PAGE :
+        code  public/modules/utilities/overflow.html 
+      li PAGE :
+        code  public/modules/utilities/position.html 
+      li PAGE :
+        code  public/modules/utilities/shadows.html 
+      li PAGE :
+        code  public/modules/utilities/sizing.html 
+      li PAGE :
+        code  public/modules/utilities/spacing.html 
+      li PAGE :
+        code  public/modules/utilities/typography.html 
+      li PAGE :
+        code  public/modules/utilities/vertical-align.html                                       
+      li PAGE :
+        code  public/modules/utilities/visibility.html
+      li PAGE :
+        code  public/pages/authentication/simple/forgot-password.html
+      li PAGE :
+        code  public/pages/authentication/simple/lock-screen.html
+      li PAGE :
+        code  public/pages/authentication/simple/reset-password.html
+      li PAGE :
+        code  public/pages/authentication/simple/sign-in.html
+      li PAGE :
+        code  public/pages/authentication/simple/sign-up.html
+      li PAGE :
+        code  public/pages/errors/404.html
+      li PAGE :
+        code  public/pages/errors/500.html
+      li PAGE :
+        code  public/pages/pages/members.html
+      li PAGE :
+        code  public/pages/starter.html
+
+  +Changelog({
+    version: 'v1.1.0',
+    name:'Hermes',
+    date: '17 April, 2022',
+  })
+    h6.mb-2 New
+    ul.bullet-inside.ps-0
+      li PAGE : 
+        code public/apps/e-commerce/orders.html
+      li PAGE : 
+        code public/apps/e-commerce/products.html
+      li PAGE : 
+        code public/pages/pages/faq-accordion.html
+      li PAGE : 
+        code public/pages/pages/pricing.html
+      li PAGE : 
+        code public/pages/pages/notifications.html
+      li PAGE : 
+        code public/pages/pages/pricing.html
+      li PAGE : 
+        code public/modules/components/navs-and-tabs/navbar.html
+      li PAGE : 
+        code public/modules/components/navs-and-tabs/tabs.html
+
+      li JS : 
+        code src/scripts/theme/list.js
+
+    h6.mb-2 Update
+    ul.bullet-inside.ps-0
+      li JS : 
+        code webpack/webpack.config.js
+      li SCSS : 
+        code src/scss/theme/_badges.scss
+      li SCSS : 
+        code src/scss/theme/_mixed.scss
+      li SCSS : 
+        code src/scss/theme/_colors.scss
+      li SCSS : 
+        code src/scss/theme/_nav-tab.scss
+      li SCSS : 
+        code src/scss/theme/_pagination.scss
+      li SCSS : 
+        code src/scss/theme/_reboot.scss
+      li SCSS : 
+        code src/scss/theme/_search-box.scss
+      li SCSS : 
+        code src/scss/theme/_table.scss
+      li SCSS : 
+        code src/scss/theme/_variables.scss
+      li SCSS : 
+        code src/scss/theme/plugins/_list.scss
+      li SCSS : 
+        code src/scss/theme/root/_light.scss
+      li JSON : 
+        code package.json
+
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0.mb-0
+      li Minor issues
+
+
+  +Changelog({
+    version: 'v1.0.1',
+    name:'Theseus',
+    date: '30 March, 2022',
+  })
+    h6.mb-2 Fix
+    ul.bullet-inside.ps-0.mb-0
+      li Minor issues
+
+  +Changelog({
+    version: 'v1.0.0',
+    name:'Initial Release',
+    date: '24 March, 2022'
+  })
+    p.mb-0 Nothing to see here.

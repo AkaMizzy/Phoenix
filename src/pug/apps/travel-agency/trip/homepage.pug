@@ -1,0 +1,108 @@
+extends ../../../layouts/LayoutTrip
+include ../../../mixins/travel-agency/common/NavbarHome
+include ../../../mixins/travel-agency/trip/TripSearch
+include ../../../mixins/travel-agency/trip/TripCard
+include ../../../mixins/travel-agency/trip/TripFilterOffcanvas
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Homepage';
+
+prepend styles
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+
+block tripContent
+  +Section(null,'container-small').py-0
+    +NavbarHome('Trip')
+  +TripSearch
+  +Section('container-medium').pt-0.pb-9.mt-n13
+    -
+      var trips = [
+        {
+          title: 'Selfie with Snape',
+          place: 'Hogwarts',
+          price: '2,340',
+          days: 3,
+          maxPeople: 24,
+          img: '/img/trip/1.png'
+        },
+        {
+          title: 'Dine with Joker',
+          place: 'Gotham',
+          price: '4,540',
+          days: 5,
+          maxPeople: 32,
+          img: '/img/trip/2.png'
+        },
+        {
+          title: 'Ask Frodo to visit Mordor',
+          place: 'The Shire',
+          price: '3,000',
+          days: 2,
+          maxPeople: 18,
+          img: '/img/trip/3.png'
+        },
+        {
+          title: 'Sit on the iron throne',
+          place: 'King’s Landing',
+          price: '1,500',
+          days: 2,
+          maxPeople: 10,
+          img: '/img/trip/4.png'
+        },
+        {
+          title: 'Day out with Luke Skywalker',
+          place: 'Tatooine',
+          price: '2,899',
+          days: 3,
+          maxPeople: 14,
+          img: '/img/trip/5.png'
+        },
+        {
+          title: 'Feed the smelly cat',
+          place: 'New York',
+          price: '3,799',
+          days: 4,
+          maxPeople: 12,
+          img: '/img/trip/6.png'
+        },
+        {
+          title: 'Stormtrooper for a day',
+          place: 'The Death Star',
+          price: '2,899',
+          days: 3,
+          maxPeople: 16,
+          img: '/img/trip/7.png'
+        },
+        {
+          title: 'Walk where the king walked',
+          place: 'Wakanda',
+          price: '5,999',
+          days: 3,
+          maxPeople: 20,
+          img: '/img/trip/8.png'
+        },
+        {
+          title: 'Petting the ghost',
+          place: 'Winterfell',
+          price: '2,999',
+          days: 3,
+          maxPeople: 10,
+          img: '/img/trip/9.png'
+        },
+      ]
+    .row.g-3
+      each trip in trips
+        .col-md-6.col-xl-4
+          +TripCard(trip)
+    .mt-5.position-relative.text-center 
+      hr.m-0.position-absolute.top-50.translate-middle-y.w-100
+      button.btn.btn-phoenix-secondary.rounded-pill.position-relative
+        | Show more
+  +TripFilterOffcanvas

@@ -1,0 +1,48 @@
+mixin FileFilterModal
+  #fileFilterModal.modal.fade(tabindex="-1")
+    .modal-dialog.modal-dialog-centered
+      .modal-content.border.border-translucent
+        form#fileFilterForm(autocomplete="off")&attributes(attributes)
+          .modal-header.p-4.pb-0.border-0.flex-between-center
+            h4.modal-title Filter
+            button.btn.p-1.text-danger(type='button' data-bs-dismiss='modal' aria-label='Close')
+              span.fas.fa-times.fs-9  				
+          .modal-body.p-4
+            .mb-3
+              label.fw-bold.mb-2.text-body-highlight(for='type') Type
+              select.form-select#type
+                option Select
+                option(value="documents") Documents
+                option(value="images") Images 
+                option(value="videos") Videos
+                option(value="audios") Audios
+            .mb-3
+              label.fw-bold.mb-2.text-body-highlight(for='people') People
+              select.form-select#people
+                option Select
+                option(value="1") Robert Allan
+                option(value="2") Charles
+                option(value="3") Adrian
+            .mb-3
+              label.fw-bold.mb-2.text-body-highlight(for='modified') Modified
+              select.form-select#modified
+                option Select
+                option(value="today") Today
+                option(value="last7Days") Last 7 Days
+                option(value="last157Days") Last 15 Days
+                option(value="last30Days") Last 30 Days
+                option(value="chooseATimePeriod") Choose a time period
+            div
+              label.fw-bold.mb-2.text-body-highlight(for='location') Location
+              select.form-select#location
+                option Select
+                option(value="1") Anywhere is drive
+                option(value="2") My Drive
+                option(value="3") Shared with me
+                option(value="4") Starred
+                option(value="5") Trashed
+          .modal-footer.d-flex.justify-content-end.align-items-center.p-4.pt-0.border-0
+            button.btn.btn-link.text-body-secondary.px-3.mx-0(type="button") 
+              span.fas.fa-arrows-rotate.me-2
+              | Reset
+            button.btn.btn-sm.btn-primary.px-5.mx-0(type="submit") Apply

@@ -1,0 +1,178 @@
+extends ../../../layouts/LayoutTrip
+include ../../../mixins/travel-agency/trip/TripSummaryCard
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Checkout';
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+prepend scripts 
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+
+block tripContent
+  +Section(null,'container-medium').pt-5.pb-9
+    .row.justify-content-between.gy-5.gx-lg-0
+      .col-lg-6
+        nav.mb-3(aria-label='breadcrumb')
+          ol.breadcrumb.mb-0
+            li.breadcrumb-item
+              a(href='#') Page 1
+            li.breadcrumb-item
+              a(href='#') Page 2
+            li.breadcrumb-item.active(aria-current='page') Default
+        h2.mb-0 Check out
+        hr.mt-5.mb-7
+        h3.mb-5 Contact details
+        .row.g-3.mb-3
+          .col-sm-6
+            label(for='email').fw-bold.text-body-highlight.mb-1 Email
+            input.form-control(type='text' id='email' placeholder='Enter email address')
+          .col-sm-6
+            label(for='phone-number').fw-bold.text-body-highlight.mb-1 Phone number
+            input.form-control(type='text' id='phone-number' placeholder='Enter phone number')
+        .form-check
+          input.form-check-input#recieveUpdate(type='checkbox')
+          label.form-check-label.fw-normal.fs-8.text-body(for='recieveUpdate') Get booking updates via SMS.
+          a(href="#!").text-nowrap  Terms apply
+        hr.my-7
+        h3.mb-3 Traveler details
+        .form-check.mb-5
+          input.form-check-input#anotherCountry(type='checkbox')
+          label.form-check-label.fw-normal.fs-8.text-body(for='anotherCountry') I am travelling from another country
+        .row.gx-3.gy-4
+          .col-sm-6
+            label(for='first-name').fw-bold.text-body-highlight.mb-1 First name
+            input.form-control(type='text' id='first-name' placeholder='Enter first name')
+          .col-sm-6
+            label(for='last-name').fw-bold.text-body-highlight.mb-1 Last name
+            input.form-control(type='text' id='last-name' placeholder='Enter last name')
+          .col-sm-6
+            label(for='date-of-birth').fw-bold.text-body-highlight.mb-1 Date of birth
+            .form-icon-container.flatpickr-input-container
+              input.form-control.form-icon-input.datetimepicker(type='text' id='date-of-birth' placeholder='DD/MM/YYYY' data-options!={disableMobile:true})
+              span.fa-solid.fa-calendar-alt.text-body-quaternary.fs-9.form-icon(data-fa-transform='up-1')
+          .col-sm-6
+            label(for='passport-number').fw-bold.text-body-highlight.mb-1 Passport number
+            input.form-control(type='text' id='passport-number' placeholder='Enter passport number')
+          .col-sm-6
+            label(for='country').fw-bold.text-body-highlight.mb-1 Country
+            input.form-control(type='text' id='country' placeholder='Enter country name')
+          .col-sm-6
+            label(for='expiration-date').fw-bold.text-body-highlight.mb-1 Expiration date
+            .form-icon-container.flatpickr-input-container
+              input.form-control.form-icon-input.datetimepicker(type='text' id='expiration-date' placeholder='DD/MM/YYYY' data-options!={disableMobile:true})
+              span.fa-solid.fa-calendar-alt.text-body-quaternary.fs-9.form-icon(data-fa-transform='up-1')
+        hr.my-7
+        h3.mb-5 Tour specifics
+        .row.gx-3.gy-4
+          .col-sm-6
+            label(for='arrival-airline').fw-bold.text-body-highlight.mb-1 Arrival airline
+            input.form-control(type='text' id='arrival-airline' placeholder='Enter arrival airline')
+          .col-sm-6
+            label(for='arrival-flight-no').fw-bold.text-body-highlight.mb-1 Arrival flight no
+            input.form-control(type='text' id='arrival-flight-no' placeholder='Enter flight no.')
+          .col-12
+            .row 
+              .col-sm-6
+                .flatpickr-input-container
+                  label(for='arrival-time').fw-bold.text-body-highlight.mb-1 Arrival time
+                  input.form-control.datetimepicker(type='text' id='arrival-time' placeholder='Hour : Minute' data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+          .col-sm-6
+            .flatpickr-input-container
+              label(for='cruise-time').fw-bold.text-body-highlight.mb-1 Cruise time
+              input.form-control.datetimepicker(type='text' id='cruise-time' placeholder='Hour : Minute' data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+          .col-sm-6
+            .flatpickr-input-container
+              label(for='disemberkation-time').fw-bold.text-body-highlight.mb-1 Disemberkation time
+              input.form-control.datetimepicker(type='text' id='disemberkation-time' placeholder='Hour : Minute' data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+          .col-sm-6
+            label(for='departure-flight-no').fw-bold.text-body-highlight.mb-1 Departure flight no
+            input.form-control(type='text' id='departure-flight-no' placeholder='Enter flight no.')
+          .col-sm-6
+            label(for='departure-date').fw-bold.text-body-highlight.mb-1 Departure date
+            .form-icon-container.flatpickr-input-container
+              input.form-control.form-icon-input.datetimepicker(type='text' id='departure-date' placeholder='DD/MM/YYYY' )
+              span.fa-solid.fa-calendar-alt.text-body-quaternary.fs-9.form-icon(data-fa-transform='up-1')
+          .col-sm-6
+            .flatpickr-input-container
+              label(for='departure-time').fw-bold.text-body-highlight.mb-1 Departure time
+              input.form-control.datetimepicker(type='text' id='departure-time' placeholder='Hour : Minute' data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+          .col-sm-6
+            label(for='departure-airline').fw-bold.text-body-highlight.mb-1 Departure airline
+            input.form-control(type='text' id='departure-airline' placeholder='Enter name')
+          .col-sm-6
+            label(for='pick-up-location').fw-bold.text-body-highlight.mb-1 Pick up location
+            .position-relative
+              input.form-control.pe-6(type='text' id='pick-up-location' placeholder='Enter location')
+              span.fa-solid.fa-location.position-absolute.top-0.end-0.mt-2.me-3.text-body-quaternary(data-fa-transform='down-3')
+          .col-sm-6
+            label(for='drop-off-location').fw-bold.text-body-highlight.mb-1 Drop off location
+            .position-relative
+              input.form-control.pe-6(type='text' id='drop-off-location' placeholder='Enter location')
+              span.fa-solid.fa-location.position-absolute.top-0.end-0.mt-2.me-3.text-body-quaternary(data-fa-transform='down-3')
+        hr.my-7
+        h5.mb-2 Special requests
+        p.text-body-tertiary.fs-9 Special requests cannot be guaranteed-but the property will do its best to meet your needs. You can always make a special request after your booking is complete!
+        textarea.form-control(id='request' placeholder='Type your request' rows='5')
+        h3.mt-7.mb-5 Payment Method
+        .row.gx-xxl-6.mb-5
+          .col-md-auto
+            .form-check
+              input.form-check-input#creditCard(type='radio' name='paymentMethod' checked)
+              label.form-check-label.fs-8.text-body.text-nowrap.d-flex.gap-2(for='creditCard')
+                | Credit card
+                img.h-100(src=`${CWD}assets/img/logos/visa.png`, alt="")
+                img.h-100(src=`${CWD}assets/img/logos/discover.png`, alt="")
+                img.h-100(src=`${CWD}assets/img/logos/mastercard.png`, alt="")
+                img.h-100(src=`${CWD}assets/img/logos/american_express.png`, alt="")
+          .col-md-auto
+            .form-check
+              input.form-check-input#paypal(type='radio' name='paymentMethod')
+              label.form-check-label.fs-8.text-body(for='paypal') Paypal
+          .col-md-auto
+            .form-check
+              input.form-check-input#coupon(type='radio' name='paymentMethod')
+              label.form-check-label.fs-8.text-body(for='coupon') Coupon
+        .row.gx-3.gy-4
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1(for='selectCard') Select card
+            select#selectCard.form-select.text-body-emphasis
+              option(selected='selected') Select a card
+              option(value='visa') Visa
+              option(value='discover') Discover
+              option(value='mastercard') Mastercard
+              option(value='american-express') American Express
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1(for='inputCardNumber') Card number
+            input#inputCardNumber.form-control(type='number' placeholder="Enter card number" aria-label="Card number")
+          .col-12
+            label.fw-bold.text-body-highlight.mb-1(for='inputName') Full name
+            input#inputName.form-control(type='text' placeholder='Ansolo Lazinatov' aria-label="Full name")
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1 Expires on
+            .d-flex
+              select.form-select.text-body-emphasis.me-3
+                option(selected='selected') Month
+                option January
+                option February
+                option March
+              select.form-select.text-body-emphasis
+                option(selected='selected') Year
+                - var n = 1990
+                  while n < 2023
+                    option(value=n)=n++
+          .col-md-6
+            label.fw-bold.text-body-highlight.mb-1(for='inputCardCVC') CVC
+            input#inputCardCVC.form-control(type='number' placeholder="Enter a valid CVC" aria-label="CVC")
+          .col-12
+            .form-check
+              input#gridCheck.form-check-input(type='checkbox')
+              label.form-check-label.text-body-emphasis.fs-8(for='gridCheck') Save Card Details
+      .col-lg-5.col-xl-4
+        +TripSummaryCard
+        button.btn.btn-primary.w-100.mt-3 Book now

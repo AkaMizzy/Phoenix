@@ -1,0 +1,179 @@
+mixin FligthListHead
+  .d-flex.flex-between-center.mb-3 
+    ul.nav.nav-pills(role='tablist')
+      li.nav-item(role='presentation')
+        button.nav-link(data-wizard-step data-bs-toggle='pill' type='button' role='tab' aria-selected='true')
+          | Cheapest
+      li.nav-item(role='presentation')
+        button.nav-link.active(data-wizard-step data-bs-toggle='pill' type='button' role='tab' aria-selected='false')
+          | Fastest
+    
+    button.btn.btn-phoenix-secondary.text-nowrap.px-4(type="button" data-bs-toggle="modal" data-bs-target="#flightFilterModal")
+      span.fa-solid.fa-filter.me-md-2
+      span.d-none.d-md-inline-block Filters
+
+mixin FlightSchedule(schedule) 
+  .d-flex.gap-4.justify-content-center
+    div 
+      p.mb-2.fs-9.text-body-tertiary #{schedule.departure.date}
+      h4.mb-2.text-body #{schedule.departure.from}
+      h2.mb-0 #{schedule.departure.time}
+    .text-center
+      p.mb-2.fs-9.text-body-tertiary #{schedule.duration}
+      p.mb-2.fs-9.text-body-tertiary Non-stop
+      img.position-relative.rtl__flip(src=`${CWD}assets/img/icons/long-arrow.svg`, alt="")
+    .text-end 
+      p.mb-2.fs-9.text-body-tertiary #{schedule.arrival.date}
+      h4.mb-2.text-body #{schedule.arrival.to}
+      h2.mb-0 #{schedule.arrival.time}
+
+mixin FlightLists
+  - 
+    var searchedFlights = [
+      {
+        airline: {
+          name: 'Qatar Airways',
+          logo: 'assets/img/brand/qatar-airline.png'
+        },
+        schedules: [
+          {
+            duration: '25m',
+            departure: {
+              from: 'DAC',
+              date: '25 Jan',
+              time: '7:45'
+            },
+            arrival: {
+              to: 'CGP',
+              date: '25 Jan',
+              time: '8:10'
+            }
+          },
+          {
+            duration: '25m',
+            departure: {
+              from: 'CGP',
+              date: '27 Jan',
+              time: '8:15'
+            },
+            arrival: {
+              to: 'DAC',
+              date: '27 Jan',
+              time: '8:45'
+            }
+          },
+        ],
+        price: {
+          regular: 150,
+          discounted: 124
+        }
+      },
+      {
+        airline: {
+          name: 'Emirates',
+          logo: 'assets/img/brand/emirates-airline.png'
+        },
+        schedules: [
+          {
+            duration: '25m',
+            departure: {
+              from: 'DAC',
+              date: '25 Jan',
+              time: '7:55'
+            },
+            arrival: {
+              to: 'ZYL',
+              date: '25 Jan',
+              time: '8:20'
+            }
+          },
+        ],
+        price: {
+          regular: 139,
+          discounted: 120
+        }
+      },
+      {
+        airline: {
+          name: 'Japan Airlines',
+          logo: 'assets/img/brand/japan-airline.png'
+        },
+        schedules: [
+          {
+            duration: '25m',
+            departure: {
+              from: 'DAC',
+              date: '25 Jan',
+              time: '8:45'
+            },
+            arrival: {
+              to: 'ZYL',
+              date: '25 Jan',
+              time: '9:10'
+            }
+          },
+        ],
+        price: {
+          regular: 144,
+          discounted: 128
+        }
+      },
+      {
+        airline: {
+          name: 'Qatar Airways',
+          logo: 'assets/img/brand/qatar-airline.png'
+        },
+        schedules: [
+          {
+            duration: '25m',
+            departure: {
+              from: 'DAC',
+              date: '25 Jan',
+              time: '8:55'
+            },
+            arrival: {
+              to: 'ZYL',
+              date: '25 Jan',
+              time: '9:15'
+            }
+          },
+        ],
+        price: {
+          regular: 150,
+          discounted: 124
+        }
+      }
+    ]
+  
+  each flight in searchedFlights
+    .py-7.border-top 
+      .row.g-0.gap-6.align-items-center
+        .col-lg
+          .d-flex.flex-column.gap-md-3.gap-6 
+            each schedule in flight.schedules
+              .row.gy-md-0.gy-4.justify-content-sm-between.justify-content-lg-start
+                .col-sm-auto.col-md-5
+                  .d-flex.flex-center.justify-content-sm-start.gap-4 
+                    img(src=`${CWD}${flight.airline.logo}` alt='').flight-list-item-logo.img-fluid.rounded-3
+                    h5.d-none.d-md-block.text-nowrap.text-body-highlight #{flight.airline.name}
+                .col-sm-auto 
+                  +FlightSchedule(schedule)
+
+        .col-lg-auto
+          .d-flex.gap-3.flex-column.flex-sm-row.flex-lg-column.flex-xl-row.flex-end-center
+            h3.mb-0.fs-5.fs-sm-6.d-flex.gap-2.flex-column.flex-sm-row.align-items-center
+              span.fs-9.text-body-quaternary.fw-normal.text-decoration-line-through $#{flight.price.regular}.00
+              | $#{flight.price.discounted}.00
+
+            a.btn.btn-primary.px-9(href=`${CWD}${paths['flight-booking']}`) Select
+
+mixin FligthListFooter
+  .mt-4.position-relative.text-center 
+    hr.m-0.position-absolute.top-50.translate-middle-y.w-100
+    button.btn.btn-phoenix-secondary.rounded-pill.position-relative
+      | Show more
+
+mixin FlightListing 
+  +FligthListHead
+  +FlightLists
+  +FligthListFooter

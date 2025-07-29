@@ -1,0 +1,12 @@
+mixin GalleryLayoutMenu(view)
+  .d-flex.gap-2&attributes(attributes)
+    a.btn.btn-phoenix-secondary.btn-square(href=`${CWD}${paths['gallery-column']}` class=`${view === 'column' ? 'border-primary text-primary' : ''}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Column view")
+      span.fa-solid.fa-grip-vertical
+    a.btn.btn-phoenix-secondary.btn-square(href=`${CWD}${paths['gallery-grid']}` class=`${view === 'grid' ? 'border-primary text-primary' : ''}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Grid view")
+      span.fa-solid.fa-th-large
+    a.btn.btn-phoenix-secondary.btn-square(href=`${CWD}${paths['gallery-grid-with-title']}` class=`${view === 'grid-title' ? 'border-primary text-primary' : ''}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Grid view with title")
+      span.fa-solid.fa-th-large
+    a.btn.btn-phoenix-secondary.btn-square(href=`${CWD}${paths['gallery-masonry']}` class=`${view === 'masonry' ? 'border-primary text-primary' : ''}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Masonry view")
+      span.fa-solid.fa-th
+    a.btn.btn-phoenix-secondary.btn-square(href=`${CWD}${paths['gallery-slider']}` class=`${view === 'slider' ? 'border-primary text-primary' : ''}` data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Slider view")
+      span.fa-solid.fa-mattress-pillow

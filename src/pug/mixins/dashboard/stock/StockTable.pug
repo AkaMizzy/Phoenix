@@ -1,0 +1,330 @@
+mixin StockTableRow(data,index,type)
+  tr
+    td.symbol.align-middle.white-space-nowrap.py-2.ps-4.fs-9.text-body.fw-semibold= data.symbol
+    td.name.align-middle.white-space-nowrap.text-start.text-body.py-2=data.name
+    td.price.align-middle.white-space-nowrap.text-body.py-2.text-end $#{data.price}
+    td.change.align-middle.white-space-nowrap.fs-9.pe-4.fw-semibold.text-end(class=type==='losers' ? 'text-danger': 'text-success')  #{type==='losers' ? '-' : ''}#{data.change}%
+
+mixin TopGainers 
+  -
+    var gainersTableData = [
+      {
+        symbol: 'CHSN',
+        name: 'Chanson International Holding',
+        price: '14.81',
+        change: '387.17'
+      },
+      {
+        symbol: 'BENF',
+        name: 'Beneficient',
+        price: '1.89',
+        change: '58.82'
+      },
+      {
+        symbol: 'FORD',
+        name: 'Forward Industries',
+        price: '5.38',
+        change: '52.41'
+      },
+      {
+        symbol: 'ATGL',
+        name: 'Alpha Technology Group',
+        price: '7.20',
+        change: '36.11'
+      },
+      {
+        symbol: 'TIGR',
+        name: 'UP Fintech Holding',
+        price: '12.39',
+        change: '34.82'
+      },
+      {
+        symbol: 'UXIN',
+        name: 'Uxin Limited',
+        price: '7.35',
+        change: '33.88'
+      },
+      {
+        symbol: 'BANL',
+        name: 'CBL International',
+        price: '1.35',
+        change: '29.81'
+      },
+      {
+        symbol: 'NVDA',
+        name: 'Nvidia Corporation',
+        price: '950.12',
+        change: '28.45'
+      },
+      {
+        symbol: 'TSLA',
+        name: 'Tesla Inc.',
+        price: '205.32',
+        change: '26.78'
+      },
+      {
+        symbol: 'AAPL',
+        name: 'Apple Inc.',
+        price: '187.56',
+        change: '25.43'
+      },
+      {
+        symbol: 'AMD',
+        name: 'Advanced Micro Devices',
+        price: '152.74',
+        change: '23.91'
+      },
+      {
+        symbol: 'GOOGL',
+        name: 'Alphabet Inc.',
+        price: '138.19',
+        change: '22.34'
+      },
+      {
+        symbol: 'MSFT',
+        name: 'Microsoft Corporation',
+        price: '402.78',
+        change: '21.56'
+      },
+      {
+        symbol: 'NFLX',
+        name: 'Netflix Inc.',
+        price: '462.83',
+        change: '20.67'
+      },
+      {
+        symbol: 'META',
+        name: 'Meta Platforms Inc.',
+        price: '469.12',
+        change: '19.85'
+      },
+      {
+        symbol: 'AMZN',
+        name: 'Amazon.com Inc.',
+        price: '145.23',
+        change: '18.92'
+      },
+      {
+        symbol: 'BABA',
+        name: 'Alibaba Group Holding',
+        price: '85.14',
+        change: '17.32'
+      },
+      {
+        symbol: 'DIS',
+        name: 'Walt Disney Co.',
+        price: '93.45',
+        change: '16.78'
+      },
+      {
+        symbol: 'PYPL',
+        name: 'PayPal Holdings',
+        price: '75.64',
+        change: '15.89'
+      },
+      {
+        symbol: 'NIO',
+        name: 'Nio Inc.',
+        price: '9.56',
+        change: '14.92'
+      },
+      {
+        symbol: 'PFE',
+        name: 'Pfizer Inc.',
+        price: '39.84',
+        change: '13.65'
+      }
+    ]
+  #topGainersTable(data-list!={
+		valueNames: ["symbol", "name", "price", "change"],
+		page: 7,
+		pagination: true
+	})
+    .table-responsive.scrollbar
+      table.table.table-striped.fs-9.mb-0
+        thead
+          tr.bg-body-highlight.border-top.border-translucent
+            th.sort.white-space-nowrap.align-middle.ps-4.text-uppercase(scope='col' data-sort="symbol" style='min-width: 8rem;') Symbol
+            th.sort.align-middle.pe-6.text-uppercase(scope='col' data-sort="name" style='min-width:10rem') Name
+            th.sort.align-middle.text-end.text-uppercase(scope='col' data-sort="price" style='min-width: 9.5rem') Price
+            th.sort.align-middle.px-4.text-end.text-uppercase(scope='col' data-sort="change" style='min-width: 8rem;') Change
+        tbody.list#top-gainers-table
+          each row,index in gainersTableData
+            +StockTableRow(row,index,"gainer")
+    .row.align-items-center.justify-content-between.pt-2.pe-0.fs-9.pagination-subtle
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semibold.text-body(data-list-info)
+        a.fw-semibold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semibold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right
+
+mixin TopLosers
+  -
+    var losersTableData = [
+      {
+        symbol: 'DUO',
+        name: 'Fangdd Network Group',
+        price: '2.53',
+        change: '32.89'
+      },
+      {
+        symbol: 'XIN',
+        name: 'Xinyuan Real Estate',
+        price: '4.17',
+        change: '27.23'
+      },
+      {
+        symbol: 'UPXI',
+        name: 'Upexi',
+        price: '2.34',
+        change: '26.88'
+      },
+      {
+        symbol: 'SPAI',
+        name: 'Safe Pro Group',
+        price: '1.93',
+        change: '25.19'
+      },
+      {
+        symbol: 'SAVE',
+        name: 'Spirit Airlines',
+        price: '1.69',
+        change: '24.55'
+      },
+      {
+        symbol: 'LASE',
+        name: 'Laser Photonics',
+        price: '7.06',
+        change: '23.09'
+      },
+      {
+        symbol: 'IBO',
+        name: 'Impact BioMedical',
+        price: '1.27',
+        change: '23.02'
+      },
+      {
+        symbol: 'SOUN',
+        name: 'SoundHound AI Inc.',
+        price: '3.12',
+        change: '21.56'
+      },
+      {
+        symbol: 'FUBO',
+        name: 'FuboTV Inc.',
+        price: '2.19',
+        change: '19.83'
+      },
+      {
+        symbol: 'NKLA',
+        name: 'Nikola Corporation',
+        price: '0.95',
+        change: '18.92'
+      },
+      {
+        symbol: 'RIVN',
+        name: 'Rivian Automotive',
+        price: '10.78',
+        change: '17.65'
+      },
+      {
+        symbol: 'PLUG',
+        name: 'Plug Power Inc.',
+        price: '3.89',
+        change: '16.74'
+      },
+      {
+        symbol: 'CVNA',
+        name: 'Carvana Co.',
+        price: '49.65',
+        change: '15.92'
+      },
+      {
+        symbol: 'LCID',
+        name: 'Lucid Group',
+        price: '3.56',
+        change: '14.78'
+      },
+      {
+        symbol: 'AFRM',
+        name: 'Affirm Holdings',
+        price: '27.34',
+        change: '14.23'
+      },
+      {
+        symbol: 'COIN',
+        name: 'Coinbase Global',
+        price: '116.47',
+        change: '13.56'
+      },
+      {
+        symbol: 'PTON',
+        name: 'Peloton Interactive',
+        price: '6.85',
+        change: '12.49'
+      },
+      {
+        symbol: 'ZM',
+        name: 'Zoom Video Communications',
+        price: '64.23',
+        change: '11.92'
+      },
+      {
+        symbol: 'RIDE',
+        name: 'Lordstown Motors',
+        price: '1.24',
+        change: '10.78'
+      },
+      {
+        symbol: 'BBBYQ',
+        name: 'Bed Bath & Beyond',
+        price: '0.09',
+        change: '9.86'
+      },
+      {
+        symbol: 'TUP',
+        name: 'Tupperware Brands',
+        price: '1.97',
+        change: '8.99'
+      }
+    ]
+  #topLosersTable(data-list!={
+		valueNames: ["symbol", "name", "price", "change"],
+		page: 7,
+		pagination: true
+	})
+    .table-responsive.scrollbar
+      table.table.table-striped.fs-9.mb-0
+        thead
+          tr.bg-body-highlight.border-top.border-translucent
+            th.sort.white-space-nowrap.align-middle.ps-4.text-uppercase(scope='col' data-sort="symbol" style='min-width: 8rem;') Symbol
+            th.sort.align-middle.pe-6.text-uppercase(scope='col' data-sort="name" style='min-width:10rem') Name
+            th.sort.align-middle.text-end.text-uppercase(scope='col' data-sort="price" style='min-width: 9.5rem') Price
+            th.sort.align-middle.px-4.text-end.text-uppercase(scope='col' data-sort="change" style='min-width: 8rem;') Change
+        tbody.list#top-losers-table
+          each row,index in losersTableData
+            +StockTableRow(row,index,"losers")
+    .row.align-items-center.justify-content-between.pt-2.pe-0.fs-9.pagination-subtle
+      .col-auto.d-flex
+        p.mb-0.d-none.d-sm-block.me-3.fw-semibold.text-body(data-list-info)
+        a.fw-semibold(href='#!' data-list-view="*")
+          | View all
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+        a.fw-semibold.d-none(href='#!' data-list-view="less")
+          | View Less
+          span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .col-auto.d-flex
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link.pe-0(data-list-pagination="next")
+          span.fas.fa-chevron-right

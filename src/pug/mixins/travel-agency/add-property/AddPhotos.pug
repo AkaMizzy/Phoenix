@@ -1,0 +1,19 @@
+mixin AddPhotos(config, title)
+  form(id=`${config.formId}4` class=config.validation && 'needs-validation' novalidate data-wizard-form='4')
+    h3.mb-6= title
+    .dropzone.dropzone-multiple.p-0.mb-5#my-awesome-dropzone(data-dropzone)
+      .fallback
+        input(name='file' type='file', multiple)
+      .dz-message.text-body-tertiary.text-opacity-85(data-dz-message) Drag your photo here
+        span.text-body-secondary.px-1 or
+        button.btn.btn-link.p-0(type='button') Browse from device
+        br
+        img.mt-3(src=`${CWD}assets/img/icons/image-icon.png`, width=40 alt="").me-2
+      .dz-preview.d-flex.flex-wrap.mt-3
+        .rounded-2.overflow-hidden.me-2.mb-2.position-relative(style='height:140px;width:200px;')
+          img(src=`${CWD}assets/img/products/23.png` alt="..." data-dz-thumbnail).w-100.h-100.object-fit-cover
+          button.btn.dropdown-toggle.dropdown-caret-none.px-3.text-body.bg-body.dz-remove.w-auto.h-auto.py-0.border(type='button' data-bs-toggle='dropdown' aria-expanded='false' style="top: 16px; right: 16px")
+            span.fa-solid.fa-ellipsis
+          ul.dropdown-menu.dropdown-menu-end.py-1
+            li
+              a.dropdown-item(href='#!' data-dz-remove) Remove

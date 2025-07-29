@@ -1,0 +1,297 @@
+mixin FileManagerOffcanvas
+  .phoenix-offcanvas.phoenix-offcanvas-fixed.bg-body.scrollbar.overflow-x-hidden#fileManagerSideBar(data-breakpoint='lg')
+    .d-flex.flex-between-center
+      h5.mb-2 My Files
+      button.btn.p-0.fs-8.d-lg-none(data-phoenix-dismiss="offcanvas")
+        span.fa-solid.fa-xmark(data-fa-transform='up-3')
+    -
+      var treeviewItems = [
+        {
+          name: 'My Drive',
+          id: '1-1',
+          show: true,
+          children:[
+            {
+              name: 'Illustrations',
+              id:'2-1',
+              badge: 3,
+              dot: 'danger',
+              children:[
+                {
+                  name: 'Read.txt',
+                  icon: 'fa-solid fa-file-lines',
+                },
+                {
+                  name: 'error.jpg',
+                  icon: 'fa-solid fa-image',
+                },
+                {
+                  name: 'Illustration.zip',
+                  icon: 'fa-solid fa-file-zipper',
+                }
+              ]
+            },
+            {
+              name:'UI Design',
+              id:'2-2',
+              children:[ 
+                {
+                  name: 'Pages.zip',
+                  icon: 'fa-solid fa-file-zipper',
+                },
+              ]
+            },
+            {
+              name:'Brand Identity',
+              id:'2-3',
+              children:[ 
+                {
+                  name: 'information.doc',
+                  icon: 'fa-solid fa-file-word',
+                },
+              ]
+            },
+            {
+              name:'Source Code',
+              id:'2-4',
+              children:[ 
+                {
+                  name: 'getting-started.html',
+                  icon: 'fa-brands fa-html5',
+                },
+                {
+                  name: 'Source Code.zip',
+                  icon: 'fa-solid fa-file-zipper',
+                },
+              ]
+            },
+            {
+              name:'Code Backup',
+              id:'2-5',
+              show: true,
+              children:[ 
+                {
+                  name: 'Files',
+                  id:'3-1',
+                  children:[
+                    {
+                      name: 'main.zip',
+                      icon: 'fa-solid fa-file-zipper',
+                    },
+                  ]
+                },
+                {
+                  name: 'Report.docx',
+                  icon: 'fa-solid fa-file',
+                },
+                {
+                  name: 'backup.zip',
+                  icon: 'fa-solid fa-file-zipper',
+                },
+              ]
+            },
+            {
+              name:'Landing',
+              id:'2-6',
+              show: true,
+              children:[ 
+                {
+                  name: 'Landing.png',
+                  icon: 'fa-solid fa-image',
+                },
+                {
+                  name: 'Images',
+                  id:'3-2',
+                  children:[
+                    {
+                      name: 'images.zip',
+                      icon: 'fa-solid fa-file-zipper',
+                    },
+                  ]
+                },
+                {
+                  name: 'index.html',
+                  icon: 'fa-brands fa-html5',
+                },
+                {
+                  name: 'Style.css',
+                  icon: 'fa-brands fa-css3-alt',
+                },
+              ]
+            },
+            {
+              name:'Travel',
+              id:'2-7',
+              badge: 4,
+              dot: 'danger',
+              show: true,
+              children:[ 
+                {
+                  name: 'Files',
+                  id:'3-3',
+                  children:[
+                    {
+                      name: 'main.zip',
+                      icon: 'fa-solid fa-file-zipper',
+                    },
+                  ]
+                },
+                {
+                  name: 'index.html',
+                  icon: 'fa-brands fa-html5',
+                },
+                {
+                  name: 'Style.css',
+                  icon: 'fa-brands fa-css3-alt',
+                },
+                {
+                  name: 'Notes.txt',
+                  icon: 'fa-solid fa-file-lines',
+                },
+              ]
+            },
+            {
+              name: 'Phoenix.html',
+              icon: 'fa-brands fa-html5',
+            },
+          ]
+        },
+        {
+          name:'Shared with me',
+          icon:'fa-solid fa-share-nodes'
+        },
+        {
+          name:'Recent',
+          icon:'fa-solid fa-clock'
+        },
+        {
+          name:'Favourite',
+          icon:'fa-solid fa-heart'
+        },
+        {
+          name:'Spam',
+          icon:'fa-solid fa-circle-info'
+        },
+        {
+          name:'Trash',
+          icon:'fa-solid fa-trash'
+        },
+        {
+          name:'Google Drive',
+          icon:'fa-brands fa-google-drive'
+        },
+        {
+          name:'Dropbox',
+          icon:'fa-brands fa-dropbox'
+        },
+        {
+          name:'One Drive',
+          icon:'fa-solid fa-cloud',
+        },
+      ]
+    ul.mb-0.treeview#treeviewExample
+      each item,index in treeviewItems
+        if item.hasOwnProperty('children')
+          +SingleItem(item,index,false,'treeviewExample')
+        else
+          +TreeviewListItem(item,false)
+    a.btn.collapse-indicator.px-0.py-3.mt-3.d-flex.flex-between-center(data-bs-toggle='collapse' href='#collapseStorageDetails' role='button' aria-expanded='false' aria-controls='collapseStorageDetails')
+      h5.mb-0.text-body-highlight Storage details
+      span.fa-solid.fa-chevron-right.toggle-icon.storate-details-toggle.fs-9.text-primary
+    .progress-stacked(style='height: 10px')
+      .progress.h-100(role="progressbar" aria-label="Segment one" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%")
+        .progress-bar.bg-primary-light
+      .progress.h-100(role="progressbar" aria-label="Segment one" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100" style="width: 16%")
+        .progress-bar.bg-info-lighter
+      .progress.h-100(role="progressbar" aria-label="Segment one" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100" style="width: 18%")
+        .progress-bar.bg-warning-lighter
+      .progress.h-100(role="progressbar" aria-label="Segment one" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100" style="width: 12%")
+        .progress-bar.bg-danger-lighter
+      .progress.h-100(role="progressbar" aria-label="Segment one" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" style="width: 11%")
+        .progress-bar.bg-success-lighter
+    h6.text-body.mt-2.mb-0 Used: 45.8 GB (92%) of the 50 GB.
+    .collapse#collapseStorageDetails
+      -
+        var categories = [
+          {
+            category: 'Images',
+            count: '22k',
+            storage: '13GB',
+            icon: 'file-pdf',
+            type: 'primary'
+          },
+          {
+            category: 'Videos',
+            count: '534',
+            storage: '8.3GB',
+            icon: 'video',
+            type: 'info'
+          },
+          {
+            category: 'Audio',
+            count: '55',
+            storage: '4GB',
+            icon: 'music',
+            type: 'warning'
+          },
+          {
+            category: 'Documents',
+            count: '65k',
+            storage: '15.5GB',
+            icon: 'file',
+            type: 'danger'
+          },
+          {
+            category: 'Others',
+            count: '12k',
+            storage: '5GB',
+            icon: 'rectangle-list',
+            type: 'success'
+          },
+        ]
+      .pt-4
+        each item, index in categories 
+          .d-flex.align-items-center.gap-2(class=`${index !== categories.length - 1 ? 'mb-3' : ''}`)
+            .square-icon-box(class=`bg-${item.type}-subtle`)
+              span.fa-solid(class=`fa-${item.icon} text-${item.type}-darker`)
+            div
+              h6.text-body= item.category
+              h6.mb-0.text-body.fw-semibold #{item.count} Files - #{item.storate} Used
+    hr.my-4
+    .text-center 
+      img.d-dark-none.img-fluid(src=`${CWD}assets/img/spot-illustrations/45.png`, alt="" width=98)
+      img.d-light-none.img-fluid(src=`${CWD}assets/img/spot-illustrations/dark_45.png`, alt="" width=98)
+      h5.mt-3.text-body.fw-bolder Upgrade to Pro
+      h6.mb-3.text-body-tertiary.fw-normal Expand your storage capacity with our upgraded storage options.
+      button.btn.btn-sm.btn-primary.w-100 Upgrade Now
+  .phoenix-offcanvas-backdrop.d-lg-none(data-phoenix-backdrop)
+
+
+
+
+mixin SingleItem(config,index,stripe,treeviewId)
+  li.treeview-list-item
+    a(data-bs-toggle='collapse', href=`#${treeviewId}-${config.id}` role='button' aria-expanded='false')
+      p.treeview-text.text-nowrap
+        span.fa-solid.fa-folder.treeview-icon(class=`${config.id === '2-3' ? 'text-info-light' : ''}`)
+        | #{config.name}
+        if config.badge
+          span.treeview-badge=config.badge
+        if config.dot
+          span.treeview-dot(class=`bg-${config.dot}`)
+    ul.collapse.treeview-list(id=`${treeviewId}-${config.id}` data-show=`${config.show ? config.show : false}`)
+      each item,ind in config.children
+        if item.hasOwnProperty('children')
+          +SingleItem(item,ind,stripe,treeviewId)
+        else 
+          +TreeviewListItem(item,stripe)
+
+mixin TreeviewListItem(item,stripe)
+  li.treeview-list-item
+    .treeview-item
+      a(href='#!').flex-1.ps-2.ms-2
+        p.treeview-text.text-nowrap
+          span.treeview-icon(class=`${item.icon}`)
+          | #{item.name}
+          if item.dot
+            span.treeview-dot(class=`bg-${item.dot}`)

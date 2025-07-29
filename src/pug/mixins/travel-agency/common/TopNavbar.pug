@@ -1,0 +1,103 @@
+
+mixin TopNavbar(currentPage)
+  .sticky-top.bg-body(data-navbar-shadow-on-scroll)
+    nav.navbar.navbar-top.navbar-expand-lg.container-medium.border-0.bg-body.px-3.py-2
+      button.navbar-toggler.fs-8.ps-2.me-sm-2(type='button' data-bs-toggle='collapse' data-bs-target='#navbarTopCollapse' aria-controls='navbarTopCollapse' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      a.navbar-brand.flex-1.flex-lg-grow-0.me-lg-8.me-xl-13(href=`${CWD}${paths['default-dashboard']}`)
+        +Logo
+      .d-flex.align-items-center.gap-2.gap-sm-3.gap-md-4.my-2.order-lg-1
+        +ToggleThemeBtn('themeControlToggleSm')
+        a.btn.btn-link.text-body-tertiary.p-0(href="#!")
+          span(data-feather='map-pin' style="width: 18px; height: 18px")
+        a.btn.btn-link.text-body-tertiary.p-0(href="#!")
+          span(data-feather='bell' style="width: 20px; height: 20px")
+        a.btn.btn-link.text-body-tertiary.p-0(href=`${CWD}${paths['card-signin']}` data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Agent Login")
+          span(data-feather='log-in' style="width: 20px; height: 20px")
+        a.btn.btn-link.text-body-tertiary.p-0(href="#!")
+          span(data-feather='user' style="width: 20px; height: 20px")
+      #navbarTopCollapse.collapse.navbar-collapse.navbar-top-collapse.order-1.order-lg-0.justify-content-center.pb-0
+        ul.navbar-nav.travel-nav-top.me-auto(data-dropdown-on-hover)
+          -
+            var navLinks = [
+              {
+                title: 'Hotel',
+                links: [
+                  {
+                    title: 'Homepage',
+                    url: `${CWD}${paths['hotel-homepage']}`
+                  },
+                  {
+                    title: 'Hotel Details',
+                    url: `${CWD}${paths['hotel-details']}`
+                  },
+                  {
+                    title: 'Hotel Compare',
+                    url: `${CWD}${paths['hotel-compare']}`
+                  },
+                  {
+                    title: 'Check out',
+                    url: `${CWD}${paths['hotel-checkout']}`
+                  },
+                  {
+                    title: 'Payment',
+                    url: `${CWD}${paths['hotel-payment']}`
+                  },
+                  {
+                    title: 'Gallery',
+                    url: `${CWD}${paths['hotel-gallery']}`
+                  },
+                ]
+              },
+              {
+                title: 'Flight',
+                links: [
+                  {
+                    title: 'Homepage',
+                    url: `${CWD}${paths['flight-homepage']}`
+                  },
+                  {
+                    title: 'Booking',
+                    url: `${CWD}${paths['flight-booking']}`
+                  },
+                  {
+                    title: 'Payment',
+                    url: `${CWD}${paths['flight-payment']}`
+                  }
+                ]
+              },
+              {
+                title: 'Trip',
+                links: [
+                  {
+                    title: 'Homepage',
+                    url: `${CWD}${paths['trip-homepage']}`
+                  },
+                  {
+                    title: 'Trip Details',
+                    url: `${CWD}${paths['trip-details']}`
+                  },
+                  {
+                    title: 'Checkout',
+                    url: `${CWD}${paths['trip-checkout']}`
+                  }
+                ]
+              },
+              {
+                title: 'Event'
+              },
+              {
+                title: 'Package'
+              }
+            ]
+          each item in navLinks 
+            +NavbarItem(item, currentPage)
+
+mixin NavbarItem(config, currentPage)
+  li.nav-item.dropdown
+    a.nav-link.fs-8.fw-bold(href=`#!` class=`${config.links ? 'dropdown-toggle' : ''} ${config.title === currentPage ? 'text-primary' : ''}` role='button' data-bs-toggle='dropdown' data-bs-auto-close="outside" aria-haspopup='true' aria-expanded='false')= config.title
+    if config.links
+      ul.dropdown-menu.navbar-dropdown-caret
+        each link in config.links
+          li
+            a.dropdown-item(href=`${link.url}`)= link.title

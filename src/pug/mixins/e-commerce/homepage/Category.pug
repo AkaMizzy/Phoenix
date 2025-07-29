@@ -1,0 +1,70 @@
+mixin CategoryItem(data, index)
+  a.icon-nav-item(href='#!')
+    .icon-container.mb-2(class=`${data.bgClass ? data.bgClass : ''}` data-bs-theme=`${index === 0 ? 'light' : undefined}`)
+      span.fs-4(class=data.icon)
+    p.nav-label=data.label
+
+mixin Categories
+  - 
+    var items = [
+      {
+        label: 'Deals',
+        bgClass: 'bg-warning-subtle',
+        icon: 'uil uil-star text-warning'
+      },
+      {
+        label: 'Grocery',
+        icon: 'uil uil-shopping-bag' 
+      },
+      {
+        label: 'Fashion',
+        iconClass: 'text-white',
+        selected: true,
+        icon: 'uil uil-watch-alt'
+      },
+      {
+        label: 'Mobile',
+        iconClass: 'text-body',
+        icon: 'uil uil-mobile-android'
+      },
+      {
+        label: 'Electronics',
+        icon: 'uil uil-monitor',
+        iconClass: 'uil uil-mobile-android'
+      },
+      {
+        label: 'Home',
+        icon: 'uil uil-estate',
+        iconClass: 'text-body'
+      },
+      {
+        label: 'Dining',
+        icon: 'uil uil-lamp',
+        iconClass: 'text-body'
+      },
+      {
+        label: 'Gifts',
+        icon: 'uil uil-gift',
+        iconClass: 'text-body'
+      },
+      {
+        label: 'Tools',
+        icon: 'uil uil-wrench',
+        iconClass: 'text-body'
+      },
+      {
+        label: 'Travel',
+        icon: 'uil uil-plane-departure',
+        iconClass: 'text-body'
+      },
+      {
+        label: 'Others',
+        icon: 'uil uil-palette',
+        iconClass: 'text-body'
+      },
+    ]
+
+  .scrollbar
+    .d-flex.justify-content-between
+      each item, index in items 
+        +CategoryItem(item, index)

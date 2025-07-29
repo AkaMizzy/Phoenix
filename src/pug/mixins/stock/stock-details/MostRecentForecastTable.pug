@@ -1,0 +1,198 @@
+mixin MostRecentForecastTableRow(item) 
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.fs-9.align-middle.ps-0
+      .form-check.mb-0.fs-8
+        input.form-check-input(type='checkbox' data-bulk-select-row!=item)
+    td.align-middle.analyst.white-space-nowrap
+      a(href=`#!`).d-flex.align-items-center.text-body
+        .avatar.avatar-m
+          if item.customer.avatar
+            img.rounded-circle(src=`${CWD}assets/img${item.customer.avatar}`, alt="" class=item.customer.avatarPlaceholder ? 'avatar-placeholder' : '')
+          else
+            .avatar-name.rounded-circle
+              span=item.customer.name.charAt(0).toUpperCase()
+        h6.mb-0.ms-2=item.customer.name
+    td.align-middle.rating.white-space-nowrap.ps-3
+      +Rating(item.rating)
+    td.align-middle.status.ps-3
+      .badge.badge-phoenix.fs-10(class=`badge-phoenix-${item.status.badge}`)
+        span.badge-label=item.status.title
+    td.align-middle.action
+      p.fs-9.fw-semibold.text-body-emphasis.mb-0=item.action
+    td.align-middle.priceTarget.white-space-nowrap
+      p.fs-9.fw-semibold.mb-0 $#{item.priceTarget}
+    td.align-middle.upside
+      .badge.badge-phoenix.badge-phoenix-secondary.fs-10 #{item.upside}%
+    td.align-middle.date.pe-3.text-end
+      .d-flex.align-items-center.justify-content-end.gap-2 
+        span.uil.uil-calender.fs-8
+        h6.fw-semibold.mb-0=item.date
+    td.align-middle.white-space-nowrap.pe-0
+      +StockDropdown.fs-10
+
+mixin MostRecentForecastTable
+  -
+    var MostRecentForecastTableData = [
+      {
+        customer: {
+          name: 'JSmith',
+          avatar: '/team/3.webp'
+        },
+        rating: 3,
+        status: {
+          title: 'Hold',
+          badge: 'secondary'
+        },
+        action: 'Downgrades',
+        priceTarget: '65.00',
+        upside: '17.36',
+        date: 'Nov 06, 2022'
+      },
+      {
+        customer: {
+          name: 'Alex',
+          avatar: '/team/35.webp'
+        },
+        rating: 4,
+        status: {
+          title: 'Buy',
+          badge: 'success'
+        },
+        action: 'Reiterates',
+        priceTarget: '87.00',
+        upside: '+5.25',
+        date: 'Nov 06, 2022'
+      },
+      {
+        customer: {
+          name: 'Amy',
+          avatar: '/team/57.webp'
+        },
+        rating: 2,
+        status: {
+          title: 'Buy',
+          badge: 'success'
+        },
+        action: 'Maintains',
+        priceTarget: '54.00',
+        upside: '54.73',
+        date: 'Nov 06, 2022'
+      },
+      {
+        customer: {
+          name: 'Michael',
+          avatar: '/team/5.webp'
+        },
+        rating: 5,
+        status: {
+          title: 'Sell',
+          badge: 'danger'
+        },
+        action: 'Maintains',
+        priceTarget: '35.00',
+        upside: '8.51',
+        date: 'Nov 06, 2022'
+      },
+      {
+        customer: {
+          name: 'Sophia',
+          avatar: '/team/34.webp'
+        },
+        rating: 2,
+        status: {
+          title: 'Sell',
+          badge: 'danger'
+        },
+        action: 'Downgrades',
+        priceTarget: '46.00',
+        upside: '22.09',
+        date: 'Nov 06, 2022'
+      },
+      {
+        customer: {
+          name: 'Emma Brown',
+          avatar: '/team/avatar.webp',
+          avatarPlaceholder: true
+        },
+        rating: 2,
+        status: {
+          title: 'Buy',
+          badge: 'success'
+        },
+        action: 'Maintains',
+        priceTarget: '60.00',
+        upside: '+32.98',
+        date: 'Nov 06, 2022'
+      },
+      {
+        customer: {
+          name: 'Olivia',
+          avatar: '/team/8.webp'
+        },
+        rating: 4,
+        status: {
+          title: 'Buy',
+          badge: 'success'
+        },
+        action: 'Reiterates',
+        priceTarget: '58.00',
+        upside: '+2.20',
+        date: 'Nov 06, 2022'
+      },
+    ]
+
+  .row.g-3.g-lg-5.flex-between-center.mb-5 
+    .col-auto 
+      h4 Most Recent Forecast
+      p.mb-0 Brief summary of all projects
+    .col-auto
+      .d-flex.align-items-center.gap-2
+        select#recent-forecast-amount.form-select.form-select-sm(name="amount") 
+          option(value="million") Annual 
+          option(value='billions') Half Annual 
+          option(value="remove")  Quarterly
+        button.btn.px-3.btn-phoenix-primary.d-flex.align-items-center.gap-2
+          span.fa-solid.fa-filter(data-fa-transform='up-1')
+          span.d-none.d-sm-inline Filter
+  #mostRecentForecast(data-list!={
+    valueNames: ["analyst", "rating", "status", "action", "priceTarget", 'upside', 'date'],
+    page: 10,
+    pagination: true
+  })
+    .table-responsive.scrollbar
+      table.table.fs-9.mb-0.border-top.border-translucent
+        thead
+          tr.text-uppercase
+            th.white-space-nowrap.fs-9.ps-0.align-middle
+              .form-check.mb-0.fs-8
+                input.form-check-input#checkbox-bulk-most-recent-forecast-select(
+                  type='checkbox' 
+                  data-bulk-select!={
+                    body: "table-most-recent-forecast-body",
+                  }
+                )
+            th.sort.white-space-nowrap.align-middle(scope='col' style='min-width:13.75rem;' data-sort="analyst") Analyst
+            th.sort.align-middle.ps-3(scope='col' data-sort="rating" style='min-width:7.5rem;') rating
+            th.sort.align-middle.ps-3(scope='col' data-sort="status" style='min-width:7.5rem;') status
+            th.sort.align-middle(scope='col' style='min-width:11.25rem;' data-sort="action") action
+            th.sort.align-middle(scope='col' style='min-width:10rem;' data-sort="priceTarget") price target
+            th.sort.align-middle(scope='col' style='min-width:9rem;' data-sort="upside") upside
+            th.sort.align-middle.text-end.pe-3(scope='col' style='min-width:9rem;' data-sort="date") date
+            th.sort.pe-0.align-middle(scope='col' style="min-width: 3.6rem;")
+        tbody.list#table-most-recent-forecast-body
+          each row in MostRecentForecastTableData 
+            +MostRecentForecastTableRow(row)
+    .d-flex.flex-end-center.py-1.fs-9.pagination-subtle
+      p.mb-0.d-none.d-sm-block.me-3.fw-semibold.text-body(data-list-info)
+      a.fw-semibold(href='#!' data-list-view="*")
+        | View all
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      a.fw-semibold.d-none(href='#!' data-list-view="less")
+        | View Less
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      .d-flex.ms-4.me-sm-n2
+        button.page-link(data-list-pagination="prev")
+          span.fas.fa-chevron-left
+        ul.mb-0.pagination
+        button.page-link(data-list-pagination="next")
+          span.fas.fa-chevron-right

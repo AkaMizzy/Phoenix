@@ -1,0 +1,92 @@
+mixin HotelDetails(data)
+  .card.card-img-shift.border-0.mx-auto
+    .rounded-3.overflow-hidden.w-100.position-relative.z-5
+      img(src=`${CWD}assets${data.image}`, alt="" height=250).w-100
+      button.btn.btn-wish.position-absolute.top-0.end-0.mt-3.me-3
+        span.far.fa-heart
+    .card-body.p-0
+      .card-content
+        .d-flex.align-items-center.justify-content-between.flex-wrap.gap-2.mb-4
+          div
+            span.badge.badge-phoenix.px-1.me-2(class=`badge-phoenix-${data.status.type}`)= data.status.label
+            span.badge.badge-phoenix.px-1(class=`badge-phoenix-${data.package.type}`)= data.package.label
+          h6
+            span.fa-solid.fa-star.text-warning.me-1
+            | #{data.rating} (#{data.stay}k stay)
+        a(href="#!").fw-bold.fs-7.text-body-emphasis.mb-2.text-primary-hover= data.name
+        a(href="#!").fw-semibold.text-body-tertiary.mb-3.d-block
+          span(data-feather='map-pin').me-1
+          | #{data.located}
+        h6.fe-semibold.text-body-tertiary.d-flex.align-items-center.gap-1.mb-4
+          | From 
+          span.fw-bolder.fs-7.text-body-highlight $#{data.price}
+          | / per night
+        button.btn.btn-primary.px-5 Book Now
+
+mixin BestHotels 
+  section.py-0
+    +Background({image: `${CWD}assets/img/bg/bg-left-29.png`, attrs: { style: { 'background-size': 'auto','background-position': '-15%'}}, className: "d-none d-xl-block"})
+    .container-medium.position-relative
+      h3.mb-2.text-body-emphasis.text-center.text-xl-start The best of our hotel
+      .d-xl-flex.justify-content-between.mb-5.text-center
+        p.mb-0.text-body-tertiary This list will help you get insights into how much you’ll need to spend to afford accommodation.
+        button.btn.btn-link.p-0.fs-8
+          | View all
+          span.fa-solid.fa-chevron-right.ms-2(data-fa-transform='shrink-3')
+      -
+        var hotels = [
+          {
+            name: 'Royal Mansour Marrakech',
+            located: 'Morocco',
+            price: '60.00',
+            image: '/img/gallery/45.png',
+            rating: 4.8,
+            stay: 1.4,
+            status: {
+              label: 'promoted',
+              type: 'warning'
+            },
+            package: {
+              label: 'Couple package',
+              type: 'info'
+            }
+          },
+          {
+            name: 'Mandarin Oriental Jumeira',
+            located: 'Abu dhabi',
+            price: '90.00',
+            image: '/img/gallery/46.png',
+            rating: 4.8,
+            stay: 1.4,
+            status: {
+              label: 'promoted',
+              type: 'warning'
+            },
+            package: {
+              label: 'Couple package',
+              type: 'info'
+            }
+          },
+          {
+            name: 'Swissotel Bangkok',
+            located: 'Bangkok',
+            price: '70.00',
+            image: '/img/gallery/47.png',
+            rating: 4.8,
+            stay: 1.4,
+            status: {
+              label: 'promoted',
+              type: 'warning'
+            },
+            package: {
+              label: 'Couple package',
+              type: 'info'
+            }
+          },
+        ]
+      .row.g-0.justify-content-center
+        .col-sm-11.col-md-8.col-lg-6.col-xl-12
+          .row.gy-5.gx-xl-7.justify-content-between.pe-4
+            each hotel in hotels
+              .col-xl-4
+                +HotelDetails(hotel)

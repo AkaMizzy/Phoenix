@@ -1,0 +1,35 @@
+mixin CartSummaryCard
+  .card
+    .card-body
+      .d-flex.flex-between-center.mb-3
+        h3.card-title.mb-0 Summary
+        a.btn.btn-link.p-0(href="#!") Edit cart 
+      select.form-select.mb-3(aria-label='delivery type')
+        option(value='cod') Cash on Delivery
+        option(value='card') Card
+        option(value='paypal') Paypal
+      div
+        .d-flex.justify-content-between
+          p.text-body.fw-semibold Items subtotal :
+          p.text-body-emphasis.fw-semibold $691
+        .d-flex.justify-content-between
+          p.text-body.fw-semibold Discount :
+          p.text-danger.fw-semibold -$59
+        .d-flex.justify-content-between
+          p.text-body.fw-semibold Tax :
+          p.text-body-emphasis.fw-semibold $126.20
+        .d-flex.justify-content-between
+          p.text-body.fw-semibold Subtotal :
+          p.text-body-emphasis.fw-semibold $665
+        .d-flex.justify-content-between
+          p.text-body.fw-semibold Shipping Cost :
+          p.text-body-emphasis.fw-semibold $30
+      .input-group.mb-3
+        input.form-control(type='text', placeholder='Voucher')
+        button.btn.btn-phoenix-primary.px-5 Apply
+      .d-flex.justify-content-between.border-y.border-dashed.py-3.mb-4
+        h4.mb-0 Total :
+        h4.mb- $695.20
+      button.btn.btn-primary.w-100
+        | Proceed to check out
+        span.fas.fa-chevron-right.ms-1.fs-10

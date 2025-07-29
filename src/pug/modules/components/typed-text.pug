@@ -1,0 +1,29 @@
+extends ../../layouts/LayoutComponent
+
+append variables
+  - 
+    var pageHeader = {
+      title: 'Typed text',
+      description: 'A JavaScript library that types out, deletes them, and then types again.',
+      url: `https://mattboldt.com/demos/typed-js/`,
+      linkText: 'Documentation for Typed.js'
+    }
+
+prepend scripts
+  script(src=`${CWD}vendors/typed.js/typed.umd.js`)
+
+block component
+  .mb-9
+    +ComponentCard({
+      title: 'Example',
+      anchor: true,
+    }).mb-3.mt-6
+      h3.fw-light.overflow-hidden A smarter way to tell about  
+        span.typed-text.fw-bold(data-typed-text='["new features.","product updates.", "a new idea.", "an announcment."]')
+
+    +ComponentCard({
+      title: 'Javascript',
+      hideNavTab: true
+    }).mb-3
+      +ComponentCardLib
+        script(src=`vendors/typed.js/typed.umd.js`)

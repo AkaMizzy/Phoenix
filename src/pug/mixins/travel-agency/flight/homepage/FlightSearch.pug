@@ -1,0 +1,139 @@
+mixin FlightTypeCheckbox
+  div&attributes(attributes)
+    .form-check.form-check-inline
+      input.form-check-input#oneWay(type='radio' name='flightType')
+      label.form-check-label.fs-8.text-body(for='oneWay') One way
+
+    .form-check.form-check-inline
+      input.form-check-input#return(type='radio' name='flightType' checked)
+      label.form-check-label.fs-8.text-body(for='return') Return
+
+    .form-check.form-check-inline
+      input.form-check-input#multi(type='radio' name='flightType')
+      label.form-check-label.fs-8.text-body(for='multi') Multiple cities
+
+mixin FlightSearchForm
+  .row.g-3&attributes(attributes) 
+    .col-lg
+      .row.flex-center.g-2 
+        .col-sm
+          .form-floating.flex-1
+            input.form-control#fromLocation(type='text' placeholder='Dhaka (DAC)')
+            label(for='fromLocation') From
+        .col-auto
+          button.btn.btn-phoenix-secondary.circle-btn(type="button")
+            span.fas.fa-arrows-rotate
+        .col-sm
+          .form-floating.flex-1
+            input.form-control#toLocation(type='text' placeholder='Sylhet (ZYL)')
+            label(for='toLocation') To
+
+    .col-lg
+      .row.g-2 
+        .col-sm-6
+          .form-floating.flex-1
+            input.form-control.datetimepicker#journeyDate(type="text" placeholder="dd/mm/yyyy" data-options!={disableMobile:true, defaultDate: "today", dateFormat:'j M, Y',})
+            label.form-label(for="journeyDate") Journey Date
+        .col-sm-6
+          .form-floating.flex-1
+            input.form-control.datetimepicker#returnDate(type="text" placeholder="dd/mm/yyyy" data-options!={disableMobile:true, defaultDate: "today", dateFormat:'j M, Y',})
+            label.form-label(for="returnDate") Return Date
+    .col-lg-auto 
+      .form-floating(style="min-width: 13rem" data-bs-toggle='dropdown' data-bs-auto-close="outside")
+        input.form-control.cursor-pointer#travelerCount(type='text' readonly placeholder='1 Traveler' value="1 Traveler")
+        label(for='travelerCount') Traveler
+
+      .dropdown-menu.dropdown-menu-start.p-4(style='max-width: 20rem')
+        .row.align-items-center.g-0.pb-3.border-bottom.border-translucent
+          .col-5
+            h5.mb-0.text-body Adults
+          .col-7
+            .input-group.gap-2(data-quantity)
+              button.btn.btn-phoenix-primary.px-2.rounded(data-type="minus" type="button")
+                span.fa-solid.fa-minus.px-1
+              input.form-control.border-translucent.input-spin-none.text-center.rounded(id="adults" type="number" value='1')
+              button.btn.btn-phoenix-primary.px-2.rounded(data-type="plus" type="button")
+                span.fa-solid.fa-plus.px-1
+        .row.align-items-center.g-0.py-3.border-bottom.border-translucent
+          .col-5
+            h5.mb-0.text-body Infants
+          .col-7
+            .input-group.gap-2(data-quantity)
+              button.btn.btn-phoenix-primary.px-2.rounded(data-type="minus" type="button")
+                span.fa-solid.fa-minus.px-1
+              input.form-control.border-translucent.input-spin-none.text-center.rounded(id="infants" type="number" value='0')
+              button.btn.btn-phoenix-primary.px-2.rounded(data-type="plus" type="button")
+                span.fa-solid.fa-plus.px-1
+        .row.align-items-center.g-0.py-3
+          .col-5
+            h5.mb-0.text-body Children
+          .col-7
+            .input-group.gap-2(data-quantity)
+              button.btn.btn-phoenix-primary.px-2.rounded(data-type="minus" type="button")
+                span.fa-solid.fa-minus.px-1
+              input.form-control.border-translucent.input-spin-none.text-center.rounded(id="child" type="number" value='0')
+              button.btn.btn-phoenix-primary.px-2.rounded(data-type="plus" type="button")
+                span.fa-solid.fa-plus.px-1
+        button.btn.btn-primary.w-100(type="button") Complete
+
+mixin FlightPreviewForm
+  .bg-body-highlight.p-3.p-sm-4.rounded-2&attributes(attributes)
+    .row.g-3
+      .col-xl-2.col-lg.col-md-4 
+        h6.mb-2 Fare Type
+        .form-check.mb-0
+          input.form-check-input.mt-0#flightFareType(type='checkbox' checked)
+          label.form-check-label.d-block.lh-sm.fs-8.text-body.fw-normal.mb-0(for='flightFareType') Refundable ticket
+      .col-xl-2.col-lg.col-md-4 
+        h6.mb-3 Price Range
+        .noUi-primary-lighter.noUi-handle-primary.noUi-slider-slim.noUi-handle-circle.px-1.mb-3(
+          data-nouislider!={
+            start: [100, 186],
+            range: {
+              min: 100,
+              max: 200
+            },
+            connect: true
+          }
+        )
+        .d-flex.flex-between-center 
+          div 
+            small.d-none.d-lg-block.text-body-tertiary Min
+            h6.mb-0.text-body-highlight.fw-semibold $100
+          .text-end 
+            small.d-none.d-lg-block.text-body-tertiary Max
+            h6.mb-0.text-body-highlight.fw-semibold $200
+      .col-xl-2.col-lg.col-md-4
+        h6.mb-2 Class
+        select.form-select#flightClass
+          option Economy
+          option Business
+          option First class
+      .col-xl-2.col-lg.col-md-6.ms-auto
+        h6.mb-2 Onward depart time
+        select.form-select#departTime
+          option 12:00 - 18:00
+          option 18:00 - 24:00
+          option 06:00 - 12:00
+      .col-xl-2.col-lg.col-md-6
+        h6.mb-2 Return depart time
+        select.form-select#returnTime
+          option 12:00 - 18:00
+          option 18:00 - 24:00
+          option 06:00 - 12:00
+
+mixin FlightSearch 
+  form
+    .card.position-relative&attributes(attributes)
+      .card-body
+        +FlightTypeCheckbox.mb-4
+
+        +FlightSearchForm.mb-4
+
+        +FlightPreviewForm.mb-4
+
+        .d-flex.flex-wrap.gap-3.justify-content-between 
+          a.fw-semibold.text-nowrap(href='#!' data-list-view="*")
+            | Close details 
+            span.fas.fa-angle-up.ms-1(data-fa-transform='down-1')
+          button.btn.btn-lg.btn-primary.flex-1(type="button" style="max-width: 15rem") Search

@@ -1,0 +1,223 @@
+include ../dashboard/common
+
+mixin ListingTableRow(data, index)
+  tr.hover-actions-trigger.btn-reveal-trigger.position-static
+    td.fs-9.align-middle.ps-0
+      .form-check.mb-0.fs-8
+        input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+    td.align-middle.py-4.name
+      .d-flex.align-items-center.gap-3
+        a(href="#!") 
+          img.rounded-1.border.border-translucent(src=`${CWD}assets${data.img}`, alt="" width=80)
+        div 
+          a(href="#!").fs-8.fw-bolder.text-body-emphasis.text-nowrap= data.name
+          h6.fw-seibold.text-body.text-nowrap.mt-1.mb-2
+            span.fa-solid.fa-border-all.me-2
+            | #{data.category}
+          h4.fw-bolder.mb-0 $#{data.price}
+    td.align-middle.px-4.beds
+      .d-flex.align-items-center
+        .d-flex.align-items-center.justify-content-center.bg-primary-subtle.rounded.me-2(style='height:24px; width: 24px')
+          span.fa-solid.fa-person-shelter.text-primary-darker
+        h5.text-body-emphasis.fw-semibold.mb-0.me-3= data.bedRooms
+        .d-flex.align-items-center.justify-content-center.bg-success-subtle.rounded.me-2(style='height:24px; width: 24px')
+          span.fa-solid.fa-bed.text-success-darker
+        h5.text-body-emphasis.fw-semibold.mb-0= data.beds
+    td.align-middle.px-4.guest
+      .d-flex.align-items-center
+        .d-flex.align-items-center.justify-content-center.bg-warning-subtle.rounded.me-2(style='height:24px; width: 24px')
+          span.fa-solid.fa-user.text-warning-darker
+        h5.text-body-emphasis.fw-semibold.mb-0.me-3= data.guest
+        .d-flex.align-items-center.justify-content-center.bg-info-subtle.rounded.me-2(style='height:24px; width: 24px')
+          span.fa-solid.fa-baby.text-info-darker
+        h5.text-body-emphasis.fw-semibold.mb-0= data.child
+    td.align-middle.px-4.bathRooms
+      .d-flex.align-items-center
+        .d-flex.align-items-center.justify-content-center.bg-danger-subtle.rounded.me-2(style='height:24px; width: 24px')
+          span.fa-solid.fa-bath.text-danger-darker
+        h5.text-body-emphasis.fw-semibold.mb-0.me-3= data.bathRooms
+    td.align-middle.ps-4.amenities
+      .d-flex.flex-wrap.gap-2
+        each item in data.amenities.slice(0, 13)
+          span.badge.badge-phoenix.bg-primary-subtle.text-body-highlight.py-1.fs-10= item
+        a.fw-bold.fs-9(href="#!") +#{data.amenities.length - 13} More
+    td.align-middle.text-end.ps-4.totalRooms
+      h2.text-body-secondary= data.totalRooms
+    td.align-middle.ps-4
+      +DashboardDropdown.fs-10
+
+
+mixin RoomListingTable 
+  -
+    var RoomListingData = [
+      {
+        name: 'Bunk Bed',
+        category: "Standard Room",
+        price: 332.67,
+        img: '/img/hotels/17.png',
+        bedRooms: '01',
+        beds: "02",
+        guest: '02',
+        child: "01",
+        bathRooms: "01",
+        totalRooms: 65,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone']
+      },
+      {
+        name: 'King bed',
+        category: "Presidential Suite",
+        price: 450.67,
+        img: '/img/hotels/18.png',
+        bedRooms: '02',
+        beds: "03",
+        guest: '02',
+        child: "01",
+        bathRooms: "02",
+        totalRooms: 23,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area',]
+      },
+      {
+        name: 'Queen bed',
+        category: "Deluxe Room",
+        price: 400.50,
+        img: '/img/hotels/19.png',
+        bedRooms: '02',
+        beds: "02",
+        guest: '02',
+        child: "01",
+        bathRooms: "02",
+        totalRooms: 77,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television',]
+      },
+      {
+        name: 'Twin bed',
+        category: "Family Room",
+        price: 600.41,
+        img: '/img/hotels/20.png',
+        bedRooms: '03',
+        beds: "05",
+        guest: '07',
+        child: "01",
+        bathRooms: "03",
+        totalRooms: 12,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service']
+      },
+      {
+        name: 'Single bed',
+        category: "Honeymoon Suite",
+        price: 350.80,
+        img: '/img/hotels/21.png',
+        bedRooms: '01',
+        beds: "01",
+        guest: '02',
+        child: "00",
+        bathRooms: "01",
+        totalRooms: 21,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub']
+      },
+      {
+        name: 'Single bed',
+        category: "Loft Suite",
+        price: 200.22,
+        img: '/img/hotels/22.png',
+        bedRooms: '01',
+        beds: "01",
+        guest: '01',
+        child: "00",
+        bathRooms: "01",
+        totalRooms: 15,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'Television', 'common area', 'Kettle', 'iron',]
+      },
+      {
+        name: 'Double bed',
+        category: "Corner Room",
+        price: 290.55,
+        img: '/img/hotels/23.png',
+        bedRooms: '01',
+        beds: "02",
+        guest: '04',
+        child: "00",
+        bathRooms: "02",
+        totalRooms: '08',
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating',]
+      },
+      {
+        name: 'Twin XL bed',
+        category: "Ocean View Room",
+        price: 550.75,
+        img: '/img/hotels/24.png',
+        bedRooms: '01',
+        beds: "02",
+        guest: '04',
+        child: "01",
+        bathRooms: "02",
+        totalRooms: '06',
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service']
+      },
+      {
+        name: 'Quad Bed',
+        category: "Standard Room",
+        price: 550.65,
+        img: '/img/hotels/20.png',
+        bedRooms: '02',
+        beds: "04",
+        guest: '04',
+        child: "00",
+        bathRooms: "02",
+        totalRooms: 50,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'tv',]
+      },
+      {
+        name: 'Executive Suite',
+        category: "Standard Room",
+        price: 750.67,
+        img: '/img/hotels/21.png',
+        bedRooms: '01',
+        beds: "01",
+        guest: '02',
+        child: "01",
+        bathRooms: "01",
+        totalRooms: 22,
+        amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television','wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television',]
+      }
+    ]
+  .table-responsive.scrollbar.mx-n1.px-1
+    table.table.fs-9.mb-0
+      thead
+        tr
+          th.white-space-nowrap.fs-9.align-middle.ps-0(style="max-width:20px; width:18px;")
+            .form-check.mb-0.fs-8
+              input.form-check-input#checkbox-bulk-products-select(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "room-listing-table-body",
+                }
+              )
+          th.sort.text-body-tertiary.align-middle.white-space-nowrap(scope='col' data-sort="name" style='width:300px;') ROOM INFORMATION
+          th.sort.text-body-tertiary.align-middle.px-4(scope='col' style='width:200px;' data-sort="beds") NO. OF BEDS
+          th.sort.text-body-tertiary.align-middle.px-4(scope='col' data-sort="guest" style='width:200px;' ) NO. OF GUESTS
+          th.sort.text-body-tertiary.align-middle.px-4(scope='col' data-sort="bathRooms" style='width:140px;') BATHROOM
+          th.text-body-tertiary.align-middle.ps-4(scope='col' data-sort="amenities" style='min-width:450px;') AMENITIES
+          th.sort.text-body-tertiary.align-middle.ps-4.text-end(scope='col' data-sort="totalRooms" style='width:180px;') TOTAL ROOM
+          th.sort.text-body-tertiary.text-end.align-middle.pe-0.ps-4(scope='col')
+
+      tbody.list#room-listing-table-body
+        each row,index in RoomListingData
+          +ListingTableRow(row,index)
+  .row.align-items-center.py-2.g-0
+    .pagination.d-none
+    .col.d-flex.fs-9
+      p.mb-0.d-none.d-sm-block.me-3.fw-semibold.text-body(data-list-info)
+      a.fw-semibold(href='#!' data-list-view="*")
+        | View all
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      a.fw-semibold.d-none(href='#!' data-list-view="less")
+        | View Less
+    .col-auto.d-flex
+      = '\n'
+      button(type='button' title="Previous" data-list-pagination='prev').btn.btn-link.px-1.me-1
+        span.fas.fa-chevron-left.me-2
+        | Previous
+      button(type='button' title="Next" data-list-pagination='next').btn.btn-link.px-1.ms-1
+        | Next
+        span.fas.fa-chevron-right.ms-2

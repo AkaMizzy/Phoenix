@@ -1,0 +1,25 @@
+mixin HeroHeader 
+  .booking-hero-header.d-flex.align-items-center
+    +Background({
+      image: `${CWD}assets/video/travel.png`, 
+      video: {
+        mp4: `${CWD}assets/video/travel`
+      },
+      className: 'bg-holder overlay bg-opacity-50'
+    })
+    .container-medium.position-relative.z-5
+      h2.text-secondary-lighter.fs-5.fs-md-3.fw-normal.mb-3 Where is your
+      h1.fs-4.fs-md-1.text-white.fw-normal.mb-6.overflow-hidden NEXT  
+        span.typed-text.text-primary(data-typed-text='["<span class=text-primary>TRIP!</span>","<span class=text-warning>TOUR?</span>", "<span class=text-info>SOJOURN?</span>", "<span class=text-success>VACAY?</span>"]')
+      .input-group.rounded-2.py-1.ps-2.w-lg-50.border.border-light
+        .form-icon-container.flex-1.d-flex.align-items-center(data-fa-transform="down-1")
+          span.fa-solid.fa-location-dot.form-icon.text-danger-light
+          input.form-control.form-icon-input.bg-transparent.border-0.outline-none.fs-8.fs-md-7.text-secondary-light(type='text' placeholder="Search Destination")
+        .dropdown.d-flex.align-items-center
+          button.btn.py-0.bg-transparent.text-secondary-light.fs-8.fs-md-7.fw-semibold.border-0.border-start.border-light.rounded-0(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" )
+            | Flight
+            span.fa-solid.fa-chevron-down.ms-2(data-fa-transform="down-1 shrink-4")
+          .dropdown-menu.dropdown-menu-end(data-bs-theme="dark")
+            a.dropdown-item(href='#!') Flight
+            a.dropdown-item(href='#!') Trip
+            a.dropdown-item(href='#!') Hotel

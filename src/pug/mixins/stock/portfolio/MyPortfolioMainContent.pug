@@ -1,0 +1,269 @@
+mixin PortfolioTableRow(item, index)
+  tr
+    td.align-middle.portfolioName.white-space-nowrap
+      p.fw-semibold.mb-0=item.portfolioName
+    td.align-middle.symbols.white-space-nowrap.text-center
+      p.fs-9.fw-semibold.text-body-tertiary.mb-0=item.symbols
+    td.align-middle.text-center.costBasis.ps-3
+      p.fs-9.text-body-tertiary.mb-0 $#{item.costBasis}
+    td.align-middle.marketValue.white-space-nowrap.ps-3
+      p.fs-9.text-body-tertiary.mb-0 $#{item.marketValue}
+    td.align-middle.dayChange.white-space-nowrap.ps-3
+      if item.dayChange
+        div(class=`text-${item.dayChange.growth ? 'success' : 'danger'}`)
+          p.fs-9.fw-bold.mb-1 #{item.dayChange.growth ? '+'  : '-'}$#{item.dayChange.amount}
+          p.fs-9.fw-bold.mb-1 #{item.dayChange.growth ? '+'  : '-'}#{item.dayChange.changes}%
+      else 
+        p.text-body-tertiary.mb-0.fw-bold ---
+    td.align-middle.unrealized.white-space-nowrap.text-end.pe-3
+      if item.unrealized
+        div(class=`text-${item.unrealized.growth ? 'success' : 'danger'}`)
+          p.fs-9.fw-bold.mb-1 #{item.unrealized.growth ? '+'  : '-'}$#{item.unrealized.amount}
+          p.fs-9.fw-bold.mb-1 #{item.unrealized.growth ? '+'  : '-'}#{item.unrealized.changes}%
+      else 
+        p.text-body-tertiary.mb-0.fw-bold ---
+    td.align-middle.realized.white-space-nowrap.text-end
+      if item.realized
+        div(class=`text-${item.realized.growth ? 'success' : 'danger'}`)
+          p.fs-9.fw-bold.mb-1 #{item.realized.growth ? '+'  : '-'}$#{item.realized.amount}
+          p.fs-9.fw-bold.mb-1 #{item.realized.growth ? '+'  : '-'}#{item.realized.changes}%
+      else 
+        p.text-body-tertiary.mb-0.fw-bold ---
+
+mixin MyPortfolioMainContent 
+  -
+    var portfolioStatus = [
+      {
+        title: 'Cash Holding',
+        amount: '$1.1K',
+        badge: {
+          color: 'success',
+          content: '+1.71'
+        },
+        className: 'border-end pe-4'
+      },
+      {
+        title: 'Day Change',
+        amount: '-$1.3K',
+        badge: {
+          color: 'danger',
+          content: '+1.71'
+        },
+        className: 'px-4 border-end',
+        textColor: 'text-danger'
+      },
+      {
+        title: 'Unrealized Gain/Loss',
+        amount: '-$5.5K',
+        badge: {
+          color: 'danger',
+          content: '+1.71'
+        },
+        className: 'border-end px-4',
+        textColor: 'text-danger'
+      },
+      {
+        title: 'Realized Gain/Loss',
+        amount: '+$3.5K',
+        badge: {
+          color: 'success',
+          content: '+1.71'
+        },
+        className: 'px-4',
+        textColor: 'text-success'
+      },
+    ]
+  .card.mb-4 
+    .card-body 
+      .row.justify-content-between.g-3.g-xxl-5.pb-4.pb-md-5 
+        .col-12
+            h5.text-body All Portfolio Holding
+            h4.text-body.mb-0 $12,000.00
+        .col-12
+          .scrollbar
+            .row.g-0.flex-nowrap
+              each item in portfolioStatus
+                .col-auto(class=item.className)
+                  h6.text-body-tertiary=item.title 
+                  .d-flex.gap-2.align-items-center 
+                    p.mb-0.fw-bold(class=item.textColor) #{item.amount}
+                    .badge.badge-phoenix.fs-10(class=`badge-phoenix-${item.badge.color}`) 
+                      | #{item.badge.content}%
+
+      .row.flex-between-center.g-3.mb-4 
+        .col-12.col-xxl-auto 
+          h4 Portfolio Chart
+          p.mb-0 No. of bookings fulfilled &amp; cancelled
+        .col-12.col-xxl-auto
+          .scrollbar 
+            .btn-group.btn-group-sm.stock-btn-group(role='group' aria-label='portfolio-chart-btn-group')
+              button.btn.btn-phoenix-secondary(data-line-filter data-value='1d') 1D
+              button.btn.btn-phoenix-secondary(data-line-filter data-value='5d') 5D
+              button.btn.btn-phoenix-secondary(data-line-filter data-value='1m') 1M
+              button.btn.btn-phoenix-secondary(data-line-filter data-value='3m') 3M
+              button.btn.btn-phoenix-secondary(data-line-filter data-value='6m') 6M
+              button.btn.btn-phoenix-secondary.active(data-line-filter data-value='1y') 1Y
+              button.btn.btn-phoenix-secondary(data-line-filter data-value='all') All
+
+      .echart-portfolio-line-chart(style='width: 100%; min-height:25rem;')
+  
+  .row.g-4 
+    .col-12
+      h4 My Portfolio 
+      p.text-body-tertiary.mb-0 Brief summary of all projects
+    .col-12
+      -
+        var portfolioTableData = [
+          {
+            portfolioName: 'My Watchlist',
+            symbols: 11,
+            costBasis: '26,514.56',
+            marketValue: '3.46 T',
+            dayChange: {
+              amount: '978.90',
+              changes: '0.74',
+              growth: true
+            },
+            unrealized: {
+              amount: '2,429.49',
+              changes: '0.74',
+              growth: true
+            },
+            realized: {
+              amount: '321.42',
+              changes: '0.74',
+              growth: false
+            },
+          },
+          {
+            portfolioName: 'Phoenix Growth Fund',
+            symbols: 14,
+            costBasis: '95,987.90',
+            marketValue: '2.02 T',
+            dayChange: {
+              amount: '872.96',
+              changes: '0.74',
+              growth: true
+            },
+            unrealized: {
+              amount: '60.95',
+              changes: '0.74',
+              growth: false
+            },
+            realized: {
+              amount: '23.42',
+              changes: '1.98',
+              growth: false
+            },
+          },
+          {
+            portfolioName: 'Titanium Edge',
+            symbols: 8,
+            costBasis: '30,675.98',
+            marketValue: '1.98 T',
+            dayChange: {
+              amount: '823.12',
+              changes: '0.74',
+              growth: true
+            },
+            unrealized: {
+              amount: '639.12',
+              changes: '2.15',
+              growth: true
+            },
+            realized: {
+              amount: '98.86',
+              changes: '2.74',
+              growth: true
+            },
+          },
+          {
+            portfolioName: 'Apex Capital',
+            symbols: 9,
+            costBasis: '12,789.98',
+            marketValue: '3.09 T',
+            dayChange: {
+              amount: '129.21',
+              changes: '0.74',
+              growth: true
+            },
+            unrealized: {
+              amount: '978.99',
+              changes: '0.54',
+              growth: false
+            },
+            realized: {
+              amount: '61.93',
+              changes: '2.74',
+              growth: false
+            },
+          },
+          {
+            portfolioName: 'Blue Horizon Fund',
+            symbols: 11,
+            costBasis: '2,787.49',
+            marketValue: '5,815.03',
+            dayChange: {
+              amount: '312.95',
+              changes: '0.74',
+              growth: true
+            },
+            unrealized: {
+              amount: '125.42',
+              changes: '1.74',
+              growth: true
+            },
+            realized: {
+              amount: '100.90',
+              changes: '5.74',
+              growth: true
+            },
+          },
+          {
+            portfolioName: 'Navigator Fund',
+            symbols: 17,
+            costBasis: '5,987.98',
+            marketValue: '589.95',
+            realized: {
+              amount: '72.42',
+              changes: '1.51',
+              growth: true
+            }
+          },
+          {
+            portfolioName: 'Equity Elevation',
+            symbols: 21,
+            costBasis: '19,845.37',
+            marketValue: '3.32 T',
+            dayChange: {
+              amount: '120.31',
+              changes: '1.74',
+              growth: false
+            },
+            unrealized: {
+              amount: '2,429.49',
+              changes: '0.51',
+              growth: true
+            }
+          },
+        ]
+      #portfolioTable(data-list != {
+        valueNames: ['portfolioName', 'symbols', 'costBasis', 'marketValue', 'dayChange', 'unrealized', 'realized'],
+        page: 7,
+        pagination: false
+      })
+        .table-responsive.scrollbar
+          table.table.mb-0 
+            thead 
+              tr.text-uppercase.border-top.text-body.fw-bold.fs-9
+                th.sort.white-space-nowrap.align-middle.ps-0(scope='col' style='min-width:180px;' data-sort="portfolioName") Portfolio Name
+                th.sort.align-middle.text-center(scope='col' data-sort="symbols" style='min-width:120px;') symbols
+                th.sort.align-middle.ps-3(scope='col' data-sort="costBasis" style='min-width:150px;') cost basis
+                th.sort.align-middle.ps-3(scope='col' style='min-width:160px;' data-sort="marketValue") Market value
+                th.sort.ps-3.align-middle(scope='col' style='min-width:140px;' data-sort="dayChange") Day Change
+                th.sort.pe-3.text-end.align-middle(scope='col' style='min-width:220px;' data-sort="unrealized") Unrealized gain / loss
+                th.sort.align-middle.text-end(scope='col' style='min-width:180px;' data-sort="realized") realized gain / loss
+
+            tbody.list 
+              each row, index in portfolioTableData 
+                +PortfolioTableRow(row, index)

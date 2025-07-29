@@ -1,0 +1,30 @@
+
+mixin Navbar
+  .bg-body-emphasis.sticky-top(data-navbar-shadow-on-scroll)
+    nav.navbar.navbar-landing.navbar-expand-lg.container-medium
+      a.navbar-brand.flex-1.flex-lg-grow-0.me-lg-8.me-xl-13(href=`${CWD}${paths['default-dashboard']}`)
+        +Logo
+      .d-flex.align-items-center.gap-2.gap-sm-3.gap-md-4.my-2.order-lg-1
+        +ToggleThemeBtn('themeControlToggleSm')
+        a.btn.btn-link.text-body-tertiary.p-0(href="#!")
+          span(data-feather='map-pin' style="width: 18px; height: 18px")
+        a.btn.btn-link.text-body-tertiary.p-0(href="#!")
+          span(data-feather='bell' style="width: 20px; height: 20px")
+        a.btn.btn-link.text-body-tertiary.p-0.me-2.me-lg-0(href="#!")
+          span(data-feather='user' style="width: 20px; height: 20px")
+      button.navbar-toggler.fs-8.ps-1.ps-sm-3.pe-0(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbarSupportedContent
+        ul.navbar-nav.me-auto.mt-3.mt-lg-0
+          li.nav-item.border-bottom.border-translucent.border-bottom-lg-0
+            a.nav-link(href=`${CWD}${paths['hotel-homepage']}`) Hotel
+          li.nav-item.border-bottom.border-translucent.border-bottom-lg-0
+            a.nav-link(href=`${CWD}${paths['flight-homepage']}`) Flight
+          li.nav-item.border-bottom.border-translucent.border-bottom-lg-0
+            a.nav-link(href=`${CWD}${paths['trip-homepage']}`) Trip
+          li.nav-item.border-bottom.border-translucent.border-bottom-lg-0
+            a.nav-link(href=`${CWD}${paths['event-detail']}`) Event
+          li.nav-item.border-bottom.border-translucent.border-bottom-lg-0
+            a.nav-link(href='#!') Package
+          li.nav-item
+            a.nav-link(href='#!') Trending

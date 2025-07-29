@@ -1,0 +1,68 @@
+extends ../../../../layouts/LayoutHotel
+include ../../../../mixins/travel-agency/hotel/HotelDetailsTab
+include ../../../../mixins/travel-agency/hotel/DetailsGallery
+include ../../../../mixins/travel-agency/hotel/SummaryCard
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Hotel Details';
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+append styles
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/mapbox-gl/mapbox-gl.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`) 
+  script(src=`${CWD}vendors/mapbox-gl/mapbox-gl.js`)
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+block hotelContent
+  +Section("container-medium").pt-4.pb-9
+    nav.mb-3(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#') Page 1
+        li.breadcrumb-item
+          a(href='#') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-4 Hotel Details
+    .row.g-4.flex-between-end.mb-5
+      .col-md-8.col-lg-9
+        h1.mb-2.fw-semibold Radisson Blu Water Garden Hotel, Dhaka
+        .mb-1
+          a(href="#!").text-body-tertiary
+            span.fa-solid.fa-map-marker-alt.me-2.text-body
+            | Airport Rd, Dhaka Cantonment, Dhaka, 1206, Bangladesh
+        .mb-1
+          a(href="tel:+88029834555").text-body-tertiary
+            span.fa-solid.fa-phone.me-2.text-body
+            | +880 29834555
+        .mb-1
+          a(href="mailto:sales.dhaka@radisson.com").text-body-tertiary
+            span.fa-solid.fa-envelope.me-2.text-body(data-fa-transform='down-1')
+            | sales.dhaka@radisson.com
+      .col-md-4.col-lg-3
+        .d-flex.flex-md-column.align-items-center.align-items-md-end.gap-3
+          h5.mb-0.text-nowrap
+            span.text-body-tertiary.me-2.fw-normal Rated
+            span.text-primary.me-2 Good
+            span.badge.text-bg-primary 4.3
+          a(href="#!").btn.btn-phoenix-primary.px-5.px-lg-8.w-100.w-md-auto
+            span.fa-solid.fa-map.me-2 
+            | Show in map
+    .row.g-3 
+      .col-xl-8
+        +DetailsGallery
+        +HotelDetailsTab
+      .col-xl-4
+        +SummaryCard("hotel-details").mt-3.mt-xl-0

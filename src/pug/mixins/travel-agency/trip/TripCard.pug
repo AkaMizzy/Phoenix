@@ -1,0 +1,18 @@
+mixin TripCard(data)
+  .hoverbox.rounded
+    a(href=`${CWD}${paths['trip-details']}`)
+      img(src=`${CWD}assets${data.img}`, alt="").img-fluid
+      .backdrop-faded
+        h3.text-underline.fs-7.fs-lg-6.text-white.fw-bold.mb-2= data.title
+        h5.text-secondary-lighter.fw-normal.mb-3
+          span.fa-solid.fa-map-marker-alt.text-primary.me-2
+          | #{data.place}
+        .d-sm-flex.d-md-block.d-lg-flex.flex-between-center 
+          h3.text-white.fw-bold.mb-3.mb-sm-0.mb-md-3.mb-lg-0.fs-7.fs-lg-6 $ #{data.price}
+          .d-flex.gap-3 
+            h5.text-secondary-lighter.fw-normal 
+              span.fa-solid.fa-clock.fs-9.me-2
+              | #{data.days} days
+            h5.text-secondary-lighter.fw-normal 
+              span.fa-solid.fa-user.fs-9.me-2
+              | From 1 to #{data.people} people

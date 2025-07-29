@@ -1,0 +1,12 @@
+mixin BookingsCard 
+  .card.h-100&attributes(attributes)
+    .card-header.pb-3.d-sm-flex.d-xl-block.d-xxl-flex.justify-content-between.align-items-start
+      div
+        h3.text-body-highlight Bookings
+        p.mb-0 Completed and canceled bookings
+      select.form-select.form-select-sm.pe-9.w-auto.mt-3.mt-sm-0.mt-xl-3.mt-xxl-0(data-booking-options)
+        option(value=0) Hotel
+        option(value=1) Flight
+        option(value=2) Trip
+    .card-body 
+      .echart-bookings(style="height: 100%;min-height: 322px; width: 100%")

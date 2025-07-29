@@ -1,0 +1,388 @@
+mixin ChangeRoomModal 
+  .modal.fade(id="changeRoomModal" data-bs-keyboard="false" tabindex="-1" aria-labelledby="changeRoomModalLabel" aria-hidden="true")
+    .modal-dialog.modal-dialog-centered.modal-xl
+      .modal-content
+        .modal-header.justify-content-between.p-4
+          h3.mb-0.text-body-highlight(id='changeRoomModalLabel') Select Room
+          button.btn.btn-phoenix-danger.px-3(data-bs-dismiss="modal" aria-label="Close")
+            span.fa-solid.fa-times(data-fa-transform='down-2')
+        .modal-body.p-4
+          -
+            var rooms = [
+              {
+                type: 'Standard Double Queen',
+                discount: '10',
+                price: '143.65',
+                discountPrice: '123.65',
+                desc: 'A standard double queen room has two queen-sized beds and may accept up to two people for a convenient and comfortable stay.',
+                beds: '01',
+                adults: '02',
+                childs: '00',
+                bathrooms: '01',
+                images: ['/img/hotels/33.png', '/img/hotels/34.png', '/img/hotels/35.png', '/img/hotels/36.png', '/img/hotels/37.png', '/img/hotels/38.png', ],
+                popularAmenities: [
+                  {
+                    title: 'Airport shuttle', 
+                    icon: 'fa-solid fa-car',
+                    classes: 'border'
+                  },
+                  {
+                    title: 'Free wifi',
+                    icon: 'fa-solid fa-wifi',
+                    classes: 'border-bottom border-top-sm border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Restaurant',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-end border-start border-start-lg-0 border-top-lg border-bottom'
+                  },
+                  {
+                    title: 'Smoking zone',
+                    icon: 'fa-solid fa-smoking',
+                    classes: 'border-end border-start border-start-sm-0 border-start-lg border-bottom'
+                  },
+                  {
+                    title: 'Room service',
+                    icon: 'fa-solid fa-user',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Pet-Friendly',
+                    icon: 'fa-solid fa-dog',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Free parking',
+                    icon: 'fa-solid fa-square-parking',
+                    classes: 'border-x border-bottom'
+                  },
+                  {
+                    title: 'Beach-front',
+                    icon: 'fa-solid fa-umbrella-beach',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Facilities for disabled guests',
+                    icon: 'fa-solid fa-wheelchair',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Bar',
+                    icon: 'fa-solid fa-wine-glass',
+                    classes: 'border-x border-bottom border-start border-start-sm-0 border-start-lg'
+                  },
+                  {
+                    title: 'Free Breakfast',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: '24-hour front desk',
+                    icon: 'fa-solid fa-bell-concierge',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  }
+                ],
+                amenities: ["Wifi", "Luggage rack", "Hairdryer", "Toiletries", "Seating area", "Bed sheets", "Room service", "Blankets", "Air conditioning", "Television", "Heating", "Sofa or couch", "Coffee table", "Ironing service", "Dry cleaning", "Coffee maker", "Electric kettle", "Garden view", "Baby cots", "Desk or workstation", ]
+              },
+              {
+                type: 'Deluxe Room',
+                discount: '10',
+                price: '199.65',
+                discountPrice: '165.98',
+                desc: 'A Deluxe Room is a spacious and luxurious hotel accommodation offering upgraded amenities and enhanced comfort for a more indulgent stay.',
+                beds: '01',
+                adults: '02',
+                childs: '00',
+                bathrooms: '01',
+                images: ['/img/hotels/33.png', '/img/hotels/34.png', '/img/hotels/35.png', '/img/hotels/36.png', '/img/hotels/37.png', '/img/hotels/38.png', ],
+                popularAmenities: [
+                  {
+                    title: 'Airport shuttle', 
+                    icon: 'fa-solid fa-car',
+                    classes: 'border'
+                  },
+                  {
+                    title: 'Free wifi',
+                    icon: 'fa-solid fa-wifi',
+                    classes: 'border-bottom border-top-sm border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Restaurant',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-end border-start border-start-lg-0 border-top-lg border-bottom'
+                  },
+                  {
+                    title: 'Smoking zone',
+                    icon: 'fa-solid fa-smoking',
+                    classes: 'border-end border-start border-start-sm-0 border-start-lg border-bottom'
+                  },
+                  {
+                    title: 'Room service',
+                    icon: 'fa-solid fa-user',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Pet-Friendly',
+                    icon: 'fa-solid fa-dog',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Free parking',
+                    icon: 'fa-solid fa-square-parking',
+                    classes: 'border-x border-bottom'
+                  },
+                  {
+                    title: 'Beach-front',
+                    icon: 'fa-solid fa-umbrella-beach',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Facilities for disabled guests',
+                    icon: 'fa-solid fa-wheelchair',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Bar',
+                    icon: 'fa-solid fa-wine-glass',
+                    classes: 'border-x border-bottom border-start border-start-sm-0 border-start-lg'
+                  },
+                  {
+                    title: 'Free Breakfast',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: '24-hour front desk',
+                    icon: 'fa-solid fa-bell-concierge',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  }
+                ],
+                amenities: ["Wifi", "Luggage rack", "Hairdryer", "Toiletries", "Seating area", "Bed sheets", "Room service", "Blankets", "Air conditioning", "Television", "Heating", "Sofa or couch", "Coffee table", "Ironing service", "Dry cleaning", "Coffee maker", "Electric kettle", "Garden view", "Baby cots", "Desk or workstation", ]
+              },
+              {
+                type: 'Presidential Suite',
+                discount: '10',
+                price: '156.23',
+                discountPrice: '130.65',
+                desc: 'The Presidential Suite: The pinnacle of luxury accommodations, reserved for VIPs and boasting the utmost opulence and prestige.',
+                beds: '01',
+                adults: '02',
+                childs: '00',
+                bathrooms: '01',
+                images: ['/img/hotels/33.png', '/img/hotels/34.png', '/img/hotels/35.png', '/img/hotels/36.png', '/img/hotels/37.png', '/img/hotels/38.png', ],
+                popularAmenities: [
+                  {
+                    title: 'Airport shuttle', 
+                    icon: 'fa-solid fa-car',
+                    classes: 'border'
+                  },
+                  {
+                    title: 'Free wifi',
+                    icon: 'fa-solid fa-wifi',
+                    classes: 'border-bottom border-top-sm border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Restaurant',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-end border-start border-start-lg-0 border-top-lg border-bottom'
+                  },
+                  {
+                    title: 'Smoking zone',
+                    icon: 'fa-solid fa-smoking',
+                    classes: 'border-end border-start border-start-sm-0 border-start-lg border-bottom'
+                  },
+                  {
+                    title: 'Room service',
+                    icon: 'fa-solid fa-user',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Pet-Friendly',
+                    icon: 'fa-solid fa-dog',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Free parking',
+                    icon: 'fa-solid fa-square-parking',
+                    classes: 'border-x border-bottom'
+                  },
+                  {
+                    title: 'Beach-front',
+                    icon: 'fa-solid fa-umbrella-beach',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Facilities for disabled guests',
+                    icon: 'fa-solid fa-wheelchair',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Bar',
+                    icon: 'fa-solid fa-wine-glass',
+                    classes: 'border-x border-bottom border-start border-start-sm-0 border-start-lg'
+                  },
+                  {
+                    title: 'Free Breakfast',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: '24-hour front desk',
+                    icon: 'fa-solid fa-bell-concierge',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  }
+                ],
+                amenities: ["Wifi", "Luggage rack", "Hairdryer", "Toiletries", "Seating area", "Bed sheets", "Room service", "Blankets", "Air conditioning", "Television", "Heating", "Sofa or couch", "Coffee table", "Ironing service", "Dry cleaning", "Coffee maker", "Electric kettle", "Garden view", "Baby cots", "Desk or workstation", ]
+              },
+              {
+                type: 'Ocean View Room',
+                discount: '10',
+                price: '271.65',
+                discountPrice: '240.96',
+                desc: 'An Ocean View Room offers breathtaking vistas of the sea, providing guests with a captivating and serene coastal experience.',
+                beds: '01',
+                adults: '02',
+                childs: '00',
+                bathrooms: '01',
+                images: ['/img/hotels/33.png', '/img/hotels/34.png', '/img/hotels/35.png', '/img/hotels/36.png', '/img/hotels/37.png', '/img/hotels/38.png', ],
+                popularAmenities: [
+                  {
+                    title: 'Airport shuttle', 
+                    icon: 'fa-solid fa-car',
+                    classes: 'border'
+                  },
+                  {
+                    title: 'Free wifi',
+                    icon: 'fa-solid fa-wifi',
+                    classes: 'border-bottom border-top-sm border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Restaurant',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-end border-start border-start-lg-0 border-top-lg border-bottom'
+                  },
+                  {
+                    title: 'Smoking zone',
+                    icon: 'fa-solid fa-smoking',
+                    classes: 'border-end border-start border-start-sm-0 border-start-lg border-bottom'
+                  },
+                  {
+                    title: 'Room service',
+                    icon: 'fa-solid fa-user',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Pet-Friendly',
+                    icon: 'fa-solid fa-dog',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Free parking',
+                    icon: 'fa-solid fa-square-parking',
+                    classes: 'border-x border-bottom'
+                  },
+                  {
+                    title: 'Beach-front',
+                    icon: 'fa-solid fa-umbrella-beach',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  },
+                  {
+                    title: 'Facilities for disabled guests',
+                    icon: 'fa-solid fa-wheelchair',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: 'Bar',
+                    icon: 'fa-solid fa-wine-glass',
+                    classes: 'border-x border-bottom border-start border-start-sm-0 border-start-lg'
+                  },
+                  {
+                    title: 'Free Breakfast',
+                    icon: 'fa-solid fa-utensils',
+                    classes: 'border-bottom border-end border-start border-start-lg-0'
+                  },
+                  {
+                    title: '24-hour front desk',
+                    icon: 'fa-solid fa-bell-concierge',
+                    classes: 'border-bottom border-end border-start border-start-sm-0'
+                  }
+                ],
+                amenities: ["Wifi", "Luggage rack", "Hairdryer", "Toiletries", "Seating area", "Bed sheets", "Room service", "Blankets", "Air conditioning", "Television", "Heating", "Sofa or couch", "Coffee table", "Ironing service", "Dry cleaning", "Coffee maker", "Electric kettle", "Garden view", "Baby cots", "Desk or workstation", ]
+              },
+            ]
+          each room, index in rooms 
+            .row.g-3.mb-4
+              .col-lg-8.col-xxl-7
+                .d-flex.align-items-center.mb-2
+                  h4.mb-0.fw-semibold.pe-3
+                    span.fa-solid.fa-circle.fs-9.text-body-quaternary.me-2(data-fa-transform='up-1')
+                    | #{room.type}
+                  span.badge.badge-phoenix.badge-phoenix-info.fs-10 #{room.discount}% OFF
+                p.mb-0= room.desc
+              .col-lg-4.col-xxl-5 
+                h3.mb-2.d-flex.align-items-center.justify-content-lg-end.gap-2
+                  span.fs-9.text-body-quaternary.fw-normal.text-decoration-line-through $#{room.price}
+                  | $#{room.discountPrice}
+                  span.fs-9.text-body / night
+                h5.text-body.text-lg-end.fw-normal Inclusive of all taxes and fees
+            .row.mb-4.justify-content-between
+              .col-lg-7
+                .swiper-theme-container
+                  .swiper.theme-slider(data-swiper!={
+                    loop: true,
+                    spaceBetween: 8,
+                    slidesPerView: 'auto',
+                    centeredSlide: true,
+                    grabCursor: true,
+                  })
+                    .swiper-wrapper
+                      each img in room.images
+                        .swiper-slide.w-auto
+                          img(src=`${CWD}assets${img}`, alt="" width=158).rounded-2
+                  .swiper-nav.swiper-nav-inside
+                    .swiper-button-next
+                      span.fas.fa-chevron-right.nav-icon
+                    .swiper-button-prev
+                      span.fas.fa-chevron-left.nav-icon
+              .col-lg-5.col-xl-4
+                .p-4.border.border-translucent.rounded-2.mt-4.mt-lg-0
+                  .row.g-3
+                    .col-6 
+                      h6.fw-semibold.text-body-secondary
+                        span.fa-solid.fa-bed.text-info.me-2
+                        | #{room.beds} Double Bed
+                    .col-6 
+                      h6.fw-semibold.text-body-secondary
+                        span.fa-solid.fa-user.text-info.me-2 
+                        | #{room.adults} Adult
+                    .col-6 
+                      h6.fw-semibold.text-body-secondary
+                        span.fa-solid.fa-baby.text-info.me-2 
+                        | #{room.childs} Child
+                    .col-6 
+                      h6.fw-semibold.text-body-secondary
+                        span.fa-solid.fa-bath.text-info.me-2 
+                        | #{room.bathrooms} Bathrooms
+                button.btn.btn-outline-primary.w-100.mt-3 Add to compare
+            a.btn.p-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href=`#amenitiesCollapse-${index}` role='button' aria-expanded='false' aria-controls=`amenitiesCollapse-${index}`)
+              h5.mb-0 Room Amenities
+              span.fa-solid.fa-chevron-down.toggle-icon.text-body
+            .collapse(id=`amenitiesCollapse-${index}`)
+              .px-md-4.pt-4
+                h5.mb-3 Most popular
+                .row.g-0.mb-5
+                  each item in room.popularAmenities
+                    .col-sm-6.col-lg-4
+                      .d-flex.align-items-center.gap-2.px-4.py-3.h-100.border-translucent(class=`${item.classes}`)
+                        span.fs-9.text-warning(class=`${item.icon}`)
+                        h5.text-body-tertiary.mb-0.fw-normal= item.title
+                h5.mb-3 Others Amenities
+                .row.g-2 
+                  each item in room.amenities 
+                    .col-lg-4.col-xl-3 
+                      .p-3.border.border-translucent.rounded-2 
+                        h5.text-body-secondary.fw-semibold.mb-0
+                          span.fa-solid.fa-check.text-success.me-2 
+                          | #{item}
+            if index !== rooms.length - 1
+              hr.my-7

@@ -1,0 +1,127 @@
+mixin OverviewCard(data)
+  .card
+    .card-body
+      .d-flex.flex-between-center.gap-2.gap-lg-3
+        .flex-1 
+          .d-flex.align-items-center.gap-2.mb-2 
+            h5.mb-0.text-body-tertiary.text-nowrap= data.title
+            .badge.badge-phoenix.fs-10.d-flex.align-items-center(
+              class=data.isPositive ? 'badge-phoenix-success' : 'badge-phoenix-danger'
+            ) 
+              | #{data.isPositive ? '+' : '-'}#{data.stockValue}%
+              span.ms-1.fas(
+                class=data.isPositive ? 'fa-chevron-up' : 'fa-chevron-down'
+              )
+          h4.mb-0 $#{data.totalValue}
+        .overview-echart(class=data.className data-echarts!={data: data.echartData})
+
+
+mixin OverviewCards 
+  -
+    var cardData = [
+      {
+        title : 'S&P 500',
+        stockValue: 0.97,
+        isPositive: true,
+        totalValue: '5,751.13',
+        className: 'echart-stock-overview-chart',
+        echartData: [
+          70, 50, 85, 45, 200, 193, 196, 210, 198, 210, 103, 120, 84, 95, 130, 123,
+          214, 245, 287, 348, 356, 390
+        ]
+      },
+      {
+        title : 'Dow 30',
+        stockValue: 0.50,
+        isPositive: false,
+        totalValue: '42,080.37',
+        className: 'echart-stock-overview-mixed-chart',
+        echartData: [
+          -100, 190, 200, -200, -190, 300, -110, 100, -100, 250, 200, 190, -80, 50,
+          40, 200, -200, 200, 150, 160, 300, -100
+        ]
+      },
+      {
+        title : 'Nasdaq',
+        stockValue: 1.45,
+        isPositive: true,
+        totalValue: '42,080.37',
+        className: 'echart-stock-overview-chart',
+        echartData: [
+          400, 450, 500, 490, 600, 550, 400, 350, 200, 250, 180, 350, 320, 330, 320, 
+          450, 480, 350, 345, 200, 320, 400
+        ]
+      },
+      {
+        title : 'FTSE 100',
+        stockValue: 1.36,
+        isPositive: false,
+        totalValue: '8,190.61',
+        className: 'echart-stock-overview-inverted-chart',
+        echartData: [
+          -500, -300, -250, -280, -150, -250, -300, -180, -145, -250, -46, -250, -90,
+          -80, -85, -150, -250, -180, -175, -50
+        ]
+      },
+      {
+        title : 'Crude Oil',
+        stockValue: 0.64,
+        isPositive: false,
+        totalValue: '6,705.13',
+        className: 'echart-stock-overview-inverted-chart',
+        echartData: [
+          -600, -500, -450, -480, -450, -350, -400, -680, -145, -650, -546, -450, -590,
+          -380, -585, -250, -550, -680, -375, -250
+        ]
+      },
+      {
+        title : 'Russell',
+        stockValue: 9.09,
+        isPositive: true,
+        totalValue: '2,275.88',
+        className: 'echart-stock-overview-chart',
+        echartData: [
+          500, 450, 600, 690, 700, 550, 400, 350, 200, 250, 180, 350, 320, 330, 320, 
+          450, 480, 450, 445, 300, 420, 600
+        ]
+      },
+      {
+        title : 'VIX',
+        stockValue: 9.99,
+        isPositive: false,
+        totalValue: '24.28',
+        className: 'echart-stock-overview-inverted-chart',
+        echartData: [
+          -600, -500, -450, -480, -450, -350, -400, -680, -145, -650, -546, -450, -590,
+          -380, -585, -250, -550, -680, -375, -250
+        ]
+      },
+      {
+        title : 'DAX',
+        stockValue: 1.56,
+        isPositive: true,
+        totalValue: '22,676.41',
+        className: 'echart-stock-overview-chart',
+        echartData: [
+          500, 450, 600, 690, 700, 550, 400, 350, 200, 250, 180, 350, 320, 330, 320, 
+          450, 480, 450, 445, 300, 420, 600
+        ]
+      }
+    ]
+  .swiper-theme-container.w-100
+    .swiper.theme-slider(data-swiper!={
+      spaceBetween: 24,
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      autoplay: {
+        delay: 0,
+      },
+      freeMode: true,
+      speed: 6500,
+      grabCursor: true
+    })
+      .swiper-wrapper.swiper-continuous-autoplay
+        each item in cardData 
+          .swiper-slide.stock-overview-card
+            +OverviewCard(item)

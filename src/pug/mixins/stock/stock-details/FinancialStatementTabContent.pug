@@ -1,0 +1,182 @@
+mixin FinancialStatementTabContent
+  .card 
+    .card-body
+      .row.g-3.flex-between-center.mb-4 
+        .col-auto
+          h4 Apple Income Statement
+          p.text-body-tertiary.mb-0 Financials in millions USD. 
+        .col-auto
+          .d-flex.align-items-center.gap-2
+            select#amount.form-select.form-select-sm(name="amount") 
+              option(value="million") Millions 
+              option(value='billions') Thousands 
+              option(value="remove")  hundreds 
+            select#time.form-select.form-select-sm(name="time") 
+              option(value="million") Annual 
+              option(value='semi-annual') Semi Annual 
+              option(value="quarterly")  Quarterly 
+            button.btn.btn-sm.btn-phoenix-secondary 
+              span.fas.fa-download
+
+      .table-responsive.scrollbar 
+        table.table.border-top.border-translucent.fs-9.mb-0
+          thead 
+            tr.text-uppercase 
+              th.fw-bold.ps-0.py-3(style="min-width: 22rem;") Breakdown
+              th.fw-bold.text-center.bg-body-highlight.py-3(style="min-width: 7.5rem;") ttm 
+              th.fw-bold.text-center.py-3(style="min-width: 7.5rem;") 2023-12-31
+              th.fw-bold.text-center.bg-body-highlight.py-3(style="min-width: 7.5rem;") 2022-12-31
+              th.fw-bold.text-center.py-3(style="min-width: 7.5rem;") 2021-12-31
+              th.fw-bold.text-center.bg-body-highlight.py-3(style="min-width: 7.5rem;") 2020-12-31
+          tbody.text-center.fw-semibold
+            tr
+              td.text-start Total Revenue
+              td.bg-body-highlight 5,40,512
+              td 5,21,250
+              td.bg-body-highlight 4,55,579
+              td 3,93,488
+              td.bg-body-highlight 3,40,199
+              
+            tr
+              td.text-start Cost of Revenue
+              td.bg-body-highlight 90,010
+              td 86,012
+              td.bg-body-highlight 75,221
+              td 60,812
+              td.bg-body-highlight 47,164
+              
+            tr
+              td.text-start Gross Profit
+              td.bg-body-highlight 4,50,502
+              td 4,35,238
+              td.bg-body-highlight 3,80,358
+              td 3,32,676
+              td.bg-body-highlight 2,93,035
+
+            tr
+              td.text-start.fw-bold 
+                a.btn.px-0.d-block.collapse-indicator.py-0(data-bs-toggle='collapse' href='#collapseOperating' role='button' aria-expanded='true' aria-controls='collapseOperating')
+                  .d-flex.align-items-center.gap-2
+                    .fs-9.text-body-highlight Operating Expenses
+                    span.fa-solid.fa-angle-down.toggle-icon.text-body-secondary
+              td.bg-body-highlight
+              td 
+              td.bg-body-highlight
+              td 
+              td.bg-body-highlight
+            tr
+              td(colspan=6).py-0.border-bottom-0
+                .collapse.show#collapseOperating
+                  table.table.mb-0 
+                    tbody
+                      tr.bg-primary-subtle 
+                        td.text-start.ps-3.ps-xl-4(style="width: 22rem;") Selling General and Administration
+                        td.bg-body-highlight(style="width: 7.5rem;") 33,981
+                        td(style="width: 7.5rem;") 40,445
+                        td.bg-body-highlight(style="width: 7.5rem;") 28,598
+                        td(style="width: 7.5rem;") 37,770
+                        td.bg-body-highlight(style="width: 7.5rem;") 31,635
+
+                      tr.fw-bold.bg-primary-subtle
+                        td.text-start.fw-bolder.ps-3.ps-xl-4 Total Operating Expenses
+                        td.bg-body-highlight 35,464
+                        td 42,712
+                        td.bg-body-highlight 31,063
+                        td 39,720
+                        td.bg-body-highlight 33,354
+
+            tr.fw-bold
+              td.text-start.fw-bolder Operating Income or Loss
+              td.bg-body-highlight 4,15,038
+              td 3,92,526
+              td.bg-body-highlight 3,49,295
+              td 2,92,956
+              td.bg-body-highlight 2,59,681
+
+            tr
+              td.text-start Interest Expense
+              td.bg-body-highlight 81,305
+              td 72,864
+              td.bg-body-highlight 45,183
+              td 39,393
+              td.bg-body-highlight 33,610
+
+            tr
+              td.text-start Total Other Income/Expenses Net
+              td.bg-body-highlight -98,893
+              td -1,92,510
+              td.bg-body-highlight -2,07,796
+              td 12,98,095
+              td.bg-body-highlight 2,72,800
+
+            tr
+              td.text-start Income Before Tax
+              td.bg-body-highlight 2,36,758
+              td 1,25,632
+              td.bg-body-highlight 88,256
+              td 1,45,256
+              td.bg-body-highlight 2,45,563
+
+            tr
+              td.text-start Income Tax Expense
+              td.bg-body-highlight 7,256
+              td -9,653
+              td.bg-body-highlight -69,586
+              td 2,41,012
+              td.bg-body-highlight 4,25,365
+
+            tr
+              td.text-start Income from Continuing Operations
+              td.bg-body-highlight 2,12,356
+              td 1,45,258
+              td.bg-body-highlight 25,365
+              td 45,362
+              td.bg-body-highlight 4,16,259
+
+            tr.fw-bold
+              td.text-start.fw-bolder Net Income
+              td.bg-body-highlight 2,25,653
+              td 4,58,693
+              td.bg-body-highlight 1,25,489
+              td 5,36,125
+              td.bg-body-highlight 47,852
+
+            tr
+              td.text-start Net Income Available to Common
+              td.bg-body-highlight 2,25,235
+              td 1,36,665
+              td.bg-body-highlight 1,55,256
+              td 1,25,365
+              td.bg-body-highlight 3,65,259
+
+            tr
+              td.text-start Basic EPS
+              td.bg-body-highlight -0.25
+              td 2.15
+              td.bg-body-highlight 2.36
+              td 20.47
+              td.bg-body-highlight 6.85
+
+            tr
+              td.text-start Diluted EPS
+              td.bg-body-highlight -0.25
+              td 2.14
+              td.bg-body-highlight 2.36
+              td 20.47
+              td.bg-body-highlight 6.97
+
+            tr
+              td.text-start Basic Average Shares
+              td.bg-body-highlight 63,785
+              td 63,700
+              td.bg-body-highlight 64,582
+              td 64,142
+              td.bg-body-highlight 63,125
+
+            tr
+              td.text-start Diluted Average Shares
+              td.bg-body-highlight 63,455
+              td 63,900
+              td.bg-body-highlight 65,256
+              td 64,400
+              td.bg-body-highlight 61,475

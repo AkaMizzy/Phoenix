@@ -1,0 +1,85 @@
+mixin EmailDetails
+	.d-flex.flex-between-center.pb-3.border-bottom.border-translucent.mb-4
+		a.btn.btn-link.p-0.text-body-secondary.me-3(href=`${CWD}${paths['email-inbox']}`)
+			span.fa-solid.fa-angle-left.fw-bolder.fs-8
+		h3.flex-1.mb-0.lh-sm.line-clamp-1 Query about recently purchased soccer socks
+		+RevealBtn
+	.overflow-x-hidden.scrollbar.email-detail-content
+		.row.align-items-center.gy-3.gx-0.mb-10
+			.col-12.col-sm-auto.d-flex.order-sm-1
+				button.btn.p-0.me-4.me-lg-3.me-xl-4(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Reply")
+					span.fa-solid.fa-reply.text-body-quaternary
+				button.btn.p-0.me-4.me-lg-3.me-xl-4(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Remove")
+					span.fa-solid.fa-trash-can.text-body-quaternary
+				button.btn.p-0.me-4.me-lg-3.me-xl-4(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Archive")
+					span.fa-solid.fa-archive.text-body-quaternary
+				button.btn.p-0.me-4.me-lg-3.me-xl-4(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Print")
+					span.fa-solid.fa-print.text-body-quaternary
+				button.btn.p-0(data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Star")
+					span.fa-regular.fa-star.text-body-quaternary
+			.col-auto
+				img.me-2(src=`${CWD}assets/img/team/60.webp` alt="..." width='48' height='48').rounded-circle
+			.col-auto.flex-1
+				.d-flex.mb-1
+					h5.mb-0.text-body-highlight.me-2 Jessica Ball
+					p.mb-0.lh-sm.text-body-tertiary.fs-9.d-none.d-md-block.text-nowrap &#60; jessica.ball@email.com  &#62;
+				p.mb-0.fs-9
+					span.text-body-tertiary to
+					span.fw-bold.text-body-secondary  Me 
+					span.text-body-highlight.fw-semibold.fs-10 28 Aug, 2021 
+					span.fw-semibold.text-body.fs-10.me-1  6:32 PM
+					span.fa-regular.fa-star.text-body-quaternary
+
+
+		.text-body-highlight.fs-9.w-100.w-md-75.mb-8
+			p Dear Simp sons,	
+			p Something in a thirty-acre thermal thicket of thorns and thistles thumped and thundered threatening the three-D thoughts of Matthew the thug - although, theatrically, it was only the thirteen-thousand thistles and thorns through the underneath of his thigh that the thirty year old thug thought of that morning.
+
+			p How much caramel can a canny canonball cram in a camel if a canny canonball can cram caramel in a camel? If practice makes perfect and perfect needs practice, I’m perfectly practiced and practically perfect.
+
+			p.mb-0 Best regards,
+			p Jess
+
+		.d-flex.align-items-center.mb-5
+			button.btn.btn-link.text-body-highlight.fs-8.text-decoration-none.p-0(type='button')
+				span.fa-solid.fa-paperclip.me-2
+				| 2 Attachments
+		.row.pb-11.border-bottom.mb-4.gx-0.gy-2.border-translucent
+			.col-auto.me-3
+				a.text-decoration-none.d-flex.align-items-center(href="#!")
+					.btn-icon.btn-icon-xl.border.rounded-3.text-body-quaternary.text-opacity-75.flex-column.me-2
+						span.fa-solid.fa-file.fs-8.mb-1
+						p.mb-0.fs-10.fw-bold PDF
+					div
+						h6.text-body-highlight workflow-data.pdf
+						p.fs-9.mb-0.text-body-tertiary.lh-1 53.34 KB
+			.col-auto
+				a.text-decoration-none.d-flex.align-items-center(href="#!")
+					img(src=`${CWD}assets/img/generic/41.png` alt="...").rounded
+					.ms-2
+						h6.text-body-highlight forest.jpg
+						p.fs-9.mb-0.text-body-tertiary 53.34 KB
+		.d-flex.justify-content-between
+			button.btn.btn-phoenix-secondary.me-1.text-nowrap.px-2.px-sm-4 Reply
+				span.fa-solid.fa-reply.ms-2.fs-10
+			button.btn.btn-phoenix-secondary.me-1.text-nowrap.px-2.px-sm-4 Reply All
+				span.fa-solid.fa-reply-all.ms-2.fs-10
+			button.btn.btn-phoenix-secondary.ms-auto.text-nowrap.px-2.px-sm-4 Forward
+				span.fa-solid.fa-share.ms-2.fs-10
+
+	//- form.row
+	//- 	.col-12.mb-3
+	//- 		textarea#reviewTextarea.form-control(rows='9' placeholder='Input Body')
+	//- 	.col-12.mb-4.d-lg-flex.justify-content-between.align-items-center
+	//- 		div
+	//- 			button.btn.btn-link.p-0.text-body.fs-10(type='button')
+	//- 				span.fa-solid.fa-paperclip.me-1
+	//- 			button.btn.btn-link.p-0.text-body.fs-10(type='button')
+	//- 				span.fa-solid.fa-image.me-1
+	//- 			button.btn.btn-link.p-0.text-body.fs-10(type='button')
+	//- 				span.fa-solid.fa-link
+	//- 		div
+	//- 			button.btn.btn-link.text-body.fs-10.p-0.me-1 Discard
+	//- 			button.btn.btn-primary.fs-10(type='submit') Send
+	//- 				span.fa-solid.fa-paper-plane.ms-1
+

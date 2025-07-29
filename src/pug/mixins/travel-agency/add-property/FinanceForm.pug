@@ -1,0 +1,63 @@
+mixin FinanceForm(config)
+  form(id=`${config.formId}5` class=config.validation && 'needs-validation' novalidate data-wizard-form='5')
+    h3.mb-6 Finance
+    h4.mb-4 Payment from Phoenix Booking Management
+    .row.g-3
+      .col-md-6
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-currency` id=`${config.name}wizard-currency` required=config.validation placeholder='payment currency' value="$ US Dollar")
+          label(for=`${config.name}wizard-currency`) payment currency
+      .col-md-6
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-percentage` id=`${config.name}wizard-percentage` required=config.validation placeholder='Commission Percentage' value="Flat 10%" disabled)
+          label(for=`${config.name}wizard-percentage`) Commission Percentage
+    .form-floating.mt-3
+      select.form-select.form-icon-input(name=`${config.name}-type` id=`${config.name}EFT-type` required=config.validation)
+        option(selected) Electronic Funds Transfer (EFT)
+        option Option 2
+        option Option 3
+      label.form-icon-label(for=`${config.name}EFT-type`) Select Payment Method
+    .form-check.my-4
+      input.form-check-input#invoiceChecked(type='checkbox' checked)
+      label.form-check-label.fw-normal.fs-8(for='invoiceChecked') Invoice to the name and address of property
+    .form-floating.mb-4
+      input.form-control(type='text' name=`${config.name}-invoice-email` id=`${config.name}wizard-invoice-email` required=config.validation placeholder='Invoice email')
+      label(for=`${config.name}wizard-invoice-email`) Invoice email
+      a.position-absolute.d-flex.align-items-center.px-3.fw-bold.fs-9.end-0.top-0.mt-3.me-2 Verify now 
+    .form-check.form-check-inline.mb-3
+      input.form-check-input#creditCard(type='radio' name='paymentMethod' value='creditCard' checked)
+      label.form-check-label.fs-8(for='creditCard') Credit Card
+    .form-check.form-check-inline.mb-3
+      input.form-check-input#bankAccount(type='radio' name='paymentMethod' value='bankAccount')
+      label.form-check-label.fs-8(for='bankAccount') Bank Account
+    .form-check.form-check-inline.mb-3
+      input.form-check-input#online(type='radio' name='paymentMethod' value='online')
+      label.form-check-label.fs-8(for='online') Online
+    .row.g-3
+      .col-md-6
+        .form-floating
+          select.form-select.form-icon-input(name=`${config.name}-type` id=`${config.name}card-type` required=config.validation)
+            option(selected) Visa Debit card
+            option Option 2
+            option Option 3
+          label.form-icon-label(for=`${config.name}card-type`) Select card
+      .col-md-6
+        .form-floating
+          input.form-control(type='text' name=`${config.name}-card-number` id=`${config.name}wizard-card-number` required=config.validation placeholder='Card number')
+          label(for=`${config.name}wizard-card-number`) Card number
+    .form-floating.mt-3
+      input.form-control(type='text' name=`${config.name}-card-holder` id=`${config.name}wizard-card-holder` required=config.validation placeholder='Card Holder name')
+      label(for=`${config.name}wizard-card-holder`) Card Holder name
+    h4.mt-6.mb-4 Payment from Guests (On property)
+    .border.p-3.rounded-2
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="cashPayment" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="cashPayment") Cash payment
+    .border.p-3.rounded-2.my-3
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="cardPayment" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="cardPayment") Card Payment
+    .border.p-3.rounded-2
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="onlinePayment" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="onlinePayment") MFS / Online Payment

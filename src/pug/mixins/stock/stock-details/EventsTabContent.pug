@@ -1,0 +1,235 @@
+include ./EventsTabOffcanvas
+
+mixin EventsCardBody(item)
+  .d-sm-flex.gap-3
+    .custom-calendar-container 
+      .position-relative.custom-calender.border.rounded.d-flex.flex-column.flex-center.mb-3.mb-sm-0
+          h5.fw-bolder.lh-sm.text-body-tertiary #{item.day}
+          p.mb-0.fs-10.text-body-tertiary.fw-semibold #{item.date}
+    .flex-1
+      h5.mb-2.cursor-pointer(data-bs-toggle='offcanvas' data-bs-target='#stockEventsSidebar' aria-controls="stockEventsSidebar")= item.title
+      .d-sm-flex.mb-3.align-items-center
+        h6.text-body-tertiary.fw-semibold.mb-2.mb-sm-0.border-end-sm.pe-sm-3.me-sm-3.text-nowrap
+          span.me-2(data-feather='clock' style="width: 16px; height: 16px;")
+          span 12.30 PM - 10 PM EDT 
+        h6.text-body-tertiary.fw-semibold.mb-0.line-clamp-1 
+          span.me-2(data-feather='map-pin' style="width: 16px; height: 16px;")
+          span Tavern on the Greend, New York
+      .d-flex.align-items-center.gap-1
+        .avatar-group.align-items-center 
+          a(href="#!").avatar.avatar-s
+            img.rounded-circle(src=`${CWD}assets/img/team/1.webp`, alt="")
+          a(href="#!").avatar.avatar-s
+            img.rounded-circle(src=`${CWD}assets/img/team/2.webp`, alt="")
+          a(href="#!").avatar.avatar-s
+            img.rounded-circle(src=`${CWD}assets/img/team/3.webp`, alt="")
+        a.fs-10.ms-1.fw-semibold.text-body-quaternary(href='#!')  +604 people going
+        ul.ps-3.mb-0.text-body-quaternary.fs-10
+          li 1k people interested
+
+
+mixin EventsTabContent 
+  .row.g-3.g-md-5.flex-between-center.mb-3 
+    .col-auto
+      h4.fw-bolder Upcoming Events
+      p.mb-0.text-body-tertiary Brief summary of all projects 
+    .col-12.col-sm-auto
+      +Search({placeholder: 'Search events'}).w-100
+  
+  -
+    var highlightEvents = [
+      {
+        date: '24 Mar, 2024',
+        title: 'Stock Market Essentials: Company Fundamentals',
+        status: 'featured',
+        desc: 'Picking stocks requires diligence beyond diversified investing with mutual funds or ETFs. Learn characteristics essential to finding and comparing stocks, such as profitability, growth, value, and more.',
+        checked: false
+      },
+      {
+        date: '26 Mar, 2024',
+        title: 'Managing Your Mind: The Forgotten Indicator',
+        status: 'interested',
+        location: 'Tavern on the Greend, New York',
+        desc: `While traditional metrics such as financial indicators, performance data, 
+        or technical analysis are commonly used to assess progress or predict outcomes, 
+        this concept suggests that managing one's psychological state is equally important.`,
+        checked: true
+      }
+    ]
+  div 
+    each item in highlightEvents 
+      .card.mb-4 
+        .card-body 
+          .row.g-0 
+            .col-12.col-sm-3.me-sm-4.custom-calendar-container
+              .position-relative.custom-calender.border.rounded.d-flex.flex-column.flex-center.mb-4.mb-sm-0.px-0
+                h5.fw-bolder.lh-sm.text-body-tertiary #{item.date.slice(0, 2)}
+                p.mb-0.fs-10.text-body-tertiary.fw-semibold #{item.date.slice(3)}
+            .col-12.col-sm-9.flex-1
+              .row.g-4 
+                .col-12.col-xxl-9
+                  .d-xxl-flex.align-items-center.gap-2.mb-2 
+                    h5.mb-2.mb-xxl-0.cursor-pointer(data-bs-toggle='offcanvas' data-bs-target='#stockEventsSidebar' aria-controls="stockEventsSidebar")= item.title 
+                    .badge.badge-phoenix.fs-10(class=`badge-phoenix-${item.checked ? 'info' : 'warning'}`)=item.status
+                  .d-sm-flex.mb-3.align-items-center
+                      h6.text-body-tertiary.fw-semibold.mb-2.mb-sm-0.border-end-sm.pe-sm-3.me-sm-3.text-nowrap
+                        span.me-2(data-feather='clock' style="width: 16px; height: 16px;")
+                        span 12.30 PM - 10 PM EDT 
+                      h6.text-body-tertiary.fw-semibold.mb-0.line-clamp-1 
+                        span.me-2(data-feather='map-pin' style="width: 16px; height: 16px;")
+                        span Tavern on the Greend, New York
+                  p.fs-9.text-body-tertiary=item.desc
+                  .d-flex.align-items-center.gap-1
+                    .avatar-group.align-items-center 
+                      a(href="#!").avatar.avatar-s
+                        img.rounded-circle(src=`${CWD}assets/img/team/1.webp`, alt="")
+                      a(href="#!").avatar.avatar-s
+                        img.rounded-circle(src=`${CWD}assets/img/team/2.webp`, alt="")
+                      a(href="#!").avatar.avatar-s
+                        img.rounded-circle(src=`${CWD}assets/img/team/3.webp`, alt="")
+                      a.fs-10.ms-1.fw-semibold.text-body-quaternary.d-i(href='#!')  +604 people going
+                    ul.ps-3.mb-0.text-body-quaternary.fs-10
+                      li 1k people interested
+                .col-xxl-3
+                  button.btn.me-2.me-xxl-0.mb-xxl-2.w-xxl-100(class=`btn-${item.checked ? 'primary' : 'phoenix-primary'}`)
+                    span.far.me-2(class=item.checked ? 'fa-circle-check' : 'fa-bookmark')
+                    | Interested
+                  button.btn.btn-phoenix-primary.w-xxl-100 
+                    span.far.fa-circle-check.me-2 
+                    | Going
+  +EventsTabOffcanvas
+
+  h4.mb-3 Later This Week
+  -
+    var laterThisWeekItems=[
+      {
+        day: '28-30',
+        date: 'Mar, 2024',
+        title: 'Setting Up Your Options Trade'
+      },
+      {
+        day: '03', 
+        date: 'Apr, 2024',
+        title: 'Stock Market Essentials'
+      },
+      {
+        day: '07',
+        date: 'Apr, 2024',
+        title: 'Stock Research'
+      },
+      {
+        day: '17', 
+        date: 'Apr, 2024',
+        title: 'Introduction to Candlestick Charts'
+      },
+    ]
+  .row.g-4.mb-4 
+    each item in laterThisWeekItems
+      .col-xxl-6 
+        .card 
+          .card-body.position-relative
+            +EventsCardBody(item)
+            .position-absolute.top-0.end-0.mt-4.me-4 
+              .btn-reveal-trigger
+                button.btn.p-0(type='button' id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+                  span.fas.fa-ellipsis-h(class=iconClass)
+                .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+                  a(href='#!').dropdown-item Edit
+                  a(href='#!').dropdown-item.text-danger Delete
+                  a(href='#!').dropdown-item Download
+                  a(href='#!').dropdown-item Report abuse.p-0
+
+  .row.g-3.g-lg-5.flex-between-center.mb-3 
+    .col-6 
+      h4.mb-0 Previous Events
+    .col-6.d-flex.flex-end-center
+      .position-relative.flatpickr-input-container(style="max-width: 180px;")
+        input#endDatepicker.form-control.form-control-sm.datetimepicker.ps-6.pe-5(type='text' placeholder='dd/mm/yyyy', data-options!={disableMobile:true})
+        span.uil.uil-calendar-alt.flatpickr-icon.text-body-tertiary.position-absolute.top-50(style="left: 1rem;")
+  -
+    var previousEvents = [
+      {
+        title: 'Managing Your Mind: The Forgotten Indicator',
+        className: 'border-top border-bottom'
+      },
+      {
+        title: 'Setting Up Your Options Trade in Power',
+        className: 'border-bottom border-top-sm'
+      },
+      {
+        title: 'Stock Market Essentials: Using Stock Charts',
+        className: 'border-bottom'
+      },
+      {
+        title: 'Stock Research',
+        className: 'border-bottom'
+      },
+      {
+        title: 'Introduction to Candlestick Charts',
+        className: 'border-bottom'
+      },
+      {
+        title: 'Fibonacci Tools & Analysis',
+        className: 'border-bottom'
+      },
+      {
+        title: 'Talking Futures Markets with Special Guest Jim Iuorio',
+        className: 'border-bottom'
+      },
+      {
+        title: 'Bearish Trading Strategies',
+        className: 'border-bottom'
+      }
+    ] 
+  .row.g-4.gx-xxl-8.mb-3
+    each item in previousEvents 
+      .col-12.col-sm-6
+        .border-dashed.py-4(class=item.className)
+          h6.text-body-quaternary.fs-10.mb-1 09, Feb 21 - 01, Mar 21
+          .d-flex.flex-between-center.gap-3.mb-2
+            h5.mb-0.line-clamp-1=item.title
+            .btn-reveal-trigger
+              button.btn.p-0(type='button' id=id data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+                span.fas.fa-ellipsis-h(class=iconClass)
+              .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+                a(href='#!').dropdown-item Edit
+                a(href='#!').dropdown-item.text-danger Delete
+                a(href='#!').dropdown-item Download
+                a(href='#!').dropdown-item Report abuse
+          p.fs-10.text-body-quaternary.mb-3 64 people going 
+          .row.g-2 
+            .d-xxl-flex.mb-3.align-items-center
+              h6.text-body-tertiary.fw-semibold.mb-2.mb-xxl-0.border-end-xxl.border-end-solid-xxl.pe-xxl-3.me-xxl-3.text-nowrap
+                span.me-2(data-feather='clock' style="width: 16px; height: 16px;")
+                span 12.30 PM - 10 PM EDT 
+              h6.text-body-tertiary.fw-semibold.mb-0.line-clamp-1 
+                span.me-2(data-feather='map-pin' style="width: 16px; height: 16px;")
+                span Tavern on the Greend, New York
+
+  .row.flex-between-center.py-2.pe-0.fs-9
+    .col-auto.d-flex
+      p.mb-0.d-none.d-sm-block.me-3.fw-semibold 1 to 8 
+        span.text-body-tertiary Items of 
+        | 32
+      a.fw-semibold(href='#!' data-list-view="*")
+        | View all
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+      a.fw-semibold.d-none(href='#!' data-list-view="less")
+        | View Less
+        span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+    .col-auto.d-flex.me-sm-n2
+      button.page-link.disabled(data-list-pagination="prev")
+        span.fas.fa-chevron-left
+      ul.mb-0.pagination
+        li.page-item.active 
+            a.page-link(href="#!") 1
+        li.page-item 
+            a.page-link(href="#!") 2
+        li.page-item 
+          a.page-link(href="#!") 3
+        li.page-item 
+          a.page-link(href="#!")  4
+          
+      button.page-link(data-list-pagination="next")
+        span.fas.fa-chevron-right
+      

@@ -1,0 +1,89 @@
+mixin CashTransactionTableRow(item, index)
+  tr 
+    td.align-middle.date.white-space-nowrap
+      p.fw-semibold.mb-0=item.date
+    td.align-middle.type.white-space-nowrap.ps-3
+      p.fs-9.fw-semibold.text-body-tertiary.mb-0=item.type
+    td.align-middle.amount.ps-0
+      p.fw-semibold.text-body-tertiary.mb-0.fs-9=item.amount
+    td.align-middle.currency.white-space-nowrap.text-center
+      p.fs-9.text-body-tertiary.mb-0=item.currency
+    td.align-middle.note.white-space-nowrap.text-end
+      p.fs-9.text-body-tertiary.mb-0=item.note
+    td.align-middle.note.white-space-nowrap.text-end
+      button.btn.btn-link.text-body-quaternary.btn-sm.p-0
+        span.fa-solid.fa-trash
+
+
+mixin CashTransactionTable 
+  .row.mt-4.flex-between-center 
+    .col-auto 
+      h4 Cash Transaction Report
+      p.mb-0.text-body-tertiary Brief summary of all projects
+    .col-auto 
+      button.btn.btn-phoenix-secondary.btn-sm(type='button' data-bs-toggle='modal' data-bs-target='#CashTransactionModal')
+        span.fa-solid.fa-add.me-2
+        | Add Cash Transaction
+  -
+    var cashTransactionTableData = [
+      {
+        "date": "10 Nov, 2024",
+        "type": "Withdrawal",
+        "amount": "$230.34",
+        "currency": "USD",
+        "note": "Cash Withdrawal Completed"
+      },
+      {
+        "date": "01 Nov, 2024",
+        "type": "Deposit",
+        "amount": "$184.19",
+        "currency": "USD",
+        "note": "Funds Withdrawn Successfully"
+      },
+      {
+        "date": "23 Oct, 2024",
+        "type": "Income",
+        "amount": "$217.97",
+        "currency": "USD",
+        "note": "Withdrawal Confirmed"
+      },
+      {
+        "date": "13 Oct, 2024",
+        "type": "Fee",
+        "amount": "$120.82",
+        "currency": "CAD",
+        "note": "Cash Disbursed"
+      },
+      {
+        "date": "03 Oct, 2024",
+        "type": "Withdrawal",
+        "amount": "$166.82",
+        "currency": "CAD",
+        "note": "Withdrawal Request Fulfilled"
+      },
+      {
+        "date": "23 Sep, 2024",
+        "type": "Deposit",
+        "amount": "$23.89",
+        "currency": "CAD",
+        "note": "Withdrawal Processed"
+      }
+    ]
+
+  #cashTransactionTable.mt-2(data-list !={
+    valueNames: ["date", "type", "amount", "currency", "note",],
+    page: 11
+  })
+    .table-responsive.scrollbar 
+      table.table
+        thead 
+          tr.text-uppercase.text-body.fw-bold.fs-9
+            th.sort.white-space-nowrap.align-middle.ps-0(scope='col' style='min-width:240px;' data-sort="date") Date
+            th.sort.align-middle.ps-3(scope='col' data-sort="type" style='min-width:240px;') Type
+            th.sort.align-middle.ps-0(scope='col' data-sort="amount" style='min-width:140px;') amount
+            th.sort.align-middle.text-center(scope='col' style='min-width:120px;' data-sort="currency") currency
+            th.sort.align-middle.text-end(scope='col' style='min-width:350px;' data-sort="note") note
+            th.sort.text-center.align-middle(scope='col' style='min-width:72px;') 
+        tbody.list 
+          each row, index in cashTransactionTableData
+            +CashTransactionTableRow(row, index)

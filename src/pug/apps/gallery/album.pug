@@ -1,0 +1,197 @@
+extends ../../layouts/LayoutTheme
+
+append variables
+  -
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+append scripts
+  script(src=`${CWD}vendors/isotope-layout/isotope.pkgd.min.js`)
+  script(src=`${CWD}vendors/isotope-packery/packery-mode.pkgd.min.js`)
+  script(src=`${CWD}vendors/imagesloaded/imagesloaded.pkgd.min.js`)
+
+block content
+  .mb-9
+    h2.mb-5 Album
+    .d-flex.flex-wrap.gap-3.justify-content-between
+      div
+        button.btn.btn-primary.me-4
+          span.fas.fa-plus.me-2
+          | Add New
+        button.btn.btn-link.text-body.me-4.px-0
+          span.fa-solid.fa-file-export.fs-9.me-2
+          | Export
+      +Search({placeholder: 'Search by name'})
+    ul.nav.nav-underline.my-4.gap-0.w-max-content(data-filter-nav)
+      li.nav-item
+        a.nav-link.pe-3.cursor-pointer.text-start.active(data-filter='*') All
+      li.nav-item
+        a.nav-link.px-3.cursor-pointer(data-filter='.image') Image
+      li.nav-item
+        a.nav-link.px-3.cursor-pointer(data-filter='.video') Video
+    .row.g-4#gallery-album(data-sl-isotope!={
+      layoutMode: 'packery',
+      packery: {
+        gutter: 0,
+      },
+    })
+      -
+        var data = [
+          {
+            title: 'Trip',
+            count: 43,
+            category: 'image',
+            media: [
+              '/img/gallery/109.png',
+              '/img/gallery/77.png',
+              '/img/gallery/78.png'
+            ]
+          },
+          {
+            title: 'Hotel',
+            count: 23,
+            category: 'video',
+            media: [
+              '/video/1.mp4',
+              '/img/gallery/81.png',
+              '/img/gallery/80.png'
+            ]
+          },
+          {
+            title: 'Trip Details',
+            count: 32,
+            category: 'image',
+            media: [
+              '/img/gallery/111.png',
+              '/img/gallery/82.png',
+              '/img/gallery/83.png'
+            ]
+          },
+          {
+            title: 'Landing',
+            count: 12,
+            category: 'video',
+            media: [
+              '/video/2.mp4',
+              '/img/gallery/84.png',
+              '/img/gallery/85.png'
+            ]
+          },
+          {
+            title: 'E commerce',
+            count: 56,
+            category: 'image',
+            media: [
+              '/img/gallery/112.png',
+              '/img/gallery/86.png',
+              '/img/gallery/87.png'
+            ]
+          },
+          {
+            title: 'Products',
+            count: 45,
+            category: 'image',
+            media: [
+              '/img/gallery/113.png',
+              '/img/gallery/88.png',
+              '/img/gallery/89.png'
+            ]
+          },
+          {
+            title: 'Project Management',
+            count: 61,
+            category: 'image',
+            media: [
+              '/img/gallery/114.png',
+              '/img/gallery/90.png',
+              '/img/gallery/91.png'
+            ]
+          },
+          {
+            title: 'Kanban',
+            count: 45,
+            category: 'image',
+            media: [
+              '/img/gallery/115.png',
+              '/img/gallery/92.png',
+              '/img/gallery/93.png'
+            ]
+          },
+          {
+            title: 'Social',
+            count: 23,
+            category: 'image',
+            media: [
+              '/img/gallery/116.png',
+              '/img/gallery/94.png',
+              '/img/gallery/95.png'
+            ]
+          },
+          {
+            title: 'Travel vlogs',
+            count: 34,
+            category: 'video',
+            media: [
+              '/video/3.mp4',
+              '/img/gallery/96.png',
+              '/img/gallery/97.png'
+            ]
+          },
+          {
+            title: 'Travel Agency',
+            count: 89,
+            category: 'video',
+            media: [
+              '/video/4.mp4',
+              '/img/gallery/98.png',
+              '/img/gallery/99.png'
+            ]
+          },
+          {
+            title: 'Events',
+            count: 54,
+            category: 'image',
+            media: [
+              '/img/gallery/117.png',
+              '/img/gallery/100.png',
+              '/img/gallery/101.png'
+            ]
+          },
+        ]
+      each category in data
+        .col-sm-6.col-md-4.col-xl-3.isotope-item(class=`${category.category}`)
+          .album-item.position-relative.overflow-hidden
+            a(href=`${CWD}${paths['gallery-grid']}`).text-decoration-none
+              .photo-stack
+                each item, index in category.media
+                  .rounded-2.overflow-hidden(class=`${index === 0 ? 'photo-stack-top' : index === 1 ? 'photo-stack-middle' : 'photo-stack-bottom'}`)
+                    if item.split('.')[1] === 'mp4'
+                      .video-container
+                        video.video.d-block.h-100.w-100.overflow-hidden.rounded-2(muted data-play-on-hover poster=`${CWD}assets${item.split('.')[0]}.png`)
+                          source(src=`${CWD}assets${item}` type="video/mp4")
+                        .circle-icon-item.position-absolute.top-50.start-50.translate-middle.bg-body-emphasis.rounded-pill.bg-opacity-50
+                          span.fa-solid.fa-video.text-body.fs-9.fs-sm-8
+                    else 
+                      img(src=`${CWD}assets${item}`, alt="").w-100.object-fit-cover
+              h4.mt-5.title= category.title
+              p.mb-0.fs-9.text-body #{category.count} Items
+            .dropdown.position-absolute.top-0.end-0.mt-3.me-3.z-5
+              button.btn.btn-sm.px-3.dropdown-toggle.dropdown-caret-none&attributes(attributes)(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+                span.fas.fa-ellipsis-h(class=iconClass)
+              .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+                a(href='#!').dropdown-item Edit
+                a(href='#!').dropdown-item.text-danger Delete
+                a(href='#!').dropdown-item Download

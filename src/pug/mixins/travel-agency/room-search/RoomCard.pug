@@ -1,0 +1,95 @@
+mixin RoomCard(data, index)
+  .card&attributes(attributes)
+    .card-body 
+      .row.gx-4.justify-content-between
+        .col-auto.mb-4
+          .d-flex.gap-3
+            a(href="#!") 
+              img.rounded-1.border.border-translucent(src=`${CWD}assets${data.img}`, alt="" width=108)
+            div 
+              a(href="#!").fs-8.fw-bolder.text-body-emphasis.text-nowrap= data.name
+              h6.fw-semibold.text-body.text-nowrap.mt-1.mb-2
+                span.fa-solid.fa-border-all.me-2
+                | #{data.category}
+              .d-flex.align-items-baseline.gap-1.mb-3
+                h6.mb-0.fw-semibold Available:
+                h4.text-warning-dark.fw-bolder.mb-0
+                  | #{data.available}
+                  span.fs-9.text-body-tertiary.fw-bold  / #{data.total}
+              h4.fw-bolder.mb-0 $#{data.price}
+        .col-xxl-auto.d-flex.gap-5.gap-md-6.order-1.order-xxl-0.mb-4
+          div
+            h6.mb-3.fw-bolder.text-body-tertiary.text-uppercase 
+              span.d-none.d-sm-inline-block No. of 
+              |  Beds
+            .d-flex.align-items-center.gap-3
+              .d-sm-flex.align-items-center.gap-2
+                .d-flex.align-items-center.justify-content-center.bg-primary-subtle.rounded.mb-2.mb-sm-0(style='height:24px; width: 24px')
+                  span.fa-solid.fa-person-shelter.text-primary-darker
+                h5.text-body.fw-semibold.mb-0= data.bedRooms
+              .d-sm-flex.align-items-center.gap-2
+                .d-flex.align-items-center.justify-content-center.bg-success-subtle.rounded.mb-2.mb-sm-0(style='height:24px; width: 24px')
+                  span.fa-solid.fa-bed.text-success-darker
+                h5.text-body.fw-semibold.mb-0= data.beds
+          div 
+            h6.mb-3.fw-bolder.text-body-tertiary.text-uppercase
+              span.d-none.d-sm-inline-block No. of 
+              |  guests
+            .d-flex.align-items-center.gap-3
+              .d-sm-flex.align-items-center.gap-2
+                .d-flex.align-items-center.justify-content-center.bg-warning-subtle.rounded.mb-2.mb-sm-0(style='height:24px; width: 24px')
+                  span.fa-solid.fa-user.text-warning-darker
+                h5.text-body.fw-semibold.mb-0= data.guest
+              .d-sm-flex.align-items-center.gap-2
+                .d-flex.align-items-center.justify-content-center.bg-info-subtle.rounded.mb-2.mb-sm-0(style='height:24px; width: 24px')
+                  span.fa-solid.fa-baby.text-info-darker
+                h5.text-body.fw-semibold.mb-0= data.child
+          div
+            h6.mb-3.fw-bolder.text-body-tertiary.text-uppercase Bathroom
+            .d-sm-flex.align-items-center.gap-2
+              .d-flex.align-items-center.justify-content-center.bg-danger-subtle.rounded.mb-2.mb-sm-0(style='height:24px; width: 24px')
+                span.fa-solid.fa-bath.text-danger-darker
+              h5.text-body.fw-semibold.mb-0.me-3= data.bathrooms
+        .col-sm-auto.mb-4
+          a.btn.btn-phoenix-info.collapse-indicator.me-2.px-3.d-xxl-block.mb-xxl-2(data-bs-toggle='collapse' href=`#collapseRoomAvailableOnDates-${index}` role='button' aria-expanded=`${index === 0 ? 'true' : 'false'}` aria-controls=`collapseRoomAvailableOnDates-${index}`)
+            span.fa-solid.fa-calendar.me-2
+            span.collapse-show Show Dates
+            span.collapse-hide Hide Dates
+          a(href="#!").btn.btn-primary.px-5.px-md-7.px-xxl-5.flex-1 Book now
+        .col-12
+          .collapse(id=`collapseRoomAvailableOnDates-${index}` class=`${index === 0 ? "show": ""}`)
+            .px-4.py-3.border.border-translucent.rounded.mb-4.bg-body-highlight
+              .swiper-theme-container.px-4
+                .swiper.theme-slider(data-swiper!={
+                  spaceBetween: 24,
+                  slidesPerView: 'auto',
+                  centeredSlide: true,
+                  grabCursor: true,
+                  breakpoints: {
+                    768: {
+                      spaceBetween: 32,
+                    },
+                    1540: {
+                      spaceBetween: 48,
+                    },
+                  },
+                })
+                  .swiper-wrapper
+                    each item, dateIndex in data.availableOnDates
+                      .swiper-slide.w-auto
+                        .text-center.pe-4.pe-md-5.pe-xl-7(class=`${dateIndex !== data.availableOnDates.length - 1 ? "border-end" : ''}`)
+                          h6.mb-3.fw-bolder.text-body= item.date
+                          h6.mb-2.text-body-highlight.fw-semibold $#{item.price}
+                          if item.units 
+                            h6(class=`${parseInt(item.units) > 5 ? "text-success": "text-warning"}`) #{item.units} units
+                          else
+                            h6.text-danger N/A
+                .swiper-nav
+                  .swiper-button-next
+                    span.fas.fa-chevron-right.text-primary(data-fa-transform='shrink-3')
+                  .swiper-button-prev
+                    span.fas.fa-chevron-left.text-primary(data-fa-transform='shrink-3')
+      .p-3.border.border-translucent.rounded
+        each item in data.amenities.slice(0, 13)
+          a(href="#!").badge.badge-phoenix.bg-primary-subtle.text-body-highlight.py-1.fs-10.me-2= item
+        a.fw-bold.pe-0.fs-9.text-nowrap(href="#!") + #{data.amenities.slice(13).length} more

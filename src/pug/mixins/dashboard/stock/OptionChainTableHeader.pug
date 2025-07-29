@@ -1,0 +1,54 @@
+mixin OptionChainTableHeader(href) 
+  -
+    var tabItems = [
+      { id: '1', date: 'May 17, 24', days: '4 Days', href: 'may-17', className: 'active' },
+      { id: '2', date: 'May 24, 24', days: '11 Days', href: 'may-24' },
+      { id: '3', date: 'Jun 01, 24', days: '18 Days', href: 'jun-01' },
+      { id: '4', date: 'Jun 08, 24', days: '25 Days', href: 'jun-08' },
+      { id: '5', date: 'Jun 15, 24', days: '32 Days', href: 'jun-15' },
+      { id: '6', date: 'Jun 24, 24', days: '41 Days', href: 'jun-24' },
+      { id: '7', date: 'Jun 31, 24', days: '48 Days', href: 'jun-31' },
+      { id: '8', date: 'Jul 07, 24', days: '56 Days', href: 'jul-07' }
+    ]
+
+  .swiper-theme-container.optionChainTableHeader.nav.nav-underline
+    .swiper.theme-slider(data-swiper!={
+      loop: true,
+      slidesPerView: 5,
+      breakpoints:{
+        0: {
+          slidesPerView: 1.5,
+        },
+        560: {
+          slidesPerView: 2.5,
+        },
+        768: {
+          slidesPerView: 3.5
+        },
+        1200: {
+          slidesPerView: 3
+        }, 
+        1560: {
+          slidesPerView: 4
+        },
+        1800: {
+          slidesPerView: 5
+        }
+      },
+      grabCursor: true,
+      navigation: true
+    })
+      .swiper-wrapper
+        each item, index in tabItems
+          .swiper-slide.nav-item
+            button.nav-link.text-center.text-nowrap.w-100(
+              class=item.className
+            )
+              span.fs-8 #{item.date} 
+              span.text-body-tertiary.fs-9.fw-semibold (#{item.days})
+
+      .swiper-nav 
+        .swiper-button-next 
+          span.fas.fa-chevron-right.nav-icon
+        .swiper-button-prev
+          span.fas.fa-chevron-left.nav-icon

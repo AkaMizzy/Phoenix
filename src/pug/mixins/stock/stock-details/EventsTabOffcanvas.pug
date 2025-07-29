@@ -1,0 +1,60 @@
+mixin EventsTabOffcanvas 
+  #stockEventsSidebar.offcanvas.offcanvas-end.bg-body-emphasis.stock-events-offcanvas
+    .offcanvas-header.gap-4.p-4.align-items-start 
+      h3.mb-0 Stock Market Essentials: Company Fundamentals
+      button.btn.btn-sm.btn-phoenix-secondary(data-bs-dismiss='offcanvas' aria-label='close') 
+        span.fa-solid.fa-xmark
+    .offcanvas-body.scrollbar.p-4.border-top 
+      img.img-fluid.rounded-2.mb-4(src=`${CWD}assets/img/stock/offcanvas-image.jpeg` alt='')
+      .row.g-2.mb-4
+        .col-5
+          button.btn.btn-primary.w-100 
+            span.fa-solid.fa-ticket.me-2 
+            | Get Tickets 
+        .col-auto
+          button.btn.btn-phoenix-primary 
+            span.fa-solid.fa-calendar-plus.me-2 
+            | Add to Calendar
+        .col-auto
+          button.btn.btn-phoenix-primary 
+            span.fa-solid.fa-heart.me-2 
+            | 3677 
+      .card.mb-4 
+        .card-body
+          .row.g-3 
+            .col-lg-6
+              .d-flex.gap-2.align-items-center.mb-2
+                .bg-info-subtle.px-2.py-1.rounded
+                  span.uil.uil-map-marker.fs-7.text-info
+                h5 Location
+              p.fs-9.mb-0.text-body-secondary Shannon Mekalan Vancouver, British Columbia, Canada
+            .col-lg-6
+              .d-flex.gap-2.align-items-center.mb-2
+                .bg-primary-subtle.px-2.py-1.rounded
+                  span.uil.uil-clock.fs-7.text-primary
+                h5 Date &amp; Time
+              p.fs-9.mb-0.text-body-secondary 28th June - 2nd July 2022, 
+                br 
+                | 10 am - 4 pm EDT
+      a.btn.px-4.py-3.d-flex.flex-between-center.collapse-indicator.bg-body-highlight(data-bs-toggle='collapse' href='#aboutEvent' role='button' aria-expanded='true' aria-controls='aboutEvent')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight About This event
+        span.fa-solid.fa-chevron-down.toggle-icon 
+      .collapse.show#aboutEvent
+        .p-4
+          p.mb-0 Company fundamentals are vital for navigating the stock market effectively. They encompass key financial statements—balance sheets, income statements, and cash flow statements—that reveal a company's revenue, expenses, assets, and liabilities. Investors often examine metrics like earnings per share (EPS)...
+            a(href='#!') read more
+      
+      a.btn.px-4.py-3.d-flex.flex-between-center.collapse-indicator.bg-body-highlight.mt-4(data-bs-toggle='collapse' href='#speaker' role='button' aria-expanded='true' aria-controls='speaker')
+        h4.fs-8.fs-sm-7.mb-0.text-body-highlight Speaker
+        span.fa-solid.fa-chevron-down.toggle-icon 
+      .collapse.show#speaker
+        .p-4
+          .d-flex.align-items-center.gap-2
+            .avatar.avatar-xl.avatar-bordered
+              img.rounded-circle(src=`${CWD}assets/img/team/30.webp` alt='')
+            div
+              h4 Richard Dawkins
+              p.text-body-tertiary.fs-9 Senior Strategist, Phoenix
+
+          p.mb-0 Richard Dawkins serves as a Senior Strategist at Phoenix, bringing over a decade of expertise in strategic planning and market analysis. He excels in identifying emerging trends and developing actionable strategies that propel growth and innovation. With a background in Economics and an MBA, Richard is recognized for his collaborative leadership style, fostering cross-departmental teamwork...
+            a(href='#!') read more

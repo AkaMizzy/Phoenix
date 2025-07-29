@@ -1,0 +1,152 @@
+mixin PoliciesForm(config)
+  form(id=`${config.formId}6` class=config.validation && 'needs-validation' novalidate data-wizard-form='6')
+    h3.mb-6 Policies
+    .form-check.form-check-inline.me-5.mb-3
+      input.form-check-input#limitedCheckIn(type='radio' name='checkIn' value='limitedCheckIn' checked)
+      label.form-check-label.fs-8(for='limitedCheckIn') Limited Check-in
+    .form-check.form-check-inline.mb-3
+      input.form-check-input#24HrCheckIn(type='radio' name='checkIn' value='24HrCheckIn')
+      label.form-check-label.fs-8(for='24HrCheckIn') 24hr Check-in
+    .row.g-3.align-items-center
+      .col-12.col-sm-6.col-md-auto.flex-md-grow-1
+        .form-floating
+          input.form-control.datetimepicker#checkInStarts(type="text" placeholder="H:i" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+          label(for="checkInStarts") Check-in Starts
+      .col-12.col-sm-6.col-md-auto.flex-md-grow-1
+        .form-floating
+          input.form-control.datetimepicker#checkInEnds(type="text" placeholder="H:i" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+          label(for="checkInEnds") Check-in Ends
+      .col-12.col-md-auto
+        .form-check.mb-0
+          input.form-check-input#lateCheckIn(type='checkbox' checked)
+          label.form-check-label.fw-normal.fs-8(for='lateCheckIn') Late Check-in
+    .border.p-3.rounded-2.mt-3
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="ageRestriction" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="ageRestriction") Age Restriction
+    .border.p-3.rounded-2.my-3
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="deposit" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="deposit") Deposit at Check-in
+    .border.p-3.rounded-2
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="documentation" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="documentation") Documentation at Check-in
+    h4.mb-4.mt-6 Checkout Policy
+    .form-floating.mb-3
+      input.form-control.datetimepicker#chcckOutBefore(type="text" placeholder="H:i" data-options!={enableTime:true, noCalendar: true, dateFormat:'H:i',disableMobile:true,})
+      label(for="chcckOutBefore") Checkout Before
+    +PriceTierForm({id: "flexible-checkout", name: "Flexible Checkout"})
+    h4.mb-4.mt-6 Cancellation Policy
+    .form-check.form-check-inline.me-5.mb-0
+      input.form-check-input#nonRefundable(type='radio' name='refundPolicy' value='nonRefundable')
+      label.form-check-label.fs-8(for='nonRefundable') Non Refundable
+    .form-check.form-check-inline.mb-0
+      input.form-check-input#optionalRefund(type='radio' name='refundPolicy' value='optionalRefund' checked)
+      label.form-check-label.fs-8(for='optionalRefund') Optional Refund
+    .border.p-3.rounded-2.my-3
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="fullRefund" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="fullRefund") Full Refund
+    .border.p-3.rounded-2
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="partialRefund" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="partialRefund") Partial Refund
+    h4.mb-4.mt-6 Pet Policy
+    .form-check.form-check-inline.me-5.mb-0
+      input.form-check-input#notAllowed(type='radio' name='petPolicy' value='notAllowed')
+      label.form-check-label.fs-8(for='notAllowed') Not allowed
+    .form-check.form-check-inline.mb-0
+      input.form-check-input#allowed(type='radio' name='petPolicy' value='allowed' checked)
+      label.form-check-label.fs-8(for='allowed') Allowed
+    .border.p-3.rounded-2.my-3
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="petRestrickedZone" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="petRestrickedZone") Pet Restricted Zones
+    .border.p-3.rounded-2
+      .form-check.form-switch.mb-0
+        input.form-check-input(id="AdditionalCharges" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="AdditionalCharges") Additional Charges
+    h4.mb-4.mt-6 Child Policy
+    h5.mb-2.text-body Age Segment 1
+    .row.align-items-center.g-3
+      .col-6.col-sm-auto
+        .form-floating.age-segment-input
+          input.form-control.input-spin-none(type='number' name=`${config.name}-from1` id=`${config.name}wizard-from1` required=config.validation placeholder='From (Yrs)' value=0 disabled)
+          label(for=`${config.name}wizard-from1`) From (Yrs)
+      .col-12.col-sm-auto.flex-1.order-1.order-sm-0
+        .noUi-target-primary.noUi-handle-primary.noUi-slider-slim.noUi-handle-circle.px-2(data-nouislider!={
+          range: {
+            'min': 0,
+            'max': 18
+          },
+          start: [0, 7], 
+          connect: true 
+        })
+      .col-6.col-sm-auto
+        .form-floating.age-segment-input
+          input.form-control.input-spin-none(type='number' name=`${config.name}-to1` id=`${config.name}wizard-to1` required=config.validation placeholder='To (Yrs)' value=7)
+          label(for=`${config.name}wizard-to1`) To (Yrs)
+    h5.mb-2.mt-4.text-body Age Segment 2
+    .row.align-items-center.g-3
+      .col-6.col-sm-auto
+        .form-floating.age-segment-input
+          input.form-control.input-spin-none(type='number' name=`${config.name}-from2` id=`${config.name}wizard-from2` required=config.validation placeholder='From (Yrs)' value=8)
+          label(for=`${config.name}wizard-from2`) From (Yrs)
+      .col-auto.flex-1.order-1.order-sm-0
+        .noUi-target-primary.noUi-handle-primary.noUi-slider-slim.noUi-handle-circle.px-2(data-nouislider!={
+          range: {
+            'min': 0,
+            'max': 18
+          },
+          start: [8, 12], 
+          connect: true 
+        })
+      .col-6.col-sm-auto
+        .form-floating.age-segment-input
+          input.form-control.input-spin-none(type='number' name=`${config.name}-to2` id=`${config.name}wizard-to2` required=config.validation placeholder='To (Yrs)' value=12)
+          label(for=`${config.name}wizard-to2`) To (Yrs)
+    h5.mb-2.mt-4.text-body 
+      span Age Segment 3
+      button.btn.btn-link.p-0.ms-1 Remove
+    .row.align-items-center.g-3
+      .col-6.col-sm-auto
+        .form-floating.age-segment-input
+          input.form-control.input-spin-none(type='number' name=`${config.name}-from3` id=`${config.name}wizard-from3` required=config.validation placeholder='From (Yrs)' value=13)
+          label(for=`${config.name}wizard-from3`) From (Yrs)
+      .col-auto.flex-1.order-1.order-sm-0
+        .noUi-target-primary.noUi-handle-primary.noUi-slider-slim.noUi-handle-circle.px-2(data-nouislider!={
+          range: {
+            'min': 0,
+            'max': 18
+          },
+          start: [13, 18], 
+          connect: true 
+        })
+      .col-6.col-sm-auto
+        .form-floating.age-segment-input
+          input.form-control.input-spin-none(type='number' name=`${config.name}-to3` id=`${config.name}wizard-to3` required=config.validation placeholder='To (Yrs)' value=18 disabled)
+          label(for=`${config.name}wizard-to3`) To (Yrs)
+    button.btn.btn-link.p-0.mt-3.fs-8
+      span.fa-solid.fa-plus.me-2
+      | Add Segment
+    .border.px-3.py-2.rounded-2.mt-4
+      .form-check.form-switch.mb-0.py-1
+        input.form-check-input(id="documentation-requirement" type="checkbox")
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for="documentation-requirement") Documentation Requirement
+    h4.mb-4.mt-6 Included Taxes in your rate
+    +PriceTierForm({id: "vat", name: "VAT"}).mb-3
+    +PriceTierForm({id: "gst", name: "GST"}).mb-3
+    +PriceTierForm({id: "holet-tax", name: "Hotel tax"}).mb-3
+    +PriceTierForm({id: "city-tax", name: "City / District tax"}).mb-3
+    +PriceTierForm({id: "tourist-tax", name: "Tourist tax"})
+    h4.mb-4.mt-6 Your Documentations
+    .form-floating
+      input.form-control.input-spin-none(type='number' name=`${config.name}-property-registrations` id=`${config.name}wizard-property-registrations` required=config.validation placeholder='Property Registration No. (OPTIONAL)')
+      label(for=`${config.name}wizard-property-registrations`) Property Registration No. (OPTIONAL)
+    .form-floating.my-3
+      input.form-control.input-spin-none(type='number' name=`${config.name}-business-registration` id=`${config.name}wizard-business-registration` required=config.validation placeholder='Business Registration No.')
+      label(for=`${config.name}wizard-business-registration`) Business Registration No.
+    .form-floating
+      input.form-control.input-spin-none(type='number' name=`${config.name}-taxpaper` id=`${config.name}wizard-taxpaper` required=config.validation placeholder='Taxpayer Indentification No.')
+      label(for=`${config.name}wizard-taxpaper`) Taxpayer Indentification No.

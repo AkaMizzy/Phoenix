@@ -1,0 +1,46 @@
+mixin SinglePhoto(config)
+  .img-zoom-hover.rounded-3.overflow-hidden.position-relative
+    a(href="#!")
+      img(src=`${CWD}assets${config.img}`, alt="").latest-img.w-100.object-fit-cover
+    .backdrop-faded
+      a(href='#!').fw-semibold.mb-0.text-secondary-lighter.stretched-link
+        span.fa-solid.fa-location-dot.text-secondary-lighter.me-2
+        | #{config.location}
+
+
+mixin LatestPhotos 
+  +Section("container-medium").pb-7.pt-0
+    .text-center.mb-5
+      h3.mb-2.text-body-emphasis Latest photos from tourists
+      p.mb-0.text-body-tertiary See how our tourists enjoyed their trip from images captured by them with Team Phoenix!
+    -
+      var photos = [
+        {
+          img: '/img/gallery/51.png',
+          location: 'Bali Indonesia',
+        },
+        {
+          img: '/img/gallery/52.png',
+          location: 'Barcelona',
+        },
+        {
+          img: '/img/gallery/53.png',
+          location: 'Bali Indonesia',
+        },
+        {
+          img: '/img/gallery/54.png',
+          location: 'Sydney',
+        },
+        {
+          img: '/img/gallery/55.png',
+          location: 'Great Barrier Reef',
+        },
+        {
+          img: '/img/gallery/56.png',
+          location: 'Grand Canyon',
+        },
+      ]
+    .row.g-3
+      each photo in photos 
+        .col-md-6.col-xl-4
+          +SinglePhoto(photo)

@@ -1,0 +1,200 @@
+mixin OptionChainTable 
+  -
+    var tableData = [
+      {
+        calls: [
+          {
+            bid: '12.50',
+            ask: '12.75',
+            last: '12.30',
+            delta: '0.977',
+            gamma: '0.008'
+          },
+          {
+            bid: '10.15',
+            ask: '10.25',
+            last: '10.25',
+            delta: '0.964',
+            gamma: '0.014'
+          },
+          {
+            bid: '7.65',
+            ask: '8.05',
+            last: '7.80',
+            delta: '0.937',
+            gamma: '0.024'
+          },
+          {
+            bid: '5.30',
+            ask: '5.45',
+            last: '5.35',
+            delta: '0.871',
+            gamma: '0.034'
+          },
+          {
+            bid: '3.25',
+            ask: '3.30',
+            last: '3.28',
+            delta: '0.732',
+            gamma: '0.044'
+          },
+          {
+            bid: '1.65',
+            ask: '1.66',
+            last: '1.64',
+            delta: '0.510',
+            gamma: '0.054'
+          },
+          {
+            bid: '0.65',
+            ask: '0.66',
+            last: '0.65',
+            delta: '0.487',
+            gamma: '0.063'
+          },
+          {
+            bid: '0.22',
+            ask: '0.23',
+            last: '0.23',
+            delta: '0.234',
+            gamma: '0.072'
+          },
+          {
+            bid: '0.08',
+            ask: '0.09',
+            last: '0.08',
+            delta: '0.123',
+            gamma: '0.084'
+          },
+          {
+            bid: '0.04',
+            ask: '0.05',
+            last: '0.04',
+            delta: '0.012',
+            gamma: '0.088'
+          },
+          {
+            bid: '1.65',
+            ask: '1.66',
+            last: '1.64',
+            delta: '0.510',
+            gamma: '0.054'
+          }
+        ],
+        strikePrices: [174,5, 172.5, 175, 177.5, 180, 182.5, 185, 187.5, 190, 192, 182.5],
+        puts: [
+          {
+            bid: '0.06',
+            ask: '0.07',
+            last: '0.06',
+            delta: '-0.023',
+            gamma: '0.008'
+          },
+          {
+            bid: '0.07',
+            ask: '0.08',
+            last: '0.07',
+            delta: '-0.035',
+            gamma: '0.014'
+          },
+          {
+            bid: '0.12',
+            ask: '0.13',
+            last: '0.12',
+            delta: '-0.064',
+            gamma: '0.046'
+          },
+          {
+            bid: '0.26',
+            ask: '0.27',
+            last: '0.27',
+            delta: '-0.130',
+            gamma: '0.046'
+          },
+          {
+            bid: '0.66',
+            ask: '0.67',
+            last: '0.66',
+            delta: '-0.269',
+            gamma: '0.078'
+          },
+          {
+            bid: '1.53',
+            ask: '1.54',
+            last: '1.54',
+            delta: '-0.498',
+            gamma: '0.100'
+          },
+          {
+            bid: '3.10',
+            ask: '3.00',
+            last: '3.10',
+            delta: '-0.431',
+            gamma: '0.100'
+          },
+          {
+            bid: '5.05',
+            ask: '5.25',
+            last: '5.15',
+            delta: '-0.987',
+            gamma: '0.023'
+          },
+          {
+            bid: '7.45',
+            ask: '7.70',
+            last: '7.90',
+            delta: '-0.897',
+            gamma: '0.087'
+          },
+          {
+            bid: '9.90',
+            ask: '10.15',
+            last: '10.05',
+            delta: '-0.988',
+            gamma: '0.014'
+          },
+          {
+            bid: '1.53',
+            ask: '1.54',
+            last: '1.54',
+            delta: '-0.498',
+            gamma: '0.100'
+          }
+        ]
+      }
+    ]
+  .table-responsive.scrollbar 
+    table.table.text-center.mb-0
+      thead 
+        tr
+          th(colspan='5') Calls
+          th.bg-body-highlight.border-x.border-translucent Strike Price 
+          th(colspan='5') Puts
+        tr.fs-10.text-uppercase 
+          th(style='min-width: 6.688rem;') BID
+          th(style='min-width: 6.688rem;') ASK 
+          th(style='min-width: 6.688rem;') last 
+          th(style='min-width: 6.688rem;') delta 
+          th(style='min-width: 6.688rem;') gamma
+          th.bg-body-highlight.border-x.border-translucent(style='min-width: 7.5rem;') IV 19.4%
+          th(style='min-width: 6.688rem;') BID
+          th(style='min-width: 6.688rem;') ASK 
+          th(style='min-width: 6.688rem;') last 
+          th(style='min-width: 6.688rem;') delta 
+          th(style='min-width: 6.688rem;') gamma
+      tbody 
+        each row in tableData 
+          each call, callIndex in row.calls 
+            tr.fs-9.fw-semibold
+              td.text-info-dark.lh-sm #{call.bid}
+              td.text-info-dark.lh-sm #{call.ask}
+              td.lh-sm #{call.last}
+              td.lh-sm #{call.delta}
+              td.lh-sm #{call.gamma}
+              td.bg-body-highlight.border-x.border-translucent.text-body-tertiary.fw-bold.lh-sm #{row.strikePrices[callIndex]}
+              if row.puts[callIndex] 
+                td.text-info-dark.lh-sm #{row.puts[callIndex].bid || '-'} 
+                td.text-info-dark.lh-sm #{row.puts[callIndex].ask || '-'} 
+                td.lh-sm #{row.puts[callIndex].last || '-'} 
+                td.lh-sm #{row.puts[callIndex].delta || '-'} 
+                td.lh-sm #{row.puts[callIndex].gamma || '-'} 

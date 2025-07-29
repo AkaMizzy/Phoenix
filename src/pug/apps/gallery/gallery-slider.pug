@@ -1,0 +1,191 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/gallery/GalleryLayoutMenu
+
+append variables
+  -
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+prepend scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+append scripts
+  script(src=`${CWD}vendors/isotope-layout/isotope.pkgd.min.js`)
+  script(src=`${CWD}vendors/isotope-packery/packery-mode.pkgd.min.js`)
+  script(src=`${CWD}vendors/imagesloaded/imagesloaded.pkgd.min.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+
+append styles 
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+prepend styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+block content
+  .mb-9
+    h2.mb-5 Gallery
+    .d-flex.flex-wrap.gap-3.justify-content-between
+      div
+        button.btn.btn-primary.me-4
+          span.fas.fa-plus.me-2
+          | Add New
+        button.btn.btn-link.text-body.me-4.px-0
+          span.fa-solid.fa-file-export.fs-9.me-2
+          | Export
+      +Search({placeholder: 'Search by name'})
+    .d-md-flex.d-lg-block.d-xl-flex.justify-content-between.gap-4.my-4
+      +GalleryLayoutMenu('slider').mb-3.mb-md-0.mb-lg-3.mb-xl-0.order-md-1.order-lg-0.order-xl-1
+      .scrollbar
+        ul.nav.nav-underline.gap-3.gap-md-5(id="gallery-slider-tab" role="tablist" style='min-width: 385px')
+          li.nav-item(role="presentation")
+            a.nav-link.active(id="all-tab" href='#all-tab' data-bs-toggle="tab" data-bs-target="#all-tab-pane" role="tab" aria-controls="all-tab-pane" aria-selected="true") All
+          li.nav-item(role="presentation")
+            a.nav-link(id="ecommerce-tab" href='#ecommerce-tab' data-bs-toggle="tab" data-bs-target="#ecommerce-tab-pane" role="tab" aria-controls="ecommerce-tab-pane" aria-selected="false") Ecommerce
+          li.nav-item(role="presentation")
+            a.nav-link(id="project-management-tab" href='#project-management-tab' data-bs-toggle="tab" data-bs-target="#project-management-tab-pane" role="tab" aria-controls="project-management-tab-pane" aria-selected="false") Project Management
+          li.nav-item(role="presentation") 
+            a.nav-link(id="photography-tab" href='#photography-tab' data-bs-toggle="tab" data-bs-target="#photography-tab-pane" role="tab" aria-controls="photography-tab-pane" aria-selected="false") Photography
+    -
+      var images = [
+        {
+          img: '/img/gallery/100.png',
+          className: 'landscape ecommerce',
+          title: 'Nature'
+        },
+        {
+          img: '/img/gallery/101.png',
+          className: 'landscape photography',
+          title: 'Pixel 4'
+        },
+        {
+          img: '/img/gallery/102.png',
+          className: 'portrait ecommerce',
+          title: 'Sunset'
+        },
+        {
+          img: '/img/gallery/103.png',
+          className: 'square project-management',
+          title: 'Ear Buds'
+        },
+        {
+          img: '/img/gallery/104.png',
+          className: 'landscape ecommerce photography',
+          title: 'Sunset Horizon'
+        },
+        {
+          img: '/img/gallery/71.png',
+          className: 'portrait project-management photography',
+          title: 'Sunset'
+        },
+        {
+          img: '/img/gallery/105.png',
+          className: 'landscape photography',
+          title: 'Ear Buds'
+        },
+        {
+          img: '/video/2.png',
+          video: '/video/2.mp4',
+          className: 'square ecommerce photography',
+          title: 'Bike Ride'
+        },
+        {
+          img: '/video/3.png',
+          video: '/video/3.mp4',
+          className: 'landscape project-management',
+          title: 'Mountain Sunset'
+        },
+        {
+          img: '/img/gallery/66.png',
+          className: 'portrait project-management',
+          title: 'Desert Photography'
+        },
+        {
+          img: '/img/gallery/42.png',
+          className: 'square project-management',
+          title: 'London'
+        },
+      ]
+    .tab-content(id='gallery-slider-tab-content')
+      .tab-pane.fade.show.active(id="all-tab-pane" role="tabpanel" aria-labelledby="all-tab" tabindex="0")
+        +GallerySlider(images, 'all')
+      .tab-pane.fade(id="ecommerce-tab-pane" role="tabpanel" aria-labelledby="ecommerce-tab" tabindex="0")
+        +GallerySlider(images.filter(image => image.className.includes('ecommerce')), 'ecommerce')
+      .tab-pane.fade(id="project-management-tab-pane" role="tabpanel" aria-labelledby="project-management-tab" tabindex="0")
+        +GallerySlider(images.filter(image => image.className.includes('project-management')), 'project-management')
+      .tab-pane.fade(id="photography-tab-pane" role="tabpanel" aria-labelledby="photography-tab" tabindex="0")
+        +GallerySlider(images.filter(image => image.className.includes('photography')), 'photography')
+
+
+mixin GallerySlider(images, category)
+  .swiper-theme-container.swiper-slider-gallery
+    .swiper.theme-slider(data-swiper!={
+      speed: 500,
+      spaceBetween: 16,
+      slidesPerView: 'auto',
+      simulateTouch: false,
+      centeredSlides: true,
+      initialSlide: 1,
+      thumb: {
+        slidesPerView: 4,
+        spaceBetween: 8,
+        freeMode: true,
+        loop: images.length > 9,
+        watchSlidesProgress: true,
+        watchSlidesVisibility: true,
+        grabCursor: true,
+        breakpoints: {
+          540: {
+            slidesPerView: 7,
+          },
+          768: {
+            slidesPerView: 8,
+          },
+          1200: {
+            slidesPerView: 9,
+          },
+        },
+      },
+    })
+      .swiper-wrapper.align-items-center(id=`gallery-slider-${category}`)
+        each item in images
+          .swiper-slide.position-relative.rounded-2.overflow-hidden(class=`${item.className}`)
+            if item.video
+              a(href=`${CWD}assets${item.video}` data-gallery=`gallery-slider-${category}`)
+                .video-container.h-100
+                  video.video.w-100.h-100.object-fit-cover.overflow-hidden.rounded-2(muted data-play-on-hover poster=`${CWD}assets${item.img}`)
+                    source(src=`${CWD}assets${item.video}` type="video/mp4")
+                  .circle-icon-item.position-absolute.top-50.start-50.translate-middle.bg-body-emphasis.rounded-pill.bg-opacity-50
+                    span.fa-solid.fa-video.text-body.fs-9.fs-sm-8
+                img(src=`${CWD}assets${item.img}` alt="").d-none
+            else
+              a(href=`${CWD}assets${item.img}` data-gallery=`gallery-slider-${category}`) 
+                img(src=`${CWD}assets${item.img}` alt="").w-100.h-100.object-fit-cover
+            .backdrop-faded.d-flex.justify-content-between.p-5
+              div 
+                h3.text-white.mb-2= item.title
+                p.mb-0.text-secondary-light Description text
+              .dropdown 
+                button.btn.p-1.dropdown-toggle.dropdown-caret-none.text-white&attributes(attributes)(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+                  span.fas.fa-ellipsis-h(class=iconClass)
+                .dropdown-menu.dropdown-menu-end.py-2(aria-labelledby=id )
+                  a(href='#!').dropdown-item Edit
+                  a(href='#!').dropdown-item.text-danger Delete
+                  a(href='#!').dropdown-item Download
+    .swiper-nav
+      .swiper-button-next
+        span.fas.fa-chevron-right.nav-icon
+      .swiper-button-prev
+        span.fas.fa-chevron-left.nav-icon

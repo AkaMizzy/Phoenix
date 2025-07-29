@@ -1,0 +1,19 @@
+extends LayoutTheme
+include ../mixins/travel-agency/common/TopNavbar
+include ../mixins/travel-agency/common/Navbar
+include ../mixins/travel-agency/flight/homepage/FlightFooter
+
+append variables
+  - var attrsFooter = { class: 'position-relative'}
+
+block mainContent
+  +TopNavbar('Flight')
+  +Navbar('flight')
+  block flightContent
+
+
+  block supportChat
+    +SupportChat
+
+  .container-medium
+    +Footer.px-0

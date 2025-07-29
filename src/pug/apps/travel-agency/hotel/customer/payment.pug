@@ -1,0 +1,104 @@
+extends ../../../../layouts/LayoutHotel
+include ../../../../mixins/travel-agency/hotel/SummaryCard
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Payment';
+
+block hotelContent
+  +Section("container-medium").pt-6.pb-9
+    nav.mb-3(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#') Page 1
+        li.breadcrumb-item
+          a(href='#') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-5 Payment
+    .row.justify-content-between 
+      .col-lg-7.col-xl-6
+        form(id=`checkoutForm2`)
+          a(href=`${CWD}${paths['hotel-checkout']}`).btn.btn-phoenix-primary
+            span.fas.fa-chevron-left.me-2(data-fa-transform="shrink-3")
+            | Go back
+          hr.mt-5.mb-7
+          h3.mb-5 Enter your address
+          .row.g-3.mb-5
+            .col-sm-3
+              label(for='country').fw-bold.text-body-highlight.mb-1 Country
+              select#country.form-select
+                option(value='1') India
+                option(value='2') USB
+                option(value='3') UAE
+            .col-sm-5.col-lg-4
+              label(for='phone-number').fw-bold.text-body-highlight.mb-1 Phone number
+              input.form-control.input-spin-none(type='number' id='phone-number' placeholder='Enter phone number')
+          .row.g-3
+            .col-sm-8.col-lg-7
+              label(for='phone-number-type').fw-bold.text-body-highlight.mb-1 Email address
+              input.form-control.input-spin-none(type='email' id='phone-number-type' placeholder='Email address')
+          h3.mt-7.mb-5 Payment Method
+          .row.gx-xxl-6.mb-5
+            .col-md-auto
+              .d-flex
+                .form-check
+                  input.form-check-input#creditCard(type='radio' name='paymentMethod' checked)
+                  label.form-check-label.fs-8.text-body.text-nowrap.d-flex.gap-2(for='creditCard')
+                    | Credit card
+                    img.h-100(src=`${CWD}assets/img/logos/visa.png`, alt="")
+                    img.h-100(src=`${CWD}assets/img/logos/discover.png`, alt="")
+                    img.h-100(src=`${CWD}assets/img/logos/mastercard.png`, alt="")
+                    img.h-100(src=`${CWD}assets/img/logos/american_express.png`, alt="")
+            .col-md-auto
+              .form-check
+                input.form-check-input#paypal(type='radio' name='paymentMethod')
+                label.form-check-label.fs-8.text-body(for='paypal') Paypal
+            .col-md-auto
+              .form-check
+                input.form-check-input#coupon(type='radio' name='paymentMethod')
+                label.form-check-label.fs-8.text-body(for='coupon') Coupon
+          .row.gx-3.gy-4
+            .col-md-6
+              label.fw-bold.text-body-highlight.mb-1(for='selectCard') Select card
+              select#selectCard.form-select.text-body-emphasis
+                option(selected='selected') Select a card
+                option(value='visa') Visa
+                option(value='discover') Discover
+                option(value='mastercard') Mastercard
+                option(value='american-express') American Express
+            .col-md-6
+              label.fw-bold.text-body-highlight.mb-1(for='inputCardNumber') Card number
+              input#inputCardNumber.form-control(type='number' placeholder="Enter card number" aria-label="Card number")
+            .col-12
+              label.fw-bold.text-body-highlight.mb-1(for='inputName') Full name
+              input#inputName.form-control(type='text' placeholder='Ansolo Lazinatov' aria-label="Full name")
+            .col-md-6
+              label.fw-bold.text-body-highlight.mb-1 Expires on
+              .d-flex
+                select.form-select.text-body-emphasis.me-3
+                  option(selected='selected') Month
+                  option January
+                  option February
+                  option March
+                select.form-select.text-body-emphasis
+                  option(selected='selected') Year
+                  - var n = 1990
+                    while n < 2023
+                      option(value=n)=n++
+            .col-md-6
+              label.fw-bold.text-body-highlight.mb-1(for='inputCardCVC') CVC
+              input#inputCardCVC.form-control(type='number' placeholder="Enter a valid CVC" aria-label="CVC")
+            .col-12
+              .form-check
+                input#gridCheck.form-check-input(type='checkbox')
+                label.form-check-label.text-body-emphasis.fs-8(for='gridCheck') Save Card Details
+          hr.mt-6.mb-5
+          a(href=`${CWD}${paths['hotel-checkout']}`).btn.btn-phoenix-primary.me-3
+            span.fa-solid.fa-chevron-left.me-2(data-fa-transform='shrink-3')
+            | Go back
+          button.btn.btn-primary.px-sm-15 Confirm booking
+      .col-lg-5.col-xl-4
+        +SummaryCard.mt-5.mt-lg-0

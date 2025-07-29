@@ -1,0 +1,35 @@
+mixin TopNavbar
+  .bg-primary-subtle.py-2
+    .container-medium.d-flex.align-items-center.justify-content-between
+      a.btn.btn-link.p-0.text-body(href=`${CWD}${paths['card-signin']}`)
+        span.fa-solid.fa-arrow-right-to-bracket.me-2(data-fa-transform="down-1")
+        | Agent Login
+      .dropdown
+        button.btn.btn-sm.p-0.d-md-none.fs-8(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent" )
+          span.fas.fa-ellipsis-h
+        ul.dropdown-menu.dropdown-menu-end(style="z-index: 9999")
+          li
+            a.dropdown-item(href='#!') Become a Host
+          li
+            a.dropdown-item(href='#!') Blog
+          li
+            a.dropdown-item(href='#!') Career
+          li
+            a.dropdown-item(href='#!') Support
+          li
+            a.dropdown-item(href='#!') +01 123 581321
+      ul.d-none.d-md-flex.gap-5.list-unstyled.mb-0
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='#!') Become a Host
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='#!') Blog
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='#!') Career
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href='mailto:example@gmail.com') 
+            span.fa-regular.fa-envelope.me-2(data-fa-transform="down-1")
+            | Support
+        li
+          a.lh-1.text-body-tertiary.fw-semibold.fs-9(href="tel:+01123581321") 
+            span.fa-brands.fa-whatsapp.me-2
+            | +01 123 581321

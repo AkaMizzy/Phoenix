@@ -1,0 +1,49 @@
+extends ../../../layouts/LayoutFlight
+include ../../../mixins/travel-agency/common/NavbarHome
+include ../../../mixins/travel-agency/flight/homepage/FlightSearch
+include ../../../mixins/travel-agency/flight/homepage/FlightListing
+include ../../../mixins/travel-agency/flight/homepage/FlightFooter
+include ../../../mixins/travel-agency/flight/homepage/FlightFilterModal
+include ../../../mixins/travel-agency/flight/homepage/FlightPromoModal
+include ../../../mixins/travel-agency/common/FooterLinks
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Homepage';
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/choices/choices.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+  script(src=`${CWD}vendors/choices/choices.min.js`)
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+block flightContent
+  +Section(null,'container-small').py-0
+    +NavbarHome('Flight')
+  +Section('container-fluid px-0').p-0
+    .position-relative(style='height: 19rem;')
+      +Background({
+        image: `${CWD}assets/img/bg/44.png`,
+        attrs: {
+          style: 'background-position: center; background-size: cover',
+        }
+      })
+    .container-small.mb-6(style="margin-top: -12rem")
+      +FlightSearch.mb-6
+      +FlightListing
+
+    +FlightFooter.mb-6
+    .container-medium
+      +FooterLinks.mb-3
+
+append afterMainContent
+  +FlightFilterModal
+  +FlightPromoModal

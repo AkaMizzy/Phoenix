@@ -1,0 +1,29 @@
+mixin TripSummaryCard
+  .card 
+    .card-body
+      img(src=`${CWD}assets/img/trip/10.png`, alt="" height=220).w-100.object-fit-cover.rounded-2
+      h3.mb-4.mt-5 Walk where the king walked once in Wakanda
+      h5.fw-normal.mb-3
+        span.fa-solid.fa-calendar.text-body-quaternary.me-2
+        | March 9, 2023
+      h5.fw-normal.mb-3
+        span.fa-solid.fa-user.text-body-quaternary.me-2
+        | 1 adult
+      h5.fw-normal.mb-3
+        span.fa-solid.fa-clock.text-body-quaternary.me-2
+        | Pickup time: 
+        span.ms-3 10:00 am
+      h5.fw-normal.mb-5
+        span.fa-solid.fa-clock.text-body-quaternary.me-2
+        | Drop off time: 
+        span.ms-2 10:00 am
+      .p-3.rounded-2.bg-body-highlight
+        .d-flex.flex-between-center.mb-2
+          h5.mb-0.fw-normal Booking Fee
+          h5.mb-0.fw-normal USD 0.00
+        .d-flex.flex-between-center.mb-3
+          h5.mb-0.fw-normal Subtotal
+          h5.mb-0.fw-normal USD 300.00
+        .d-flex.flex-between-center
+          h4.mb-0 Total
+          h4.mb-0 USD 300.00

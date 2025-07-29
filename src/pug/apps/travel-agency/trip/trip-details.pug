@@ -1,0 +1,125 @@
+extends ../../../layouts/LayoutTrip
+include ../../../mixins/travel-agency/trip/TripGallery
+include ../../../mixins/travel-agency/trip/TripDetails
+include ../../../mixins/travel-agency/trip/TripReview
+include ../../../mixins/travel-agency/trip/TripCard
+include ../../../mixins/travel-agency/trip/TripAvailabilityModal
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Trip Details';
+
+prepend styles
+  link(href=`${CWD}vendors/mapbox-gl/mapbox-gl.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+
+append styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/mapbox-gl/mapbox-gl.js`)
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+
+append scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}assets/js/pages/trip.js`)
+
+block tripContent
+  +Section('container-medium').py-5
+    nav.mb-3(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#') Page 1
+        li.breadcrumb-item
+          a(href='#') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-5 Trip Details
+    h1.fw-bold
+      | Walk where the king walked once in Wakanda 
+      span.align-middle.text-nowrap.fs-8
+        span.text-body-quaternary by 
+        span.text-body-tertiary Panther Travels Limited
+    hr.bg-secondary-lighter
+    .d-flex.align-items-center.flex-wrap.gap-3
+      h2.me-3
+        | $300 
+        span.fs-8.fw-semibold.text-body-tertiary.align-middle / per person
+      div.me-3
+        +Rating(5).me-1.fs-9
+        span.fw-semibold.text-body-tertiary ( 32 reviews )
+      h5.fw-semibold.text-body-tertiary.me-3
+        span.p-2.d-inline-flex.bg-danger-subtle.rounded-pill.me-2
+          span.fa-solid.fa-heart.fs-9.text-danger-light(data-fa-transform='down-1')
+        | Recommended by 25 travellers
+      button.btn.btn-primary.ms-md-auto(type='button' data-bs-toggle='modal' data-bs-target='#trilAvailabilityModal' aria-haspopup="true" aria-expanded="false" data-bs-reference="parent") Check availability
+    .p-4.bg-body-highlight.rounded-2.mt-3.mb-5
+      .row.gy-4
+        .col-md-4.col-lg-3.border-end-md
+          h6.text-body.fw-semibold.mb-2 
+            span.fa-solid.fa-map-marker-alt.me-2
+            | Birnin Zana, Wakanda
+          h6.text-body.fw-semibold.mb-2 
+            span.fa-solid.fa-clock.me-2
+            | 3 Days, 1 Night
+          h6.text-body.fw-semibold.mb-4 
+            span.fa-solid.fa-user.me-2
+            | From 1 to 12 people
+          a(href="#!").badge.badge-phoenix.badge-phoenix-secondary.me-2 Sightseeing
+          a(href="#!").badge.badge-phoenix.badge-phoenix-secondary Eco-tourism
+        .col-md-8.col-lg-9.ps-lg-7
+          h4.text-body.mb-3 Overview
+          p.mb-0 A private guide will allow you to fully experience Wakanda's native culture without having to worry about getting lost. Set out on a full-day tour that concentrates on off-the-beaten-path sites like the active wholesale markets for produce and seafood. The old-fashioned way to get around is via rickshaw...
+            a(href="#!") Read more
+    +TripGallery
+    ul.nav.nav-pills.flex-nowrap.my-5(role='tablist')
+      li.nav-item
+        button.nav-link.active(id="pills-details-tab" data-bs-toggle="pill" data-bs-target="#pills-details" type="button" role="tab" aria-controls="pills-details" aria-selected="true") Details
+      li.nav-item
+        button.nav-link(id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review" aria-selected="true") Review
+    .tab-content#trip-details-tab-content
+      .tab-pane.fade.show.active(id="pills-details" role="tabpanel" aria-labelledby="pills-details-tab" tabindex="0")
+        +TripDetails
+      .tab-pane.fade(id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab" tabindex="0")
+        +TripReview
+
+    h2.mt-5.mb-3 Similar tours
+    -
+      var trips = [
+        {
+          title: 'Stormtrooper for a day',
+          place: 'The Death Star',
+          price: '2,899',
+          days: 3,
+          maxPeople: 16,
+          img: '/img/trip/7.png'
+        },
+        {
+          title: 'Walk where the king walked',
+          place: 'Wakanda',
+          price: '5,999',
+          days: 3,
+          maxPeople: 20,
+          img: '/img/trip/8.png'
+        },
+        {
+          title: 'Petting the ghost',
+          place: 'Winterfell',
+          price: '2,999',
+          days: 3,
+          maxPeople: 10,
+          img: '/img/trip/9.png'
+        },
+      ]
+    .row.g-3
+      each trip in trips
+        .col-md-6.col-xl-4
+          +TripCard(trip)
+
+append afterMainContent
+  +TripAvailabilityModal

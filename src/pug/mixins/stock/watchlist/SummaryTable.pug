@@ -1,0 +1,255 @@
+mixin SummaryTableRow(item, index)
+  tr 
+    td.align-middle.symbol.white-space-nowrap
+      p.fw-semibold.mb-0=item.symbol
+    td.align-middle.lastPrice.white-space-nowrap.ps-3
+      p.fs-9.fw-semibold.text-body-tertiary.mb-0  $#{item.lastPrice}
+    td.align-middle.change.ps-3.fs-9(class=`text-${item.change.className}`)
+      p.fw-bold.mb-1=item.change.growth
+      p.mb-0 #{item.change.percent}%
+    td.align-middle.priceAdds.white-space-nowrap.ps-0
+      p.fs-9.text-body-tertiary.fw-semibold.mb-0 $#{item.priceAdds}
+    td.align-middle.volume.white-space-nowrap.ps-3
+      p.fs-9.text-body-tertiary.mb-0=item.volume
+    td.align-middle.share.white-space-nowrap.text-center
+      if item.share 
+        p.fw-bold.mb-0.fs-9.text-info=item.share 
+      else 
+        button.btn.btn-phoenix-secondary.btn-sm Add
+    td.align-middle.text-center.avgVolume.ps-5
+      p.fs-9.text-body-tertiary.mb-0=item.avgVolume
+    td.align-middle.dayChart.white-space-nowrap.ps-4.py-2
+      div(class=item.chart style='width: 109px; height: 44px;' data-echarts!={data: item.echartData})
+    td.align-middle.marketCap.white-space-nowrap.pe-5.text-end
+      p.fs-9.text-body-tertiary.mb-0=item.marketCap
+    td.align-middle.actions.white-space-nowrap.pe-3.text-end
+      button.btn.btn-link.text-body-quaternary.p-0.me-2
+        span.fa-solid.fa-file-invoice-dollar
+      button.btn.btn-link.text-body-quaternary.p-0
+        span.fa-solid.fa-trash
+
+mixin SummaryTable
+  -
+    var summaryTableData = [
+      {
+        symbol: 'AAPL',
+        lastPrice: 230.76,
+        change: {
+          growth: '+$0.42',
+          percent: '+0.35',
+          className: 'success'
+        },
+        priceAdds: 230.34,
+        volume: '50.658M',
+        share: 2,
+        avgVolume: '50.658M',
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          70, 50, 85, 45, 200, 193, 196, 210, 198, 210, 103, 120, 84, 95, 130, 123,
+          214, 245, 287, 348, 356, 390
+        ],
+        marketCap:'3.518T'
+      },
+      {
+        symbol: 'AMZN',
+        lastPrice: 184.71,
+        change: {
+          growth: '+$0.54',
+          percent: '+0.12',
+          className: 'success'
+        },
+        priceAdds: 184.19,
+        volume: '34.16M',
+        avgVolume: '34.16M',
+        chart: 'echart-stock-overview-mixed-chart',
+        echartData: [
+          -100, 190, 200, -200, -190, 300, -110, 100, -100, 250, 200, 190, -80, 50,
+          40, 200, -200, 200, 150, 160, 300, -100
+        ],
+        marketCap:'1.971T'
+      },
+      {
+        symbol: 'TSLA',
+        lastPrice: 213.65,
+        change: {
+          growth: '-$4.32',
+          percent: '-1.98',
+          className: 'danger'
+        },
+        priceAdds: 217.97,
+        volume: '74.38M',
+        avgVolume: '74.38M',
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          400, 450, 500, 490, 600, 550, 400, 350, 320, 330, 320, 
+          450, 480, 350, 345, 200, 320, 400
+        ],
+        marketCap:'864.116B'
+      },
+      {
+        symbol: 'NVDA',
+        lastPrice: 121.78,
+        change: {
+          growth: '+$0.12',
+          percent: '+0.09',
+          className: 'success'
+        },
+        priceAdds: 120.82,
+        volume: '278.17M',
+        avgVolume: '278.17M',
+        chart: 'echart-stock-overview-mixed-chart',
+        echartData: [
+          -100, 190, 200, -200, -190, 300, -110, 100, -100, 250, 200, 190, -80, 50,
+          40, 200, -200, 200, 150, 160, 300, -100
+        ],
+        marketCap:'3.472T'
+      },
+      {
+        symbol: 'GOOG',
+        lastPrice: 164.48,
+        change: {
+          growth: '-$2.34',
+          percent: '-1.40',
+          className: 'danger'
+        },
+        priceAdds: 166.82,
+        volume: '15.57M',
+        share: 4,
+        avgVolume: '15.57M',
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          70, 50, 85, 45, 200, 193, 196, 210, 198, 210, 103, 120, 84, 95, 130, 123,
+          214, 245, 287, 348, 356, 390
+        ],
+        marketCap:'2.013T'
+      },
+      {
+        symbol: 'INTC',
+        lastPrice: 21.98,
+        change: {
+          growth: '-$0.42',
+          percent: '-1.88',
+          className: 'danger'
+        },
+        priceAdds: 23.89,
+        volume: '82.86M',
+        avgVolume: '82.86M',
+        chart: 'echart-stock-overview-mixed-chart',
+        echartData: [
+          100, -190, 200, -210, -190, 300, -190, 100, -100, 250, 200, 190, -80, 50,
+          40, 200, -200, 200, 150, 160, 300, -100
+        ],
+        marketCap:'96.98B'
+      },
+      {
+        symbol: 'GSPC',
+        lastPrice: 184.71,
+        change: {
+          growth: '+$0.54',
+          percent: '+0.12',
+          className: 'success'
+        },
+        priceAdds: 184.19,
+        volume: '34.16M',
+        avgVolume: '34.16M',
+        chart: 'echart-stock-overview-mixed-chart',
+        echartData: [
+          -100, 190, 200, -200, -190, 300, -110, 100, -100, 250, 200, 190, -80, 50,
+          40, 200, -200, 200, 150, 160, 300, -100
+        ],
+        marketCap:'1.971T'
+      },
+      {
+        symbol: 'IBRX',
+        lastPrice: 213.65,
+        change: {
+          growth: '-$4.32',
+          percent: '-1.98',
+          className: 'danger'
+        },
+        priceAdds: 217.97,
+        volume: '74.38',
+        avgVolume: '74.38',
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          400, 450, 500, 490, 600, 550, 400, 350, 320, 330, 320, 
+          450, 480, 350, 345, 200, 320, 400
+        ],
+        marketCap:'864.116B'
+      },
+      {
+        symbol: 'NIO',
+        lastPrice: 121.78,
+        change: {
+          growth: '+$0.12',
+          percent: '+0.09',
+          className: 'success'
+        },
+        priceAdds: 120.82,
+        volume: '278.1M',
+        avgVolume: '278.1M',
+        chart: 'echart-stock-overview-inverted-chart',
+        echartData: [
+          -500, -300, -250, -280, -150, -250, -300, -180, -145, -250, -46, -250, -90,
+          -80, -85, -150, -250, -180, -175, -50
+        ],
+        marketCap:'3.472T'
+      },
+      {
+        symbol: 'TLN',
+        lastPrice: 164.48,
+        change: {
+          growth: '-$2.34',
+          percent: '-1.40',
+          className: 'danger'
+        },
+        priceAdds: 166.82,
+        volume: '15.57M',
+        avgVolume: '15.57M',
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          70, 50, 85, 45, 200, 193, 196, 210, 198, 210, 103, 120, 84, 95, 130, 123,
+          214, 245, 287, 348, 356, 390
+        ],
+        marketCap:'2.013T'
+      },
+      {
+        symbol: 'ES=F',
+        lastPrice: 21.98,
+        change: {
+          growth: '-$0.42',
+          percent: '-1.88',
+          className: 'danger'
+        },
+        priceAdds: 23.89,
+        volume: '82.86M',
+        avgVolume: '82.86M',
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          0, 200, 150, 120, 155, 115, 125, 160, 150, 145, 140, 90, 20, 120, 110, 
+          80, 120, 40,90, 210, 220
+        ],
+        marketCap:'3.518T'
+      },
+    ]
+  #summeryTable.mt-2(data-list !={
+    valueNames: ["symbol", "lastPrice", "change", "priceAdds", "volume", "share", "avgVolume", "marketCap", "actions"],
+    page: 11
+  })
+    .table-responsive.scrollbar 
+      table.table
+        thead 
+          tr.text-uppercase.text-body.fw-bold.fs-9
+            th.sort.white-space-nowrap.align-middle.ps-0(scope='col' style='min-width:158px;' data-sort="symbol") Symbol
+            th.sort.align-middle.ps-3(scope='col' data-sort="lastPrice" style='min-width:158px;') Last Price
+            th.sort.align-middle.ps-3(scope='col' data-sort="change" style='min-width:158px;') Change
+            th.sort.align-middle.ps-0(scope='col' style='min-width:180px;' data-sort="priceAdds") Price When Addes
+            th.sort.ps-3.align-middle(scope='col' style='min-width:120px;' data-sort="volume") volume
+            th.sort.text-center.align-middle(scope='col' style='min-width:158px;' data-sort="share") share
+            th.sort.align-middle.ps-5(scope='col' style='min-width:158px;' data-sort="avgVolume") Avg Volume
+            th.sort.ps-4.align-middle(scope='col' style='min-width:158px;' data-sort="dayChart") Day Chart
+            th.sort.align-middle.text-end.pe-5(scope='col' style='min-width:180px;' data-sort="marketCap") Market Cap
+            th.sort.align-middle.text-end.pe-3(scope='col' style='min-width:158px;' data-sort="actions") actions
+        tbody.list 
+          each row, index in summaryTableData
+            +SummaryTableRow(row, index)

@@ -1,0 +1,159 @@
+extends ../../../../layouts/LayoutHotel
+include ../../../../mixins/travel-agency/common/NavbarHome
+include ../../../../mixins/travel-agency/hotel/HotelSearch
+include ../../../../mixins/travel-agency/hotel/HotelCard
+include ../../../../mixins/travel-agency/hotel/HotelFilterOffcanvas
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var activeNavItem = 'Homepage';
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+
+append scripts
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+
+block hotelContent
+  +Section(null,'container-small').py-0
+    +NavbarHome('Hotel')
+  +HotelSearch({background: true})
+  +Section("container-medium").py-0
+    .py-6 
+      .d-flex
+        select#hotelSort.form-select.w-sm-auto.me-4(name="Hotel sort")
+          option Sort by
+          option Best reviewed and lowest price
+          option Option 1
+          option Option 2
+        button.btn.btn-phoenix-secondary.text-nowrap.px-3.px-md-4.ms-auto.me-2
+          span.fa-solid.fa-map.me-md-2
+          span.d-none.d-md-inline-block Show in map
+        button.btn.btn-phoenix-secondary.text-nowrap.px-3(type="button" data-bs-toggle="offcanvas" data-bs-target="#hotelFilterOffcanvas" aria-controls="hotelFilterOffcanvas")
+          span.fa-solid.fa-filter.me-md-2
+          span.d-none.d-md-inline-block Filters
+    -
+      var hotels = [
+        {
+          name: 'Hotel Palace',
+          location: 'Bangkok, Thailand',
+          price: '33.48',
+          rating: '3.8',
+          img: '/img/hotels/1.png'
+        },
+        {
+          name: 'Silom Furama',
+          location: 'Bangkok, Thailand',
+          price: '32.27',
+          rating: '4.0',
+          img: '/img/hotels/2.png'
+        },
+        {
+          name: 'Hotel Prince Palace',
+          location: 'Bangkok, Thailand',
+          price: '38.96',
+          rating: '3.9',
+          img: '/img/hotels/3.png'
+        },
+        {
+          name: 'Hotel Grandmas Plus',
+          location: 'Bali, Indonesia',
+          price: '13.99',
+          rating: '4.5',
+          img: '/img/hotels/4.png'
+        },
+        {
+          name: 'Hotel Asia Solo',
+          location: 'Jawa Tengah, Indonesia',
+          price: '14.66',
+          rating: '3.9',
+          img: '/img/hotels/5.png'
+        },
+        {
+          name: 'Golden Inn Kuta',
+          location: 'Bali, Indonesia',
+          price: '52.91',
+          rating: '4.4',
+          img: '/img/hotels/6.png'
+        },
+        {
+          name: 'The Shanty House',
+          location: 'Bali, Indonesia',
+          price: '87.71',
+          rating: '4.7',
+          img: '/img/hotels/7.png'
+        },
+        {
+          name: 'Hotel Kiwi International',
+          location: 'New Zealand',
+          price: '41.19',
+          rating: '3.7',
+          img: '/img/hotels/8.png'
+        },
+        {
+          name: 'Residences of the Angel',
+          location: 'Locarno, Switzerland',
+          price: '83.41',
+          rating: '4.9',
+          img: '/img/hotels/9.png'
+        },
+        {
+          name: "Brenig Kulm's Gasthaus",
+          location: 'Meiringen, Switzerland',
+          price: '109.29',
+          rating: '4.2',
+          img: '/img/hotels/10.png'
+        },
+        {
+          name: 'The Andermatt Chedi',
+          location: 'Andermatt, Switzerland',
+          price: '107.25',
+          rating: '4.6',
+          img: '/img/hotels/11.png'
+        },
+        {
+          name: 'Interlaken Alplodge',
+          location: 'Interlaken, Switzerland',
+          price: '120.32',
+          rating: '4.5',
+          img: '/img/hotels/12.png'
+        },
+        {
+          name: 'Inn at Agus Beach',
+          location: 'Bali, Indonesia',
+          price: '25.98',
+          rating: '4.2',
+          img: '/img/hotels/13.png'
+        },
+        {
+          name: 'Hotel Cahya Nirwana',
+          location: 'Jawa Tengah, Indonesia',
+          price: '22.45',
+          rating: '4.1',
+          img: '/img/hotels/14.png'
+        },
+        {
+          name: 'Villas at Atoll Haven',
+          location: 'Bali, Indonesia',
+          price: '145.10',
+          rating: '3.3',
+          img: '/img/hotels/15.png'
+        },
+        {
+          name: 'The Sanchaya Hotel',
+          location: 'Bali, Indonesia',
+          price: '45.22',
+          rating: '4.5',
+          img: '/img/hotels/16.png'
+        },
+      ]
+    .row.g-3.mb-6
+      each hotel in hotels 
+        .col-sm-6.col-lg-4.col-xl-3
+          +HotelCard(hotel)
+  +HotelFilterOffcanvas

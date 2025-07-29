@@ -1,0 +1,103 @@
+mixin BestPlaces 
+  section.pb-10.pt-0
+    +Background({image: `${CWD}assets/img/bg/bg-left-28.png`, attrs: { style: { 'background-size': '7%','background-position':'left 27%'}}, className: "d-none d-md-block"})
+    +Background({image: `${CWD}assets/img/bg/bg-right-28.png`, attrs: { style: { 'background-size': '16%','background-position':'right -25px'}}, className: "d-none d-md-block"})
+    .container-medium.text-center.mb-11.position-relative
+      h3.mb-2.text-body-emphasis Travel more, spend less
+      p.text-body-tertiary.mb-0 Working with Phoenix means you’ll have all the plans and the perfect price list to help you plan.
+    -
+      var placesData = [
+        {
+          country: "Thailand",
+          flag: '/img/country/thailand.png',
+          img: "/img/gallery/39.png",
+          hotels: 17,
+          packages: 22
+        },
+        {
+          country: "Switzerland",
+          flag: '/img/country/switzerland.png',
+          img: "/img/gallery/40.png",
+          hotels: 15,
+          packages: 24
+        },
+        {
+          country: "Turkey",
+          flag: '/img/country/turkey.png',
+          img: "/img/gallery/42.png",
+          hotels: 44,
+          packages: 123
+        },
+        {
+          country: "New Zealand",
+          flag: '/img/country/new-zealand.png',
+          img: "/img/gallery/41.png",
+          hotels: 55,
+          packages: 41
+        },
+        {
+          country: "Sweden",
+          flag: '/img/country/sweden.png',
+          img: "/img/gallery/43.png",
+          hotels: 17,
+          packages: 22
+        },
+        {
+          country: "Turkey",
+          flag: '/img/country/turkey.png',
+          img: "/img/gallery/44.png",
+          hotels: 44,
+          packages: 123
+        },
+        {
+          country: "Vietnam",
+          flag: '/img/country/vietnam.png',
+          img: "/img/gallery/58.png",
+          hotels: 54,
+          packages: 123
+        },
+        {
+          country: "Japan",
+          flag: '/img/country/japan.png',
+          img: "/img/gallery/57.png",
+          hotels: 17,
+          packages: 22
+        },
+      ]
+    .container-fluid.px-sm-0
+      .swiper-theme-container.swiper-slide-nav-top
+        .swiper-nav
+          .swiper-button-next
+            span.fas.fa-chevron-right.text-primary(data-fa-transform='shrink-3')
+          .swiper-button-prev
+            span.fas.fa-chevron-left.text-primary(data-fa-transform='shrink-3')
+        .swiper.theme-slider(data-swiper!={
+          loop: true,
+          centeredSlides: true,
+          autoplay: true,
+          centeredSlidesBounds: true,
+          spaceBetween: 16,
+          slidesPerView: 1,
+          speed: 1500,
+          breakpoints: {
+            576: {
+              slidesPerView: 'auto',
+            }
+          },
+        })
+          .swiper-wrapper
+            each data, index in placesData
+              .swiper-slide.w-sm-auto
+                a(href="#!").position-relative.rounded-3.overflow-hidden.d-block
+                  img.w-100.w-sm-auto.object-fit-cover(src=`${CWD}assets${data.img}`, alt="" height=220)
+                  .img-backdrop-faded
+                    .image-reveal-content.mb-3
+                      .d-flex.align-items-center.gap-2.mb-2
+                        span.fa-solid.fa-hotel.text-secondary-lighter
+                        h6.mb-0.text-secondary-lighter.fw-semibold #{data.hotels} Hotels
+                      .d-flex.align-items-center.gap-2
+                        span.fa-solid.fa-tree-city.text-secondary-lighter
+                        h6.mb-0.text-secondary-lighter.fw-semibold #{data.packages} Tour Package
+                    .d-flex.align-items-center.gap-2
+                      img(src=`${CWD}assets${data.flag}`, alt="")
+                      h4.mb-0.text-white= data.country

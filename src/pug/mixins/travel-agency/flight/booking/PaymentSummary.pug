@@ -1,0 +1,37 @@
+mixin PaymentSummary
+  div&attributes(attributes)  
+    h3.mb-4 Payment Summary
+    .card.bg-body-highlight
+      .card-body 
+        ul.list-group.list-group-flush
+          li.p-0.pb-3.list-group-item.bg-body-highlight 
+            .d-flex.flex-between-center 
+              h6.mb-0 Base fare
+              p.mb-0.text-body-emphasis 
+                span.fs-9.me-2 BDT
+                | 4,074 
+          li.px-0.py-3.list-group-item.bg-body-highlight 
+            .d-flex.flex-between-center 
+              h6.mb-0 Tax
+              p.mb-0.text-body-emphasis 
+                span.fs-9.me-2 BDT
+                | +725
+          li.px-0.pt-3.pb-5.list-group-item.bg-body-highlight 
+            .d-flex.flex-between-center 
+              h6.mb-0 Sub-total
+              p.mb-0.text-body-emphasis.fw-bold 
+                span.fs-9.me-2.fw-semibold BDT
+                | 4,799 
+          li.px-0.py-3.list-group-item.bg-body-highlight 
+            .d-flex.flex-between-center 
+              h6.mb-0 Code
+                span.badge.text-bg-warning.ms-2 DOMFLy2023
+              p.mb-0.text-body-emphasis 
+                span.fs-9.me-2 BDT
+                | -285
+          li.px-0.pb-0.pt-3.list-group-item.bg-body-highlight 
+            .d-flex.flex-between-center 
+              h6.mb-0 Convenience charge
+              p.mb-0.text-body-emphasis 
+                span.fs-9.me-2 BDT
+                | +95

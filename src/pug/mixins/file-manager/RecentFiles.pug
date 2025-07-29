@@ -1,0 +1,122 @@
+mixin RecentFiles 
+  .card.mt-4
+    .card-body.pb-5
+      h4.mb-3 Recent Files
+      -
+        var recentFiles = [
+          {
+            name: 'Verification Letter.pdf',
+            type: 'pdf',
+            size: '8.8 mb',
+            createdAt: '5 min ago',
+            actionType: 'Edited',
+            img: 'img/file-manager/1.png',
+            pdf: 'img/generic/67.pdf'
+          },
+          {
+            name: 'Travel Tales.mp4',
+            type: 'video',
+            size: '65 mb',
+            createdAt: '6 min ago',
+            actionType: 'Upload',
+            video: 'video/2.mp4',
+          },
+          {
+            name: 'Mountain During.jpg',
+            type: 'image',
+            size: '5.8 mb',
+            createdAt: '6 min ago',
+            actionType: 'Upload',
+            img: 'img/file-manager/2.png'
+          },
+          {
+            name: 'Cinematic Adventures.mp4',
+            type: 'video',
+            size: '54 mb',
+            createdAt: '8 min ago',
+            actionType: 'Upload',
+            video: 'video/3.mp4',
+          },
+          {
+            name: 'Travel Tales.mp4',
+            type: 'video',
+            size: '65 mb',
+            createdAt: '6 min ago',
+            actionType: 'Upload',
+            video: 'video/1.mp4',
+          },
+          {
+            name: 'Hot air balloons.png',
+            type: 'image',
+            size: '5.8 mb',
+            createdAt: '6 min ago',
+            actionType: 'Upload',
+            img: 'img/file-manager/6.png',
+          },
+          {
+            name: 'Aurora Borealis.jpg',
+            type: 'image',
+            size: '10 mb',
+            createdAt: '5 min ago',
+            actionType: 'Edited',
+            img: 'img/file-manager/7.png',
+          },
+          {
+            name: 'Cinematic Adventures.mp4',
+            type: 'video',
+            size: '54 mb',
+            createdAt: '8 min ago',
+            actionType: 'Upload',
+            video: 'video/4.mp4',
+          },
+        ]
+      .row.g-3
+        each file in recentFiles.slice(0, 4)
+          .col-sm-6.col-xl-6.col-xxl-3
+            +RecentFile(file)
+      .collapse#collapseRecentFiles
+        .mt-3
+          .row.g-3
+            each file in recentFiles.slice(4)
+              .col-sm-6.col-xl-6.col-xxl-3
+                +RecentFile(file)
+      a.btn.collapse-indicator.bg-body-emphasis.fs-10.py-1.border.rounded-1.px-3.position-absolute.start-50.translate-middle-x(style='bottom: -11px' data-bs-toggle='collapse' href='#collapseRecentFiles' role='button' aria-expanded='false' aria-controls='collapseRecentFiles')
+        span.collapse-show VIEW MORE
+        span.collapse-hide VIEW LESS
+        span.fa-solid.fa-chevron-down.toggle-icon.fs-10.ms-2
+
+mixin RecentFile(file)
+  .position-relative(data-play-on-container-hover=file.type === 'video')
+    .img-zoom-hover.mask-image-none.overflow-hidden.border.rounded-3
+      .position-relative
+        .mask-image-recent-file.overflow-hidden
+          if file.type === 'image' || file.type === 'pdf'
+            .ratio.ratio-16x9
+              img(src=`${CWD}assets/${file.img}`, alt="").w-100.h-100.object-fit-cover
+          if file.type === 'video'
+            .video-container.rounded-3.h-100.ratio.ratio-16x9
+              video.video.d-block.h-100.w-100.object-fit-cover(muted data-play-on-hover poster=`${CWD}assets/${file.video.split('.')[0]}.png`)
+                source(src=`${CWD}assets/${file.video}` type="video/mp4")
+          span.badge.badge-phoenix.fs-10.position-absolute.top-0.start-0.mt-3.ms-3(class=`badge-phoenix-${file.actionType === 'Edited' ? 'warning' : 'info'}`) #{file.actionType} #{file.createdAt}
+        if file.type === 'video'
+          button.btn.p-0.circle-icon-item-md.position-absolute.top-50.start-50.translate-middle.bg-body-emphasis.bg-opacity-50.z-5(data-bs-theme='light' data-video-controller)
+            span.play-icon.pointer-events-none
+              span.fa-solid.fa-play.text-body-secondary.fs-9(data-fa-transform='down-1')
+            span.pause-icon.pointer-events-none
+              span.fa-solid.fa-pause.text-body-secondary.fs-9(data-fa-transform='down-1')
+      .bg-body.p-3.pe-2.d-flex.justify-content-between.align-items-start.rounded-bottom-3
+        .w-75
+          a(href=`${CWD}assets/${file.type === 'image' ? file.img : file.type === 'video' ? file.video : file.pdf}` data-gallery='recent-file' data-width=`${file.type === 'pdf' ? '90%' : ''}` data-height=`${file.type === 'pdf' ? '90vh' : ''}`).text-body-highlight.fw-bold.mb-2.stretched-link.d-block.text-truncate= file.name
+          h6.mb-0.fw-semibold.text-body-tertiary= file.size
+        .dropdown.position-static.z-5
+          button.btn.btn-square-sm.position-relative.mt-n1(type='button' data-bs-toggle='dropdown' data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+            span.fas.fa-ellipsis-v(data-fa-transform="shrink-2")
+          .dropdown-menu.dropdown-menu-end
+            a.dropdown-item.fw-semibold.text-decoration-none(href='#') Share
+            a.dropdown-item.fw-semibold.text-decoration-none(href='#') Download
+            a.dropdown-item.fw-semibold.text-decoration-none(href='#') Duplicate
+            a.dropdown-item.fw-semibold.text-decoration-none(href='#') Move
+            a.dropdown-item.fw-semibold.text-decoration-none(href='#') Rename
+            a.dropdown-item.fw-semibold.text-decoration-none(href='#') Move to Bin
+            hr.dropdown-divider
+            a.dropdown-item.fw-semibold.text-decoration-none.text-danger(href='#') Delete

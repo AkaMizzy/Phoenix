@@ -1,0 +1,73 @@
+include ./RoomDetailsForm
+include ./PricingForm
+include ./Preview
+include ../add-property/GeneralAmenitiesForm
+include ../add-property/AddPhotos
+
+mixin WizardHeader(config)
+  .scrollbar.mb-4
+    ul.nav.justify-content-between.flex-nowrap.nav-wizard.nav-wizard-vertical-xl
+      li.nav-item
+        a(href=config.tab1 data-bs-toggle='tab' data-wizard-step='1').nav-link.active.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-file.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Details
+      li.nav-item
+        a(href=config.tab2 data-bs-toggle='tab' data-wizard-step='2').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-usd.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Pricing
+      li.nav-item
+        a(href=config.tab3 data-bs-toggle='tab' data-wizard-step='3').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-grip.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Amenities
+      li.nav-item
+        a(href=config.tab4 data-bs-toggle='tab' data-wizard-step='4').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-images.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Photos
+      li.nav-item
+        a(href=config.tab5 data-bs-toggle='tab' data-wizard-step='5').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fas.fa-check
+            span.nav-item-title.fs-9.fs-xl-8 Done
+
+
+mixin WizardContent(config)
+  - var config = Object.assign({ url: `${CWD}${paths['wizard-auth']}` }, config)
+  .tab-content
+    .tab-pane.active(role="tabpanel" aria-labelledby=config.tab1.split('#').pop() id=config.tab1)
+      .row.g-0 
+        .col-xxl-8
+          +RoomDetailsForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab2.split('#').pop() id=config.tab2)
+      .row.g-0 
+        .col-xxl-8
+          +PricingForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab3.split('#').pop() id=config.tab3)
+      .row.g-0 
+        .col-xxl-8
+          +GeneralAmenitiesForm(config, "Amenities")
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab4.split('#').pop() id=config.tab4)
+      .row.g-0 
+        .col-xxl-8
+          +AddPhotos(config, "Add room picture")
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab5.split('#').pop() id=config.tab5)
+      .row.g-0 
+        .col-xxl-10
+          +Preview

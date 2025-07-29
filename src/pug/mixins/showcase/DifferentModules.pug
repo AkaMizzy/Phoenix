@@ -1,0 +1,56 @@
+mixin Module(config)
+  a(href=`${config.url}` class=`${config.badge ? "new" : ""}`).col-lg-6.module-variant-container.text-decoration-none
+    if config.badge 
+      h1.module-badge New
+    h2.module-title.position-relative= config.name
+    .image-container
+      each img in config.images
+        .image
+          img(src=`${CWD}assets${img}`, alt="").w-100
+
+mixin DifferentModules 
+  +Section('container-fluid').pt-10
+    h2.text-body-highlight.fw-normal.lh-sm.text-center.mb-11 Different
+      span.text-primary.position-relative.fw-bolder.d-inline-flex.ms-2 modules
+        img.text-illustration-underline(src=`${CWD}assets/img/spot-illustrations/31.png`, alt="")
+      |  dedicated for different purposes
+    -
+      var modules = [
+        {
+          name: 'E commerce',
+          images: ["/img/sections/module-4.png", "/img/sections/module-3.png", "/img/sections/module-2.png", "/img/sections/module-1.png"],
+          url: `${CWD}${paths['default-dashboard']}`
+        },
+        {
+          name: 'Project Management',
+          images: ["/img/sections/module-8.png", "/img/sections/module-7.png", "/img/sections/module-6.png", "/img/sections/module-5.png"],
+          url: `${CWD}${paths['project-management-dashboard']}`
+        },
+        {
+          name: 'CRM',
+          images: ["/img/sections/module-12.png", "/img/sections/module-11.png", "/img/sections/module-10.png", "/img/sections/module-9.png"],
+          url: `${CWD}${paths['crm']}`
+        },
+        {
+          name: 'Booking',
+          images: ["/img/sections/module-16.png", "/img/sections/module-15.png", "/img/sections/module-14.png", "/img/sections/module-13.png"],
+          url: `${CWD}${paths['travel-agency']}`
+        },
+        {
+          name: 'Social',
+          images: ["/img/sections/module-24.png", "/img/sections/module-23.png", "/img/sections/module-22.png", "/img/sections/module-21.png"],
+          url: `${CWD}${paths['social-feed']}`,
+        },
+        {
+          name: 'Stock',
+          images: ["/img/sections/module-20.png", "/img/sections/module-19.png", "/img/sections/module-18.png", "/img/sections/module-17.png"],
+          url: `${CWD}${paths['stock']}`,
+          badge: {
+            type: 'warning',
+            label: 'New'
+          }
+        },
+      ]
+    .row
+      each item in modules
+        +Module(item)

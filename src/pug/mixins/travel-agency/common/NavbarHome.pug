@@ -1,0 +1,26 @@
+mixin NavbarHome(currentPage) 
+  nav.navbar.navbar-landing.navbar-home.navbar-expand.py-4.px-0
+    ul.navbar-nav.mx-auto.mt-3.mt-lg-0.gap-2
+      -
+        var tabs = [
+          {
+            label: 'Hotel',
+            icon: 'fa-solid fa-hotel',
+            path: `${CWD}${paths['hotel-homepage']}`
+          },
+          {
+            label: 'Flight',
+            icon: 'fa-solid fa-plane',
+            path: `${CWD}${paths['flight-homepage']}`
+          },
+          {
+            label: 'Trip',
+            icon: 'fa-solid fa-suitcase-rolling',
+            path: `${CWD}${paths['trip-homepage']}`
+          },
+        ]
+      each tab in tabs
+        li.nav-item
+          a.nav-link.fw-bold.rounded-3(aria-current='page' href=`${tab.path}` class=`${currentPage === tab.label ? 'active' : ''}`) 
+            span.me-2(class=`${tab.icon}`)
+            | #{tab.label}

@@ -1,0 +1,45 @@
+mixin SearchTotalResult(config)
+  h6.dropdown-header.text-body-highlight.fs-10.py-2&attributes(attributes)!=config.text
+
+mixin SearchResultTitle(config)
+  h6.dropdown-header.text-body-highlight.fs-9.border-bottom.border-translucent.py-2.lh-sm&attributes(attributes)=config.text
+
+mixin SearchedItems(items)
+  .py-2
+    each item in items
+      a(href=item.url).dropdown-item
+        .d-flex.align-items-center
+          = '\n'
+          .fw-normal.text-body-highlight.title!=item.text
+      = '\n'
+
+mixin SearchSuggestion(items)
+  .py-2
+    each item in items
+      a(href=item.url).dropdown-item.py-2.d-flex.align-items-center
+        if item.file
+          .file-thumbnail.me-2
+            img(src=item.img, alt="")&attributes(item.imgAttrs)
+        if item.icon 
+          +Avatar(item.icon).me-2.text-body
+        .flex-1
+          h6.mb-0.text-body-highlight.title(class=item.titleClass)=item.title
+          if item.text
+            p.fs-10.mb-0.d-flex.text-body-tertiary!=item.text
+      = '\n'
+
+mixin SuggestedFilter(items)
+  each item in items
+    a(href=item.url).dropdown-item.px-card.py-1.fs-8
+      .d-flex.align-items-center
+        span.badge.fw-medium.text-decoration-none.me-2(class=`badge-subtle-${item.type}`) #{item.key}:
+        .flex-1.fs-9.title=item.text
+    = '\n'
+
+mixin Search({placeholder,inputClass})
+  .search-box&attributes(attributes)
+    form.position-relative
+      input.form-control.search-input.search(type='search' class=inputClass placeholder=placeholder, aria-label='Search')
+      = '\n'
+      span.fas.fa-search.search-box-icon
+      = '\n'

@@ -1,0 +1,60 @@
+extends ../../../layouts/LayoutFlight
+include ../../../mixins/travel-agency/flight/FlightBookingWizard
+include ../../../mixins/travel-agency/flight/booking/FlightInfo
+include ../../../mixins/travel-agency/flight/booking/FlightDetails
+include ../../../mixins/travel-agency/flight/booking/TravelerDetails
+include ../../../mixins/travel-agency/flight/booking/PaymentSummary
+include ../../../mixins/travel-agency/flight/booking/CouponCard
+include ../../../mixins/travel-agency/flight/FlightBottomBar
+
+append variables
+  - var disableNavigationType = true;
+  - var disableHorizontalNavbarShape = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarAppearance = true;
+  - var attrsFooter = { class: 'd-none' }
+  - var attrsSupportChat = {class: 'support-chat-bottom-lg'}
+  - var activeNavItem = 'Booking';
+
+prepend styles
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dropzone/dropzone.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+  script(src=`${CWD}vendors/dropzone/dropzone-min.js`)
+
+block flightContent
+  +Section("container-small").pt-6.pb-9
+    nav.mb-3(aria-label='breadcrumb')
+      ol.breadcrumb.mb-0
+        li.breadcrumb-item
+          a(href='#') Page 1
+        li.breadcrumb-item
+          a(href='#') Page 2
+        li.breadcrumb-item.active(aria-current='page') Default
+    h2.mb-5 Booking
+    .row.g-3.align-items-sm-center.justify-content-between.mb-5 
+      .col-sm
+        +FlightBookingWizard('Booking')
+      .col-sm.text-sm-end
+        p.mb-2.text-info Book before time runs out
+        h3.mb-0.text-info.fw-bold.d-flex.gap-2.align-items-center.justify-content-sm-end 
+          span.fa-solid.fa-clock.fs-8
+          | 29 
+          span.fs-9.fw-normal min 
+          | 50 
+          span.fs-9.fw-normal sec
+
+    +FlightInfo.mb-6
+    +FlightDetails.mb-6 
+    form.row.justify-content-between 
+      .col-lg-8 
+        +TravelerDetails
+        +PaymentSummary.mb-4.mb-lg-9
+      .col-lg-4
+        +CouponCard.mb-9.mb-lg-0
+
+  +FlightBottomBar({ href:"flight-payment" })

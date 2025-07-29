@@ -1,0 +1,27 @@
+mixin PriceTierForm(config)
+  .form-price-tier.border.p-3.rounded-2(data-form-price-tier)&attributes(attributes)
+    .d-sm-flex.align-items-center.gap-3
+      .form-check.form-switch.mb-0
+        input.form-check-input(id=`${config.id}` type="checkbox" data-price-toggle)
+        label.form-check-label.fs-8.fw-bold.text-body.ms-2(for=`${config.id}`)= config.name
+      .pricings.ms-auto.mt-2.mt-sm-0
+        .form-check.form-check-inline.me-3.mb-0
+          input.form-check-input(type='radio' id=`${config.id}-free` name=`${config.name}-radio` value='free' data-pricing)
+          label.form-check-label(for=`${config.id}-free`) Free
+        .form-check.form-check-inline.me-0.mb-0
+          input.form-check-input(type='radio' id=`${config.id}-paid` name=`${config.name}-radio` value='paid' data-pricing)
+          label.form-check-label(for=`${config.id}-paid`) Paid
+    .collapse(data-pricing-collapse)
+      .p-4.bg-primary-subtle.rounded-3.mt-3
+        .form-check.mb-4
+          input.form-check-input(id=`${config.id}-option1` type='checkbox')
+          label.form-check-label.fw-normal.fs-8.fw-semibold(for=`${config.id}-option1`) Option 1
+        .form-check.mb-4
+          input.form-check-input(id=`${config.id}-option2` type='checkbox')
+          label.form-check-label.fw-normal.fs-8.fw-semibold(for=`${config.id}-option2`) Option 2
+        .form-check.mb-4
+          input.form-check-input(id=`${config.id}-option3` type='checkbox')
+          label.form-check-label.fw-normal.fs-8.fw-semibold(for=`${config.id}-option3`) Option 3
+        button.btn.btn-link.p-0
+          span.fa-solid.fa-plus.me-2
+          | Additional Condition

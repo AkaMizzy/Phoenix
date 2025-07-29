@@ -1,0 +1,28 @@
+extends ../index
+
+
+
+append variables
+  - var attrsHtml = Object.assign(attrsHtml, { 'data-navigation-type': "dual", 'data-navbar-horizontal-shape': "default"})
+  - var disableNavigationType = true;
+  - var disableVerticalNavbarAppearance = true;
+  - var disableHorizontalNavbarShape = true;
+
+append headScripts
+  if ENV === 'PROD'
+    script.
+      window.config.set({
+        phoenixNavbarPosition: 'dual-nav',
+        phoenixNavbarTopStyle: 'default'
+      });
+
+block navbarVertical
+
+block navbarTop
+  +DualNav({
+    toggleID: 'navbarTopCollapse',
+    links: false,
+    search: true
+    }).navbar-expand-lg
+
+block afterWrapperContent

@@ -1,0 +1,177 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/gallery/GalleryTabs
+include ../../mixins/gallery/GalleryLayoutMenu
+
+append variables
+  -
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+append scripts
+  script(src=`${CWD}vendors/isotope-layout/isotope.pkgd.min.js`)
+  script(src=`${CWD}vendors/isotope-packery/packery-mode.pkgd.min.js`)
+  script(src=`${CWD}vendors/imagesloaded/imagesloaded.pkgd.min.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+
+append styles 
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+block content
+  .mb-9
+    h2.mb-5 Gallery
+    .d-flex.flex-wrap.gap-3.justify-content-between
+      div
+        button.btn.btn-primary.me-4
+          span.fas.fa-plus.me-2
+          | Add New
+        button.btn.btn-link.text-body.me-4.px-0
+          span.fa-solid.fa-file-export.fs-9.me-2
+          | Export
+      +Search({placeholder: 'Search by name'})
+    .d-md-flex.d-lg-block.d-xl-flex.justify-content-between.gap-4.my-4
+      +GalleryLayoutMenu('masonry').mb-3.mb-md-0.mb-lg-3.mb-xl-0.order-md-1.order-lg-0.order-xl-1
+      +GalleryTabs
+    .row.g-3#gallery-masonry(data-sl-isotope!={
+      layoutMode: 'packery',
+      packery: {
+        gutter: 0,
+      },
+    })
+      -
+        var images = [
+          {
+            img: '/img/gallery/89.png',
+            LargeImg: '/img/gallery/89_large.png',
+            category: 'ecommerce',
+            title: 'Pixel 4a 5g'
+          },
+          {
+            img: '/img/gallery/90.png',
+            LargeImg: '/img/gallery/86.png',
+            category: 'photography',
+            title: 'Sunset'
+          },
+          {
+            img: '/img/gallery/91.png',
+            LargeImg: '/img/gallery/91_large.png',
+            category: 'project-management',
+            title: 'Trees During Night'
+          },
+          {
+            img: '/img/gallery/92.png',
+            LargeImg: '/img/gallery/92_large.png',
+            category: 'ecommerce',
+            title: 'Mountain Sunset'
+          },
+          {
+            img: '/img/gallery/93.png',
+            LargeImg: '/img/gallery/79.png',
+            category: 'photography',
+            title: 'Camera'
+          },
+          {
+            img: '/img/gallery/94.png',
+            LargeImg: '/img/gallery/77.png',
+            category: 'ecommerce',
+            title: 'Basketball Shoes'
+          },
+          {
+            img: '/img/gallery/95.png',
+            LargeImg: '/img/gallery/95_large.png',
+            category: 'project-management',
+            title: 'Aurora'
+          },
+          {
+            video: '/img/gallery/96.mp4',
+            img: '/img/gallery/96.png',
+            category: 'project-management',
+            title: 'Beautiful Nature'
+          },
+          {
+            img: '/img/gallery/97.png',
+            video: '/img/gallery/97.mp4',
+            category: 'ecommerce',
+            title: 'Bike Ride'
+          },
+          {
+            video: '/img/gallery/99.mp4',
+            img: '/img/gallery/99.png',
+            category: 'photography',
+            title: 'Air Balloons'
+          },
+          {
+            img: '/img/gallery/106.png',
+            LargeImg: '/img/gallery/106_large.png',
+            category: 'photography',
+            title: 'MI Phone'
+          },
+          {
+            img: '/img/gallery/119.png',
+            LargeImg: '/img/gallery/107_large.png',
+            category: 'project-management',
+            title: 'Car'
+          },
+          {
+            img: '/img/gallery/108.png',
+            LargeImg: '/img/gallery/108_large.png',
+            category: 'photography',
+            title: 'House near lake'
+          },
+        ]
+      .col-sm-6.col-md-8.col-xl-4.isotope-item.ecommerce
+        +GalleryLightBox(images[0])
+      .col-sm-6.col-md-4.col-xl-2.isotope-item.photography
+        +GalleryLightBox(images[1])
+      .col-sm-6.col-md-4.col-xl-3.isotope-item.project-management
+        +GalleryLightBox(images[2])
+      .col-sm-6.col-md-4.col-xl-3.isotope-item.ecommerce
+        +GalleryLightBox(images[3])
+      .col-sm-6.col-md-4.col-xl-3.isotope-item.project-management
+        +GalleryLightBox(images[7])
+      .col-sm-6.col-md-8.col-xl-3.isotope-item.ecommerce
+        +GalleryLightBox(images[8])
+      .col-sm-6.col-md-4.col-xl-2.isotope-item.photography
+        +GalleryLightBox(images[4])
+      .col-sm-6.col-md-4.col-xl-2.isotope-item.ecommerce
+        +GalleryLightBox(images[5])
+      .col-sm-6.col-md-4.col-xl-2.isotope-item.project-management
+        +GalleryLightBox(images[6])
+      .col-sm-6.col-md-4.col-xl-2.isotope-item.photography
+        +GalleryLightBox(images[12])
+      .col-sm-6.col-md-8.col-xl-4.isotope-item.project-management
+        +GalleryLightBox(images[11])
+      .col-sm-6.col-md-4.col-xl-2.isotope-item.photography
+        +GalleryLightBox(images[10])
+      .col-sm-6.col-md-8.col-xl-4.isotope-item.photography
+        +GalleryLightBox(images[9])
+
+mixin GalleryLightBox(images)
+  .img-zoom-hover.position-relative.rounded-2.overflow-hidden
+    if images.video
+      a(href=`${CWD}assets${images.video}` data-gallery='gallery-masonry').video-container
+        video.video.d-block.h-100.w-100.overflow-hidden.rounded-2(muted data-play-on-hover poster=`${CWD}assets${images.img}`)
+          source(src=`${CWD}assets${images.video}` type="video/mp4")
+        .circle-icon-item.position-absolute.top-50.start-50.translate-middle.bg-body-emphasis.rounded-pill.bg-opacity-50
+          span.fa-solid.fa-video.text-body.fs-9.fs-sm-8
+        .backdrop-faded.position-absolute.w-100.bottom-0.start-0.p-3
+          h4.text-white= images.title
+          p.mb-0.text-secondary-lighter.text-capitalize #{images.category.split('-').join(" ")}
+    else
+      a(href=`${CWD}assets${images.LargeImg}` data-gallery='gallery-masonry')
+        img(src=`${CWD}assets${images.img}`, alt="").rounded-2.w-100.h-100.object-fit-cover
+        .backdrop-faded.position-absolute.w-100.bottom-0.start-0.p-3
+          h4.text-white= images.title
+          p.mb-0.text-secondary-lighter.text-capitalize #{images.category.split('-').join(" ")}

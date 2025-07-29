@@ -1,0 +1,40 @@
+extends ../../../../layouts/LayoutTheme
+include ../../../../mixins/travel-agency/RoomListingTable
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-7
+    h2 Room Listing
+    div(data-list!={
+      valueNames: ["name", "beds", "guest", "bathRooms", "amenities", 'totalRooms'],
+      page: 8,
+    })
+      .d-md-flex.mt-5.mb-4
+        button.btn.btn-primary.me-4
+          span.fas.fa-plus.me-2
+          | Create Listing
+        button.btn.btn-link.text-body.me-4.px-0
+          span.fa-solid.fa-file-export.fs-9.me-2
+          | Export
+        .d-flex.gap-2.ms-md-auto.mt-3.mt-md-0
+          +Search({placeholder: 'Search products'})
+          button.btn.btn-phoenix-primary.px-3
+            span.fa-solid.fa-filter(data-fa-transform='down-2')
+      +RoomListingTable

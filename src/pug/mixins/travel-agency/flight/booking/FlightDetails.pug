@@ -1,0 +1,41 @@
+mixin FlightDetails 
+  div&attributes(attributes) 
+    h3.mb-4 Flight Details
+    .row.g-0.justify-content-between.mb-4
+      .col-lg-3.border-end-lg.mb-5.mb-lg-0 
+        h5.mb-4 Baggage weight limit
+        table.table.table-borderless.mb-0(style="max-width: 9.375rem")
+          tr
+            th.p-0
+            th.p-0
+            th.p-0
+          tr 
+            td.text-nowrap.py-1
+              p.mb-0.text-body-tertiary.text-nowrap
+                span.fa-solid.fa-suitcase-rolling.text-body-emphasis.me-2
+                | Cargo 
+            td.w-max-content.py-1.pe-1
+              p.mb-0.text-body-tertiary :
+            td.py-1.align-middle
+              h5.mb-0 20 kgs
+          tr 
+            td.text-nowrap.py-1
+              p.mb-0.text-body-tertiary.text-nowrap
+                span.fa-solid.fa-briefcase.text-body-emphasis.me-2
+                | Carry 
+            td.w-max-content.py-1.pe-1
+              p.mb-0.text-body-tertiary :
+            td.py-1.align-middle
+              h5.mb-0 7 kgs
+
+      .col-auto.col-lg-8
+        h5.mb-4 Policy 
+        .d-flex.flex-column.flex-sm-row.justify-content-between.gap-4 
+          div 
+            p.mb-2.text-info Cancellation
+            p.mb-0 Refund Amount = Paid Amount - Airline’s Cancellation Fee
+          div 
+            p.mb-2.text-info Re-issue
+            p.mb-0 Re-issue Fee = Airline’s Fee + Fare Difference
+
+    p.mb-0.text-info *The airline’s fee is indicative and per person. Convenience fee is nom-refundable

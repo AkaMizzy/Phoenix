@@ -1,0 +1,69 @@
+mixin Navbar(layout)
+  .navbar-responsive-navitems.navbar-expand.border-y.bg-body-emphasis.border-translucent.py-2
+    -
+      var navLinks = {
+        hotel: [
+          {
+            title: 'Homepage',
+            url: `${CWD}${paths['hotel-homepage']}`
+          },
+          {
+            title: 'Hotel Details',
+            url: `${CWD}${paths['hotel-details']}`
+          },
+          {
+            title: 'Hotel Compare',
+            url: `${CWD}${paths['hotel-compare']}`
+          },
+          {
+            title: 'Check out',
+            url: `${CWD}${paths['hotel-checkout']}`
+          },
+          {
+            title: 'Payment',
+            url: `${CWD}${paths['hotel-payment']}`
+          },
+          {
+            title: 'Gallery',
+            url: `${CWD}${paths['hotel-gallery']}`
+          },
+        ],
+        flight: [
+          {
+            title: 'Homepage',
+            url: `${CWD}${paths['flight-homepage']}`
+          },
+          {
+            title: 'Booking',
+            url: `${CWD}${paths['flight-booking']}`
+          },
+          {
+            title: 'Payment',
+            url: `${CWD}${paths['flight-payment']}`
+          }
+        ],
+        trip: [
+          {
+            title: 'Homepage',
+            url: `${CWD}${paths['trip-homepage']}`
+          },
+          {
+            title: 'Trip Details',
+            url: `${CWD}${paths['trip-details']}`
+          },
+          {
+            title: 'Checkout',
+            url: `${CWD}${paths['trip-checkout']}`
+          }
+        ]
+      }
+    .container-medium.d-flex.flex-between-center(data-navbar)
+      ul.navbar-nav.justify-content-end.align-items-center
+        each link, index in layout === 'hotel' ? navLinks.hotel : layout === 'flight' ? navLinks.flight : navLinks.trip
+          li.nav-item(data-nav-item)
+            a.nav-link.px-3(href=`${link.url}` class=`${index === 0 ? 'ps-0' : ''} ${activeNavItem === link.title ? 'text-primary' : ''}`)= link.title
+        li.nav-item(data-nav-item data-more-item).dropdown
+          a.nav-link.dropdown-toggle.dropdown-caret-none.fw-bold.pe-0.ps-3(href="javascript: void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-boundary="window" data-bs-reference="parent") 
+            | More
+            span.fas.fa-angle-down.ms-2
+          .dropdown-menu.dropdown-menu-end.category-list(aria-labelledby="navbarDropdown" data-category-list)

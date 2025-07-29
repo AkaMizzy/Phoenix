@@ -1,0 +1,81 @@
+include ./HotelDetailsTabContent
+
+mixin HotelDetailsTab
+  .scrollbar.mt-5.mb-3.pb-3
+    ul.nav.nav-pills.flex-nowrap(data-tab-map-container role='tablist')
+      li.nav-item
+        button.nav-link.active(id="pills-availability-tab" data-bs-toggle="pill" data-bs-target="#pills-availability" type="button" role="tab" aria-controls="pills-availability" aria-selected="true") Availability
+      li.nav-item
+        button.nav-link(id="pills-description-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="true") Description
+      li.nav-item
+        button.nav-link(id="pills-policy-tab" data-bs-toggle="pill" data-bs-target="#pills-policy" type="button" role="tab" aria-controls="pills-policy" aria-selected="true") Policy
+      li.nav-item
+        button.nav-link(id="pills-facilities-tab" data-bs-toggle="pill" data-bs-target="#pills-facilities" type="button" role="tab" aria-controls="pills-facilities" aria-selected="true") Facilities
+      li.nav-item
+        button.nav-link(id="pills-reviews-tab" data-bs-toggle="pill" data-bs-target="#pills-reviews" type="button" role="tab" aria-controls="pills-reviews" aria-selected="true") Reviews
+  .tab-content#hotel-details-tab-content
+    .tab-pane.fade.show.active(id="pills-availability" role="tabpanel" aria-labelledby="pills-availability-tab" tabindex="0")
+      h3.mb-3.fw-bold Availability
+      .card 
+        .card-body 
+          .row.g-3
+            .col-sm-6.col-lg-3
+              label.fw-bold.text-body-tertiary.mb-1(for='checkIn') Check in
+              .form-icon-container.flatpickr-input-container
+                input#checkIn.form-control.form-icon-input.datetimepicker(type='text' placeholder='26 Jan, 2023', data-options!={disableMobile:true})
+                span.fa-solid.fa-calendar.text-body.fs-9.form-icon
+            .col-sm-6.col-lg-3
+              label.fw-bold.text-body-tertiary.mb-1(for='checkOut') Check out
+              .form-icon-container.flatpickr-input-container
+                input#checkOut.form-control.form-icon-input.datetimepicker(type='text' placeholder='26 Jan, 2023', data-options!={disableMobile:true})
+                span.fa-solid.fa-calendar.text-body.fs-9.form-icon
+            .col-sm-6.col-lg-3
+              label.fw-bold.text-body-tertiary.mb-1 Adults
+              .input-group.gap-2(data-quantity)
+                button.btn.btn-phoenix-primary.rounded.px-3(data-type="minus")
+                  span.fa-solid.fa-minus
+                input.form-control.border-translucent.input-spin-none.text-center.rounded(id="adult" type="number" value='2')
+                button.btn.btn-phoenix-primary.rounded.px-3(data-type="plus")
+                  span.fa-solid.fa-plus
+            .col-sm-auto.ms-auto.align-self-end
+              button.btn.btn-primary.w-100 Update Results
+      -
+        var rooms = [
+          {
+            name: 'Standard double queen',
+            desc: 'A standard double queen room has two queen-sized beds and may accept up to two people for a convenient and comfortable stay.',
+            beds: 2,
+            person: 2,
+            breakfast: true,
+            discount: 10,
+            price: '1,456.65',
+            discountPrice: '1,256.65',
+            tax: '123',
+            amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone'],
+            images: ['/img/hotels/33.png', '/img/hotels/34.png', '/img/hotels/35.png']
+          },
+          {
+            name: 'Standard double king',
+            desc: 'A standard double king room is a hotel room with two king-size beds that can comfortably fit up to four guests.',
+            beds: 2,
+            person: 4,
+            breakfast: true,
+            discount: 15,
+            price: '1,456.65',
+            discountPrice: '1,856.65',
+            tax: '155',
+            amenities: ['wifi', 'tv', 'common area', 'bathtub', 'Heating', 'Telephone', 'Television', 'common area', 'Kettle', 'iron', 'Coffee maker', 'refrigerator', 'Room service', 'Coffee maker', 'refrigerator', 'Room service', 'common area', 'bathtub', 'Heating', 'Telephone'],
+            images: ['/img/hotels/36.png', '/img/hotels/37.png', '/img/hotels/38.png']
+          }
+        ]
+      each room, index in rooms
+        hr.my-6
+        +RoomInfo(room, index)
+    .tab-pane.fade(id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab" tabindex="0")
+      +Description
+    .tab-pane.fade(id="pills-policy" role="tabpanel" aria-labelledby="pills-policy-tab" tabindex="0")
+      +Policy
+    .tab-pane.fade(id="pills-facilities" role="tabpanel" aria-labelledby="pills-facilities-tab" tabindex="0")
+      +Facilities
+    .tab-pane.fade(id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab" tabindex="0")
+      +Reviews

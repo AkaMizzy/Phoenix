@@ -1,0 +1,66 @@
+mixin CashTransactionModal 
+  #CashTransactionModal.modal.fade(role='dialog' tabindex='-1' aria-hidden='true')
+    .modal-dialog.modal-dialog-centered.modal-600 
+      .modal-content 
+        .modal-header.border-0 
+          h4.text-body-highlight.mb-0 Add Transaction 
+          button.btn.btn-link.text-danger.fs-9.ms-auto.p-1(type="button" data-bs-dismiss='modal' aria-label='Close')
+            span.fa-solid.fa-xmark
+        .modal-body
+          .bg-body-highlight.rounded-3.row.g-0.gap-3.p-3.flex-between-center.mb-4
+            .col-auto
+              p.fw-bold.mb-0 Stock Name : Apple Inc
+            .col-auto
+              p.fw-bold.mb-0 NASDAQ : AAPL
+          .row.g-3.form
+            .col-sm-6 
+              label.fw-bold.text-body-highlight.mb-2 Type 
+              select.form-select(name="type")
+                option(value="buy") Buy 
+                option(value="sell") Sell 
+                option(value="hold") Hold 
+            .col-sm-6 
+              label.fw-bold.text-body-highlight.mb-2 Date 
+              .position-relative.flatpickr-input-container
+                input.form-control.form-control-sm.datetimepicker.px-5(type='text' placeholder='dd/mm/yyyy', data-options!={disableMobile:true})
+                span.fa-solid.fa-calendar-alt.text-body.position-absolute.top-50.translate-middle-y.fs-9(style="left: 1rem;") 
+
+            .col-sm-6 
+              label.fw-bold.text-body-highlight.mb-2 Cost per share
+              input.form-control.input-spin-none(type="number", name="costPerShare" placeholder='Enter cost per Share...')
+            
+            .col-sm-6 
+              label.fw-bold.text-body-highlight.mb-2(for="currency") Currency 
+              select#currency.form-select(name="currency")
+                option(value="usd") USD 
+                option(value="cad") CAD 
+                option(value="yen") YEN 
+            
+            .col-sm-6 
+              label.fw-bold.text-body-highlight.mb-2 Share Quantity
+              input.form-control.input-spin-none(type="number", name="shareQuantity" placeholder='Enter share quantity...')
+            
+            .col-sm-6 
+              label.fw-bold.text-body-highlight.mb-2 Commission 
+              select.form-select(name="commission")
+                option(value="") Select 
+                option(value="20%") 20% 
+                option(value="25%") 25%
+            .col-12.mb-4 
+              label.fw-bold.text-body-highlight.mb-2 Note 
+              input.form-control(type='text' name='note' placeholder='Write a note...')
+              span.text-end.fs-8.lh-sm.mt-2.d-block 
+                span.text-primary.fw-semibold 15
+                span.text-body-quaternary /16
+            
+            .col-12 
+              .row.flex-between-center.g-3.border-top.border-dashed 
+                .col-auto 
+                  h4.mb-0 Total Cost: 
+                .col-auto 
+                  h4.mb-0 $562.08
+            .col-12.text-end
+              button.btn.btn-link.text-secondary.btn-sm(type="button") Cancel 
+              button.btn.btn-primary.btn-sm(type="submit")  Add Transaction
+
+              

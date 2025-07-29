@@ -1,0 +1,14 @@
+extends ../dashboard/project-management
+
+append variables
+  - var attrsHtml = Object.assign(attrsHtml, { class: 'navbar-vertical-collapsed' })
+  - var disableNavigationType = true;
+
+append headScripts
+  if ENV === 'PROD'
+    script.
+      window.config.set({
+        phoenixIsNavbarVerticalCollapsed: true
+      });
+
+block afterWrapperContent

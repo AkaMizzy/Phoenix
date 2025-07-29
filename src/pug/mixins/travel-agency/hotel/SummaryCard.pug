@@ -1,0 +1,88 @@
+mixin CartItem(item, index, page)
+  .card&attributes(attributes)
+    .card-body
+      if page === 'hotel-details'
+        button.btn.p-0.position-absolute.end-0.fs-8.mt-n5.me-n2.text-body-tertiary
+          span.fa-solid.fa-circle-xmark
+      .d-flex.justify-content-between.gap-3.mb-4
+        div
+          h5.text-body-highlight Room #{index + 1}
+          p.mb-0.text-body-tertiary= item.roomName
+        h4.mb-0 $#{item.price}
+      .row.align-items-center.g-0 
+        .col-3
+          h5.text-body.text-nowrap.mb-0 Check in
+        .col-auto
+          span.px-2 :
+        .col-auto
+          span= item.checkIn
+      .row.align-items-center.g-0.mb-4 
+        .col-3
+          h5.text-body.text-nowrap.mb-0 Check out
+        .col-auto
+          span.px-2 :
+        .col-auto
+          span= item.checkOut
+      .d-flex.flex-wrap.gap-2
+        span.badge.badge-phoenix.badge-phoenix-secondary.py-1.border-0.text-capitalize
+          span.fa-solid.fa-bed.fs-9.me-2
+          span #{item.bedType}
+        span.badge.badge-phoenix.badge-phoenix-secondary.py-1.border-0.text-capitalize
+          span.fa-solid.fa-user.fs-9.me-2
+          span #{item.adults} Adults
+        if item.childs
+          span.badge.badge-phoenix.badge-phoenix-secondary.py-1.border-0.text-capitalize
+            span.fa-solid.fa-baby.fs-9.me-2
+            span #{item.childs} Childs
+        if item.nights
+          span.badge.badge-phoenix.badge-phoenix-secondary.py-1.border-0.text-capitalize
+            span.fa-solid.fa-moon.fs-9.me-2
+            span #{item.nights} Nights
+
+mixin SummaryCard(page)
+  .card&attributes(attributes)
+    .card-body 
+      h5.mb-3 Summary
+      if page !== 'hotel-details'
+        img(src=`${CWD}assets/img/hotels/39.png`, alt="" width='208').rounded-2.mb-3
+        h4.text-body-highlight.mb-2 Radisson Blu Water Garden Hotel, Dhaka
+        p.mb-5.text-body-tertiary Airport Rd, Dhaka Cantonment, Dhaka, 1206, Bangladesh
+      -
+        var cartItems = [
+          {
+            roomName: 'King-Super deluxe',
+            price: '2,056.75',
+            checkIn: '25 January, 2023',
+            checkOut: '27 January, 2023',
+            bedType: 'Double bed',
+            adults: 2,
+            nights: 2,
+          },
+          {
+            roomName: 'Standard double queen',
+            price: '1,456.65',
+            checkIn: '25 January, 2023',
+            checkOut: '28 January, 2023',
+            bedType: 'Double bed',
+            adults: 2,
+            childs: 1,
+            nights: 3,
+          }
+        ]
+      each item, index in cartItems 
+        +CartItem(item, index, page).mb-3
+      .px-4.py-3.bg-body-highlight.rounded-2
+        .d-flex.flex-between-center.mb-2
+          h6.text-body-tertiary.fw-semibold Sub-total
+          h6.text-body-highlight.fw-semibold $3,513.40
+        .d-flex.flex-between-center 
+          h6.text-body-tertiary.fw-semibold Discount
+          h6.text-body-tertiary.fw-semibold -$50
+        hr
+        .d-flex.flex-between-center
+          h4.text-body Total
+          h4.text-body 1,756.70
+      if page === 'hotel-details'
+        a(href=`${CWD}${paths['hotel-checkout']}`).btn.btn-primary.mt-3.w-100 Proceed with booking
+
+

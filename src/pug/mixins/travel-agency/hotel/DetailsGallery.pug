@@ -1,0 +1,57 @@
+mixin DetailsGallery
+  -
+    var hotelImages = [
+      {
+        img: '/img/hotels/25_2.png',
+        largeImg: '/img/hotels/25.png',
+      },
+      {
+        img: '/img/hotels/26_2.png',
+        largeImg: '/img/hotels/26.png',
+      },
+      {
+        img: '/img/hotels/27_2.png',
+        largeImg: '/img/hotels/27.png',
+      },
+      {
+        img: '/img/hotels/28_2.png',
+        largeImg: '/img/hotels/28.png',
+      },
+      {
+        img: '/img/hotels/29_2.png',
+        largeImg: '/img/hotels/29.png',
+      },
+      {
+        img: '/img/hotels/30_2.png',
+        largeImg: '/img/hotels/30.png',
+      },
+      {
+        img: '/img/hotels/31_2.png',
+        largeImg: '/img/hotels/31.png',
+      },
+      {
+        img: '/img/hotels/32_2.png',
+        largeImg: '/img/hotels/32.png',
+      },
+    ]
+
+  .row.g-3.mb-3
+    .col-md-6
+      a(href=`${CWD}assets${hotelImages[0].largeImg}` data-gallery='hotel-details-gallery') 
+        img(src=`${CWD}assets${hotelImages[0].img}`, alt="").img-fluid.rounded-2
+    .col-6.d-none.d-md-block
+      .row.g-3
+        each item, index in hotelImages.slice(1, 4)
+          div(class=`${index === 0 ? "col-12" : "col-6"}`)
+            a(href=`${CWD}assets${item.largeImg}` data-gallery='hotel-details-gallery') 
+              img(src=`${CWD}assets${item.img}`, alt="").img-fluid.rounded-2
+    each item, index in hotelImages.slice(4, 7)
+      .col-3.d-none.d-md-block
+        a(href=`${CWD}assets${item.largeImg}` data-gallery='hotel-details-gallery')
+          img(src=`${CWD}assets${item.img}`, alt="").img-fluid.rounded-2
+    .col-md-3
+      .position-relative.rounded-2.overflow-hidden
+        a(href=`${CWD}assets${hotelImages[7].largeImg}` data-gallery='hotel-details-gallery') 
+          img(src=`${CWD}assets${hotelImages[7].img}`, alt="" height='43').w-100.h-md-100.object-fit-cover
+        .position-absolute.w-100.h-100.left-0.top-0.d-flex.flex-center.bg-black.bg-opacity-50
+          a(href=`${CWD}${paths['hotel-gallery']}`).text-white.stretched-link Show all

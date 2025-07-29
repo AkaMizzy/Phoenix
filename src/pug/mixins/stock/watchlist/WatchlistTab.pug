@@ -1,0 +1,36 @@
+include ./SummaryTable
+include ./CashTransactionTable
+include ./CashTransactionModal
+
+mixin WatchlistTab 
+  ul#watchlist-tab.nav.nav-underline.optionChainTableHeader.fs-9.gap-0(role='tablist')
+    li.nav-item 
+      a#summary-tab.nav-link.active.pe-3(
+        data-bs-toggle='tab' 
+        href='#tab-summary' 
+        role='tab' 
+        aria-controls='tab-summary' 
+        aria-selected='true'
+      ) Summary
+    li.nav-item 
+      a#cashTransaction-tab.nav-link.px-3(
+        data-bs-toggle='tab' 
+        href='#tab-cashTransaction' 
+        role='tab' 
+        aria-controls='tab-cashTransaction' 
+        aria-selected='false'
+      ) Cash Transaction 
+    li.nav-item.flex-1 
+      a#empty-tab1.nav-link.h-100.disabled(
+        data-bs-toggle='tab' 
+        href='#empty-tab-1' 
+        role='tab'
+        aria-selected='false'
+      )
+  #watchlist-tabContent.tab-content.mt-2 
+    #tab-summary.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='summary-tab')
+      +SummaryTable
+    #tab-cashTransaction.tab-pane.fade(role='tabpanel' aria-labelledby='cashTransaction-tab')
+      +CashTransactionTable
+      
+  +CashTransactionModal

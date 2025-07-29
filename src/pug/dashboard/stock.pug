@@ -1,0 +1,35 @@
+extends ../layouts/LayoutTheme
+include ../mixins/dashboard/stock/Stat
+include ../mixins/dashboard/stock/StockTable
+include ../mixins/dashboard/stock/TopStocks
+include ../mixins/dashboard/stock/OptionChainTableHeader
+include ../mixins/dashboard/stock/OptionChainTable
+
+
+prepend styles
+  link(href=`${CWD}vendors/swiper/swiper-bundle.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/swiper/swiper-bundle.min.js`)
+
+append scripts
+  script(src=`${CWD}vendors/echarts/echarts.min.js`)
+  script(src=`${CWD}vendors/chart/chart.umd.js`)
+  script(src=`${CWD}assets/js/dashboards/stock-dashboard.js`)
+
+block content
+  h2.mb-4.text-body-emphasis Stock Dashboard
+  +OverviewCards
+  
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.py-5.border-top.mt-4
+    h3.mb-4.text-body-emphasis Top Stock
+    +TopStocks
+
+  .mx-n4.px-4.mx-lg-n6.px-lg-6.bg-body-emphasis.py-5.border-y.mb-7.mb-md-8.mb-lg-9
+    .row.gy-5.gx-xl-7.gx-xxl-10
+      .col-xl-6 
+        h2.mb-4 Top Gainers
+        +TopGainers
+      .col-xl-6 
+        h2.mb-4 Top Losers
+        +TopLosers

@@ -1,0 +1,155 @@
+mixin SidebarTableRow(item, index)
+  tr 
+    td.align-middle.white-space-nowrap(style="min-width: 112px;")
+      p.mb-0.fw-semibold.text-uppercase=item.companyAbbr
+
+    td.align-middle.white-space-nowrap(style="min-width: 112px;")
+      h5.text-body $#{item.amount}
+      p.fs-9.mb-0(class=`text-${item.growth ? 'success' : 'danger'}`)
+        span.me-1.fw-bold=item.profit
+        span #{item.percent}%
+
+    td.align-middle.white-space-nowrap.d-flex.justify-content-end.justify-content-xl-start.align-items-center(style="min-width: 112px;")
+      div(class=item.chart style='width: 80px; min-height: 44px' data-echarts!={data: item.echartData})
+
+mixin MyPortfolioSidebar
+  -
+    var quoteLookupTable = [
+      {
+        companyAbbr: 'AAPL',
+        amount: 232.98,
+        profit: '+$0.42',
+        percent: '+0.35',
+        growth: true,
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          70, 50, 85, 45, 200, 193, 196, 210, 198, 210, 103, 120, 84, 95, 130, 123,
+          214, 245, 287, 348, 356, 390
+        ]
+      },
+      {
+        companyAbbr: 'Tsla',
+        amount: 269.19,
+        profit: '-$0.42',
+        percent: '-0.35',
+        growth: false,
+        chart: 'echart-stock-overview-mixed-chart',
+        echartData: [
+          -100, 190, 200, -200, -190, 300, -110, 100, -100, 250, 200, 190, -80, 50,
+          40, 200, -200, 200, 150, 160, 300, -100
+        ]
+      },
+      {
+        companyAbbr: 'NVDA',
+        amount: 141.54,
+        profit: '+$0.42',
+        percent: '+0.35',
+        growth: true,
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          400, 450, 500, 490, 600, 550, 400, 350, 320, 330, 320, 
+          450, 480, 350, 345, 200, 320, 400
+        ]
+      },
+      {
+        companyAbbr: 'AMZN',
+        amount: 187.83,
+        profit: '-$2.42',
+        percent: '-2.35',
+        growth: false,
+        chart: 'echart-stock-overview-inverted-chart',
+        echartData: [
+          -500, -300, -250, -280, -150, -250, -300, -180, -145, -250, -46, -250, -90,
+          -80, -85, -150, -250, -180, -175, -50
+        ]
+      },
+      {
+        companyAbbr: 'MSFT',
+        amount: 428.15,
+        profit: '+$5.42',
+        percent: '+1.21',
+        growth: true,
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          70, 50, 85, 45, 200, 193, 196, 210, 198, 210, 103, 120, 84, 95, 130, 123,
+          214, 245, 287, 348, 356, 390
+        ]
+      },
+      {
+        companyAbbr: 'GOOG',
+        amount: 232.98,
+        profit: '+$0.42',
+        percent: '+0.54',
+        growth: true,
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          400, 450, 500, 490, 600, 550, 400, 350, 320, 330, 320, 
+          450, 480, 350, 345, 200, 320, 400
+        ]
+      },
+      {
+        companyAbbr: 'ADBE',
+        amount: 166.99,
+        profit: '+$1.11',
+        percent: '+0.35',
+        growth: true,
+        chart: 'echart-stock-overview-inverted-chart',
+        echartData: [
+          -500, -300, -250, -280, -150, -250, -300, -180, -145, -250, -46, -250, -90,
+          -80, -85, -150, -250, -180, -175, -50
+        ]
+      },
+      {
+        companyAbbr: 'AMD',
+        amount: 156.23,
+        profit: '-$0.42',
+        percent: '-0.35',
+        growth: false,
+        chart: 'echart-stock-overview-mixed-chart',
+        echartData: [
+          -120, 200, 230, -230, -190, 300, -110, 100, -100, 250, 200, 190, -80, 80,
+          50, 200, -200, 220, 150, 140, 310, -150
+        ]
+      },
+      {
+        companyAbbr: 'NFLX',
+        amount: 754.68,
+        profit: '+$0.42',
+        percent: '+0.35',
+        growth: true,
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          390, 356, 348, 287, 245, 214, 123, 130, 95, 84, 120, 103, 210, 198, 210, 
+          196, 193, 200, 45, 85, 70, 50
+        ]
+      },
+      {
+        companyAbbr: 'NDQA',
+        amount: 74.69,
+        profit: '-$0.42',
+        percent: '-0.35',
+        growth: false,
+        chart: 'echart-stock-overview-chart',
+        echartData: [
+          500, 450, 600, 690, 700, 550, 400, 450, 480, 450, 445, 300, 420, 600
+        ]
+      },
+
+    ]
+  #portfolioSidebar.offcanvas.offcanvas-end.stock-offcanvas-xl.bg-body-emphasis.border-xl.rounded-xl.scrollbar(tabindex='-1' aria-labelledby='portfolioOffcanvas')
+    .offcanvas-body.p-0
+      .card.border-0 
+        .card-body
+          .row.flex-between-center.mb-4 
+            .col-auto.col-xl-12 
+              h4.mb-0.text-body-highlight.text-xl-center Quote Lookup
+            .col-auto.d-xl-none 
+              button.btn.btn-link.btn-sm.fs-8.p-0.text-body-secondary(data-bs-dismiss='offcanvas' aria-label='close')
+                span.fa-solid.fa-xmark
+          +Search({placeholder: 'Search symbol'}).w-100.mb-3
+          
+          .table-responsive.scrollbar.overflow-x-hidden
+            table.table.mb-0
+              tbody.border-top
+                each row, index in quoteLookupTable 
+                  +SidebarTableRow(row, index)

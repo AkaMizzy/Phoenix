@@ -1,0 +1,59 @@
+extends ../../../../layouts/LayoutTheme
+include ../../../../mixins/travel-agency/add-property/AddPropertyWizard
+
+prepend styles
+  link(href=`${CWD}vendors/mapbox-gl/mapbox-gl.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/flatpickr/flatpickr.min.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/dropzone/dropzone.css`, rel='stylesheet')
+  link(href=`${CWD}vendors/nouislider/nouislider.min.css`, rel='stylesheet')
+
+prepend scripts
+  script(src=`${CWD}vendors/dropzone/dropzone-min.js`)
+  script(src=`${CWD}vendors/mapbox-gl/mapbox-gl.js`)
+  script(src=`${CWD}vendors/nouislider/nouislider.min.js`)
+  script(src=`${CWD}vendors/flatpickr/flatpickr.min.js`)
+
+append variables
+  - 
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!',
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+block content
+  .mb-9
+    h2.fs-5.mb-4.mb-xl-5 Add New Property
+    .theme-wizard(data-theme-wizard data-wizard-modal-disabled)
+      .row.gx-0.gx-xl-5
+        .col-xl-4.order-xl-1
+          +WizardHeader({tab1:'#add-property-wizard-tab1',tab2:'#add-property-wizard-tab2',tab3:'#add-property-wizard-tab3',tab4:'#add-property-wizard-tab4', tab5:'#add-property-wizard-tab5', tab6:'#add-property-wizard-tab6', tab7:'#add-property-wizard-tab7'})
+        .col-xl-8.flex-1
+          .row 
+            .col-xxl-8
+              +WizardContent({
+                name: 'add-property-wizard',
+                formId: 'addPropertyWizardForm',
+                tab1: 'add-property-wizard-tab1',
+                tab2: 'add-property-wizard-tab2',
+                tab3: 'add-property-wizard-tab3',
+                tab4: 'add-property-wizard-tab4',
+                tab5: 'add-property-wizard-tab5',
+                tab6: 'add-property-wizard-tab6',
+                tab7: 'add-property-wizard-tab7',
+                validation: false,
+                url: `${CWD}${paths['forms-wizard']}`
+              })
+              .mt-6(data-wizard-footer)
+                div.d-none(data-wizard-prev-btn)
+                button.btn.btn-primary.px-6.px-sm-11(type='submit' data-wizard-next-btn) Next

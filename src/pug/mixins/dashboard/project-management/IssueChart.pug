@@ -1,0 +1,39 @@
+mixin IssueChart
+  .row.g-3.mb-3
+    .col-12.col-md-6
+      h3.text-body-emphasis.text-nowrap Issues Discovered
+      p.text-body-tertiary.mb-md-7 Newly found and yet to be solved
+
+      .d-flex.align-items-center.justify-content-between
+        p.mb-0.fw-bold Issue type 
+        p.mb-0.fs-9 Total count 
+          span.fw-bold 257
+      hr.bg-body-secondary.mb-2.mt-2
+
+      .d-flex.align-items-center.mb-1
+        span.d-inline-block.bg-info-light.bullet-item.me-2
+        p.mb-0.fw-semibold.text-body.lh-sm.flex-1 Product design
+        h5.mb-0.text-body 78
+      .d-flex.align-items-center.mb-1
+        span.d-inline-block.bg-warning-light.bullet-item.me-2
+        p.mb-0.fw-semibold.text-body.lh-sm.flex-1 Development
+        h5.mb-0.text-body 63
+      .d-flex.align-items-center.mb-1
+        span.d-inline-block.bg-danger-light.bullet-item.me-2
+        p.mb-0.fw-semibold.text-body.lh-sm.flex-1 QA &amp; Testing
+        h5.mb-0.text-body 56
+      .d-flex.align-items-center.mb-1
+        span.d-inline-block.bg-success-light.bullet-item.me-2
+        p.mb-0.fw-semibold.text-body.lh-sm.flex-1 Customer queries
+        h5.mb-0.text-body 36
+      .d-flex.align-items-center
+        span.d-inline-block.bg-primary.bullet-item.me-2
+        p.mb-0.fw-semibold.text-body.lh-sm.flex-1 R &amp; D
+        h5.mb-0.text-body 24
+
+      button.btn.btn-outline-primary.mt-5
+        |See Details
+        span.fas.fa-angle-right.ms-2.fs-10.text-center
+    .col-12.col-md-6
+      .position-relative.mb-sm-4.mb-xl-0
+        .echart-issue-chart(style='min-height:390px;width:100%')

@@ -1,0 +1,11 @@
+mixin GalleryTabs 
+  .scrollbar
+    ul.nav.nav-underline.gap-md-5(data-filter-nav style='min-width: 400px')&attributes(attributes)
+      li.nav-item
+        a.nav-link.cursor-pointer.active(data-filter='*') All
+      li.nav-item
+        a.nav-link.cursor-pointer(data-filter='.ecommerce') Ecommerce
+      li.nav-item
+        a.nav-link.cursor-pointer(data-filter='.project-management') Project Management
+      li.nav-item 
+        a.nav-link.cursor-pointer(data-filter='.photography') Photography

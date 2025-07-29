@@ -1,0 +1,131 @@
+extends ../../layouts/LayoutTheme
+include ../../mixins/gallery/GalleryTabs
+include ../../mixins/gallery/GalleryLayoutMenu
+
+append variables
+  -
+    var breadcrumb = [
+      {
+        label: 'Page 1',
+        href: '#!'
+      },
+      {
+        label: 'Page 2',
+        href: '#!',
+      },
+      {
+        label: 'Default',
+        href: '#!',
+        active: true
+      },
+    ];
+
+append scripts
+  script(src=`${CWD}vendors/isotope-layout/isotope.pkgd.min.js`)
+  script(src=`${CWD}vendors/isotope-packery/packery-mode.pkgd.min.js`)
+  script(src=`${CWD}vendors/imagesloaded/imagesloaded.pkgd.min.js`)
+  script(src=`${CWD}vendors/glightbox/glightbox.min.js`)
+
+append styles 
+  link(href=`${CWD}vendors/glightbox/glightbox.min.css`, rel='stylesheet')
+
+block content
+  .mb-9
+    h2.mb-5 Gallery
+    .d-flex.flex-wrap.gap-3.justify-content-between
+      div
+        button.btn.btn-primary.me-4
+          span.fas.fa-plus.me-2
+          | Add New
+        button.btn.btn-link.text-body.me-4.px-0
+          span.fa-solid.fa-file-export.fs-9.me-2
+          | Export
+      +Search({placeholder: 'Search by name'})
+    .d-md-flex.d-lg-block.d-xl-flex.justify-content-between.gap-4.my-4
+      +GalleryLayoutMenu('grid').mb-3.mb-md-0.mb-lg-3.mb-xl-0.order-md-1.order-lg-0.order-xl-1
+      +GalleryTabs
+    -
+      var images = [
+        {
+          img: '/img/gallery/77.png',
+          LargeImg: '/img/gallery/77.png',
+          category: 'ecommerce',
+          title: 'Basketball Shoes'
+        },
+        {
+          img: '/img/gallery/78.png',
+          LargeImg: '/img/gallery/78.png',
+          category: 'photography',
+          title: 'Beach Sunset'
+        },
+        {
+          img: '/img/gallery/79.png',
+          LargeImg: '/img/gallery/79.png',
+          category: 'photography',
+          title: 'Camera'
+        },
+        {
+          img: '/img/gallery/80.png',
+          LargeImg: '/img/gallery/80.png',
+          category: 'ecommerce',
+          title: 'Telephone'
+        },
+        {
+          img: '/img/gallery/81.png',
+          LargeImg: '/img/gallery/81.png',
+          category: 'photography',
+          title: 'Sea Beach'
+        },
+        {
+          img: '/img/gallery/82.png',
+          LargeImg: '/img/gallery/82.png',
+          category: 'photography',
+          title: 'Wooden Beetle'
+        },
+        {
+          img: '/img/gallery/83.png',
+          LargeImg: '/img/gallery/83.png',
+          category: 'project-management',
+          title: 'Boat on Water'
+        },
+        {
+          img: '/img/gallery/84.png',
+          LargeImg: '/img/gallery/84.png',
+          category: 'photography',
+          title: 'Sunset Horizon'
+        },
+        {
+          img: '/img/gallery/85.png',
+          LargeImg: '/img/gallery/85.png',
+          category: 'project-management',
+          title: 'Trail Ahead'
+        },
+        {
+          img: '/img/gallery/86.png',
+          LargeImg: '/img/gallery/86.png',
+          category: 'project-management',
+          title: 'Mountain Sunset'
+        },
+        {
+          img: '/img/gallery/87.png',
+          LargeImg: '/img/gallery/87.png',
+          category: 'ecommerce',
+          title: 'Dog Sitting'
+        },
+        {
+          img: '/img/gallery/88.png',
+          LargeImg: '/img/gallery/88.png',
+          category: 'photography',
+          title: 'Tree near Lake'
+        },
+      ]
+    .row.g-3#image_gallery( data-sl-isotope!={
+      layoutMode: 'packery',
+    })
+      each item in images
+        a(href=`${CWD}assets${item.img}` data-gallery='gallery-grid' class=`${item.category}`).col-sm-6.col-md-4.col-xl-3.isotope-item
+          .hoverbox.img-zoom-hover.rounded-2
+            img(src=`${CWD}assets${item.img}`, alt="").img-fluid
+            .hoverbox-content.flex-center.flex-column
+              h4.text-white= item.title
+              p.mb-0.text-secondary-lighter.text-capitalize #{item.category.split('-').join(" ")}

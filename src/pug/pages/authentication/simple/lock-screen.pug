@@ -1,0 +1,18 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutSimpleAuth
+
+block wrapperContent
+  +LayoutBasic({logo:false})
+    .text-center.mb-5
+      .avatar.avatar-4xl.mb-4
+        img.rounded-circle(src=`${CWD}assets/img/team/30.webp`, alt='')
+      h2.text-body-highlight 
+        span.fw-normal Hello 
+        | John Smith
+      p.text-body-tertiary Enter your password to access the admin
+    .position-relative(data-password)
+      input#password.form-control.mb-3(type='password' placeholder='Enter Password' data-password-input)
+      button.btn.px-3.py-0.h-100.position-absolute.top-0.end-0.fs-7.text-body-tertiary(data-password-toggle)
+        span.uil.uil-eye.show
+        span.uil.uil-eye-slash.hide
+    a.btn.btn-primary.w-100(href=`${CWD}${paths['default-dashboard']}`) Sign In

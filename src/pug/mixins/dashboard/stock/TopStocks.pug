@@ -1,0 +1,182 @@
+mixin TabItems(item, index)
+  li.nav-item
+    a.nav-link.card.company-card(
+      id=item.id 
+      href=`#${item.href}`
+      data-bs-toggle='tab'
+      aria-current="page"
+      aria-controls=item.href
+      aria-selected=index === 0 ? "true" : "false"
+      class=index === 0 ? "active" : ""
+      role='tab'
+    )
+      .card-body.p-0 
+        .d-flex.gap-3.gap-xl-2.gap-xxl-3.align-items-center
+          if item.darkImage 
+            img(src=item.img alt="brand").d-dark-none.img-fluid
+            img(src=item.darkImage alt="brand").d-light-none.img-fluid
+          else 
+            img(src=item.img alt="brand").img-fluid
+          .d-flex.gap-3.flex-between-center.flex-1
+            div 
+              h6.fw-semibold.text-body-secondary.mb-2.lh-sm.text-nowrap= item.title 
+              h4.mb-0  $#{item.amount}
+            .text-end 
+              h6.fw-semibold.text-body-secondary.mb-2.lh-sm.text-uppercase= item.abbr 
+              h6.fw-semibold.lh-sm(class=item.increase ? 'text-success': 'text-danger') 
+                | #{item.increase ? '+' : '-'}#{item.profit}(#{item.percent}%)
+
+mixin TopStocks
+  -
+    var tabItems = [
+      {
+        id: 'tab-apple',
+        href:'apple-tab',
+        title: 'Apple Inc',
+        img: `${CWD}assets/img/brand3/apple.png`,
+        darkImage: `${CWD}assets/img/brand3/light_apple_logo.svg`,
+        amount: 225.77,
+        abbr: 'AAPL',
+        profit: 4.08,
+        percent: 1.84,
+        increase: true,
+        chart: 'top-stock-apple-chart'
+      },
+      {
+        id: 'tab-tesla',
+        href:'tesla-tab',
+        title: 'Tesla Inc',
+        img: `${CWD}assets/img/brand3/tesla.png`,
+        darkImage: `${CWD}assets/img/brand3/dark_tesla.png`,
+        amount: 240.83,
+        abbr: 'TSLA',
+        profit: 1.47,
+        percent: 0.60,
+        increase: false,
+        chart: 'top-stock-tesla-chart'
+      },
+      {
+        id: 'tab-nvidia',
+        href:'nvidia-tab',
+        title: 'NVIDIA corp',
+        img: `${CWD}assets/img/brand3/nvidia.png`,
+        amount: 132.89,
+        abbr: 'NVDA',
+        profit: 5.17,
+        percent: 4.05,
+        increase: true,
+        chart: 'top-stock-nvidia-chart'
+      },
+      {
+        id: 'tab-alphabet',
+        href:'alphabet-tab',
+        title: 'Alphabet Inc',
+        img: `${CWD}assets/img/brand3/google.png`,
+        amount: 165.70,
+        abbr: 'GOOG',
+        profit: 1.31,
+        percent: 0.80,
+        increase: true,
+        chart: 'top-stock-alphabet-chart'
+      },
+      {
+        id: 'tab-amd',
+        href:'amd-tab',
+        title: 'AMD Inc.',
+        img: `${CWD}assets/img/brand3/amd.png`,
+        darkImage: `${CWD}assets/img/brand3/dark_amd.png`,
+        amount: 172.80,
+        abbr: 'AMD',
+        profit: 1.83,
+        percent: 1.07,
+        increase: true,
+        chart: 'top-stock-amd-chart'
+      },
+      {
+        id: 'tab-microsoft',
+        href:'microsoft-tab',
+        title: 'Microsoft corp',
+        img: `${CWD}assets/img/brand3/microsoft.png`,
+        amount: 414.71,
+        abbr: 'MSFT',
+        profit: 5.17,
+        percent: 1.26,
+        increase: true,
+        chart: 'top-stock-microsoft-chart'
+      },
+      {
+        id: 'tab-intel',
+        href:'intel-tab',
+        title: 'Intel',
+        img: `${CWD}assets/img/brand3/intel.png`,
+        darkImage: `${CWD}assets/img/brand3/dark_intel.png`,
+        amount: 23.32,
+        abbr: 'INTEL',
+        profit: 0.94,
+        percent: 4.20,
+        increase: true,
+        chart: 'top-stock-intel-chart'
+      }
+    ]
+  .row.gx-5 
+    .col-12.col-xl-5.col-xxl-4.mb-4.mb-xl-0.top-stock-card-container
+      +Search({placeholder: 'Enter Company or Symbol name'}).w-100.mb-3.pe-xl-3
+      .scrollbar.top-stock-tab.w-100.pe-xl-3
+        ul#companyTab.nav.gap-3.gap-xl-2.flex-nowrap.flex-xl-column(role='tablist')
+          each item, index in tabItems 
+            +TabItems(item, index)
+    .col-12.col-xl-7.col-xxl-8.ps-xl-0.flex-1
+      #topStocksTabContent.tab-content
+        each item, index in tabItems
+          .tab-pane.fade(
+            id=item.href 
+            class=index === 0 ? "active show" : "" 
+            role='tabpanel' 
+            aria-labelledby=item.id
+          )
+            .row.justify-content-between.g-3.mb-5
+              .col-auto 
+                h4.text-body-tertiary.mb-2.lh-sm=item.abbr
+                h3.text-body-highlight.d-flex.gap-2.flex-between-center.lh-sm.mb-0 
+                  | $#{item.amount}
+                  span.badge.badge-phoenix.fs-10.d-flex.flex-between-center(class=`badge-phoenix-${item.increase ? 'success' : 'danger'}`) 
+                    | #{item.percent}%
+                    span.ms-1.fas(class=`fa-chevron-${item.increase ? 'up' : 'down'}`)
+              .col-auto
+                .d-flex.align-items-center.gap-2
+                  a.btn.btn-sm.btn-phoenix-primary(href=`${CWD}apps/stock/stock-details.html`)
+                    | View full stock details
+                    span.ms-2.fas.fa-up-right-from-square
+                  button.btn.btn-sm.btn-phoenix-secondary 
+                    span.fas.fa-clock 
+                  button.btn.btn-sm.btn-phoenix-secondary 
+                    span.fas.fa-eye 
+            ul.nav.nav-underline.optionChainTableHeader.mb-4.gap-0(id=`companyStatesTab-${index}` role="tablist")
+              li.nav-item 
+                a.nav-link.pt-0.active.pe-2(id=`chart-tab-${index}` href=`#tab-chart-${index}` data-bs-toggle="tab" role="tab" aria-controls=`tab-chart-${index}` aria-selected="true") Chart
+              li.nav-item 
+                a.nav-link.pt-0.px-3(id=`option-chain-tab-${index}` href=`#tab-optionChain-${index}` data-bs-toggle="tab" role="tab" aria-controls=`tab-optionChain-${index}` aria-selected="false") Option Chain
+              li.nav-item.flex-1 
+                a.nav-link.disabled.h-100(id=`empty-div-${index}` href=`#!` data-bs-toggle="tab" role="tab" aria-selected="false")
+            .tab-content(id=`companyStatesTabContent-${index}`)
+              .tab-pane.fade.show.active(id=`tab-chart-${index}` role='tabpanel' aria-labelledby=`chart-tab-${index}`)
+                .scrollbar.mb-4 
+                  .btn-group.stock-btn-group.btn-group-sm.text-nowrap(role="group" aria-label="top-stock-chart-filter")
+                    button.btn.btn-phoenix-secondary.fw-bolder.active 1 D
+                      span.d-none.d-sm-inline.d-xl-none.d-xxl-inline ay
+                    button.btn.btn-phoenix-secondary.fw-bolder 5 D
+                      span.d-none.d-sm-inline.d-xl-none.d-xxl-inline ays
+                    button.btn.btn-phoenix-secondary.fw-bolder 3 M
+                      span.d-none.d-sm-inline.d-xl-none.d-xxl-inline onths
+                    button.btn.btn-phoenix-secondary.fw-bolder 6 M
+                      span.d-none.d-sm-inline.d-xl-none.d-xxl-inline onths
+                    button.btn.btn-phoenix-secondary.fw-bolder 1 Y
+                      span.d-none.d-sm-inline.d-xl-none.d-xxl-inline ear
+                    button.btn.btn-phoenix-secondary.fw-bolder 5 Y
+                      span.d-none.d-sm-inline.d-xl-none.d-xxl-inline ears
+                    button.btn.btn-phoenix-secondary.fw-bolder Max
+                .top-stock-chart 
+                  canvas(id=item.chart style="width: 100%; min-height: 36.5rem; max-height: 36.5rem;")
+              .tab-pane.fade(role='tabpanel' id=`tab-optionChain-${index}` aria-labelledby=`option-chain-tab-${index}`)
+                +OptionChainTableHeader(item.href)
+                +OptionChainTable

@@ -1,0 +1,293 @@
+include ../../../mixins/dashboard/common
+include ./FlightMap
+
+mixin FlightsTableRow(data)
+  tr 
+    td.fs-9.align-middle.px-0
+      .form-check.mb-0.fs-8
+        input.form-check-input(type='checkbox' data-bulk-select-row!=data)
+    td.align-middle.flightNo.ps-0
+      a(href="#!").fw-bold= data.flightNo
+    td.align-middle.vendor.pe-5
+      a(href="#!").d-flex.align-items-center.gap-2
+        img(src=`${CWD}assets${data.vendor.image}`, alt="" width=32)
+        h6.mb-0.text-primary.fw-semibold.text-nowrap= data.vendor.name
+    td.align-middle.weather.pe-5
+      .d-flex.align-items-center
+        span.fa-solid.fa-temperature-quarter.me-2(class=`text-${data.weather.temperature > 25 ? "danger" : "info"}`)
+        p.mb-0.text-body-tertiary.me-3 #{data.weather.temperature}°C
+        span.me-2(class=`${data.weather.icon} ${data.weather.color}`)
+        p.mb-0.text-body-tertiary= data.weather.weather
+    td.align-middle.route.pe-5
+      .d-flex.align-items-center.gap-2
+        img(src=`${CWD}assets${data.route.from.flag}`, alt="" width=16)
+        p.mb-0.fw-semibold.text-bold= data.route.from.airport
+        span.fa-solid.fa-arrow-right.text-body-tertiary.mx-1
+        p.mb-0.fw-semibold.text-bold= data.route.to.airport
+        img(src=`${CWD}assets${data.route.to.flag}`, alt="" width=16)
+    td.align-middle.destination.pe-5.pe-xxl-7
+      .progress.overflow-visible(role="progressbar" aria-label="flight-progress-bar" aria-valuenow=`${data.destination.percent}` aria-valuemin="0" aria-valuemax="100" style="height: 2px")
+        .progress-bar.overflow-visible.position-relative.bg-info-light.rounded(style=`width: ${data.destination.percent}%`)
+          if data.destination.percent !== 0
+            span.fa-solid.fa-plane.text-info.position-absolute.end-0
+      .d-flex.justify-content-between.mt-2
+        p.mb-0.fs-10(class=`${data.status.label === 'Cancelled' ? "text-body-quaternary" : "text-body-tertiary"}`)= data.destination.currentPosition
+        p.mb-0.fs-10(class=`${data.status.label === 'Cancelled' ? "text-body-quaternary" : "text-body-tertiary"}`)= data.destination.target
+    td.status.align-middle.text-end
+      span.badge.badge-phoenix.fs-10(class=`badge-phoenix-${data.status.type}`)= data.status.label
+    td.align-middle.text-end.time
+      .d-flex.justify-content-end.align-items-center.gap-2.mb-2
+        span.fa-regular.fa-clock.text-body 
+        span.text-body.fw-semibold= data.time.time
+      .d-flex.justify-content-end.gap-2
+        span.text-body(data-feather="calendar" style="width:16px; height:16px")
+        span.text-body.fw-semibold= data.time.date
+    td.align-middle.text-end
+      .btn-reveal-trigger
+        button.btn.btn-sm.ms-auto.dropdown-toggle.dropdown-caret-none.transition-none.d-flex.btn-reveal(type='button' data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false" data-bs-reference="parent")
+          span.fas.fa-ellipsis-h
+        .dropdown-menu.dropdown-menu-end
+          a(href='#!').dropdown-item Track flight
+          a(href='#!').dropdown-item Download
+          a(href='#!').dropdown-item Report abuse
+
+
+
+mixin FlightsTable
+  -
+    var flightsData = [
+      {
+        flightNo: '#24349',
+        vendor: {
+          image: '/img/brands/phoenix-firelines.png',
+          name: 'Phoenix Firelines'
+        },
+        route: {
+          from: {
+            flag: '/img/country/usa.png',
+            airport: 'LAX'
+          },
+          to: {
+            flag: '/img/country/canada.png',
+            airport: 'YVR'
+          }
+        },
+        destination: {
+          currentPosition: '180 km, 00h:15m ago',
+          target: "955 km, in 01h:25m",
+          percent: 25
+        },
+        weather: {
+          temperature: 15,
+          weather: 'Stormy',
+          icon: 'fa-solid fa-cloud-bolt',
+          color: "text-body-tertiary"
+        },
+        time: {
+          time: '08:26 PM',
+          date: 'Sunday, Nov 06, 2022'
+        },
+        status: {
+          label: 'Delayed',
+          type: 'warning'
+        }
+      },
+      {
+        flightNo: '#23421',
+        vendor: {
+          image: '/img/brands/qatar-airways.png',
+          name: 'Qatar Airways'
+        },
+        route: {
+          from: {
+            flag: '/img/country/denmark.png',
+            airport: 'EBJ'
+          },
+          to: {
+            flag: '/img/country/south-korea.png',
+            airport: 'CDG'
+          }
+        },
+        destination: {
+          currentPosition: '600 km, 02h:15m ago',
+          target: "1,200 km, in 02h:25m",
+          percent: 60
+        },
+        weather: {
+          temperature: 28,
+          weather: 'Sunny',
+          icon: 'fa-solid fa-sun',
+          color: "text-warning"
+        },
+        time: {
+          time: '07:23 PM',
+          date: 'Monday, Nov 05, 2022'
+        },
+        status: {
+          label: 'On Time',
+          type: 'primary',
+        }
+      },
+      {
+        flightNo: '#23132',
+        vendor: {
+          image: '/img/brands/jal.png',
+          name: 'Japan Airlines'
+        },
+        route: {
+          from: {
+            flag: '/img/country/china.png',
+            airport: 'GOT'
+          },
+          to: {
+            flag: '/img/country/usa.png',
+            airport: 'BCN'
+          }
+        },
+        destination: {
+          currentPosition: '500 km, 00h:56m ago',
+          target: "3,455 km, in 03h:25m",
+          percent: 25
+        },
+        weather: {
+          temperature: 22,
+          weather: 'Wind',
+          icon: 'fa-solid fa-wind',
+          color: "text-info"
+        },
+        time: {
+          time: '07:23 PM',
+          date: 'Monday, Nov 05, 2022'
+        },
+        status: {
+          label: 'Departure',
+          type: 'success'
+        }
+      },
+      {
+        flightNo: '#22267',
+        vendor: {
+          image: '/img/brands/emirates.png',
+          name: 'Emirate'
+        },
+        route: {
+          from: {
+            flag: '/img/country/qatar.png',
+            airport: 'DIA'
+          },
+          to: {
+            flag: '/img/country/norway.png',
+            airport: 'OSL'
+          }
+        },
+        destination: {
+          currentPosition: '00 km, 00h:00m ago',
+          target: "00 km, in 00h:00m",
+          percent: 0
+        },
+        weather: {
+          temperature: 05,
+          weather: 'Heavy rain',
+          icon: 'fa-solid fa-cloud-showers-heavy',
+          color: "text-danger"
+        },
+        time: {
+          time: '07:23 PM',
+          date: 'Monday, Nov 05, 2022'
+        },
+        status: {
+          label: 'Cancelled',
+          type: 'danger'
+        }
+      },
+      {
+        flightNo: '#41242',
+        vendor: {
+          image: '/img/brands/emirates.png',
+          name: 'Emirate'
+        },
+        route: {
+          from: {
+            flag: '/img/country/qatar.png',
+            airport: 'DIA'
+          },
+          to: {
+            flag: '/img/country/norway.png',
+            airport: 'OSL'
+          }
+        },
+        destination: {
+          currentPosition: '26512 km, .02h:56m ago',
+          target: "3,455 km, in 03h:25m",
+          percent: 75
+        },
+        weather: {
+          temperature: 05,
+          weather: 'Heavy rain',
+          icon: 'fa-solid fa-cloud-showers-heavy',
+          color: "text-danger"
+        },
+        time: {
+          time: '07:23 PM',
+          date: 'Monday, Nov 05, 2022'
+        },
+        status: {
+          label: 'On Time',
+          type: 'primary'
+        }
+      },
+    ]
+  .table-responsive.scrollbar.mx-n1.px-1&attributes(attributes)
+    table.table.fs-9.mb-0.border-top.border-translucent
+      thead
+        tr
+          th.white-space-nowrap.px-0.py-1
+            .form-check.mb-0.fs-8
+              input.form-check-input#checkbox-bulk-flights-select(
+                type='checkbox' 
+                data-bulk-select!={
+                  body: "table-flights-body",
+                }
+              )
+          th.sort.white-space-nowrap.align-middle.text-body-tertiary.ps-0(scope='col' data-sort="flightNo" ) FLIGHTS NO.
+          th.sort.align-middle.text-body-tertiary(scope='col' data-sort="vendor" style='width:170px;') VENDOR
+          th.sort.text-start.align-middle.text-body-tertiary(scope='col' data-sort="weather" style='width:250px;') WEATHER
+          th.sort.align-middle.text-body-tertiary(scope='col' data-sort="route" style='width:180px;') ROUTE
+          th.sort.align-middle.text-body-tertiary(scope='col' style='min-width:280px;' data-sort="destination") DESTINATION
+          th.sort.text-end.align-middle.text-body-tertiary(scope='col' data-sort="status" style='min-width:120px;') STATUS
+          th.sort.align-middle.text-end.text-body-tertiary(scope='col' data-sort="time" style='min-width:200px;') TIME
+          th.text-end.pe-0(scope='col')
+      tbody.list#table-flights-body
+        each row in flightsData 
+          +FlightsTableRow(row)
+
+
+mixin Flights
+  div(data-list!={
+    valueNames: ["flightNo", "vendor","weather", "route", "destination","status",  "time" ],
+    page: 4,
+    })
+    .row.gx-0.gy-3.align-items-center.py-4
+      .col-xl-auto
+        h3.mb-0 Flights 
+      .col-auto.flex-1
+        .d-flex.flex-between-center
+          .d-flex.align-items-center
+            +Search({placeholder: 'Search by Flight no.'}).ms-xl-6.w-auto
+            button.btn.btn-phoenix-secondary.px-3.ms-2.me-3
+              span.fa-solid.fa-filter.text-body-secondary(data-fa-transform="down-2")
+          .d-flex.align-items-center
+            .pagination.d-none
+            p.mb-0.d-none.d-md-block.me-3.fw-semibold.text-body.text-nowrap(data-list-info)
+            .d-none.d-sm-block
+              a.fw-semibold.text-nowrap(href='#!' data-list-view="*")
+                | View all
+                span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+              a.fw-semibold.d-none.text-nowrap(href='#!' data-list-view="less")
+                | View Less
+            button(type='button' title="Previous" data-list-pagination='prev').btn.btn-phoenix-primary.px-3.me-1.ms-sm-4
+              span.fas.fa-chevron-left(data-fa-transform="down-1")
+            button(type='button' title="Next" data-list-pagination='next').btn.btn-phoenix-primary.px-3
+              span.fas.fa-chevron-right(data-fa-transform="down-1")
+    +FlightsTable.mb-4
+    +FlightMap

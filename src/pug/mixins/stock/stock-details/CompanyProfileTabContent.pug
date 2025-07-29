@@ -1,0 +1,401 @@
+mixin EmployeeRecordsTableRow(item)
+  tr
+    td.align-middle.date.white-space-nowrap
+      p.fs-9.fw-semibold.text-body-secondary.mb-0=item.date
+    td.align-middle.employees.white-space-nowrap.text-center
+      p.fs-9.fw-semibold.text-body-secondary.mb-0=item.employees
+    td.align-middle.text-center.change 
+      p.fs-9.fw-semibold.text-body-secondary.mb-0=item.change
+    td.align-middle.text-end.growth.white-space-nowrap
+      p.fs-9.fw-semibold.mb-0(class=item.isInLoss ? 'text-danger' : 'text-success') #{item.growth}%
+mixin DetailsView(item)
+  div(class=item.className)
+    .d-flex.align-items-center.mb-1
+      span.fa-solid.fs-8(class=item.icon style="width: 16px;")
+      h5.my-2.line-clamp-1.ms-2=item.title
+    .ps-4 
+      if item.link 
+        a(href=item.link)=item.content 
+      else if item.image 
+        .d-flex.align-items-center.gap-2 
+          img.img-fluid.d-dark-none(src=item.image alt='img')
+          if item.darkImage
+            img.img-fluid.d-light-none(src=item.darkImage alt='dark-image')
+          p.mb-0.text-body-secondary=item.content
+      else
+        p.mb-0.text-body-secondary=item.content
+
+
+mixin CompanyProfileTabContent
+  -
+    var descriptionItem = [
+      {
+        title: 'Total Employees',
+        className: 'pb-3 border-bottom border-end border-end-lg-0 border-end-xxl pe-3 pe-lg-0 pe-xxl-5',
+        color: 'info',
+        icon: 'fa-user',
+        growth: '1.61K',
+        badge: {
+          type: 'danger',
+          content: '-1.83'
+        },
+        tooltipTitle: '1.64k'
+      },
+      {
+        title: 'Total Revenue',
+        className: 'pb-3  pt-lg-3 pt-xxl-0 ps-3 ps-lg-0 ps-xxl-5 border-bottom',
+        color: 'primary',
+        icon: 'fa-hand-holding-dollar',
+        growth: '$2.40M',
+        badge: {
+          type: 'success',
+          content: '+4.71'
+        },
+        tooltipTitle: '5.4k'
+      },
+      {
+        title: 'Total Change (1Y)',
+        className: 'py-3 border-bottom border-end border-end-lg-0 border-end-xxl pe-3 pe-lg-0 pe-xxl-5',
+        color: 'warning',
+        icon: 'fa-repeat',
+        growth: '-3,000',
+        badge: {
+          type: 'success',
+          content: '+1.71'
+        },
+        tooltipTitle: '2.64k'
+      },
+      {
+        title: 'Total Profits',
+        className: 'py-3 ps-3 ps-lg-0 ps-xxl-5 border-bottom',
+        color: 'info',
+        icon: 'fa-money-bill-trend-up',
+        growth: '$6.34M',
+        badge: {
+          type: 'success',
+          content: '+3.71'
+        },
+        tooltipTitle: '3.64k'
+      },
+      {
+        title: 'Total Growth (1Y)',
+        className: 'py-3 pb-md-0 pb-lg-3 pb-xxl-0 border-end border-end-lg-0 border-end-xxl pe-3 pe-lg-0 pe-xxl-5 border-bottom-lg border-bottom-xxl-0',
+        color: 'primary',
+        icon: 'fa-chart-line',
+        growth: '-1.83%',
+        badge: {
+          type: 'danger',
+          content: '-2.32'
+        },
+        tooltipTitle: '1.4k'
+      },
+      {
+        title: 'Total Market Cap',
+        className: 'pt-3 ps-3 ps-lg-0 ps-xxl-5',
+        color: 'warning',
+        icon: 'fa-chart-column',
+        growth: '$3.46T',
+        badge: {
+          type: 'success',
+          content: '+3.71'
+        },
+        tooltipTitle: '3.64k'
+      }
+    ]
+  .card.mb-5 
+    .card-body 
+      .row.g-0
+        each item in descriptionItem 
+          .col-6.col-lg-12.col-xxl-6(class=item.className) 
+            .row.flex-between-center.g-2
+              .col-md-6
+                .d-md-flex.align-items-center.gap-2  
+                  .border.bg-opacity-15.d-flex.flex-center.p-2.rounded-1.mb-3.mb-md-0(class=`bg-${item.color} border-${item.color}-light` style="width: 2rem; height: 2rem;")
+                    span.fa-solid(class=`${item.icon} text-${item.color}-dark`)
+                  h5.text-body-highlight.mb-0.line-clamp-1=item.title
+              .col-1.d-none.d-md-block
+                h5.text-body-secondary.mb-0 :
+              .col-md-5
+                .d-flex.justify-content-md-between.align-items-center.gap-2
+                  p.mb-0.text-body-secondary=item.growth
+                  .badge.badge-phoenix.fs-10(class=`badge-phoenix-${item.badge.type}` data-bs-toggle='tooltip' data-bs-placement='top' title=`From ${item.tooltipTitle}`) #{item.badge.content}%
+  -
+    var companyDetailsContent = [
+      {
+        title: 'Company Name',
+        icon: 'fa-building',
+        image: `${CWD}assets/img/brand3/dark_apple_logo.png`,
+        darkImage: `${CWD}assets/img/brand3/light_apple_logo.png`,
+        content: 'Apple Inc',
+        className: 'mb-3'
+      },
+      {
+        title: 'CTO',
+        icon: 'fa-briefcase',
+        content: 'Timothy Cook',
+        className: 'mb-3'
+      },
+      {
+        title: 'Country',
+        icon: 'fa-earth-americas',
+        content: 'United States',
+        className: 'mb-3'
+      },
+      {
+        title: 'Founded',
+        icon: 'fa-flag',
+        content: '1997',
+        className: 'mb-3'
+      },
+      {
+        title: 'IOP Date',
+        icon: 'fa-calendar-check',
+        content: 'Dec 12, 1980',
+        className: 'mb-3'
+      },
+      {
+        title: 'Industry',
+        icon: 'fa-city',
+        content: 'Consumer Electronics',
+        className: 'mb-3'
+      },
+      {
+        title: 'Sector',
+        icon: 'fa-chart-pie',
+        content: 'Technology',
+        className: 'mb-3'
+      },
+      {
+        title: 'Employees',
+        icon: 'fa-users',
+        content: '1,61,000',
+        className: 'mb-3'
+      },
+      {
+        title: 'Website',
+        icon: 'fa-globe',
+        content: 'apple.com',
+        link: 'https://apple.com',
+        className: 'mb-3'
+      },
+      {
+        title: 'Phone Number',
+        icon: 'fa-phone',
+        content: '+1234567890',
+        className: 'mb-3'
+      },
+      {
+        title: 'Address',
+        icon: 'fa-location',
+        content: 'One Apple Park Way, Cupertino, CA 95014'
+      },
+    ]
+  
+  -
+    var stockDetailsCardItems = [
+      {
+        title: 'Ticker Symbol',
+        icon: 'fa-ticket',
+        content: 'AAPL',
+        className: 'mb-3'
+      },
+      {
+        title: 'Exchange',
+        icon: 'fa-right-left',
+        content: 'NASDAQ',
+        className: 'mb-3'
+      },
+      {
+        title: 'Fiscal Year',
+        icon: 'fa-calendar-week',
+        content: 'October - September',
+        className: 'mb-3'
+      },
+      {
+        title: 'Reporting Cur.',
+        icon: 'fa-chart-line',
+        content: 'USD',
+        className: 'mb-3'
+      },
+      {
+        title: 'CIK Code',
+        icon: 'fa-code-compare',
+        content: '0000320193',
+        className: 'mb-3'
+      },
+      {
+        title: 'CUSIP Number',
+        icon: 'fa-hashtag',
+        content: '037833100',
+        className: 'mb-3'
+      },
+      {
+        title: 'ISIN Number',
+        icon: 'fa-hashtag',
+        content: 'US0378331005',
+        className: 'mb-3'
+      },
+      {
+        title: 'Employer ID',
+        icon: 'fa-id-card',
+        content: '94-2404110',
+        className: 'mb-3'
+      },
+      {
+        title: 'SIC Code',
+        icon: 'fa-code',
+        content: '3571'
+      }
+    ]
+  .card.mb-4 
+    .card-body
+      h4.mb-3.text-body Company Description
+      p.mb-2 Apple Inc. creates, produces, and sells wearable technology, tablets, smartphones, PCs, and accessories all over the world.
+      p.mb-0 The company sells wearables, home goods, and accessories like AirPods, Apple TV, Apple Watch, Beats devices, and HomePod. It also offers a line of cellphones called iPhone, a line of personal computers called Mac, and a line of tablets called iPad...
+        a(href="#!") read more
+      hr.my-4
+      .row.g-0 
+        .col-12.col-md-6.pe-md-4.pb-4.pb-md-0
+          h4.text-body.mb-3 Company Details 
+          .row.gx-5.gx-md-3.gx-lg-1.gx-xl-3.gx-xxl-5
+            .col-sm-6.col-md-6.col-xl-12.col-xxl-6.pe-md-2
+                each item in companyDetailsContent.slice(0, 6)
+                  +DetailsView(item)
+            .col-sm-6.col-md-6.col-xl-12.col-xxl-6.ps-md-2
+                each item in companyDetailsContent.slice(6)
+                  +DetailsView(item)
+        .col-12.col-md-6.ps-md-4.pt-4.pt-md-0.border-top.border-top-md-0.border-start-md
+          h4.text-body.mb-3 Stock Details
+          .row.gx-5.gx-md-3.gx-lg-1.gx-xl-3.gx-xxl-5
+            .col-sm-6.col-md-6.col-xl-12.col-xxl-6
+                each item in stockDetailsCardItems.slice(0, 6)
+                  +DetailsView(item)
+            .col-sm-6.col-md-6.col-xl-12.col-xxl-6
+                each item in stockDetailsCardItems.slice(6)
+                  +DetailsView(item)
+
+  .row.flex-between-center.g-3.mb-4 
+    .col-auto 
+      h4 Chart of Employees
+      p.mb-0 No. of bookings fulfilled &amp; cancelled
+    .col-auto
+      .btn-group.stock-btn-group(role='group' aria-label='employees-btn-group')
+        button.btn.btn-phoenix-secondary Total
+        button.btn.btn-phoenix-secondary Change
+        button.btn.btn-phoenix-secondary.active Growth
+  
+  .echart-company-profile-employees-chart.mb-5(style="width: 100%; height: 300px;")
+
+  -
+    var employeeRecords = [
+      {
+        date: 'Sep 30, 2023',
+        employees: '161,000',
+        change: '10,000',
+        growth: '-1.83',
+        isInLoss: true
+      },
+      {
+        date: 'Sep 24, 2022',
+        employees: '164,000',
+        change: '-3,000',
+        growth: '6.49'
+      },
+      {
+        date: 'Sep 25, 2021',
+        employees: '154,000',
+        change: '7,000',
+        growth: '4.76'
+      },
+      {
+        date: 'Sep 26, 2020',
+        employees: '147,000',
+        change: '10,000',
+        growth: '7.30'
+      },
+      {
+        date: 'Sep 28, 2019',
+        employees: '137,000',
+        change: '5,000',
+        growth: '3.79'
+      },
+      {
+        date: 'Sep 29, 2018',
+        employees: '132,000',
+        change: '9,000',
+        growth: '7.32'
+      },
+      {
+        date: 'Sep 30, 2017',
+        employees: '123,000',
+        change: '7,000',
+        growth: '6.03'
+      },
+      {
+        date: 'Sep 26, 2016',
+        employees: '112,000',
+        change: '9,000',
+        growth: '4.30'
+      },
+      {
+        date: 'Sep 24, 2015',
+        employees: '109,000',
+        change: '8,000',
+        growth: '5.79'
+      },
+      {
+        date: 'Sep 18, 2014',
+        employees: '107,000',
+        change: '8,000',
+        growth: '5.77'
+      },
+      {
+        date: 'Sep 30, 2013',
+        employees: '100,000',
+        change: '10,000',
+        growth: '6.03'
+      }
+    ]
+
+  .card 
+    .card-body 
+      .row.g-3.flex-between-center.mb-3
+        .col-auto 
+          h4 Employee Records
+          p.mb-0 Record of employees' roles and tenure.
+        .col-auto
+          select.form-select.form-select-sm#action(name="action")
+            option(value="export") Export 
+            option(value="import")  Import 
+            option(value="delete")  Delete  
+      #employeeRecord(data-list!={
+        valueNames: ["date", "employees", "change", "growth"],
+        page: 10,
+        pagination: true
+      })
+        .table-responsive.scrollbar
+          table.table.fs-9.mb-0.border-top.border-translucent
+            thead
+              tr.text-uppercase
+                th.sort.white-space-nowrap.align-middle.ps-0(scope='col' style='min-width:14rem;' data-sort="date") date
+                th.sort.align-middle.text-center(scope='col' data-sort="employees" style='min-width:8rem;') employees
+                th.sort.align-middle.text-center(scope='col' data-sort="change" style='min-width:8rem;') Change
+                th.sort.align-middle.text-end(scope='col' style='min-width:11rem;' data-sort="growth") Growth
+            tbody.list
+              each row, index in employeeRecords
+                +EmployeeRecordsTableRow(row)
+        .row.align-items-center.justify-content-between.py-2.pe-0.fs-9.pagination-subtle
+          .col-auto.d-flex
+            p.mb-0.d-none.d-sm-block.me-3.fw-semibold.text-body(data-list-info)
+            a.fw-semibold(href='#!' data-list-view="*")
+              | View all
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+            a.fw-semibold.d-none(href='#!' data-list-view="less")
+              | View Less
+              span.fas.fa-angle-right.ms-1(data-fa-transform='down-1')
+          .col-auto.d-flex.me-sm-n2
+            button.page-link(data-list-pagination="prev")
+              span.fas.fa-chevron-left
+            ul.mb-0.pagination
+            button.page-link(data-list-pagination="next")
+              span.fas.fa-chevron-right

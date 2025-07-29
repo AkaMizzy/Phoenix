@@ -1,0 +1,84 @@
+include ./BasicInformationForm
+include ./LocationForm
+include ./FinanceForm
+include ./PoliciesForm
+include ./AddPhotos
+include ./GeneralAmenitiesForm
+include ./Preview
+
+mixin WizardHeader(config)
+  .scrollbar.mb-4
+    ul.nav.justify-content-between.flex-nowrap.nav-wizard.nav-wizard-vertical-xl(data-tab-map-container)
+      li.nav-item
+        a(href=config.tab1 data-bs-toggle='tab' data-wizard-step='1').nav-link.active.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-file.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Info
+      li.nav-item
+        a(href=config.tab2 data-bs-toggle='tab' data-wizard-step='2').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-location-dot.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Location
+      li.nav-item
+        a(href=config.tab3 data-bs-toggle='tab' data-wizard-step='3').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-mug-saucer.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Amenities
+      li.nav-item
+        a(href=config.tab4 data-bs-toggle='tab' data-wizard-step='4').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-images.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Photos
+      li.nav-item
+        a(href=config.tab5 data-bs-toggle='tab' data-wizard-step='5').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-usd.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Finance
+      li.nav-item
+        a(href=config.tab6 data-bs-toggle='tab' data-wizard-step='6').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fa-solid.fa-shield-halved.nav-item-icon
+                span.fa-solid.fa-check.check-icon
+            span.nav-item-title.fs-9.fs-xl-8 Policies
+      li.nav-item
+        a(href=config.tab7 data-bs-toggle='tab' data-wizard-step='7').nav-link.py-0.py-xl-3
+          .text-center.d-inline-block.d-xl-flex.align-items-center.gap-3
+            span.nav-item-circle-parent
+              span.nav-item-circle
+                span.fas.fa-check
+            span.nav-item-title.fs-9.fs-xl-8 Done
+
+mixin WizardContent(config)
+  - var config = Object.assign({ url: `${CWD}${paths['wizard-auth']}` }, config)
+  .tab-content
+    .tab-pane.active(role="tabpanel" aria-labelledby=config.tab1.split('#').pop() id=config.tab1)
+      +BasicInformationForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab2.split('#').pop() id=config.tab2)
+      +LocationForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab3.split('#').pop() id=config.tab3)
+      +GeneralAmenitiesForm(config, "General amenities")
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab4.split('#').pop() id=config.tab4)
+      +AddPhotos(config, "Add property picture")
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab5.split('#').pop() id=config.tab5)
+      +FinanceForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab6.split('#').pop() id=config.tab6)
+      +PoliciesForm(config)
+    .tab-pane(role="tabpanel" aria-labelledby=config.tab7.split('#').pop() id=config.tab7)
+      +Preview

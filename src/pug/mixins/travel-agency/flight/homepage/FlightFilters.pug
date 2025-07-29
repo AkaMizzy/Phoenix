@@ -1,0 +1,278 @@
+mixin FlightStops 
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightStops' role='button' aria-expanded='true' aria-controls='flightStops')
+      h5.mb-0.fs-8 Stops
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightStops
+      - 
+        var flightStops = [
+          {
+            id: 'fligtStopsDirect',
+            label: 'Direct'
+          },
+          {
+            id: 'fligtStops1',
+            label: '1 stop'
+          },
+          {
+            id: 'fligtStops2',
+            label: '2 stop'
+          },
+        ]
+      each item in flightStops
+        .form-check
+          input.form-check-input(type='checkbox' id=`${item.id}`)
+          label.form-check-label.fs-8.text-body(for=`${item.id}`) #{item.label}
+
+mixin FlightSchedules 
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightTime' role='button' aria-expanded='true' aria-controls='flightTime')
+      h5.mb-0.fs-8 Flight Schedules
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightTime
+      - 
+        var flightSchedules = [
+          {
+            title: 'Departure',
+            name: 'flightDepartureTime',
+            checks: [
+              {
+                id: 'departure8AMTo10AM',
+                label: '8 AM - 10 AM'
+              },
+              {
+                id: 'departure10AMTo12PM',
+                label: '10 AM - 12 PM'
+              },
+              {
+                id: 'departure12PMTo2PM',
+                label: '12 PM - 2 PM'
+              },
+              {
+                id: 'departure2PMTo4PM',
+                label: '2 PM - 4 PM'
+              },
+              {
+                id: 'departure4PMTo6PM',
+                label: '4 PM - 6 PM'
+              },
+              {
+                id: 'departure6PMTo8PM',
+                label: '6 PM - 8 PM'
+              },
+            ]
+          },
+          {
+            title: 'Arrival',
+            name: 'flightArrivalTime',
+            checks: [
+              {
+                id: 'arrival8AMTo10AM',
+                label: '8 AM - 10 AM'
+              },
+              {
+                id: 'arrival10AMTo12PM',
+                label: '10 AM - 12 PM'
+              },
+              {
+                id: 'arrival12PMTo2PM',
+                label: '12 PM - 2 PM'
+              },
+              {
+                id: 'arrival2PMTo4PM',
+                label: '2 PM - 4 PM'
+              },
+              {
+                id: 'arrival4PMTo6PM',
+                label: '4 PM - 6 PM'
+              },
+              {
+                id: 'arrival6PMTo8PM',
+                label: '6 PM - 8 PM'
+              },
+            ]
+          },
+        ]
+      each schedule in flightSchedules
+        .mb-4
+          h5.mb-3 #{schedule.title}
+          .row.g-2
+            each check in schedule.checks
+              .col-6.col-sm-4
+                input.btn-check.flight-filter-checkbox(type="checkbox" name=`${schedule.name}` id=`${check.id}`)
+                label.btn.btn-phoenix-secondary.text-nowrap.w-100.px-0(for=`${check.id}`) #{check.label}
+
+mixin FlightAirports
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightAirports' role='button' aria-expanded='true' aria-controls='flightAirports')
+      h5.mb-0.fs-8 Airports
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightAirports
+      .d-flex.gap-3 
+        - 
+          var flightAirports = [
+            {
+              id: 'dhakaAirports',
+              label: 'Dhaka',
+              airports: ['DAC : Hazrat Shahjalal International Airport']
+            },
+            {
+              id: 'sylhetAirports',
+              label: 'Sylhet',
+              airports: ['ZYL : Osmani International Airport', 'GNJ : Gajikalu Interdimensional Airport']
+            },
+          ]
+        each item in flightAirports
+          .flex-1 
+            h5.mb-3 #{item.label}
+            each airport in item.airports 
+              .form-check.gap-2
+                input.form-check-input.mt-0(type='checkbox' id=`${airport.split(' :')[0]}`)
+                label.form-check-label.fs-9.text-body.lh-sm(for=`${airport.split(' :')[0]}`) #{airport}
+
+mixin FlightBaggage
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightBaggage' role='button' aria-expanded='true' aria-controls='flightBaggage')
+      h5.mb-0 Baggage
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightBaggage
+      .d-flex.gap-2.justify-content-between
+        div 
+          h5.mb-3.text-body-highlight Carry on bag
+          .input-group.flex-nowrap.gap-1(data-quantity)
+            button.btn.btn-phoenix-primary.px-2.rounded(data-type="minus" type='button')
+              span.fa-solid.fa-minus.px-1
+            input.form-control.border-translucent.input-spin-none.text-center.rounded(id="carryOnBag" type="number" value='2')
+            button.btn.btn-phoenix-primary.px-2.rounded(data-type="plus" type='button')
+              span.fa-solid.fa-plus.px-1
+        div 
+          h5.mb-3.text-body-highlight Checked bag
+          .input-group.flex-nowrap.gap-1(data-quantity)
+            button.btn.btn-phoenix-primary.px-2.rounded(data-type="minus" type='button')
+              span.fa-solid.fa-minus.px-1
+            input.form-control.border-translucent.input-spin-none.text-center.rounded(id="checkedBag" type="number" value='2')
+            button.btn.btn-phoenix-primary.px-2.rounded(data-type="plus" type='button')
+              span.fa-solid.fa-plus.px-1
+
+mixin FlightAirlines
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightAirlines' role='button' aria-expanded='true' aria-controls='flightAirlines')
+      h5.mb-0.fs-8 Airlines
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightAirlines
+      - 
+        var flightAirlines = [
+          {
+            id: 'novoair',
+            label: 'NOVOAIR'
+          },
+          {
+            id: 'biman',
+            label: 'Biman Bangladesh Airlines',
+          },
+          {
+            id: 'usBangla',
+            label: 'US Bangla',
+          },
+          {
+            id: 'airAstra',
+            label: 'Air Astra',
+          }
+        ]
+      each item in flightAirlines
+        .form-check
+          input.form-check-input(type='checkbox' id=`${item.id}`)
+          label.form-check-label.fs-8.text-body(for=`${item.id}`) #{item.label}
+
+mixin FlightCabin
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightCabin' role='button' aria-expanded='true' aria-controls='flightCabin')
+      h5.mb-0.fs-8 Cabin
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightCabin
+      - 
+        var flightCabin = [
+          {
+            id: 'economy',
+            label: 'Economy'
+          },
+          {
+            id: 'business',
+            label: 'Business',
+          }
+        ]
+      each item in flightCabin
+        .form-check
+          input.form-check-input(type='checkbox' id=`${item.id}`)
+          label.form-check-label.fs-8.text-body(for=`${item.id}`) #{item.label}
+
+mixin FlightAircraft
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightAircraft' role='button' aria-expanded='true' aria-controls='flightAircraft')
+      h5.mb-0.fs-8 Aircraft
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightAircraft
+      .d-flex.mb-3 
+        .form-check.form-check-inline
+          input.form-check-input#includedAircraft(type='radio' name='aircrafts')
+          label.form-check-label.fs-8.text-body(for='includedAircraft') Include
+
+        .form-check.form-check-inline
+          input.form-check-input#excludedAircraft(type='radio' name='aircrafts' checked)
+          label.form-check-label.fs-8.text-body(for='excludedAircraft') Exclude
+
+      - 
+        var flightAircraft = [
+          {
+            id: 'aircraft738',
+            label: '738'
+          },
+          {
+            id: 'aircraftAT7',
+            label: 'AT-7',
+          },
+          {
+            id: 'aircraftA320',
+            label: 'A320',
+          },
+          {
+            id: 'aircraft787',
+            label: '787 Dreamliner',
+          }
+        ]
+      each item in flightAircraft
+        .form-check
+          input.form-check-input(type='checkbox' id=`${item.id}`)
+          label.form-check-label.fs-8.text-body(for=`${item.id}`) #{item.label}
+
+mixin FlightDuration
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightDuration' role='button' aria-expanded='true' aria-controls='flightDuration')
+      h5.mb-0.fs-8 Flight Duration
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightDuration
+      .d-flex.flex-between-center.mb-2 
+        h6.mb-0.text-body-highlight.fw-semibold 0h 45m
+        h6.mb-0.text-body-highlight.fw-semibold 0h 55m
+      .noUi-primary-lighter.noUi-handle-primary.noUi-slider-medium.noUi-handle-circle.px-1.mt-3(
+        data-nouislider-values!=['45m', '46m', '47m', '48m', '49m', '50m', '51m', '52m', '53m', '54m', '55m']
+        data-nouislider!={
+          start: ['48m'],
+          connect: [true, false]
+        }
+      )
+
+mixin FlightPriceCalculator 
+  div&attributes(attributes) 
+    a.btn.py-2.px-3.d-flex.flex-between-center.collapse-indicator.text-body-highlight.bg-body-highlight(data-bs-toggle='collapse' href='#flightPriceCalculator' role='button' aria-expanded='true' aria-controls='flightPriceCalculator')
+      h5.mb-0.fs-8 Price Calculator
+      span.fa-solid.fa-chevron-down.toggle-icon
+    .collapse.show.p-3.pb-0#flightPriceCalculator
+      select.form-select(data-choices multiple data-options!={removeItemButton: true,placeholder: true})
+        option(value="") Select method
+        option Mastercard debit
+        option Mastercard credit
+        option Visa debit
+        option Visa credit
+        option American Express
+        option Paypal
