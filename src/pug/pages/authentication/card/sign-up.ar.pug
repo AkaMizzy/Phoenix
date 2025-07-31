@@ -7,34 +7,34 @@ block wrapperContent
       .text-center.mb-7
         a(href=`${CWD}${paths['default-dashboard']}`).d-flex.flex-center.text-decoration-none.mb-4
           +Logo({text:false,width:58}).fw-bolder.fs-3.d-inline-block
-        h3.text-body-highlight Sign Up
-        p.text-body-tertiary Create your account today
+        h3.text-body-highlight إنشاء حساب
+        p.text-body-tertiary أنشئ حسابك اليوم
       .position-relative.mt-4
       form
         .mb-3.text-start
-          label.form-label(for='email') Email address
+          label.form-label(for='email') البريد الإلكتروني
           input#email.form-control(type='email' placeholder='name@example.com')
         .mb-3.text-start
-          label.form-label(for='password') Password
+          label.form-label(for='password') كلمة المرور
           .position-relative(data-password)
-            input#password.form-control.form-icon-input.pe-6(type='password' placeholder='Password' data-password-input)
+            input#password.form-control.form-icon-input.pe-6(type='password' placeholder='كلمة المرور' data-password-input)
             button.btn.px-3.py-0.h-100.position-absolute.top-0.end-0.fs-7.text-body-tertiary(data-password-toggle)
               span.uil.uil-eye.show
               span.uil.uil-eye-slash.hide
         .mb-3.text-start
-          label.form-label(for='confirmPassword') Confirm Password
+          label.form-label(for='confirmPassword') تأكيد كلمة المرور
           .position-relative(data-password)
-            input#confirmPassword.form-control.form-icon-input.pe-6(type='password' placeholder='Confirm Password' data-password-input)
+            input#confirmPassword.form-control.form-icon-input.pe-6(type='password' placeholder='تأكيد كلمة المرور' data-password-input)
             button.btn.px-3.py-0.h-100.position-absolute.top-0.end-0.fs-7.text-body-tertiary(data-password-toggle)
               span.uil.uil-eye.show
               span.uil.uil-eye-slash.hide
         .form-check.mb-3
           input#termsService.form-check-input(type='checkbox')
           label.form-label.fs-9.text-transform-none(for='termsService')
-            | I accept the 
-            a(href='#!') terms 
-            | and 
-            a(href='#!') privacy policy
-        button.btn.btn-primary.w-100.mb-3 Sign up
+            | أوافق على 
+            a(href='#!') الشروط 
+            | و
+            a(href='#!') سياسة الخصوصية
+        button.btn.btn-primary.w-100.mb-3 إنشاء حساب
         .text-center
-          a.fs-9.fw-bold(href=`${CWD}${paths['card-signin']}`) Sign in to an existing account
+          a.fs-9.fw-bold(href=`${CWD}${paths['card-signin']}`) لديك حساب بالفعل؟ سجل الدخول

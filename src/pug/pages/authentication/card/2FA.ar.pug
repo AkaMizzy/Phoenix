@@ -1,0 +1,24 @@
+extends ../../../layouts/LayoutTheme
+include ../../../layouts/LayoutCardAuth
+
+block wrapperContent
+  +LayoutCardBasic({img:37})
+    .auth-form-box
+      .text-center
+        a(href=`${CWD}${paths['default-dashboard']}`).d-flex.flex-center.text-decoration-none.mb-4
+          +Logo({text:false,width:58}).fw-bolder.fs-3.d-inline-block
+        h4.text-body-highlight أدخل رمز التحقق
+        p.text-body-tertiary.mb-0 تم إرسال بريد إلكتروني يحتوي على رمز تحقق مكون من 6 أرقام إلى عنوان البريد الإلكتروني - exa*********.com
+        P.fs-10.mb-5 لا يمكنك الوصول؟
+          a(href="#") استخدم طريقة أخرى
+      form.verification-form(data-2fa-form)
+        .d-flex.align-items-center.gap-2.mb-3
+          input.form-control.px-2.text-center(type="number")
+          input.form-control.px-2.text-center(type="number")
+          input.form-control.px-2.text-center(type="number")
+          span -
+          input.form-control.px-2.text-center(type="number")
+          input.form-control.px-2.text-center(type="number")
+          input.form-control.px-2.text-center(type="number")
+        Button.btn.btn-primary.w-100.mb-5(type='submit' disabled) تحقق
+        a.fs-9(href="#") لم تستلم الرمز؟

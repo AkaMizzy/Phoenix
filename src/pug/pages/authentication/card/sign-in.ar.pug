@@ -7,19 +7,19 @@ block wrapperContent
       .text-center.mb-7
         a(href=`${CWD}${paths['default-dashboard']}`).d-flex.flex-center.text-decoration-none.mb-4
           +Logo({text:false,width:58}).fw-bolder.fs-3.d-inline-block
-        h3.text-body-highlight Sign In
-        p.text-body-tertiary Get access to your account
+        h3.text-body-highlight تسجيل الدخول
+        p.text-body-tertiary الوصول إلى حسابك
       .position-relative
         
       .mb-3.text-start
-        label.form-label(for='email') Email address
+        label.form-label(for='email') البريد الإلكتروني
         .form-icon-container
           input#email.form-control.form-icon-input(type='email' placeholder='name@example.com')
           span.fas.fa-user.text-body.fs-9.form-icon
       .mb-3.text-start
-        label.form-label(for='password') Password
+        label.form-label(for='password') كلمة المرور
         .form-icon-container(data-password)
-          input#password.form-control.form-icon-input.pe-6(type='password' placeholder='Password' data-password-input)
+          input#password.form-control.form-icon-input.pe-6(type='password' placeholder='كلمة المرور' data-password-input)
           span.fas.fa-key.text-body.fs-9.form-icon
           button.btn.px-3.py-0.h-100.position-absolute.top-0.end-0.fs-7.text-body-tertiary(data-password-toggle)
             span.uil.uil-eye.show
@@ -28,9 +28,9 @@ block wrapperContent
         .col-auto
           .form-check.mb-0
             input#basic-checkbox.form-check-input(type='checkbox' checked='checked')
-            label.form-check-label.mb-0(for='basic-checkbox') Remember me
+            label.form-check-label.mb-0(for='basic-checkbox') ذكرني
         .col-auto
-          a.fs-9.fw-semibold(href=`${CWD}${paths['card-forgot-password']}`) Forgot Password?
-      button.btn.btn-primary.w-100.mb-3 Sign In
+          a.fs-9.fw-semibold(href=`${CWD}${paths['card-forgot-password']}`) نسيت كلمة المرور؟
+      button.btn.btn-primary.w-100.mb-3 تسجيل الدخول
       .text-center
-        a.fs-9.fw-bold(href=`${CWD}${paths['card-signup']}`) Create an account
+        a.fs-9.fw-bold(href=`${CWD}${paths['card-signup']}`) إنشاء حساب جديد
